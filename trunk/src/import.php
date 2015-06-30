@@ -4,7 +4,7 @@
  * LEIDEN OPEN VARIATION DATABASE (LOVD)
  *
  * Created     : 2012-09-19
- * Modified    : 2015-06-17
+ * Modified    : 2015-06-30
  * For LOVD    : 3.0-14
  *
  * Copyright   : 2004-2015 Leiden University Medical Center; http://www.LUMC.nl/
@@ -1038,7 +1038,7 @@ if (POST) {
                             unset($_ERROR['messages'][$nKey]);
                             $_ERROR['messages'] = array_values($_ERROR['messages']);
                         }
-                        $_BAR[0]->appendMessage('Warning (' . $sCurrentSection . ', line ' . $nLine . '): There is already a disease with disease name ' . $aLine['name'] . '. This disease is not imported! <BR>', 'done');
+                        $_BAR[0]->appendMessage('Warning (' . $sCurrentSection . ', line ' . $nLine . '): There is already a disease with disease name ' . $aLine['name'] . (!empty($aLine['id_omim'])?' and/or OMIM ID ' . $aLine['id_omim']:'') . '. This disease is not imported! <BR>', 'done');
                         $nWarnings ++;
                         $aLine['newID'] = $nDiseaseIdOmim[0];
                         $aLine['todo'] = 'map';
@@ -1998,10 +1998,6 @@ if (!lovd_isCurator($_SESSION['currdb'])) {
                 $aGenes = array();
                 foreach ($aParsed as $sSection => $aSection) {
                     $aTempGenes = array();
-                    echo "voor if statement.";
-                    var_dump($aSection);
-                    var_dump($aSection['updatedIDs']);
-                    var_dump(isset($aSection['updatedIDs']));
                     if (isset($aSection['updatedIDs'])) {
                         switch ($sSection) {
                             case 'Phenotypes':
@@ -2020,7 +2016,6 @@ if (!lovd_isCurator($_SESSION['currdb'])) {
                                                         'WHERE s.individualid IN (?' . str_repeat(', ?', count($aSection['updatedIDs']) - 1) . ')', $aSection['updatedIDs'])->fetchAllColumn();
                                 break;
                             case 'Screenings_To_Genes':
-                             echo "get genes";
                                 $aTempGenes = $_DB->query('SELECT DISTINCT t.geneid FROM ' . TABLE_TRANSCRIPTS . ' AS t ' .
                                                         'INNER JOIN ' . TABLE_VARIANTS_ON_TRANSCRIPTS . ' AS vot ON (vot.transcriptid = t.id) ' .
                                                         'INNER JOIN ' . TABLE_SCR2VAR . ' AS s2v ON (vot.id = s2v.variantid) ' .

@@ -8,3 +8,6 @@ trunk/.svnignore
 trunk/src/config.ini.php
 trunk/src/.idea
 trunk/src/refseq
+
+trunk/tests/test_results/error_screenshots
+trunk/tests/test_results/reports

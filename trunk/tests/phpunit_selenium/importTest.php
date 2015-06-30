@@ -4,7 +4,7 @@
  * LEIDEN OPEN VARIATION DATABASE (LOVD)
  *
  * Created     : 2014-12-19
- * Modified    : 2015-06-24:13:38:43
+ * Modified    : 2015-06-30:14:13:59
  * For LOVD    : 3.0-12
  *
  * Copyright   : 2014 Leiden University Medical Center; http://www.LUMC.nl/
@@ -204,8 +204,8 @@ class import_tests extends PHPUnit_Extensions_SeleniumTestCase
         $this->assertTrue((bool)preg_match('/^[\s\S]*Error \(Screenings_To_Variants, line 106\): Genomic Variant "0000000022" does not exist in the database and is not defined in this import file\.[\s\S]*$/',$this->getBodyText()));
         $this->assertTrue((bool)preg_match('/^[\s\S]*Warning: There is already a Individual column with column ID Age_of_death\. This column is not imported! [\s\S]*$/',$this->getBodyText()));
         $this->assertTrue((bool)preg_match('/^[\s\S]*Warning \(Diseases, line 26\): There is already a disease with disease name Healthy individual \/ control\. This disease is not imported! [\s\S]*$/',$this->getBodyText()));
-        $this->assertTrue((bool)preg_match('/^[\s\S]*Warning \(Diseases, line 27\): There is already a disease with disease name isovaleric acidemia\. This disease is not imported! [\s\S]*$/',$this->getBodyText()));
-        $this->assertTrue((bool)preg_match('/^[\s\S]*Warning \(Diseases, line 29\): There is already a disease with disease name isovaleric acidemia\. This disease is not imported! [\s\S]*$/',$this->getBodyText()));
+        $this->assertTrue((bool)preg_match('/^[\s\S]*Warning \(Diseases, line 27\): There is already a disease with disease name isovaleric acidemia and\/or OMIM ID 243500\. This disease is not imported![\s\S]*$/',$this->getBodyText()));
+        $this->assertTrue((bool)preg_match('/^[\s\S]*Warning \(Diseases, line 29\): There is already a disease with disease name isovaleric acidemia and\/or OMIM ID 243500\. This disease is not imported![\s\S]*$/',$this->getBodyText()));
         $this->assertTrue((bool)preg_match('/^[\s\S]*Warning \(Phenotypes, line 68\): The disease belonging to this phenotype entry is yet to be inserted into the database\. Perhaps not all this phenotype entry[\s\S]s custom columns will be enabled for this disease![\s\S]*$/',$this->getBodyText()));
     }
     public function testFalseUpdateImport()
@@ -228,7 +228,6 @@ class import_tests extends PHPUnit_Extensions_SeleniumTestCase
         $this->assertTrue((bool)preg_match('/^[\s\S]*Error \(Genes, line 14\): Access denied for update on field "name": Not allowed to change the gene name\.[\s\S]*$/',$this->getBodyText()));
         $this->assertTrue((bool)preg_match('/^[\s\S]*Error \(Genes, line 14\): Access denied for update on field "chromosome": Not allowed to change the chromosome\.[\s\S]*$/',$this->getBodyText()));
         $this->assertTrue((bool)preg_match('/^[\s\S]*Error \(Genes, line 15\): This line refers to non-existing entry\. During update no new inserts can be done\.[\s\S]*$/',$this->getBodyText()));
-        $this->assertTrue((bool)preg_match('/^[\s\S]*Error \(Transcripts, line 20\): Will not edit Transcript "00001", to many fields are changed\. The following fields are changed in the import file: [\s\S]*$/',$this->getBodyText()));
         $this->assertTrue((bool)preg_match('/^[\s\S]*Error \(Transcripts, line 20\): Transcript "00001" does not match the same gene and\/or the same NCBI ID as in the database\.[\s\S]*$/',$this->getBodyText()));
         $this->assertTrue((bool)preg_match('/^[\s\S]*Error \(Transcripts, line 20\): Access denied for update on field "id_ncbi": Not allowed to change the id_ncbi[\s\S]*$/',$this->getBodyText()));
         $this->assertTrue((bool)preg_match('/^[\s\S]*Error \(Transcripts, line 21\): ID "00001" already defined at line 20\.[\s\S]*$/',$this->getBodyText()));
@@ -255,11 +254,9 @@ class import_tests extends PHPUnit_Extensions_SeleniumTestCase
         $this->assertTrue((bool)preg_match('/^[\s\S]*Error \(Phenotypes, line 54\): Disease "00004" does not exist in the database and is not defined in this import file\.[\s\S]*$/',$this->getBodyText()));
         $this->assertTrue((bool)preg_match('/^[\s\S]*Error \(Phenotypes, line 54\): Individual "00000022" does not exist in the database and is not defined in this import file\.[\s\S]*$/',$this->getBodyText()));
         $this->assertTrue((bool)preg_match('/^[\s\S]*Error \(Phenotypes, line 55\): This line refers to non-existing entry\. During update no new inserts can be done\.[\s\S]*$/',$this->getBodyText()));
-        $this->assertTrue((bool)preg_match('/^[\s\S]*Error \(Screenings, line 60\): Will not edit Screening "0000000001", to many fields are changed\. The following fields are changed in the import file: [\s\S]*$/',$this->getBodyText()));
         $this->assertTrue((bool)preg_match('/^[\s\S]*Error \(Screenings, line 60\): Individual "00000022" does not exist in the database and is not defined in this import file\.[\s\S]*$/',$this->getBodyText()));
         $this->assertTrue((bool)preg_match('/^[\s\S]*Error \(Screenings, line 61\): This line refers to non-existing entry\. During update no new inserts can be done\.[\s\S]*$/',$this->getBodyText()));
         $this->assertTrue((bool)preg_match('/^[\s\S]*Error \(Screenings_To_Genes, line 67\): This line refers to non-existing entry\. During update no new inserts can be done\.[\s\S]*$/',$this->getBodyText()));
-        $this->assertTrue((bool)preg_match('/^[\s\S]*Error \(Variants_On_Genome, line 72\): Will not edit Variants_On_Genome "0000000001", to many fields are changed\. The following fields are changed in the import file: [\s\S]*$/',$this->getBodyText()));
         $this->assertTrue((bool)preg_match('/^[\s\S]*Error \(Variants_On_Genome, line 72\): Invalid value in the [\s\S]position_g_start[\s\S] field: "abc" is not a numerical value\.[\s\S]*$/',$this->getBodyText()));
         $this->assertTrue((bool)preg_match('/^[\s\S]*Error \(Variants_On_Genome, line 72\): Access denied for update on field "position_g_start": Not allowed to change the position_g_start\.[\s\S]*$/',$this->getBodyText()));
         $this->assertTrue((bool)preg_match('/^[\s\S]*Error \(Variants_On_Genome, line 73\): This line refers to non-existing entry\. During update no new inserts can be done\.[\s\S]*$/',$this->getBodyText()));
@@ -274,8 +271,8 @@ class import_tests extends PHPUnit_Extensions_SeleniumTestCase
         $this->assertTrue((bool)preg_match('/^[\s\S]*Warning \(Genes, line 14\): Updated date field is set by LOVD\. [\s\S]*$/',$this->getBodyText()));
         $this->assertTrue((bool)preg_match('/^[\s\S]*Warning \(Transcripts, line 20\): Edited by field is set by LOVD [\s\S]*$/',$this->getBodyText()));
         $this->assertTrue((bool)preg_match('/^[\s\S]*Warning \(Transcripts, line 20\): Edited date field is set by LOVD [\s\S]*$/',$this->getBodyText()));
-        $this->assertTrue((bool)preg_match('/^[\s\S]*Warning \(Diseases, line 26\): There is already a disease with disease name isovaleric acidemia\. This disease is not imported! [\s\S]*$/',$this->getBodyText()));
-        $this->assertTrue((bool)preg_match('/^[\s\S]*Warning \(Diseases, line 27\): There is already a disease with disease name isovaleric acidemia\. This disease is not imported! [\s\S]*$/',$this->getBodyText()));
+        $this->assertTrue((bool)preg_match('/^[\s\S]*Warning \(Diseases, line 26\): There is already a disease with disease name isovaleric acidemia and\/or OMIM ID 243500\. This disease is not imported![\s\S]*$/',$this->getBodyText()));
+        $this->assertTrue((bool)preg_match('/^[\s\S]*Warning \(Diseases, line 27\): There is already a disease with disease name isovaleric acidemia and\/or OMIM ID 243500\. This disease is not imported![\s\S]*$/',$this->getBodyText()));
         $this->assertTrue((bool)preg_match('/^[\s\S]*Warning \(Diseases, line 28\): Edited by field is set by LOVD [\s\S]*$/',$this->getBodyText()));
         $this->assertTrue((bool)preg_match('/^[\s\S]*Warning \(Diseases, line 28\): Edited date field is set by LOVD [\s\S]*$/',$this->getBodyText()));
         $this->assertTrue((bool)preg_match('/^[\s\S]*Warning: It is currently not possible to do an update on section Genes_To_Diseases via an import [\s\S]*$/',$this->getBodyText()));

@@ -4,7 +4,7 @@
  * LEIDEN OPEN VARIATION DATABASE (LOVD)
  *
  * Created     : 2014-12-19
- * Modified    : 2015-06-24:13:38:43
+ * Modified    : 2015-06-30:14:13:59
  * For LOVD    : 3.0-12
  *
  * Copyright   : 2014 Leiden University Medical Center; http://www.LUMC.nl/
@@ -304,9 +304,9 @@ class admin_tests extends PHPUnit_Extensions_SeleniumTestCase
                 } catch (Exception $e) {}
                 sleep(1);
         }
-
+        
         sleep(30);
-        $this->assertEquals("138 variants where imported, 1 variant could not be imported.", $this->getText("id=lovd__progress_message"));
+        $this->assertEquals("138 variants were imported, 1 variant could not be imported.", $this->getText("id=lovd__progress_message"));
         $this->click("css=input[type=\"button\"]");
         $this->waitForPageToLoad("30000");
         $this->waitForPageToLoad("4000");
@@ -514,7 +514,7 @@ class admin_tests extends PHPUnit_Extensions_SeleniumTestCase
         $this->select("name=statusid", "label=Public");
         $this->click("css=input[type=\"submit\"]");
         $this->waitForPageToLoad("30000");
-        $this->assertEquals("138 variants where imported, 1 variant could not be imported.", $this->getText("id=lovd__progress_message"));
+        $this->assertEquals("138 variants were imported, 1 variant could not be imported.", $this->getText("id=lovd__progress_message"));
         $this->click("css=input[type=\"button\"]");
         $this->waitForPageToLoad("30000");
         sleep(100);
@@ -665,7 +665,7 @@ class admin_tests extends PHPUnit_Extensions_SeleniumTestCase
                 sleep(1);
         }
 
-        $this->assertEquals("138 variants where imported, 1 variant could not be imported.", $this->getText("id=lovd__progress_message"));
+        $this->assertEquals("138 variants were imported, 1 variant could not be imported.", $this->getText("id=lovd__progress_message"));
         $this->click("css=input[type=\"submit\"]");
         $this->waitForPageToLoad("30000");
         $this->assertTrue((bool)preg_match('/^Successfully processed your submission and sent an email notification to the relevant curator[\s\S]*$/',$this->getText("css=table[class=info]")));
@@ -696,7 +696,7 @@ class admin_tests extends PHPUnit_Extensions_SeleniumTestCase
         $this->select("name=statusid", "label=Public");
         $this->click("css=input[type=\"submit\"]");
         $this->waitForPageToLoad("30000");
-        $this->assertEquals("138 variants where imported, 1 variant could not be imported.", $this->getText("id=lovd__progress_message"));
+        $this->assertEquals("138 variants were imported, 1 variant could not be imported.", $this->getText("id=lovd__progress_message"));
         $this->click("css=input[type=\"submit\"]");
         $this->waitForPageToLoad("30000");
         $this->assertTrue((bool)preg_match('/^Successfully processed your submission and sent an email notification to the relevant curator[\s\S]*$/',$this->getText("css=table[class=info]")));
