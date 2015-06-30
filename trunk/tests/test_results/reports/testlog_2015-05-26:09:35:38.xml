@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites>
+  <testsuite name="temp_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/tempTest.php" tests="9" assertions="4" failures="0" errors="8" time="46.793706">
+    <testcase name="testInstallLOVD" class="temp_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/tempTest.php" line="45" assertions="0" time="5.974075">
+      <error type="PHPUnit_Framework_Error">temp_tests::testInstallLOVD
+Current URL: https://localhost/svn/LOVD3/trunk/src/install/
+Screenshot: trunk/tests/test_results/error_screenshots/6efb78548d890b26f87cf10bc4f73936.png
+
+Invalid response while accessing the Selenium Server at 'http://localhost:4444/selenium-server/driver/': ERROR: Element css=input[type="submit"] not found
+
+</error>
+    </testcase>
+    <testcase name="testCreateGeneIVD" class="temp_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/tempTest.php" line="90" assertions="0" time="6.335969">
+      <error type="PHPUnit_Framework_Error">temp_tests::testCreateGeneIVD
+Current URL: https://localhost/svn/LOVD3/trunk/src/genes?create
+Screenshot: trunk/tests/test_results/error_screenshots/313c580fc9894586897806817f729665.png
+
+Invalid response while accessing the Selenium Server at 'http://localhost:4444/selenium-server/driver/': ERROR: Element name=active_transcripts[] not found
+
+</error>
+    </testcase>
+    <testcase name="testCreateDiseaseIVA" class="temp_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/tempTest.php" line="110" assertions="0" time="4.616187">
+      <error type="PHPUnit_Framework_Error">temp_tests::testCreateDiseaseIVA
+Current URL: https://localhost/svn/LOVD3/trunk/src/diseases?create
+Screenshot: trunk/tests/test_results/error_screenshots/b3b3fb1156495eb672e202814fcd6e2b.png
+
+Invalid response while accessing the Selenium Server at 'http://localhost:4444/selenium-server/driver/': ERROR: Element name=symbol not found
+
+</error>
+    </testcase>
+    <testcase name="testCreateIndividualDiagnosedWithIVA" class="temp_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/tempTest.php" line="121" assertions="0" time="4.736510">
+      <error type="PHPUnit_Framework_Error">temp_tests::testCreateIndividualDiagnosedWithIVA
+Current URL: https://localhost/svn/LOVD3/trunk/src/submit
+Screenshot: trunk/tests/test_results/error_screenshots/c541b3c7c65774427f995e543902876d.png
+
+Invalid response while accessing the Selenium Server at 'http://localhost:4444/selenium-server/driver/': ERROR: Element //div/table/tbody/tr/td/table/tbody/tr/td[2]/b not found
+
+</error>
+    </testcase>
+    <testcase name="testAddPhenotypeInfoToIVAIndividual" class="temp_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/tempTest.php" line="140" assertions="1" time="4.362996">
+      <error type="PHPUnit_Framework_Error">temp_tests::testAddPhenotypeInfoToIVAIndividual
+Current URL: http://localhost:4444/selenium-server/core/Blank.html?start=true
+Screenshot: trunk/tests/test_results/error_screenshots/45b07690e754be4ef46398fd65a8f216.png
+
+Failed asserting that false is true.
+
+</error>
+    </testcase>
+    <testcase name="testAddScreeningToIVAIndividual" class="temp_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/tempTest.php" line="155" assertions="1" time="4.570013">
+      <error type="PHPUnit_Framework_Error">temp_tests::testAddScreeningToIVAIndividual
+Current URL: http://localhost:4444/selenium-server/core/Blank.html?start=true
+Screenshot: trunk/tests/test_results/error_screenshots/3199f614eece248a131606daf1c0908c.png
+
+Failed asserting that false is true.
+
+</error>
+    </testcase>
+    <testcase name="testAddVariantLocatedWithinGeneToIVAIndividual" class="temp_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/tempTest.php" line="174" assertions="1" time="4.367538">
+      <error type="PHPUnit_Framework_Error">temp_tests::testAddVariantLocatedWithinGeneToIVAIndividual
+Current URL: http://localhost:4444/selenium-server/core/Blank.html?start=true
+Screenshot: trunk/tests/test_results/error_screenshots/ca93b13b78eacaee54344568c06adf1e.png
+
+Failed asserting that false is true.
+
+</error>
+    </testcase>
+    <testcase name="testConfirmVariantToIVAIndividual" class="temp_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/tempTest.php" line="210" assertions="0" time="4.738777">
+      <error type="PHPUnit_Framework_Error">temp_tests::testConfirmVariantToIVAIndividual
+Current URL: https://localhost/svn/LOVD3/trunk/src/submit/screening/0000000001
+Screenshot: trunk/tests/test_results/error_screenshots/4a2f3dae6d8d5d9faee1a76bb588673a.png
+
+Invalid response while accessing the Selenium Server at 'http://localhost:4444/selenium-server/driver/': ERROR: Element //div/table/tbody/tr/td/table/tbody/tr[2]/td[2]/b not found
+
+</error>
+    </testcase>
+    <testcase name="testUninstallLOVD" class="temp_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/tempTest.php" line="248" assertions="1" time="7.091641"/>
+  </testsuite>
+</testsuites>

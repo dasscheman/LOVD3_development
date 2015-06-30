@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites>
+  <testsuite name="admin_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/adminTest.php" tests="32" assertions="135" failures="0" errors="0" time="519.585427">
+    <testcase name="testInstallLOVD" class="admin_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/adminTest.php" line="45" assertions="7" time="25.095938"/>
+    <testcase name="testCreateGeneIVD" class="admin_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/adminTest.php" line="90" assertions="1" time="11.158430"/>
+    <testcase name="testCreateUserManager" class="admin_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/adminTest.php" line="110" assertions="1" time="2.865508"/>
+    <testcase name="testCreateUserCurator" class="admin_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/adminTest.php" line="130" assertions="1" time="3.003831"/>
+    <testcase name="testMakeUserCuratorIVD" class="admin_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/adminTest.php" line="150" assertions="1" time="2.556362"/>
+    <testcase name="testCreateUserSubmitter" class="admin_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/adminTest.php" line="159" assertions="1" time="3.015105"/>
+    <testcase name="testCreateDiseaseIVA" class="admin_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/adminTest.php" line="179" assertions="1" time="2.513939"/>
+    <testcase name="testCreateIndividualDiagnosedWithHealtyControl" class="admin_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/adminTest.php" line="190" assertions="2" time="6.853076"/>
+    <testcase name="testAddPhenotypeInfoToHealtyIndividual" class="admin_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/adminTest.php" line="209" assertions="3" time="5.779641"/>
+    <testcase name="testAddScreeningToHealtyIndividual" class="admin_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/adminTest.php" line="224" assertions="3" time="6.054188"/>
+    <testcase name="testAddVariantLocatedWithinGeneToHealtyIndividual" class="admin_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/adminTest.php" line="243" assertions="7" time="13.203036"/>
+    <testcase name="testAddSeatlleseqFileToHealtyIndividual" class="admin_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/adminTest.php" line="279" assertions="5" time="88.038267"/>
+    <testcase name="testAddVariantOnlyDescribedOnGenomicLevelToHealtyIndividual" class="admin_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/adminTest.php" line="314" assertions="4" time="5.048420"/>
+    <testcase name="testFinishIndividualDiagnosedHealty" class="admin_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/adminTest.php" line="338" assertions="2" time="0.418312"/>
+    <testcase name="testCreateIndividualDiagnosedWithIVA" class="admin_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/adminTest.php" line="345" assertions="2" time="4.446304"/>
+    <testcase name="testAddPhenotypeInfoToIVAIndividual" class="admin_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/adminTest.php" line="364" assertions="3" time="4.247617"/>
+    <testcase name="testAddScreeningToIVAIndividual" class="admin_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/adminTest.php" line="379" assertions="3" time="4.218869"/>
+    <testcase name="testAddVariantLocatedWithinGeneToIVAIndividual" class="admin_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/adminTest.php" line="398" assertions="7" time="9.057578"/>
+    <testcase name="testAddVariantOnlyDescribedOnGenomicLevelToIVAIndividual" class="admin_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/adminTest.php" line="434" assertions="4" time="6.760919"/>
+    <testcase name="testConfirmVariantToIVAIndividual" class="admin_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/adminTest.php" line="458" assertions="9" time="12.414442"/>
+    <testcase name="testAddVcfFileToIVAIndividual" class="admin_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/adminTest.php" line="495" assertions="6" time="103.574665"/>
+    <testcase name="testFinishIndividualDiagnosedWithIVA" class="admin_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/adminTest.php" line="545" assertions="2" time="4.146042"/>
+    <testcase name="testAddSummaryVariantLocatedWithinGene" class="admin_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/adminTest.php" line="554" assertions="11" time="12.705587"/>
+    <testcase name="testAddSummaryVariantOnlyDescribedOnGenomicLevel" class="admin_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/adminTest.php" line="605" assertions="6" time="8.840071"/>
+    <testcase name="testAddSummaryVariantSeatlleseqFile" class="admin_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/adminTest.php" line="635" assertions="7" time="29.729699"/>
+    <testcase name="testAddSummaryVariantVcfFile" class="admin_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/adminTest.php" line="673" assertions="7" time="112.237568"/>
+    <testcase name="testPostFinishAddVariantOnlyDescribedOnGenomicLevelToIVAIndividual" class="admin_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/adminTest.php" line="766" assertions="6" time="5.958951"/>
+    <testcase name="testPostFinishAddVariantLocatedWithinGeneToIVAIndividual" class="admin_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/adminTest.php" line="798" assertions="9" time="8.772845"/>
+    <testcase name="testPostFinishAddScreeningToIVAIndividual" class="admin_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/adminTest.php" line="841" assertions="5" time="4.774093"/>
+    <testcase name="testPostFinishAddPhenotypeInfoToIVAIndividual" class="admin_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/adminTest.php" line="867" assertions="5" time="5.023451"/>
+    <testcase name="testDeleteGeneIVD" class="admin_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/adminTest.php" line="889" assertions="3" time="4.333882"/>
+    <testcase name="testUninstallLOVD" class="admin_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/adminTest.php" line="905" assertions="1" time="2.738791"/>
+  </testsuite>
+</testsuites>

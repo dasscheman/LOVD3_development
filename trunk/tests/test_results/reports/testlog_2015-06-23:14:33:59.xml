@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites>
+  <testsuite name="import_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/importTest.php" tests="10" assertions="1" failures="0" errors="9" time="51.308573">
+    <testcase name="testInstallLOVD" class="import_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/importTest.php" line="45" assertions="0" time="6.126952">
+      <error type="PHPUnit_Framework_Error">import_tests::testInstallLOVD
+Current URL: http://localhost/svn/LOVD3_development/trunk/src/install/
+Screenshot: trunk/tests/test_results/error_screenshots/e851a3b3434beaf8437cc04150babc60.png
+
+Invalid response while accessing the Selenium Server at 'http://localhost:4444/selenium-server/driver/': ERROR: Element css=input[type="submit"] not found
+
+</error>
+    </testcase>
+    <testcase name="testCreateGeneIVD" class="import_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/importTest.php" line="90" assertions="0" time="6.374407">
+      <error type="PHPUnit_Framework_Error">import_tests::testCreateGeneIVD
+Current URL: http://localhost/svn/LOVD3_development/trunk/src/genes?create
+Screenshot: trunk/tests/test_results/error_screenshots/28049b3a9d7cbc86ee29e8c10b5a8422.png
+
+Invalid response while accessing the Selenium Server at 'http://localhost:4444/selenium-server/driver/': ERROR: Element name=active_transcripts[] not found
+
+</error>
+    </testcase>
+    <testcase name="testCreateGenderColumn" class="import_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/importTest.php" line="110" assertions="0" time="4.481616">
+      <error type="PHPUnit_Framework_Error">import_tests::testCreateGenderColumn
+Current URL: http://localhost/svn/LOVD3_development/trunk/src/columns/Individual/Gender
+Screenshot: trunk/tests/test_results/error_screenshots/0300557aa402d29d87b2e0c0ec9d9e3e.png
+
+Invalid response while accessing the Selenium Server at 'http://localhost:4444/selenium-server/driver/': ERROR: Element id=viewentryOptionsButton_Columns not found
+
+</error>
+    </testcase>
+    <testcase name="testCreateDiseaseIVA" class="import_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/importTest.php" line="120" assertions="0" time="4.524905">
+      <error type="PHPUnit_Framework_Error">import_tests::testCreateDiseaseIVA
+Current URL: http://localhost/svn/LOVD3_development/trunk/src/diseases?create
+Screenshot: trunk/tests/test_results/error_screenshots/e84ad6fb0a0d6770b4171805a8f98359.png
+
+Invalid response while accessing the Selenium Server at 'http://localhost:4444/selenium-server/driver/': ERROR: Element name=symbol not found
+
+</error>
+    </testcase>
+    <testcase name="testInsertImport" class="import_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/importTest.php" line="139" assertions="0" time="4.568805">
+      <error type="PHPUnit_Framework_Error">import_tests::testInsertImport
+Current URL: http://localhost/svn/LOVD3_development/trunk/src/import
+Screenshot: trunk/tests/test_results/error_screenshots/15f23626d61f9d2063c633ab5fffbcb7.png
+
+Invalid response while accessing the Selenium Server at 'http://localhost:4444/selenium-server/driver/': ERROR: Element name=import not found
+
+</error>
+    </testcase>
+    <testcase name="testFalseInsertImport" class="import_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/importTest.php" line="147" assertions="0" time="4.704976">
+      <error type="PHPUnit_Framework_Error">import_tests::testFalseInsertImport
+Current URL: http://localhost/svn/LOVD3_development/trunk/src/import
+Screenshot: trunk/tests/test_results/error_screenshots/07a75e15bad53f1a0511d9644f73d322.png
+
+Invalid response while accessing the Selenium Server at 'http://localhost:4444/selenium-server/driver/': ERROR: Element name=import not found
+
+</error>
+    </testcase>
+    <testcase name="testFalseUpdateImport" class="import_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/importTest.php" line="211" assertions="0" time="4.561445">
+      <error type="PHPUnit_Framework_Error">import_tests::testFalseUpdateImport
+Current URL: http://localhost/svn/LOVD3_development/trunk/src/import
+Screenshot: trunk/tests/test_results/error_screenshots/5a7d98f93f321b52b111c9c66d72ad70.png
+
+Invalid response while accessing the Selenium Server at 'http://localhost:4444/selenium-server/driver/': ERROR: Element name=import not found
+
+</error>
+    </testcase>
+    <testcase name="testSecondInsertImport" class="import_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/importTest.php" line="293" assertions="0" time="4.638396">
+      <error type="PHPUnit_Framework_Error">import_tests::testSecondInsertImport
+Current URL: http://localhost/svn/LOVD3_development/trunk/src/import
+Screenshot: trunk/tests/test_results/error_screenshots/edb58ea84e41b92dca7210c3f30b409b.png
+
+Invalid response while accessing the Selenium Server at 'http://localhost:4444/selenium-server/driver/': ERROR: Element name=import not found
+
+</error>
+    </testcase>
+    <testcase name="testUpdateImport" class="import_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/importTest.php" line="302" assertions="0" time="4.576278">
+      <error type="PHPUnit_Framework_Error">import_tests::testUpdateImport
+Current URL: http://localhost/svn/LOVD3_development/trunk/src/import
+Screenshot: trunk/tests/test_results/error_screenshots/6006583c7dfd5d408377eb6a5f4b6cc6.png
+
+Invalid response while accessing the Selenium Server at 'http://localhost:4444/selenium-server/driver/': ERROR: Element name=import not found
+
+</error>
+    </testcase>
+    <testcase name="testUninstallLOVD" class="import_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/importTest.php" line="315" assertions="1" time="6.750793"/>
+  </testsuite>
+</testsuites>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites>
+  <testsuite name="import_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/importTest.php" tests="1" assertions="0" failures="0" errors="1" time="7.863838">
+    <testcase name="testUninstallLOVD" class="import_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/importTest.php" line="202" assertions="0" time="7.863838">
+      <error type="PHPUnit_Framework_Error">import_tests::testUninstallLOVD
+Current URL: http://localhost/svn/LOVD3_development/trunk/src/uninstall
+Screenshot: trunk/tests/test_results/error_screenshots/02df0cad066b12723ca636eca1ef0783.png
+
+Invalid response while accessing the Selenium Server at 'http://localhost:4444/selenium-server/driver/': ERROR: Element name=password not found
+
+</error>
+    </testcase>
+  </testsuite>
+</testsuites>

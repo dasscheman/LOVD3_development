@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites>
+  <testsuite name="import_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/importTest.php" tests="3" assertions="0" failures="0" errors="3" time="18.489238">
+    <testcase name="testInstallLOVD" class="import_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/importTest.php" line="45" assertions="0" time="7.317506">
+      <error type="PHPUnit_Framework_Error">import_tests::testInstallLOVD
+Current URL: http://localhost/svn/LOVD3_development/trunk/src/install/
+Screenshot: trunk/tests/test_results/error_screenshots/92f16be861fbe8137d87c31db42fd707.png
+
+Invalid response while accessing the Selenium Server at 'http://localhost:4444/selenium-server/driver/': ERROR: Element css=input[type="submit"] not found
+
+</error>
+    </testcase>
+    <testcase name="testCreateGeneIVD" class="import_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/importTest.php" line="90" assertions="0" time="6.888431">
+      <error type="PHPUnit_Framework_Error">import_tests::testCreateGeneIVD
+Current URL: http://localhost/svn/LOVD3_development/trunk/src/genes?create
+Screenshot: trunk/tests/test_results/error_screenshots/f4a2ba7d37095d6b4338d7b3dd037911.png
+
+Invalid response while accessing the Selenium Server at 'http://localhost:4444/selenium-server/driver/': ERROR: Element name=hgnc_id not found
+
+</error>
+    </testcase>
+    <testcase name="testCreateGenderColumn" class="import_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/importTest.php" line="110" assertions="0" time="4.283301">
+      <error type="PHPUnit_Framework_Error">import_tests::testCreateGenderColumn
+Issues while capturing the screenshot:
+CURL error while accessing the Selenium Server at 'http://localhost:4444/selenium-server/driver/': Failed to connect to localhost port 4444: Connection refused
+CURL error while accessing the Selenium Server at 'http://localhost:4444/selenium-server/driver/': Empty reply from server
+
+</error>
+    </testcase>
+  </testsuite>
+</testsuites>

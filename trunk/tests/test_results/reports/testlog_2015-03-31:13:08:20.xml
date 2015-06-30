@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites>
+  <testsuite name="temp_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/tempTest.php" tests="9" assertions="33" failures="0" errors="0" time="58.958603">
+    <testcase name="testInstallLOVD" class="temp_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/tempTest.php" line="45" assertions="7" time="19.746369"/>
+    <testcase name="testCreateGeneIVD" class="temp_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/tempTest.php" line="90" assertions="1" time="3.785888"/>
+    <testcase name="testCreateDiseaseIVA" class="temp_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/tempTest.php" line="110" assertions="1" time="0.668661"/>
+    <testcase name="testCreateIndividualDiagnosedWithIVA" class="temp_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/tempTest.php" line="121" assertions="2" time="4.266785"/>
+    <testcase name="testAddPhenotypeInfoToIVAIndividual" class="temp_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/tempTest.php" line="140" assertions="3" time="4.098042"/>
+    <testcase name="testAddScreeningToIVAIndividual" class="temp_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/tempTest.php" line="155" assertions="3" time="3.981922"/>
+    <testcase name="testAddVariantLocatedWithinGeneToIVAIndividual" class="temp_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/tempTest.php" line="174" assertions="7" time="8.750697"/>
+    <testcase name="testConfirmVariantToIVAIndividual" class="temp_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/tempTest.php" line="210" assertions="8" time="11.434603"/>
+    <testcase name="testUninstallLOVD" class="temp_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/tempTest.php" line="248" assertions="1" time="2.225636"/>
+  </testsuite>
+</testsuites>

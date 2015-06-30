@@ -1,0 +1,459 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites>
+  <testsuite name="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/" tests="168" assertions="436" failures="0" errors="33" time="998.540582">
+    <testsuite name="admin_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/adminTest.php" tests="32" assertions="99" failures="0" errors="7" time="386.556232">
+      <testcase name="testInstallLOVD" class="admin_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/adminTest.php" line="45" assertions="7" time="20.967062"/>
+      <testcase name="testCreateGeneIVD" class="admin_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/adminTest.php" line="90" assertions="1" time="4.155116"/>
+      <testcase name="testCreateUserManager" class="admin_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/adminTest.php" line="110" assertions="1" time="1.142714"/>
+      <testcase name="testCreateUserCurator" class="admin_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/adminTest.php" line="130" assertions="1" time="0.913491"/>
+      <testcase name="testMakeUserCuratorIVD" class="admin_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/adminTest.php" line="150" assertions="1" time="0.623192"/>
+      <testcase name="testCreateUserSubmitter" class="admin_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/adminTest.php" line="159" assertions="1" time="1.020908"/>
+      <testcase name="testCreateDiseaseIVA" class="admin_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/adminTest.php" line="179" assertions="1" time="0.828539"/>
+      <testcase name="testCreateIndividualDiagnosedWithHealtyControl" class="admin_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/adminTest.php" line="190" assertions="2" time="4.147296"/>
+      <testcase name="testAddPhenotypeInfoToHealtyIndividual" class="admin_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/adminTest.php" line="209" assertions="3" time="3.993412"/>
+      <testcase name="testAddScreeningToHealtyIndividual" class="admin_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/adminTest.php" line="224" assertions="3" time="4.015306"/>
+      <testcase name="testAddVariantLocatedWithinGeneToHealtyIndividual" class="admin_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/adminTest.php" line="243" assertions="7" time="8.124260"/>
+      <testcase name="testAddSeatlleseqFileToHealtyIndividual" class="admin_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/adminTest.php" line="279" assertions="5" time="79.666545"/>
+      <testcase name="testAddVariantOnlyDescribedOnGenomicLevelToHealtyIndividual" class="admin_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/adminTest.php" line="314" assertions="4" time="6.852011"/>
+      <testcase name="testFinishIndividualDiagnosedHealty" class="admin_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/adminTest.php" line="338" assertions="2" time="0.778117"/>
+      <testcase name="testCreateIndividualDiagnosedWithIVA" class="admin_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/adminTest.php" line="345" assertions="2" time="4.237977"/>
+      <testcase name="testAddPhenotypeInfoToIVAIndividual" class="admin_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/adminTest.php" line="364" assertions="3" time="3.942604"/>
+      <testcase name="testAddScreeningToIVAIndividual" class="admin_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/adminTest.php" line="379" assertions="3" time="3.905197"/>
+      <testcase name="testAddVariantLocatedWithinGeneToIVAIndividual" class="admin_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/adminTest.php" line="398" assertions="7" time="10.564635"/>
+      <testcase name="testAddVariantOnlyDescribedOnGenomicLevelToIVAIndividual" class="admin_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/adminTest.php" line="434" assertions="4" time="4.253977"/>
+      <testcase name="testConfirmVariantToIVAIndividual" class="admin_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/adminTest.php" line="458" assertions="9" time="12.276907"/>
+      <testcase name="testAddVcfFileToIVAIndividual" class="admin_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/adminTest.php" line="495" assertions="6" time="102.694772"/>
+      <testcase name="testFinishIndividualDiagnosedWithIVA" class="admin_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/adminTest.php" line="545" assertions="2" time="3.990710"/>
+      <testcase name="testAddSummaryVariantLocatedWithinGene" class="admin_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/adminTest.php" line="554" assertions="11" time="12.088051"/>
+      <testcase name="testAddSummaryVariantOnlyDescribedOnGenomicLevel" class="admin_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/adminTest.php" line="605" assertions="6" time="10.868457"/>
+      <testcase name="testAddSummaryVariantSeatlleseqFile" class="admin_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/adminTest.php" line="635" assertions="5" time="35.245275">
+        <error type="PHPUnit_Framework_Error">admin_tests::testAddSummaryVariantSeatlleseqFile
+Current URL: http://localhost/svn/LOVD3/trunk/src/variants/upload?create&amp;type=SeattleSeq
+Screenshot: trunk/tests/test_results/error_screenshots/3a32a307b439e76a81099aeba21eb0e8.png
+
+Invalid response while accessing the Selenium Server at 'http://localhost:4444/selenium-server/driver/': Timed out after 30000ms
+
+</error>
+      </testcase>
+      <testcase name="testAddSummaryVariantVcfFile" class="admin_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/adminTest.php" line="673" assertions="0" time="4.495247">
+        <error type="PHPUnit_Framework_Error">admin_tests::testAddSummaryVariantVcfFile
+Current URL: http://localhost:4444/selenium-server/core/Blank.html?start=true
+Screenshot: trunk/tests/test_results/error_screenshots/4819866566421d5510b0c8b6cb800a54.png
+
+Invalid response while accessing the Selenium Server at 'http://localhost:4444/selenium-server/driver/': ERROR: Element link=Submit new data not found
+
+</error>
+      </testcase>
+      <testcase name="testPostFinishAddVariantOnlyDescribedOnGenomicLevelToIVAIndividual" class="admin_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/adminTest.php" line="766" assertions="1" time="15.506317">
+        <error type="PHPUnit_Framework_Error">admin_tests::testPostFinishAddVariantOnlyDescribedOnGenomicLevelToIVAIndividual
+Current URL: http://localhost/svn/LOVD3/trunk/src/screenings
+Screenshot: trunk/tests/test_results/error_screenshots/01deb9822a259ea4ea79666e1a7992aa.png
+
+Failed asserting that false is true.
+
+</error>
+      </testcase>
+      <testcase name="testPostFinishAddVariantLocatedWithinGeneToIVAIndividual" class="admin_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/adminTest.php" line="798" assertions="0" time="4.213284">
+        <error type="PHPUnit_Framework_Error">admin_tests::testPostFinishAddVariantLocatedWithinGeneToIVAIndividual
+Current URL: http://localhost:4444/selenium-server/core/Blank.html?start=true
+Screenshot: trunk/tests/test_results/error_screenshots/6aa14b8170daad876208e151e89fd0bf.png
+
+Invalid response while accessing the Selenium Server at 'http://localhost:4444/selenium-server/driver/': ERROR: Element id=tab_screenings not found
+
+</error>
+      </testcase>
+      <testcase name="testPostFinishAddScreeningToIVAIndividual" class="admin_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/adminTest.php" line="841" assertions="0" time="4.277216">
+        <error type="PHPUnit_Framework_Error">admin_tests::testPostFinishAddScreeningToIVAIndividual
+Current URL: http://localhost:4444/selenium-server/core/Blank.html?start=true
+Screenshot: trunk/tests/test_results/error_screenshots/04c78b6624ece39aaafd129aab31c251.png
+
+Invalid response while accessing the Selenium Server at 'http://localhost:4444/selenium-server/driver/': ERROR: Element id=tab_individuals not found
+
+</error>
+      </testcase>
+      <testcase name="testPostFinishAddPhenotypeInfoToIVAIndividual" class="admin_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/adminTest.php" line="867" assertions="0" time="4.577086">
+        <error type="PHPUnit_Framework_Error">admin_tests::testPostFinishAddPhenotypeInfoToIVAIndividual
+Current URL: http://localhost:4444/selenium-server/core/Blank.html?start=true
+Screenshot: trunk/tests/test_results/error_screenshots/a2f99a9ba4a75021369d6bc7bb9bd5ed.png
+
+Invalid response while accessing the Selenium Server at 'http://localhost:4444/selenium-server/driver/': ERROR: Element id=tab_individuals not found
+
+</error>
+      </testcase>
+      <testcase name="testDeleteGeneIVD" class="admin_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/adminTest.php" line="889" assertions="0" time="5.371490">
+        <error type="PHPUnit_Framework_Error">admin_tests::testDeleteGeneIVD
+Current URL: http://localhost/svn/LOVD3/trunk/src/genes
+Screenshot: trunk/tests/test_results/error_screenshots/24cf3dd61a176d5a21ea7c479331d059.png
+
+Invalid response while accessing the Selenium Server at 'http://localhost:4444/selenium-server/driver/': ERROR: Element id=viewentryOptionsButton_Genes not found
+
+</error>
+      </testcase>
+      <testcase name="testUninstallLOVD" class="admin_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/adminTest.php" line="905" assertions="1" time="6.819060"/>
+    </testsuite>
+    <testsuite name="authorization_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/authorizationTest.php" tests="16" assertions="21" failures="0" errors="5" time="54.402208">
+      <testcase name="testInstallLOVD" class="authorization_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/authorizationTest.php" line="45" assertions="7" time="13.729248"/>
+      <testcase name="testCreateUserManager" class="authorization_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/authorizationTest.php" line="90" assertions="1" time="0.819295"/>
+      <testcase name="testCreateUserCurator" class="authorization_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/authorizationTest.php" line="110" assertions="1" time="0.797471"/>
+      <testcase name="testCreateUserCollaborator" class="authorization_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/authorizationTest.php" line="130" assertions="1" time="0.891107"/>
+      <testcase name="testCreateUserSubmitter" class="authorization_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/authorizationTest.php" line="150" assertions="1" time="0.788854"/>
+      <testcase name="testCreateUserOwner" class="authorization_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/authorizationTest.php" line="170" assertions="1" time="0.817080"/>
+      <testcase name="testCreateGeneIVD" class="authorization_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/authorizationTest.php" line="190" assertions="1" time="5.194102"/>
+      <testcase name="testCreateDiseaseIVA" class="authorization_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/authorizationTest.php" line="204" assertions="1" time="0.621976"/>
+      <testcase name="testCreateIndividualDiagnosedWithIVA" class="authorization_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/authorizationTest.php" line="215" assertions="2" time="1.183677"/>
+      <testcase name="testAddScreeningToIVAIndividual" class="authorization_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/authorizationTest.php" line="233" assertions="2" time="0.927923"/>
+      <testcase name="testAddVariantLocatedWithinGeneToIVAIndividual" class="authorization_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/authorizationTest.php" line="251" assertions="1" time="3.644173">
+        <error type="PHPUnit_Framework_Error">authorization_tests::testAddVariantLocatedWithinGeneToIVAIndividual
+Current URL: http://localhost/svn/LOVD3/trunk/src/variants?create&amp;reference=Transcript&amp;geneid=IVD&amp;target=0000000001
+Screenshot: trunk/tests/test_results/error_screenshots/364c3776102115348caf99911f062101.png
+
+Failed asserting that false is true.
+
+</error>
+      </testcase>
+      <testcase name="testAddPhenotypeInfoToIVAIndividual" class="authorization_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/authorizationTest.php" line="279" assertions="0" time="4.590066">
+        <error type="PHPUnit_Framework_Error">authorization_tests::testAddPhenotypeInfoToIVAIndividual
+Current URL: http://localhost/svn/LOVD3/trunk/src/phenotypes?create&amp;target=00000001
+Screenshot: trunk/tests/test_results/error_screenshots/b1dbbbf7ab5eaa9361c3d3ae49f1d094.png
+
+Invalid response while accessing the Selenium Server at 'http://localhost:4444/selenium-server/driver/': ERROR: Element name=Phenotype/Additional not found
+
+</error>
+      </testcase>
+      <testcase name="testMakeUserCuratorIVD" class="authorization_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/authorizationTest.php" line="289" assertions="0" time="4.682195">
+        <error type="PHPUnit_Framework_Error">authorization_tests::testMakeUserCuratorIVD
+Current URL: http://localhost/svn/LOVD3/trunk/src/genes/IVD?sortCurators
+Screenshot: trunk/tests/test_results/error_screenshots/fd047b9f08f7c065045a307b72bd6146.png
+
+Invalid response while accessing the Selenium Server at 'http://localhost:4444/selenium-server/driver/': ERROR: Element link=Test Curator not found
+
+</error>
+      </testcase>
+      <testcase name="testMakeUserCollaboratorIVD" class="authorization_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/authorizationTest.php" line="298" assertions="0" time="4.574921">
+        <error type="PHPUnit_Framework_Error">authorization_tests::testMakeUserCollaboratorIVD
+Current URL: http://localhost/svn/LOVD3/trunk/src/genes/IVD?sortCurators
+Screenshot: trunk/tests/test_results/error_screenshots/ff5338f4224d8a286251d975a115ef36.png
+
+Invalid response while accessing the Selenium Server at 'http://localhost:4444/selenium-server/driver/': ERROR: Element link=Test Collaborator not found
+
+</error>
+      </testcase>
+      <testcase name="testAuthorization" class="authorization_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/authorizationTest.php" line="308" assertions="1" time="4.481762">
+        <error type="PHPUnit_Framework_Error">authorization_tests::testAuthorization
+Current URL: http://localhost/svn/LOVD3/trunk/tests/unit_tests/authorization.php
+Screenshot: trunk/tests/test_results/error_screenshots/cf9ceae61ba32dfd55f12d7166f2b5a6.png
+
+Failed asserting that two strings are equal.
+--- Expected
++++ Actual
+@@ @@
+-'Complete, all successful'
++'Assertion Failed!
++ Line: 81
++ Code: !empty($_AUTH["curates"])'
+
+
+</error>
+      </testcase>
+      <testcase name="testUninstallLOVD" class="authorization_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/authorizationTest.php" line="313" assertions="1" time="6.658358"/>
+    </testsuite>
+    <testsuite name="collaborator_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/collaboratorTest.php" tests="28" assertions="44" failures="0" errors="9" time="88.946563">
+      <testcase name="testInstallLOVD" class="collaborator_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/collaboratorTest.php" line="45" assertions="1" time="13.768632"/>
+      <testcase name="testCreateGeneGJB" class="collaborator_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/collaboratorTest.php" line="84" assertions="3" time="6.252592"/>
+      <testcase name="testCreateUserCollaborator" class="collaborator_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/collaboratorTest.php" line="104" assertions="1" time="0.832197"/>
+      <testcase name="testMakeUserCollaboratorGJB" class="collaborator_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/collaboratorTest.php" line="124" assertions="1" time="0.650442"/>
+      <testcase name="testLoginAsCollaborator" class="collaborator_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/collaboratorTest.php" line="135" assertions="1" time="0.823518"/>
+      <testcase name="testCreateUserSubmitter" class="collaborator_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/collaboratorTest.php" line="145" assertions="1" time="0.205044"/>
+      <testcase name="testCreateDiseaseCMT" class="collaborator_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/collaboratorTest.php" line="150" assertions="6" time="5.295908"/>
+      <testcase name="testCreateIndividualDiagnosedWithCMT" class="collaborator_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/collaboratorTest.php" line="181" assertions="2" time="3.904899"/>
+      <testcase name="testAddPhenotypeInfoToCMTIndividual" class="collaborator_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/collaboratorTest.php" line="196" assertions="3" time="3.829706"/>
+      <testcase name="testAddScreeningToCMTIndividual" class="collaborator_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/collaboratorTest.php" line="209" assertions="3" time="3.831685"/>
+      <testcase name="testAddVariantLocatedWithinGeneToCMTIndividual" class="collaborator_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/collaboratorTest.php" line="227" assertions="4" time="3.838319">
+        <error type="PHPUnit_Framework_Error">collaborator_tests::testAddVariantLocatedWithinGeneToCMTIndividual
+Current URL: http://localhost/svn/LOVD3/trunk/src/variants?create&amp;reference=Transcript&amp;geneid=GJB1&amp;target=0000000001
+Screenshot: trunk/tests/test_results/error_screenshots/8768daaf31cf2cb7d1feffaf3862f8a7.png
+
+Failed asserting that false is true.
+
+</error>
+      </testcase>
+      <testcase name="testAddVariantOnlyDescribedOnGenomicLevelToCMTIndividual" class="collaborator_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/collaboratorTest.php" line="259" assertions="1" time="4.488950">
+        <error type="PHPUnit_Framework_Error">collaborator_tests::testAddVariantOnlyDescribedOnGenomicLevelToCMTIndividual
+Current URL: http://localhost:4444/selenium-server/core/Blank.html?start=true
+Screenshot: trunk/tests/test_results/error_screenshots/0f18d043aff9ce04f86b0e357ffbd97b.png
+
+Failed asserting that false is true.
+
+</error>
+      </testcase>
+      <testcase name="testConfirmVariantToCMTIndividual" class="collaborator_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/collaboratorTest.php" line="280" assertions="1" time="4.298927">
+        <error type="PHPUnit_Framework_Error">collaborator_tests::testConfirmVariantToCMTIndividual
+Current URL: http://localhost:4444/selenium-server/core/Blank.html?start=true
+Screenshot: trunk/tests/test_results/error_screenshots/c90cd301ef4598f79dc55a53b37f1145.png
+
+Failed asserting that false is true.
+
+</error>
+      </testcase>
+      <testcase name="testAddSeatlleseqFileToCMTIndividual" class="collaborator_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/collaboratorTest.php" line="316" assertions="1" time="4.322306"/>
+      <testcase name="testAddVcfFileToCMTIndividual" class="collaborator_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/collaboratorTest.php" line="321" assertions="1" time="0.262943"/>
+      <testcase name="testFinishIndividualDiagnosedWithCMT" class="collaborator_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/collaboratorTest.php" line="326" assertions="1" time="0.340702">
+        <error type="PHPUnit_Framework_Error">collaborator_tests::testFinishIndividualDiagnosedWithCMT
+Current URL: http://localhost/svn/LOVD3/trunk/src/submit/screening/0000000002
+Screenshot: trunk/tests/test_results/error_screenshots/218381c1ea223885a4944dc1f2372079.png
+
+Invalid response while accessing the Selenium Server at 'http://localhost:4444/selenium-server/driver/': ERROR: Element //tr[3]/td[2]/b not found
+
+</error>
+      </testcase>
+      <testcase name="testAddSummaryVariantLocatedWithinGene" class="collaborator_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/collaboratorTest.php" line="336" assertions="1" time="4.466233"/>
+      <testcase name="testAddSummaryVariantOnlyDescribedOnGenomicLevel" class="collaborator_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/collaboratorTest.php" line="341" assertions="1" time="0.270957"/>
+      <testcase name="testAddSummaryVariantSeatlleseqFile" class="collaborator_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/collaboratorTest.php" line="346" assertions="1" time="0.195576"/>
+      <testcase name="testAddSummaryVariantVcfFile" class="collaborator_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/collaboratorTest.php" line="351" assertions="1" time="0.193700"/>
+      <testcase name="testLoginAsAdmin" class="collaborator_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/collaboratorTest.php" line="356" assertions="1" time="0.858844"/>
+      <testcase name="testCurateSubmittedData" class="collaborator_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/collaboratorTest.php" line="366" assertions="1" time="0.411295">
+        <error type="PHPUnit_Framework_Error">collaborator_tests::testCurateSubmittedData
+Current URL: http://localhost/svn/LOVD3/trunk/src/variants
+Screenshot: trunk/tests/test_results/error_screenshots/a3bd99f672640e983092187c66cf89cd.png
+
+Invalid response while accessing the Selenium Server at 'http://localhost:4444/selenium-server/driver/': ERROR: Element link=0000000001 not found
+
+</error>
+      </testcase>
+      <testcase name="testPostFinishAddVariantOnlyDescribedOnGenomicLevelToCMTIndividual" class="collaborator_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/collaboratorTest.php" line="399" assertions="2" time="5.822169">
+        <error type="PHPUnit_Framework_Error">collaborator_tests::testPostFinishAddVariantOnlyDescribedOnGenomicLevelToCMTIndividual
+Current URL: http://localhost/svn/LOVD3/trunk/src/screenings
+Screenshot: trunk/tests/test_results/error_screenshots/fc8d4d7c665dd51b6f729b01293b9ba7.png
+
+Invalid response while accessing the Selenium Server at 'http://localhost:4444/selenium-server/driver/': ERROR: Element css=#0000000002 &gt; td.ordered not found
+
+</error>
+      </testcase>
+      <testcase name="testPostFinishAddVariantLocatedWithinGeneToCMTIndividual" class="collaborator_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/collaboratorTest.php" line="434" assertions="1" time="4.384710">
+        <error type="PHPUnit_Framework_Error">collaborator_tests::testPostFinishAddVariantLocatedWithinGeneToCMTIndividual
+Current URL: http://localhost:4444/selenium-server/core/Blank.html?start=true
+Screenshot: trunk/tests/test_results/error_screenshots/d865e2d30f080edc2b5c42859b66a063.png
+
+Failed asserting that false is true.
+
+</error>
+      </testcase>
+      <testcase name="testPostFinishAddScreeningToCMTIndividual" class="collaborator_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/collaboratorTest.php" line="473" assertions="1" time="4.390251">
+        <error type="PHPUnit_Framework_Error">collaborator_tests::testPostFinishAddScreeningToCMTIndividual
+Current URL: http://localhost:4444/selenium-server/core/Blank.html?start=true
+Screenshot: trunk/tests/test_results/error_screenshots/7567801cfa8f6fcdf5d2553f01eaa525.png
+
+Failed asserting that false is true.
+
+</error>
+      </testcase>
+      <testcase name="testPostFinishAddPhenotypeInfoToCMTIndividual" class="collaborator_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/collaboratorTest.php" line="498" assertions="1" time="4.201509">
+        <error type="PHPUnit_Framework_Error">collaborator_tests::testPostFinishAddPhenotypeInfoToCMTIndividual
+Current URL: http://localhost:4444/selenium-server/core/Blank.html?start=true
+Screenshot: trunk/tests/test_results/error_screenshots/a85b0c28a5bf92c6c153c8ad2a83d716.png
+
+Failed asserting that false is true.
+
+</error>
+      </testcase>
+      <testcase name="testDeleteGeneGJB" class="collaborator_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/collaboratorTest.php" line="519" assertions="1" time="4.334462"/>
+      <testcase name="testUninstallLOVD" class="collaborator_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/collaboratorTest.php" line="524" assertions="1" time="2.470087"/>
+    </testsuite>
+    <testsuite name="curator_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/curatorTest.php" tests="28" assertions="94" failures="0" errors="0" time="131.149462">
+      <testcase name="testInstallLOVD" class="curator_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/curatorTest.php" line="45" assertions="1" time="13.812196"/>
+      <testcase name="testCreateGeneGJB" class="curator_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/curatorTest.php" line="84" assertions="3" time="6.646093"/>
+      <testcase name="testCreateUserManager" class="curator_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/curatorTest.php" line="105" assertions="1" time="0.813515"/>
+      <testcase name="testCreateUserCurator" class="curator_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/curatorTest.php" line="125" assertions="1" time="0.901941"/>
+      <testcase name="testMakeUserCuratorGJB" class="curator_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/curatorTest.php" line="145" assertions="1" time="0.578809"/>
+      <testcase name="testLoginAsCurator" class="curator_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/curatorTest.php" line="154" assertions="1" time="0.698738"/>
+      <testcase name="testCreateUserCurator2" class="curator_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/curatorTest.php" line="164" assertions="1" time="0.204804"/>
+      <testcase name="testCreateUserSubmitter" class="curator_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/curatorTest.php" line="169" assertions="1" time="0.167527"/>
+      <testcase name="testCreateDiseaseCMT" class="curator_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/curatorTest.php" line="174" assertions="3" time="3.755436"/>
+      <testcase name="testCreateIndividualDiagnosedWithCMT" class="curator_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/curatorTest.php" line="189" assertions="3" time="4.016182"/>
+      <testcase name="testAddPhenotypeInfoToCMTIndividual" class="curator_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/curatorTest.php" line="210" assertions="3" time="4.223308"/>
+      <testcase name="testAddScreeningToCMTIndividual" class="curator_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/curatorTest.php" line="225" assertions="3" time="3.803966"/>
+      <testcase name="testAddVariantLocatedWithinGeneToCMTIndividual" class="curator_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/curatorTest.php" line="244" assertions="7" time="7.436463"/>
+      <testcase name="testAddVariantOnlyDescribedOnGenomicLevelToCMTIndividual" class="curator_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/curatorTest.php" line="280" assertions="4" time="4.198405"/>
+      <testcase name="testConfirmVariantToCMTIndividual" class="curator_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/curatorTest.php" line="304" assertions="9" time="12.086588"/>
+      <testcase name="testAddSeatlleseqFileToCMTIndividual" class="curator_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/curatorTest.php" line="341" assertions="1" time="0.201975"/>
+      <testcase name="testAddVcfFileToCMTIndividual" class="curator_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/curatorTest.php" line="346" assertions="1" time="0.198819"/>
+      <testcase name="testFinishIndividualDiagnosedWithCMT" class="curator_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/curatorTest.php" line="351" assertions="3" time="3.692518"/>
+      <testcase name="testAddSummaryVariantLocatedWithinGene" class="curator_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/curatorTest.php" line="361" assertions="8" time="11.567124"/>
+      <testcase name="testAddSummaryVariantOnlyDescribedOnGenomicLevel" class="curator_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/curatorTest.php" line="401" assertions="6" time="21.674849"/>
+      <testcase name="testAddSummaryVariantSeatlleseqFile" class="curator_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/curatorTest.php" line="427" assertions="1" time="0.185205"/>
+      <testcase name="testAddSummaryVariantVcfFile" class="curator_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/curatorTest.php" line="432" assertions="1" time="0.219820"/>
+      <testcase name="testPostFinishAddVariantOnlyDescribedOnGenomicLevelToCMTIndividual" class="curator_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/curatorTest.php" line="437" assertions="5" time="6.378005"/>
+      <testcase name="testPostFinishAddVariantLocatedWithinGeneToCMTIndividual" class="curator_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/curatorTest.php" line="468" assertions="9" time="8.115791"/>
+      <testcase name="testPostFinishAddScreeningToCMTIndividual" class="curator_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/curatorTest.php" line="511" assertions="5" time="4.472304"/>
+      <testcase name="testPostFinishAddPhenotypeInfoToCMTIndividual" class="curator_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/curatorTest.php" line="537" assertions="6" time="4.412704"/>
+      <testcase name="testDeleteGeneGJB" class="curator_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/curatorTest.php" line="560" assertions="5" time="4.418563"/>
+      <testcase name="testUninstallLOVD" class="curator_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/curatorTest.php" line="579" assertions="1" time="2.267813"/>
+    </testsuite>
+    <testsuite name="manager_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/managerTest.php" tests="28" assertions="55" failures="0" errors="12" time="186.589103">
+      <testcase name="testInstallLOVD" class="manager_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/managerTest.php" line="45" assertions="1" time="13.673117"/>
+      <testcase name="testCreateUserManager" class="manager_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/managerTest.php" line="84" assertions="1" time="0.781657"/>
+      <testcase name="testLoginAsManager" class="manager_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/managerTest.php" line="104" assertions="1" time="0.680981"/>
+      <testcase name="testCreateUserManager2" class="manager_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/managerTest.php" line="114" assertions="1" time="0.285127"/>
+      <testcase name="testCreateGeneGJB" class="manager_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/managerTest.php" line="119" assertions="3" time="5.881579"/>
+      <testcase name="testCreateUserSubmitter" class="manager_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/managerTest.php" line="139" assertions="1" time="0.819026"/>
+      <testcase name="testCreateUserCurator" class="manager_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/managerTest.php" line="159" assertions="1" time="0.965942"/>
+      <testcase name="testMakeUserCuratorGJB" class="manager_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/managerTest.php" line="179" assertions="1" time="0.588958"/>
+      <testcase name="testCreateDiseaseCMT" class="manager_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/managerTest.php" line="188" assertions="3" time="3.768027"/>
+      <testcase name="testCreateIndividualDiagnosedWithCMT" class="manager_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/managerTest.php" line="203" assertions="3" time="4.167204"/>
+      <testcase name="testAddPhenotypeInfoToCMTIndividual" class="manager_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/managerTest.php" line="224" assertions="3" time="4.087622"/>
+      <testcase name="testAddScreeningToCMTIndividual" class="manager_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/managerTest.php" line="239" assertions="3" time="3.874390"/>
+      <testcase name="testAddVariantLocatedWithinGeneToCMTIndividual" class="manager_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/managerTest.php" line="258" assertions="7" time="9.217120"/>
+      <testcase name="testAddVariantOnlyDescribedOnGenomicLevelToCMTIndividual" class="manager_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/managerTest.php" line="294" assertions="4" time="8.780660"/>
+      <testcase name="testConfirmVariantToCMTIndividual" class="manager_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/managerTest.php" line="318" assertions="9" time="11.955737"/>
+      <testcase name="testAddSeatlleseqFileToCMTIndividual" class="manager_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/managerTest.php" line="355" assertions="3" time="62.173405">
+        <error type="PHPUnit_Framework_Error">manager_tests::testAddSeatlleseqFileToCMTIndividual
+Current URL: http://localhost/svn/LOVD3/trunk/src/variants/upload?create&amp;type=SeattleSeq&amp;target=0000000002
+Screenshot: trunk/tests/test_results/error_screenshots/3730a7ae7a71cb5bc56f2eff41081f0a.png
+
+timeout
+
+</error>
+      </testcase>
+      <testcase name="testAddVcfFileToCMTIndividual" class="manager_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/managerTest.php" line="389" assertions="1" time="4.260127">
+        <error type="PHPUnit_Framework_Error">manager_tests::testAddVcfFileToCMTIndividual
+Current URL: http://localhost:4444/selenium-server/core/Blank.html?start=true
+Screenshot: trunk/tests/test_results/error_screenshots/d44e46f1f53abb297c51e31a172a5c2b.png
+
+Failed asserting that false is true.
+
+</error>
+      </testcase>
+      <testcase name="testFinishIndividualDiagnosedWithCMT" class="manager_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/managerTest.php" line="472" assertions="1" time="4.630789">
+        <error type="PHPUnit_Framework_Error">manager_tests::testFinishIndividualDiagnosedWithCMT
+Current URL: http://localhost/svn/LOVD3/trunk/src/submit/screening/0000000002
+Screenshot: trunk/tests/test_results/error_screenshots/bc5f4948eb3cb372659e082130ace529.png
+
+Invalid response while accessing the Selenium Server at 'http://localhost:4444/selenium-server/driver/': ERROR: Element //tr[3]/td[2]/b not found
+
+</error>
+      </testcase>
+      <testcase name="testAddSummaryVariantLocatedWithinGene" class="manager_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/managerTest.php" line="482" assertions="0" time="4.496612">
+        <error type="PHPUnit_Framework_Error">manager_tests::testAddSummaryVariantLocatedWithinGene
+Current URL: http://localhost:4444/selenium-server/core/Blank.html?start=true
+Screenshot: trunk/tests/test_results/error_screenshots/33043b09a81df4f60ae2c274fcd5278e.png
+
+Invalid response while accessing the Selenium Server at 'http://localhost:4444/selenium-server/driver/': ERROR: Element id=tab_submit not found
+
+</error>
+      </testcase>
+      <testcase name="testAddSummaryVariantOnlyDescribedOnGenomicLevel" class="manager_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/managerTest.php" line="533" assertions="1" time="4.293622">
+        <error type="PHPUnit_Framework_Error">manager_tests::testAddSummaryVariantOnlyDescribedOnGenomicLevel
+Current URL: http://localhost:4444/selenium-server/core/Blank.html?start=true
+Screenshot: trunk/tests/test_results/error_screenshots/8cb207052de7d8320ad450204aa3b9d7.png
+
+Failed asserting that false is true.
+
+</error>
+      </testcase>
+      <testcase name="testAddSummaryVariantSeatlleseqFile" class="manager_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/managerTest.php" line="562" assertions="1" time="4.320339">
+        <error type="PHPUnit_Framework_Error">manager_tests::testAddSummaryVariantSeatlleseqFile
+Current URL: http://localhost:4444/selenium-server/core/Blank.html?start=true
+Screenshot: trunk/tests/test_results/error_screenshots/ed45da263b88f369b805a7ccd56c42b7.png
+
+Failed asserting that false is true.
+
+</error>
+      </testcase>
+      <testcase name="testAddSummaryVariantVcfFile" class="manager_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/managerTest.php" line="600" assertions="0" time="4.292234">
+        <error type="PHPUnit_Framework_Error">manager_tests::testAddSummaryVariantVcfFile
+Current URL: http://localhost:4444/selenium-server/core/Blank.html?start=true
+Screenshot: trunk/tests/test_results/error_screenshots/f90fa89af3c17122ef3b977df5c54f5b.png
+
+Invalid response while accessing the Selenium Server at 'http://localhost:4444/selenium-server/driver/': ERROR: Element id=tab_submit not found
+
+</error>
+      </testcase>
+      <testcase name="testPostFinishAddVariantOnlyDescribedOnGenomicLevelToCMTIndividual" class="manager_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/managerTest.php" line="686" assertions="1" time="4.821634">
+        <error type="PHPUnit_Framework_Error">manager_tests::testPostFinishAddVariantOnlyDescribedOnGenomicLevelToCMTIndividual
+Current URL: http://localhost/svn/LOVD3/trunk/src/screenings
+Screenshot: trunk/tests/test_results/error_screenshots/405b9e4df7f273af9042b41747e398d7.png
+
+Failed asserting that false is true.
+
+</error>
+      </testcase>
+      <testcase name="testPostFinishAddVariantLocatedWithinGeneToCMTIndividual" class="manager_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/managerTest.php" line="717" assertions="1" time="4.314377">
+        <error type="PHPUnit_Framework_Error">manager_tests::testPostFinishAddVariantLocatedWithinGeneToCMTIndividual
+Current URL: http://localhost:4444/selenium-server/core/Blank.html?start=true
+Screenshot: trunk/tests/test_results/error_screenshots/1ebde85b4d5721b07b940294638f070d.png
+
+Failed asserting that false is true.
+
+</error>
+      </testcase>
+      <testcase name="testPostFinishAddScreeningToCMTIndividual" class="manager_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/managerTest.php" line="760" assertions="1" time="4.269374">
+        <error type="PHPUnit_Framework_Error">manager_tests::testPostFinishAddScreeningToCMTIndividual
+Current URL: http://localhost:4444/selenium-server/core/Blank.html?start=true
+Screenshot: trunk/tests/test_results/error_screenshots/1f59e6b0c8faa909f0e331c50b93944c.png
+
+Failed asserting that false is true.
+
+</error>
+      </testcase>
+      <testcase name="testPostFinishAddPhenotypeInfoToCMTIndividual" class="manager_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/managerTest.php" line="786" assertions="1" time="4.203421">
+        <error type="PHPUnit_Framework_Error">manager_tests::testPostFinishAddPhenotypeInfoToCMTIndividual
+Current URL: http://localhost:4444/selenium-server/core/Blank.html?start=true
+Screenshot: trunk/tests/test_results/error_screenshots/91a8f1dfce669b20e60ccf8983da2e13.png
+
+Failed asserting that false is true.
+
+</error>
+      </testcase>
+      <testcase name="testDeleteGeneGJB" class="manager_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/managerTest.php" line="809" assertions="1" time="4.344502">
+        <error type="PHPUnit_Framework_Error">manager_tests::testDeleteGeneGJB
+Current URL: http://localhost:4444/selenium-server/core/Blank.html?start=true
+Screenshot: trunk/tests/test_results/error_screenshots/e76241c28dbc6e0dbfdfcec4744c8381.png
+
+Failed asserting that false is true.
+
+</error>
+      </testcase>
+      <testcase name="testUninstallLOVD" class="manager_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/managerTest.php" line="826" assertions="1" time="6.641521"/>
+    </testsuite>
+    <testsuite name="submitter_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/submitterTest.php" tests="27" assertions="90" failures="0" errors="0" time="94.695115">
+      <testcase name="testInstallLOVD" class="submitter_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/submitterTest.php" line="45" assertions="1" time="13.767256"/>
+      <testcase name="testCreateGeneGJB" class="submitter_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/submitterTest.php" line="84" assertions="3" time="6.104002"/>
+      <testcase name="testCreateUserSubmitter" class="submitter_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/submitterTest.php" line="104" assertions="1" time="0.826559"/>
+      <testcase name="testLoginAsSubmitter" class="submitter_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/submitterTest.php" line="124" assertions="1" time="0.668762"/>
+      <testcase name="testCreateUserSubmitter2" class="submitter_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/submitterTest.php" line="134" assertions="1" time="0.198136"/>
+      <testcase name="testCreateDiseaseCMT" class="submitter_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/submitterTest.php" line="139" assertions="6" time="5.337654"/>
+      <testcase name="testCreateIndividualDiagnosedWithCMT" class="submitter_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/submitterTest.php" line="170" assertions="2" time="3.737417"/>
+      <testcase name="testAddPhenotypeInfoToCMTIndividual" class="submitter_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/submitterTest.php" line="185" assertions="3" time="3.898736"/>
+      <testcase name="testAddScreeningToCMTIndividual" class="submitter_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/submitterTest.php" line="198" assertions="3" time="3.731436"/>
+      <testcase name="testAddVariantLocatedWithinGeneToCMTIndividual" class="submitter_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/submitterTest.php" line="216" assertions="7" time="7.301053"/>
+      <testcase name="testAddVariantOnlyDescribedOnGenomicLevelToCMTIndividual" class="submitter_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/submitterTest.php" line="248" assertions="4" time="4.091945"/>
+      <testcase name="testConfirmVariantToCMTIndividual" class="submitter_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/submitterTest.php" line="269" assertions="9" time="11.773349"/>
+      <testcase name="testAddSeatlleseqFileToCMTIndividual" class="submitter_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/submitterTest.php" line="305" assertions="1" time="0.223458"/>
+      <testcase name="testAddVcfFileToCMTIndividual" class="submitter_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/submitterTest.php" line="310" assertions="1" time="0.181963"/>
+      <testcase name="testFinishIndividualDiagnosedWithCMT" class="submitter_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/submitterTest.php" line="315" assertions="3" time="3.678935"/>
+      <testcase name="testAddSummaryVariantLocatedWithinGene" class="submitter_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/submitterTest.php" line="325" assertions="1" time="0.210666"/>
+      <testcase name="testAddSummaryVariantOnlyDescribedOnGenomicLevel" class="submitter_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/submitterTest.php" line="330" assertions="1" time="0.185849"/>
+      <testcase name="testAddSummaryVariantSeatlleseqFile" class="submitter_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/submitterTest.php" line="335" assertions="1" time="0.184366"/>
+      <testcase name="testAddSummaryVariantVcfFile" class="submitter_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/submitterTest.php" line="340" assertions="1" time="0.196122"/>
+      <testcase name="testLoginAsAdmin" class="submitter_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/submitterTest.php" line="345" assertions="1" time="0.671873"/>
+      <testcase name="testCurateSubmittedData" class="submitter_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/submitterTest.php" line="355" assertions="11" time="2.400476"/>
+      <testcase name="testPostFinishAddVariantOnlyDescribedOnGenomicLevelToCMTIndividual" class="submitter_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/submitterTest.php" line="388" assertions="6" time="5.531709"/>
+      <testcase name="testPostFinishAddVariantLocatedWithinGeneToCMTIndividual" class="submitter_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/submitterTest.php" line="423" assertions="9" time="8.021803"/>
+      <testcase name="testPostFinishAddScreeningToCMTIndividual" class="submitter_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/submitterTest.php" line="462" assertions="5" time="4.276882"/>
+      <testcase name="testPostFinishAddPhenotypeInfoToCMTIndividual" class="submitter_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/submitterTest.php" line="487" assertions="6" time="4.346775"/>
+      <testcase name="testDeleteGeneGJB" class="submitter_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/submitterTest.php" line="508" assertions="1" time="0.222205"/>
+      <testcase name="testUninstallLOVD" class="submitter_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/submitterTest.php" line="513" assertions="1" time="2.925728"/>
+    </testsuite>
+    <testsuite name="temp_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/tempTest.php" tests="9" assertions="33" failures="0" errors="0" time="56.201899">
+      <testcase name="testInstallLOVD" class="temp_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/tempTest.php" line="45" assertions="7" time="14.006592"/>
+      <testcase name="testCreateGeneIVD" class="temp_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/tempTest.php" line="90" assertions="1" time="3.545741"/>
+      <testcase name="testCreateDiseaseIVA" class="temp_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/tempTest.php" line="110" assertions="1" time="0.587409"/>
+      <testcase name="testCreateIndividualDiagnosedWithIVA" class="temp_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/tempTest.php" line="121" assertions="2" time="4.137231"/>
+      <testcase name="testAddPhenotypeInfoToIVAIndividual" class="temp_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/tempTest.php" line="140" assertions="3" time="4.754808"/>
+      <testcase name="testAddScreeningToIVAIndividual" class="temp_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/tempTest.php" line="155" assertions="3" time="4.253344"/>
+      <testcase name="testAddVariantLocatedWithinGeneToIVAIndividual" class="temp_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/tempTest.php" line="174" assertions="7" time="8.601678"/>
+      <testcase name="testConfirmVariantToIVAIndividual" class="temp_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/tempTest.php" line="210" assertions="8" time="12.736890"/>
+      <testcase name="testUninstallLOVD" class="temp_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/tempTest.php" line="248" assertions="1" time="3.578206"/>
+    </testsuite>
+  </testsuite>
+</testsuites>

@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites>
+  <testsuite name="admin_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/adminTest.php" tests="9" assertions="1" failures="0" errors="8" time="72.753091">
+    <testcase name="testInstallLOVD" class="admin_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/adminTest.php" line="45" assertions="0" time="6.619287">
+      <error type="PHPUnit_Framework_Error">admin_tests::testInstallLOVD
+Current URL: https://localhost/svn/LOVD3_development/trunk/src/install/
+Screenshot: trunk/tests/test_results/error_screenshots/4fb74f62de9a3983a8030d9915ec5a32.png
+
+Invalid response while accessing the Selenium Server at 'http://localhost:4444/selenium-server/driver/': ERROR: Element css=input[type="submit"] not found
+
+</error>
+    </testcase>
+    <testcase name="testCreateGeneIVD" class="admin_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/adminTest.php" line="90" assertions="1" time="10.524775"/>
+    <testcase name="testCreateUserManager" class="admin_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/adminTest.php" line="110" assertions="0" time="1.402340">
+      <error type="PHPUnit_Framework_Error">admin_tests::testCreateUserManager
+Current URL: https://localhost/svn/LOVD3_development/trunk/src/users?create
+Screenshot: trunk/tests/test_results/error_screenshots/4c78533308ba39c2e0188bbb63384517.png
+
+Invalid response while accessing the Selenium Server at 'http://localhost:4444/selenium-server/driver/': ERROR: Element css=table[class=info] not found
+
+</error>
+    </testcase>
+    <testcase name="testCreateUserCurator" class="admin_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/adminTest.php" line="130" assertions="0" time="4.537394">
+      <error type="PHPUnit_Framework_Error">admin_tests::testCreateUserCurator
+Current URL: https://localhost/svn/LOVD3_development/trunk/src/users?create&amp;no_orcid
+Screenshot: trunk/tests/test_results/error_screenshots/1803f76debcbfcb56753b0ade447ffcc.png
+
+Invalid response while accessing the Selenium Server at 'http://localhost:4444/selenium-server/driver/': ERROR: Element name=name not found
+
+</error>
+    </testcase>
+    <testcase name="testMakeUserCuratorIVD" class="admin_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/adminTest.php" line="150" assertions="0" time="4.562393">
+      <error type="PHPUnit_Framework_Error">admin_tests::testMakeUserCuratorIVD
+Current URL: https://localhost/svn/LOVD3_development/trunk/src/genes/IVD?sortCurators
+Screenshot: trunk/tests/test_results/error_screenshots/22091e8f39e7dbbb032da3c4051ab6e4.png
+
+Invalid response while accessing the Selenium Server at 'http://localhost:4444/selenium-server/driver/': ERROR: Element link=Test Curator not found
+
+</error>
+    </testcase>
+    <testcase name="testCreateUserSubmitter" class="admin_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/adminTest.php" line="159" assertions="0" time="4.506592">
+      <error type="PHPUnit_Framework_Error">admin_tests::testCreateUserSubmitter
+Current URL: https://localhost/svn/LOVD3_development/trunk/src/users?create&amp;no_orcid
+Screenshot: trunk/tests/test_results/error_screenshots/5002ada49b223800364e59eb367b9b0d.png
+
+Invalid response while accessing the Selenium Server at 'http://localhost:4444/selenium-server/driver/': ERROR: Element name=name not found
+
+</error>
+    </testcase>
+    <testcase name="testCreateDiseaseIVA" class="admin_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/adminTest.php" line="179" assertions="0" time="4.544392">
+      <error type="PHPUnit_Framework_Error">admin_tests::testCreateDiseaseIVA
+Current URL: https://localhost/svn/LOVD3_development/trunk/src/diseases?create
+Screenshot: trunk/tests/test_results/error_screenshots/cf6208579deb22a28a5c9b22dc84534e.png
+
+Invalid response while accessing the Selenium Server at 'http://localhost:4444/selenium-server/driver/': ERROR: Element name=symbol not found
+
+</error>
+    </testcase>
+    <testcase name="testCreateIndividualDiagnosedWithHealtyControl" class="admin_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/adminTest.php" line="190" assertions="0" time="34.626666">
+      <error type="PHPUnit_Framework_Error">admin_tests::testCreateIndividualDiagnosedWithHealtyControl
+Current URL: https://localhost/svn/LOVD3_development/trunk/src/submit
+Screenshot: trunk/tests/test_results/error_screenshots/541c74d5de866326f203c2e105d69be7.png
+
+Invalid response while accessing the Selenium Server at 'http://localhost:4444/selenium-server/driver/': Timed out after 30000ms
+
+</error>
+    </testcase>
+    <testcase name="testAddPhenotypeInfoToHealtyIndividual" class="admin_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/adminTest.php" line="209" assertions="0" time="1.429253">
+      <error type="PHPUnit_Framework_Error">admin_tests::testAddPhenotypeInfoToHealtyIndividual
+Issues while capturing the screenshot:
+CURL error while accessing the Selenium Server at 'http://localhost:4444/selenium-server/driver/': Failed to connect to localhost port 4444: Connection refused
+Invalid response while accessing the Selenium Server at 'http://localhost:4444/selenium-server/driver/': Failed to start new browser session: org.openqa.selenium.server.RemoteCommandException: Error while launching browser
+
+</error>
+    </testcase>
+  </testsuite>
+</testsuites>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites>
+  <testsuite name="authorization_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/authorizationTest.php" tests="16" assertions="27" failures="0" errors="0" time="39.778741">
+    <testcase name="testInstallLOVD" class="authorization_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/authorizationTest.php" line="45" assertions="7" time="20.679820"/>
+    <testcase name="testCreateUserManager" class="authorization_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/authorizationTest.php" line="90" assertions="1" time="0.939021"/>
+    <testcase name="testCreateUserCurator" class="authorization_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/authorizationTest.php" line="110" assertions="1" time="0.889117"/>
+    <testcase name="testCreateUserCollaborator" class="authorization_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/authorizationTest.php" line="130" assertions="1" time="1.169486"/>
+    <testcase name="testCreateUserSubmitter" class="authorization_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/authorizationTest.php" line="150" assertions="1" time="0.839089"/>
+    <testcase name="testCreateUserOwner" class="authorization_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/authorizationTest.php" line="170" assertions="1" time="0.885023"/>
+    <testcase name="testCreateGeneIVD" class="authorization_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/authorizationTest.php" line="190" assertions="1" time="2.909222"/>
+    <testcase name="testCreateDiseaseIVA" class="authorization_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/authorizationTest.php" line="204" assertions="1" time="0.693028"/>
+    <testcase name="testCreateIndividualDiagnosedWithIVA" class="authorization_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/authorizationTest.php" line="215" assertions="2" time="1.084157"/>
+    <testcase name="testAddScreeningToIVAIndividual" class="authorization_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/authorizationTest.php" line="233" assertions="2" time="0.954276"/>
+    <testcase name="testAddVariantLocatedWithinGeneToIVAIndividual" class="authorization_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/authorizationTest.php" line="251" assertions="4" time="4.208969"/>
+    <testcase name="testAddPhenotypeInfoToIVAIndividual" class="authorization_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/authorizationTest.php" line="279" assertions="1" time="0.813494"/>
+    <testcase name="testMakeUserCuratorIVD" class="authorization_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/authorizationTest.php" line="289" assertions="1" time="0.598594"/>
+    <testcase name="testMakeUserCollaboratorIVD" class="authorization_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/authorizationTest.php" line="298" assertions="1" time="0.615360"/>
+    <testcase name="testAuthorization" class="authorization_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/authorizationTest.php" line="308" assertions="1" time="0.137717"/>
+    <testcase name="testUninstallLOVD" class="authorization_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/authorizationTest.php" line="313" assertions="1" time="2.362368"/>
+  </testsuite>
+</testsuites>

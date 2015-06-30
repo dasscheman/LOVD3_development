@@ -1,0 +1,10 @@
+branches
+tags
+r400
+.idea
+.svn
+
+trunk/.svnignore
+trunk/src/config.ini.php
+trunk/src/.idea
+trunk/src/refseq
