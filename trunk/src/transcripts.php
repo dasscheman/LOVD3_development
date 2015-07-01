@@ -487,6 +487,17 @@ if (PATH_COUNT == 2 && ctype_digit($_PE[1]) && ACTION == 'edit') {
 
             $_DATA->updateEntry($nID, $_POST, $aFields);
 
+            // Get genes which are modified only when phenotype is puplic
+            if ($_POST['statusid']>=STATUS_MARKED){
+                $aGenes = $_DB->query('SELECT DISTINCT t.geneid FROM ' . TABLE_TRANSCRIPTS . ' AS t ' .
+                                          'WHERE t.id = ?', array($nID))->fetchAllColumn();
+                if ($aGenes) {
+                    $aGenes = array_unique($aGenes);
+                    // Change updated date for genes
+                    lovd_setUpdatedDate($aGenes);
+                }
+            }
+
             // Write to log...
             lovd_writeLog('Event', LOG_EVENT, 'Edited transcript information entry #' . $nID . ' (' . $zData['geneid'] . ')');
 
@@ -571,6 +582,16 @@ if (PATH_COUNT == 2 && ctype_digit($_PE[1]) && ACTION == 'delete') {
 
         if (!lovd_error()) {
             // Query text.
+                        // Get genes which are modified only when phenotype is puplic
+            if ($_POST['statusid']>=STATUS_MARKED){
+                $aGenes = $_DB->query('SELECT DISTINCT t.geneid FROM ' . TABLE_TRANSCRIPTS . ' AS t ' .
+                                          'WHERE t.id = ?', array($nID))->fetchAllColumn();
+                if ($aGenes) {
+                    $aGenes = array_unique($aGenes);
+                    // Change updated date for genes
+                    lovd_setUpdatedDate($aGenes);
+                }
+            }
             // This also deletes the entries in variants.
             $_DATA->deleteEntry($nID);
 

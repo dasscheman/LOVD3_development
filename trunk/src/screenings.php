@@ -191,6 +191,19 @@ if (PATH_COUNT == 1 && ACTION == 'create' && isset($_GET['target']) && ctype_dig
 
             $nID = $_DATA->insertEntry($_POST, $aFields);
 
+            // Get genes which are modified only when phenotype is puplic
+            if ($_POST['statusid']>=STATUS_MARKED){
+                $aGenes = $_DB->query('SELECT DISTINCT t.geneid FROM ' . TABLE_TRANSCRIPTS . ' AS t ' .
+                                                        'INNER JOIN ' . TABLE_VARIANTS_ON_TRANSCRIPTS . ' AS vot ON (vot.transcriptid = t.id) ' .
+                                                        'INNER JOIN ' . TABLE_SCR2VAR . ' AS s2v ON (vot.id = s2v.variantid) ' .
+                                                        'WHERE s2v.screeningid = ?', array($nID))->fetchAllColumn();
+                if ($aGenes) {
+                    $aGenes = array_unique($aGenes);
+                    // Change updated date for genes
+                    lovd_setUpdatedDate($aGenes);
+                }
+            }
+
             // Write to log...
             lovd_writeLog('Event', LOG_EVENT, 'Created screening information entry ' . $nID);
 
@@ -210,6 +223,12 @@ if (PATH_COUNT == 1 && ACTION == 'create' && isset($_GET['target']) && ctype_dig
                         }
                     }
                 }
+            }
+
+            if ($aSuccessGenes) {
+                $aGenes = array_unique($aSuccessGenes);
+                // Change updated date for genes
+                lovd_setUpdatedDate($aGenes);
             }
 
             if (count($aSuccessGenes)) {
@@ -343,6 +362,19 @@ if (PATH_COUNT == 2 && ctype_digit($_PE[1]) && ACTION == 'edit') {
 
             // FIXME: implement versioning in updateEntry!
             $_DATA->updateEntry($nID, $_POST, $aFields);
+
+            // Get genes which are modified only when phenotype is puplic
+            if ($_POST['statusid']>=STATUS_MARKED){
+                $aGenes = $_DB->query('SELECT DISTINCT t.geneid FROM ' . TABLE_TRANSCRIPTS . ' AS t ' .
+                                                        'INNER JOIN ' . TABLE_VARIANTS_ON_TRANSCRIPTS . ' AS vot ON (vot.transcriptid = t.id) ' .
+                                                        'INNER JOIN ' . TABLE_SCR2VAR . ' AS s2v ON (vot.id = s2v.variantid) ' .
+                                                        'WHERE s2v.screeningid = ?', array($nID))->fetchAllColumn();
+                if ($aGenes) {
+                    $aGenes = array_unique($aGenes);
+                    // Change updated date for genes
+                    lovd_setUpdatedDate($aGenes);
+                }
+            }
 
             // Write to log...
             lovd_writeLog('Event', LOG_EVENT, 'Edited screening information entry ' . $nID);
@@ -540,6 +572,9 @@ if (PATH_COUNT == 2 && ctype_digit($_PE[1]) && ACTION == 'confirmVariants') {
                     $q->execute(array($nID, $nVariant));
                 }
             }
+
+            // Hier moet een geneupdate date komen.
+
 
             // If we get here, it all succeeded.
             $_DB->commit();
@@ -806,6 +841,19 @@ if (PATH_COUNT == 2 && ctype_digit($_PE[1]) && ACTION == 'delete') {
             $_DB->beginTransaction();
             if (isset($_POST['remove_variants']) && $_POST['remove_variants'] == 'remove') {
                 $_DB->query('DELETE FROM ' . TABLE_VARIANTS . ' WHERE id IN (?' . str_repeat(', ?', count($aVariantsRemovable) - 1) . ')', $aVariantsRemovable);
+            }
+
+            // Get genes which are modified only when phenotype is puplic
+            if ($_POST['statusid']>=STATUS_MARKED){
+                $aGenes = $_DB->query('SELECT DISTINCT t.geneid FROM ' . TABLE_TRANSCRIPTS . ' AS t ' .
+                                                        'INNER JOIN ' . TABLE_VARIANTS_ON_TRANSCRIPTS . ' AS vot ON (vot.transcriptid = t.id) ' .
+                                                        'INNER JOIN ' . TABLE_SCR2VAR . ' AS s2v ON (vot.id = s2v.variantid) ' .
+                                                        'WHERE s2v.screeningid = ?', array($nID))->fetchAllColumn();
+                if ($aGenes) {
+                    $aGenes = array_unique($aGenes);
+                    // Change updated date for genes
+                    lovd_setUpdatedDate($aGenes);
+                }
             }
 
             $_DATA->deleteEntry($nID);
