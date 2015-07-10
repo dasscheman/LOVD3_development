@@ -387,6 +387,15 @@ if (ACTION == 'create') {
                 if (count($aSuccessTranscripts)) {
                     lovd_writeLog('Event', LOG_EVENT, 'Transcript information entries successfully added to gene ' . $zData['gene']['id'] . ' - ' . $zData['gene']['name']);
                 }
+
+                // Get genes which are linked to the added transcripts.
+                $aGenes = $_DB->query('SELECT DISTINCT t.geneid FROM ' . TABLE_TRANSCRIPTS . ' AS t ' .
+                                      'WHERE t.id_ncbi IN (?' . str_repeat(', ?', count($aSuccessTranscripts) - 1) . ')', $aSuccessTranscripts)->fetchAllColumn();
+                if ($aGenes) {
+                    $aGenes = array_unique($aGenes);
+                    // Change updated date for genes
+                    lovd_setUpdatedDate($aGenes);
+                }
             }
 
             unset($_SESSION['work'][$sPathBase][$_POST['workID']]);
@@ -581,7 +590,6 @@ if (PATH_COUNT == 2 && ctype_digit($_PE[1]) && ACTION == 'delete') {
 
         if (!lovd_error()) {
             // Query text.
-
             // Get genes which are linked to the modified transcript. This is done before the delete, else we kan not find the link.
             $aGenes = $_DB->query('SELECT DISTINCT t.geneid FROM ' . TABLE_TRANSCRIPTS . ' AS t ' .
                                   'WHERE t.id = ?', array($nID))->fetchAllColumn();
@@ -592,6 +600,7 @@ if (PATH_COUNT == 2 && ctype_digit($_PE[1]) && ACTION == 'delete') {
                 // Change updated date for genes
                 lovd_setUpdatedDate($aGenes);
             }
+
             // Write to log...
             lovd_writeLog('Event', LOG_EVENT, 'Deleted transcript information entry ' . $nID . ' - ' . $zData['geneid'] . ' (' . $zData['name'] . ')');
 
