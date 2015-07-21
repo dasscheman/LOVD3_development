@@ -6,3 +6,12 @@ php:
   - 5.6
   - hhvm
   - nightly
+
+before_script:
+  - ./trunk/tests/setup/bash_scripts/convert_selenium_to_phpunit.sh
+  - ./trunk/tests/setup/bash_scripts/run_phptest.sh
+
+script: phpunit --verbose -c tests/phpunit.xml
+notifications:
+  email:
+    - d.asscheman@lumc.nl
