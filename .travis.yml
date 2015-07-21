@@ -8,10 +8,10 @@ php:
   - nightly
 
 before_script:
-  - ./trunk/tests/setup/bash_scripts/convert_selenium_to_phpunit.sh
-  - ./trunk/tests/setup/bash_scripts/run_phptest.sh
+  - ./trunk/tests/setup/bash_scripts/setup_travis.sh
 
-script: phpunit --verbose -c tests/phpunit.xml
+script: phpunit --verbose --log-junit ./tests/test_results/reports/testlog.xml ./tests/phpunit_selenium
+
 notifications:
   email:
     - d.asscheman@lumc.nl
