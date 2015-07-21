@@ -8,7 +8,7 @@ php:
   - nightly
 
 before_script:
-  - /trunk/tests/setup/bash_scripts/setup_travis.sh
+  - trunk/tests/setup/bash_scripts/setup_travis.sh
 
 script: phpunit --verbose --log-junit ./tests/test_results/reports/testlog.xml ./tests/phpunit_selenium
 
