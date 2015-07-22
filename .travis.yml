@@ -8,8 +8,7 @@ php:
   - nightly
 
 before_script:
-  - chmod +x trunk/tests/setup/bash_scripts/setup_travis.sh
-  - ./trunk/tests/setup/bash_scripts/setup_travis.sh
+  - ./trunk/tests/bash_scripts/setup_travis.sh
 
 script: phpunit --verbose --log-junit ./trunk/tests/test_results/reports/testlog.xml ./tests/phpunit_selenium
 
