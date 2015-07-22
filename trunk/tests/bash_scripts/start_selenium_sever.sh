@@ -3,6 +3,10 @@ echo "Starting Selenium"
 if [ ! -f $serverFile ]; then
     wget http://selenium.googlecode.com/files/$serverFile
 fi
+
+##"sh -e /etc/init.d/xvfb start"
+##    - "export DISPLAY=:99.0"
+
 sudo xvfb-run java -jar $serverFile > /tmp/selenium.log &
 
 wget --retry-connrefused --tries=60 --waitretry=1 --output-file=/dev/null $serverUrl/wd/hub/status -O /dev/null
