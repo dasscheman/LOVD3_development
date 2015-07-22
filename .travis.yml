@@ -12,4 +12,4 @@ matrix:
 
 sudo: required
 before_script: ./trunk/tests/travis/before_script.sh
-script: "vendor/bin/phpunit  --log-junit ./trunk/tests/test_results/reports/testlog_temp.xml ./trunk/tests/phpunit_selenium/"
+script: "vendor/bin/phpunit --verbose --log-junit ./trunk/tests/test_results/reports/testlog_temp.xml ./trunk/tests/phpunit_selenium/"
