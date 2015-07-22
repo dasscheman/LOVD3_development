@@ -28,6 +28,7 @@
  *
  *************/
 
+require_once 'PHPUnit/Extensions/SeleniumTestCase.php';
 class temp_tests extends PHPUnit_Extensions_SeleniumTestCase
 {
     protected $captureScreenshotOnFailure = TRUE;
