@@ -1,7 +1,7 @@
 {
     "require-dev": {
         "phpunit/phpunit-selenium": ">=1.2",
-        "phpunit/phpunit": "4.4.*",
+        "phpunit/phpunit": "4.7.*",
         "php": ">=5.3.3",
         "sebastian/comparator": "~1.0",
         "phpunit/php-invoker": "*",
