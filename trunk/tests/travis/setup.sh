@@ -32,8 +32,8 @@ sudo sed -i "s/^directory=.*webserver$/directory=${ESCAPED_BUILD_DIR}\\/selenium
 sudo sed -i "s/^autostart=.*selenium$/autostart=true/" /etc/supervisor/conf.d/phpunit-environment.conf
 sudo sed -i "s/^autostart=.*python-webserver$/autostart=true/" /etc/supervisor/conf.d/phpunit-environment.conf
 
-sudo sed -i -e "s,/var/www,/home/travis/build/dasscheman/LOVD3_development,g" /etc/apache2/sites-available/000-default.conf
-sudo sed -i -e "s,AllowOverride[ ]None,AllowOverride All,g" /etc/apache2/sites-available/000-default.conf
+sudo sed -i -e "s,/var/www,/home/travis/build/dasscheman/LOVD3_development,g" /etc/apache2/sites-available/default
+sudo sed -i -e "s,AllowOverride[ ]None,AllowOverride All,g" /etc/apache2/sites-available/default
 
 sudo /etc/init.d/apache2 restart
 
