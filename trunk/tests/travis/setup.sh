@@ -15,8 +15,8 @@ if [ ! -d vendor ] || [ ! -f vendor/autoload.php ]; then
     composer install --dev
 fi
 
-echo "Installing nano"
-sudo apt-get install nano
+echo " intall gnome terminal"
+sudo apt-get install gnome-terminal
 
 echo "Installing Xvfb"
 sudo apt-get install xvfb
