@@ -7,8 +7,11 @@ php:
   - hhvm
   - nightly
 
-before_script:
+before_install:
+  - sudo apt-get update -qq
   - ./trunk/tests/bash_scripts/setup_apache.sh
+
+before_script:
   - ./trunk/tests/bash_scripts/setup_selenium_server.sh
   - ./trunk/tests/bash_scripts/start_selenium_server.sh
 
