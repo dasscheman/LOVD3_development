@@ -10,9 +10,6 @@ else
     sudo /usr/local/bin/composer self-update
 fi
 
-wget http://getcomposer.org/composer.phar
-php composer.phar install
-
 if [ ! -d vendor ] || [ ! -f vendor/autoload.php ]; then
     echo "Installing dependencies"
     composer install --dev
