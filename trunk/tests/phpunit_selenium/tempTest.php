@@ -40,7 +40,7 @@ class temp_tests extends PHPUnit_Extensions_SeleniumTestCase
         $this->setPort(4444);
         $this->setBrowser("firefox");
         //$this->setBrowserUrl("http://localhost/svn/LOVD3_development/");
-        $this->setBrowserUrl("http://127.0.0.1/");
+        $this->setBrowserUrl("http://localhost/");
         $this->shareSession(true);
     }
 
