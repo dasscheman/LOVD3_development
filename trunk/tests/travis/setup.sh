@@ -15,6 +15,10 @@ if [ ! -d vendor ] || [ ! -f vendor/autoload.php ]; then
     composer install --dev
 fi
 
+echo "Installing Xvfb"
+sudo apt-get install xvfb
+Xvfb :99 -ac -screen 0 1280x1024x24 export DISPLAY=:99
+
 echo "Installing supervisord"
 sudo apt-get install supervisor -y --no-install-recommends
 sudo cp ./trunk/tests/travis/phpunit-environment.conf /etc/supervisor/conf.d/
