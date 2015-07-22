@@ -17,7 +17,7 @@ fi
 
 echo "Installing supervisord"
 sudo apt-get install supervisor -y --no-install-recommends
-sudo cp ./travis/phpunit-environment.conf /etc/supervisor/conf.d/
+sudo cp ./trunk/tests/travis/phpunit-environment.conf /etc/supervisor/conf.d/
 sudo sed -i "s/^directory=.*webserver$/directory=${ESCAPED_BUILD_DIR}\\/selenium-1-tests/" /etc/supervisor/conf.d/phpunit-environment.conf
 sudo sed -i "s/^autostart=.*selenium$/autostart=true/" /etc/supervisor/conf.d/phpunit-environment.conf
 sudo sed -i "s/^autostart=.*python-webserver$/autostart=true/" /etc/supervisor/conf.d/phpunit-environment.conf
