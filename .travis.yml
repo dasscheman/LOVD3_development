@@ -13,6 +13,6 @@ php:
 sudo: required
 before_script:
   - ./trunk/tests/travis/before_script.sh
-  - ./trunk/tests/bash_scripts/convert_selenium_to_phpunit.sh
-script: "vendor/bin/phpunit --stop-on-failure --verbose --debug ./trunk/tests/phpunit_selenium/tempTest.php"
+##  - ./trunk/tests/bash_scripts/convert_selenium_to_phpunit.sh
+script: "vendor/bin/phpunit --verbose --debug ./trunk/tests/phpunit_selenium/tempTest.php"
 ##script: "vendor/bin/phpunit --verbose --log-junit ./trunk/tests/test_results/reports/testlog_temp.xml ./trunk/tests/phpunit_selenium/tempTest.php"
