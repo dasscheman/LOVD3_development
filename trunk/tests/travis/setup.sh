@@ -20,7 +20,7 @@ sudo apt-get install nano
 
 echo "Installing Xvfb"
 sudo apt-get install xvfb
-Xvfb :99 -ac -screen 0 1280x1024x24 export DISPLAY=:99
+Xvfb :99 -ac -screen 0 1280x1024x24 & export DISPLAY=:99
 
 ##echo "Installing supervisord"
 ##sudo apt-get install supervisor -y --no-install-recommends
