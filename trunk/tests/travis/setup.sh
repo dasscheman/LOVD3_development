@@ -15,24 +15,24 @@ if [ ! -d vendor ] || [ ! -f vendor/autoload.php ]; then
     composer install --dev
 fi
 
-echo " intall gnome terminal"
-sudo apt-get install gnome-terminal
+##echo " intall gnome terminal"
+##sudo apt-get install gnome-terminal
 
-echo "Installing Xvfb"
-sudo apt-get install xvfb
-Xvfb :99 -ac -screen 0 1280x1024x24 & export DISPLAY=:99
+##echo "Installing Xvfb"
+##sudo apt-get install xvfb
+##Xvfb :99 -ac -screen 0 1280x1024x24 & export DISPLAY=:99
 
-##echo "Installing supervisord"
-##sudo apt-get install supervisor -y --no-install-recommends
-##sudo cp ./trunk/tests/travis/phpunit-environment.conf /etc/supervisor/conf.d/
-##sudo sed -i "s/^directory=.*webserver$/directory=${ESCAPED_BUILD_DIR}\\/selenium-1-tests/" /etc/supervisor/conf.d/phpunit-environment.conf
-##sudo sed -i "s/^autostart=.*selenium$/autostart=true/" /etc/supervisor/conf.d/phpunit-environment.conf
-##sudo sed -i "s/^autostart=.*python-webserver$/autostart=true/" /etc/supervisor/conf.d/phpunit-environment.conf
+echo "Installing supervisord"
+sudo apt-get install supervisor -y --no-install-recommends
+sudo cp ./trunk/tests/travis/phpunit-environment.conf /etc/supervisor/conf.d/
+sudo sed -i "s/^directory=.*webserver$/directory=${ESCAPED_BUILD_DIR}\\/selenium-1-tests/" /etc/supervisor/conf.d/phpunit-environment.conf
+sudo sed -i "s/^autostart=.*selenium$/autostart=true/" /etc/supervisor/conf.d/phpunit-environment.conf
+sudo sed -i "s/^autostart=.*python-webserver$/autostart=true/" /etc/supervisor/conf.d/phpunit-environment.conf
 
-sudo sed -i -e "s,/var/www,/home/travis/build/dasscheman/LOVD3_development,g" /etc/apache2/sites-available/default
-sudo sed -i -e "s,AllowOverride[ ]None,AllowOverride All,g" /etc/apache2/sites-available/default
+##sudo sed -i -e "s,/var/www,/home/travis/build/dasscheman/LOVD3_development,g" /etc/apache2/sites-available/default
+##sudo sed -i -e "s,AllowOverride[ ]None,AllowOverride All,g" /etc/apache2/sites-available/default
 
-sudo /etc/init.d/apache2 restart
+##sudo /etc/init.d/apache2 restart
 
 echo "Installing Firefox"
 sudo apt-get install firefox -y --no-install-recommends
