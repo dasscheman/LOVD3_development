@@ -36,12 +36,12 @@ class temp_tests extends PHPUnit_Extensions_SeleniumTestCase
 
     protected function setUp()
     {
-        $this->setHost('127.0.0.1');
+        $this->setHost('localhost');
         $this->setPort(4444);
         $this->setBrowser("firefox");
         //$this->setBrowserUrl("http://localhost/svn/LOVD3_development/");
         $this->setBrowserUrl("http://127.0.0.1/");
-        $this->shareSession(false);
+        $this->shareSession(true);
     }
 
     public function testInstallLOVDeen()
