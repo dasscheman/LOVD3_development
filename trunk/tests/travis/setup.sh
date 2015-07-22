@@ -24,6 +24,7 @@ sudo sed -i "s/^autostart=.*python-webserver$/autostart=true/" /etc/supervisor/c
 
 echo "Installing Firefox"
 sudo apt-get install firefox -y --no-install-recommends
+firefox -v
 
 if [ ! -f "$SELENIUM_JAR" ]; then
     echo "Downloading Selenium"
