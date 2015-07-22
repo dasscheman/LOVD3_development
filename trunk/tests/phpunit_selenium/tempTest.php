@@ -41,52 +41,53 @@ class temp_tests extends PHPUnit_Extensions_SeleniumTestCase
         $this->setBrowser("firefox");
         //$this->setBrowserUrl("http://localhost/svn/LOVD3_development/");
         //$this->shareSession(true);
+        $this->setBrowserUrl("http://localhost/");
     }
 
     public function testInstallLOVDeen()
     {
-        $this->setBrowserUrl("http://localhost/home/travis/build/dasscheman/LOVD3_development/trunk/src/install");
-        $this->open("/svn/LOVD3_development/trunk/src/install/");
+        $this->open("/home/travis/build/dasscheman/LOVD3_development/trunk/src/install");
+       // $this->open("/svn/LOVD3_development/trunk/src/install/");
         $this->click("css=input[type=\"submit\"]");
     }
 
     public function testInstallLOVDtwee()
     {
-        $this->setBrowserUrl("http://localhost/build/dasscheman/LOVD3_development/trunk/src/install");
-        $this->open("/svn/LOVD3_development/trunk/src/install/");
+        $this->open("/build/dasscheman/LOVD3_development/trunk/src/install");
+       // $this->open("/svn/LOVD3_development/trunk/src/install/");
         $this->click("css=input[type=\"submit\"]");
     }
     public function testInstallLOVDdrie()
     {
-        $this->setBrowserUrl("http://localhost/dasscheman/LOVD3_development/trunk/src/install");
-        $this->open("/svn/LOVD3_development/trunk/src/install/");
+        $this->open("/dasscheman/LOVD3_development/trunk/src/install");
+       // $this->open("/svn/LOVD3_development/trunk/src/install/");
         $this->click("css=input[type=\"submit\"]");
     }
     public function testInstallLOVDdrietwee()
     {
         $this->setBrowserUrl("http://localhost/LOVD3_development/trunk/src/install");
-        $this->open("/svn/LOVD3_development/trunk/src/install/");
+       // $this->open("/svn/LOVD3_development/trunk/src/install/");
         $this->click("css=input[type=\"submit\"]");
     }
 
     public function testInstallLOVDvier()
     {
-        $this->setBrowserUrl("http://localhost/trunk/src/install");
-        $this->open("/svn/LOVD3_development/trunk/src/install/");
+        $this->open("/trunk/src/install");
+       // $this->open("/svn/LOVD3_development/trunk/src/install/");
         $this->click("css=input[type=\"submit\"]");
     }
 
     public function testInstallLOVDvijf()
     {
-        $this->setBrowserUrl("http://localhost/src/install");
-        $this->open("/svn/LOVD3_development/trunk/src/install/");
+        $this->open("/src/install");
+        //$this->open("/svn/LOVD3_development/trunk/src/install/");
         $this->click("css=input[type=\"submit\"]");
     }
 
     public function testInstallLOVDzes()
     {
-        $this->setBrowserUrl("http://localhost/install");
-        $this->open("/svn/LOVD3_development/trunk/src/install/");
+        $this->open("/install");
+        //$this->open("/svn/LOVD3_development/trunk/src/install/");
         $this->click("css=input[type=\"submit\"]");
     }
 
