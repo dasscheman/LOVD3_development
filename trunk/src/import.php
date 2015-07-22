@@ -4,7 +4,7 @@
  * LEIDEN OPEN VARIATION DATABASE (LOVD)
  *
  * Created     : 2012-09-19
- * Modified    : 2015-07-10
+ * Modified    : 2015-07-21
  * For LOVD    : 3.0-14
  *
  * Copyright   : 2004-2015 Leiden University Medical Center; http://www.LUMC.nl/
@@ -83,9 +83,9 @@ $aTypes =
 // Number of columns that may be updated during an update import. If changes in a column should be ignored, edit the
 // lovd_calculateFieldDifferences() function and set the ignore value for that column to true.
 // For now this value is set to 1; increasing this number will increase the chance that users accidentally update the wrong record.
-$nUpdateColumnsAllowed = 1;
+$nUpdateColumnsAllowed = 3;
 
-// An array with import file types wich are recognized but not accepted for import, with the error message.
+// An array with import file types which are recognized but not accepted for import, with the error message.
 $aExcludedTypes =
     array(
 //        'Owned data download' => 'It is currently not possible to directly import file type "Owned data download" without modifications. Please see the <A href="docs">manual</A> section "Downloading and importing own data set" for details on how to prepare these files for import.',
@@ -102,7 +102,6 @@ function lovd_calculateFieldDifferences ($zData, $aLine)
 {
     // Creates an array with changed columns, with values from the database and the values from the import file.
     // By default, the variable 'ignore' is set to false. Meaning that this field is allowed to be updated.
-
     $aDiffs = array();
     foreach ($zData as $sCol => $sValue) {
         // Empty fields in the import file is considered valid. So when a field is filled in the database
@@ -684,7 +683,7 @@ if (POST) {
                 $aLine['owned_by'] = $_AUTH['id'];
             }
             // Data status.
-            if (in_array('statusid', $aSection['allowed_columns']) && empty($aLine['statusid'])) {
+            if (in_array('statusid', $aSection['allowed_columns']) && empty($aLine['statusid']) && $sMode != 'update') {
                 // Status not filled in. Set to Public.
                 $aLine['statusid'] = STATUS_OK;
             }
@@ -759,12 +758,10 @@ if (POST) {
                     case 'Screenings_To_Genes':
                     case 'Screenings_To_Variants':
                         reset($aLine);
-                        for ($i = 1; list($key, $val) = each($aLine); $i ++) {
-                            $id[$i] = $key;
-                            $value[$i] = $val;
-                        }
-                        if (isset($value[1]) && isset($value[2])) {
-                            $zData = $_DB->query('SELECT * FROM ' . $sTableName . ' WHERE ' . $id[1] . ' = ? AND ' . $id[2] . ' = ?', array($value[1], $value[2]))->fetchAssoc();
+                        list($sCol1, $nID1) = each($aLine);
+                        list($sCol2, $nID2) = each($aLine);
+                        if (isset($nID1) && isset($nID2)) {
+                            $zData = $_DB->query('SELECT * FROM ' . $sTableName . ' WHERE ' . $sCol1 . ' = ? AND ' . $sCol2 . ' = ?', array($nID1, $nID2))->fetchAssoc();
                         }
                         break;
                 }
