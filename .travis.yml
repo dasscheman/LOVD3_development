@@ -10,5 +10,6 @@ matrix:
     allow_failures:
         - php: hhvm
 
+sudo: required
 before_script: ./trunk/tests/travis/before_script.sh
-script: "vendor/bin/phpunit Tests"
+script: "vendor/bin/phpunit  --log-junit ./trunk/tests/test_results/reports/testlog_temp.xml ./trunk/tests/phpunit_selenium/"
