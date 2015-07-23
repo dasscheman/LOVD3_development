@@ -36,7 +36,7 @@ if [ ! $? -eq 0 ]; then
         echo "install gnome-terminal"
         sudo apt-get install gnome-terminal
         echo "Start Selenium Server"
-        gnome-terminal -e "java -jar ${serverFile} -trustAllSSLCertificates" & sleep 2s
+        gnome-terminal -e "xvfb-run java -jar ${serverFile} -trustAllSSLCertificates" & sleep 2s
         javaruns=`ps -ef | grep selenium-server | grep -v grep | wc -l`
         if [ $javaruns = 0 ]; then
             echo "Alternatief werkt ook niet"
