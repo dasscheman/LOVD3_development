@@ -1,4 +1,22 @@
+sudo apt-get update
+
+if [ ! -f "/usr/local/bin/composer" ]; then
+    echo "Installing Composer"
+    php -r "readfile('https://getcomposer.org/installer');" | sudo php -d apc.enable_cli=0 -- --install-dir=/usr/local/bin --filename=composer
+else
+    echo "Updating Composer"
+    sudo /usr/local/bin/composer self-update
+fi
+
+if [ ! -d vendor ] || [ ! -f vendor/autoload.php ]; then
+    echo "Installing dependencies"
+    composer install --dev
+fi
+
+
+
 echo "Install and setup apache"
+
 
 sudo apt-get update -qq
 sudo apt-get install -y --force-yes apache2 libapache2-mod-php5 php5-curl php5-intl php5-gd php5-idn php-pear php5-imagick php5-imap php5-mcrypt php5-memcache php5-ming php5-ps php5-pspell php5-recode php5-snmp php5-sqlite php5-tidy php5-xmlrpc php5-xsl xvfb

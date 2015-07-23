@@ -7,9 +7,3 @@ phpVersion=`php -v`
 echo "Download Firefox"
 wget $firefoxUrl -O $firefoxFile
 tar xvjf $firefoxFile
-
-pear channel-discover pear.phpunit.de
-pear install phpunit/PHP_Invoker
-pear install phpunit/DbUnit
-pear install phpunit/PHPUnit_Selenium
-pear install phpunit/PHPUnit_Story

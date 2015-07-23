@@ -48,6 +48,7 @@ class temp_tests extends PHPUnit_Extensions_SeleniumTestCase
     public function testInstallLOVDeen()
     {
         $this->open("/home/travis/build/dasscheman/LOVD3_development/trunk/src/install");
+        $this->waitForPageToLoad ( "30000" );
        // $this->open("/svn/LOVD3_development/trunk/src/install/");
         $this->click("css=input[type=\"submit\"]");
     }
@@ -55,6 +56,7 @@ class temp_tests extends PHPUnit_Extensions_SeleniumTestCase
     public function testInstallLOVDtwee()
     {
         $this->open("/build/dasscheman/LOVD3_development/trunk/src/install");
+        $this->waitForPageToLoad ( "30000" );
        // $this->open("/svn/LOVD3_development/trunk/src/install/");
         $this->click("css=input[type=\"submit\"]");
     }
@@ -67,6 +69,7 @@ class temp_tests extends PHPUnit_Extensions_SeleniumTestCase
     public function testInstallLOVDdrietwee()
     {
         $this->setBrowserUrl("http://localhost/LOVD3_development/trunk/src/install");
+        $this->waitForPageToLoad ( "30000" );
        // $this->open("/svn/LOVD3_development/trunk/src/install/");
         $this->click("css=input[type=\"submit\"]");
     }
@@ -81,6 +84,7 @@ class temp_tests extends PHPUnit_Extensions_SeleniumTestCase
     public function testInstallLOVDvijf()
     {
         $this->open("/src/install");
+        $this->waitForPageToLoad ( "30000" );
         //$this->open("/svn/LOVD3_development/trunk/src/install/");
         $this->click("css=input[type=\"submit\"]");
     }
@@ -88,6 +92,7 @@ class temp_tests extends PHPUnit_Extensions_SeleniumTestCase
     public function testInstallLOVDzes()
     {
         $this->open("/install");
+        $this->waitForPageToLoad ( "30000" );
         //$this->open("/svn/LOVD3_development/trunk/src/install/");
         $this->click("css=input[type=\"submit\"]");
     }
