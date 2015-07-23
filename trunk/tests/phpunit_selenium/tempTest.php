@@ -37,7 +37,7 @@ class temp_tests extends PHPUnit_Extensions_SeleniumTestCase
     protected function setUp()
     {
         //$this->setHost('localhost');
-        //$this->setPort(4444);
+        $this->setPort(4444);
         $this->setBrowser("*firefox");
         //$this->setBrowserUrl("http://localhost/svn/LOVD3_development/");
         $this->setBrowserUrl('http://127.0.0.1/');
@@ -71,7 +71,7 @@ class temp_tests extends PHPUnit_Extensions_SeleniumTestCase
     }
     public function testInstallLOVDdrietwee()
     {
-        $this->setBrowserUrl("http://localhost/LOVD3_development/trunk/src/install");
+        $this->setBrowserUrl("/LOVD3_development/trunk/src/install");
 
         $this->waitForPageToLoad ( "30000" );
         $this->assertTitle('LOVD Setup - LOVD 3.0 shared installation');
