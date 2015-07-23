@@ -10,12 +10,8 @@ before_script:
 
 script:
   - phpunit --verbose --debug ./trunk/tests/travis/tests/
-  - phpunit --verbose --debug ./trunk/tests/phpunit_selenium/tempTest.php"
-##notifications:
-##  email:
-##    - maxtobiasweber@gmail.com
+  - phpunit --verbose --debug ./trunk/tests/phpunit_selenium/tempTest.php
 
-##  - ./trunk/tests/bash_scripts/setup_apache.sh
-##  - ./trunk/tests/bash_scripts/setup_selenium_server.sh
-##  - ./trunk/tests/bash_scripts/start_selenium_sever.sh
-##script: "vendor/bin/
+notifications:
+  email:
+    - d.asscheman@lumc.nl
