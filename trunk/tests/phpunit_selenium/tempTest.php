@@ -49,6 +49,7 @@ class temp_tests extends PHPUnit_Extensions_SeleniumTestCase
         $this->open("http://127.0.0.1/trunk/src/install");
         $this->waitForPageToLoad ( "30000" );
         $this->assertEquals('Error: Init', $this->getText("css=th"));
+        $this->assertEquals('Error connecting to database: SQLSTATE[28000] [1045] Access denied for user *', $this->getText("//tr[2]/td"));
        // $this->open("/svn/LOVD3_development/trunk/src/install/");
         //$this->click("css=input[type=\"submit\"]");
     }
@@ -58,6 +59,7 @@ class temp_tests extends PHPUnit_Extensions_SeleniumTestCase
         $this->open("trunk/src/install");
         $this->waitForPageToLoad ( "30000" );
         $this->assertEquals('Error: Init', $this->getText("css=th"));
+        $this->assertEquals('Error connecting to database: SQLSTATE[28000] [1045] Access denied for user *', $this->getText("//tr[2]/td"));
         //$this->open("/svn/LOVD3_development/trunk/src/install/");
         //$this->click("css=input[type=\"submit\"]");
     }
@@ -67,6 +69,7 @@ class temp_tests extends PHPUnit_Extensions_SeleniumTestCase
         $this->open("http://127.0.0.1/");
         $this->waitForPageToLoad ( "30000" );
         $this->assertEquals('Error: Init', $this->getText("css=th"));
+        $this->assertEquals('Error connecting to database: SQLSTATE[28000] [1045] Access denied for user *', $this->getText("//tr[2]/td"));
         //$this->open("/svn/LOVD3_development/trunk/src/install/");
        // $this->click("css=input[type=\"submit\"]");
     }
