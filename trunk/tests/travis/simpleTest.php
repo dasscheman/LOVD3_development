@@ -1,7 +1,7 @@
 <?php
 //require_once 'PHPUnit/Extensions/SeleniumTestCase.php';
 
-class FleximgTest extends PHPUnit_Extensions_SeleniumTestCase
+class admin_tests extends PHPUnit_Extensions_SeleniumTestCase
 {
     protected function setUp()
     {
