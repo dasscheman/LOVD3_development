@@ -9,12 +9,4 @@
         "ext-curl": "*",
         "ext-dom": "*"
     },
-    "autoload": {
-        "classmap": [
-            "PHPUnit/"
-        ]
-    },
-    "include-path": [
-        ""
-    ]
 }
