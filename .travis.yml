@@ -10,9 +10,15 @@ php:
 ##    allow_failures:
 ##        - php: hhvm
 
-sudo: required
+##sudo: required
 before_script:
-  - ./trunk/tests/bash_scripts/setup_apache.sh
-  - ./trunk/tests/bash_scripts/setup_selenium_server.sh
-  - ./trunk/tests/bash_scripts/start_selenium_sever.sh
+  - "export DISPLAY=:99.0"
+  - "sh -e /etc/init.d/xvfb start"
+  - "wget http://selenium-release.storage.googleapis.com/2.44/selenium-server-standalone-2.44.0.jar"
+  - "java -jar selenium-server-standalone-2.44.0.jar > /tmp/selenium.log 2> /tmp/selenium.error &"
+  - composer install
+  - php -S localhost:8000 -t public/ &
+##  - ./trunk/tests/bash_scripts/setup_apache.sh
+##  - ./trunk/tests/bash_scripts/setup_selenium_server.sh
+##  - ./trunk/tests/bash_scripts/start_selenium_sever.sh
 script: "vendor/bin/phpunit --verbose --debug ./trunk/tests/phpunit_selenium/tempTest.php"
