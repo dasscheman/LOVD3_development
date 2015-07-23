@@ -7,6 +7,7 @@ class admin_tests extends PHPUnit_Extensions_SeleniumTestCase
     {
         $this->setBrowser('*firefox');
         $this->setBrowserUrl('http://127.0.0.1/');
+        $this->shareSession(true);
     }
 
     public function testLoadPage()
