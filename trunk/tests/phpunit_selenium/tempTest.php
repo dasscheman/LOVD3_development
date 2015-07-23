@@ -28,21 +28,20 @@
  *
  *************/
 
-require_once 'PHPUnit/Extensions/SeleniumTestCase.php';
 class temp_tests extends PHPUnit_Extensions_SeleniumTestCase
 {
-    protected $captureScreenshotOnFailure = TRUE;
-    protected $screenshotPath = '/home/travis/build/dasscheman/LOVD3_development/trunk/tests/test_results/error_screenshots';
-    protected $screenshotUrl = 'trunk/tests/test_results/error_screenshots';
+//    protected $captureScreenshotOnFailure = TRUE;
+//    protected $screenshotPath = '/home/travis/build/dasscheman/LOVD3_development/trunk/tests/test_results/error_screenshots';
+//    protected $screenshotUrl = 'trunk/tests/test_results/error_screenshots';
 
     protected function setUp()
     {
         //$this->setHost('localhost');
         //$this->setPort(4444);
-        $this->setBrowser("firefox");
+        $this->setBrowser("*firefox");
         //$this->setBrowserUrl("http://localhost/svn/LOVD3_development/");
         $this->setBrowserUrl('http://127.0.0.1/');
-        //$this->shareSession(true);
+        $this->shareSession(true);
     }
 
     public function testInstallLOVDeen()
