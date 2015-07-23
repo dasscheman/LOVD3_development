@@ -10,7 +10,7 @@ echo "Installing Composer"
 php -r "readfile('https://getcomposer.org/installer');" | sudo php -d apc.enable_cli=0 -- --install-dir=/usr/local/bin --filename=composer
 
 echo "Updating Composer"
-sudo ./bin/composer self-update
+sudo /home/travis/.phpenv/versions/5.3/bin/composer self-update
 
 echo "Installing dependencies"
 composer install --dev
