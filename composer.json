@@ -4,6 +4,17 @@
         "phpunit/phpunit": "4.7.*",
         "phpunit/php-invoker": "*",
         "phpunit/dbunit": "*",
-        "phpunit/phpunit-story": "*"
-    }
+        "phpunit/phpunit-story": "*",
+        "sebastian/comparator": "~1.0",
+        "ext-curl": "*",
+        "ext-dom": "*"
+    },
+    "autoload": {
+        "classmap": [
+            "PHPUnit/"
+        ]
+    },
+    "include-path": [
+        ""
+    ]
 }
