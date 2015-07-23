@@ -1,5 +1,5 @@
 serverUrl='http://127.0.0.1:4444'
-serverFile=2.45/selenium-server-standalone-2.45.0.jar
+serverFile=2.44/selenium-server-standalone-2.44.0.jar
 firefoxUrl=http://ftp.mozilla.org/pub/mozilla.org/firefox/releases/21.0/linux-x86_64/en-US/firefox-21.0.tar.bz2
 firefoxFile=firefox.tar.bz2
 phpVersion=`php -v`
@@ -10,7 +10,7 @@ echo "Installing Composer"
 php -r "readfile('https://getcomposer.org/installer');" | sudo php -d apc.enable_cli=0 -- --install-dir=/usr/local/bin --filename=composer
 
 echo "Updating Composer"
-sudo /usr/local/bin/composer self-update
+sudo ./bin/composer self-update
 
 echo "Installing dependencies"
 composer install --dev
