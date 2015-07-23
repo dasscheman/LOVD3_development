@@ -1,5 +1,5 @@
 <?php
-require_once 'PHPUnit/Extensions/SeleniumTestCase.php';
+//require_once 'PHPUnit/Extensions/SeleniumTestCase.php';
 
 class FleximgTest extends PHPUnit_Extensions_SeleniumTestCase
 {
