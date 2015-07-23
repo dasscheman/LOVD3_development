@@ -21,7 +21,11 @@ echo "Starting Selenium"
 if [ ! -f $serverFile ]; then
     wget http://selenium-release.storage.googleapis.com/2.44/$serverFile
 fi
-
+if [ ! -e ${serverFile} ]; then
+    echo "Cannot find Selenium Server!"
+    echo "Test is aborted"
+    exit
+fi
 sudo xvfb-run java -jar $serverFile > /tmp/selenium.log &
 wget --retry-connrefused --tries=120 --waitretry=3 --output-file=/dev/null $serverUrl/wd/hub/status -O /dev/null
 if [ ! $? -eq 0 ]; then
