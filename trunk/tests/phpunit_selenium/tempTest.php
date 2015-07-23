@@ -103,10 +103,10 @@ class temp_tests extends PHPUnit_Extensions_SeleniumTestCase
         $this->assertTrue((bool)preg_match('/^[\s\S]*\/trunk\/src\/install\/[\s\S]step=3$/',$this->getLocation()));
         $this->type("name=institute", "Leiden University Medical Center");
         $this->type("name=email_address", "noreply@LOVD.nl");
-        $this->type("name=proxy_host", "localhost");
+        /*$this->type("name=proxy_host", "localhost");
         $this->type("name=proxy_port", "3128");
         $this->type("name=proxy_username", "test");
-        $this->type("name=proxy_password", "test");
+        $this->type("name=proxy_password", "test");*/
         $this->click("name=send_stats");
         $this->click("name=include_in_listing");
         $this->click("name=lock_uninstall");
