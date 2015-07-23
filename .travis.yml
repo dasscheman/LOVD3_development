@@ -9,7 +9,7 @@ before_script:
   - ./trunk/tests/travis/setup/setup_selenium_server.sh
 
 script:
-  - phpunit --verbose --debug ./trunk/tests/travis/tests
+  - phpunit --verbose --debug ./trunk/tests/travis/tests/
 ##notifications:
 ##  email:
 ##    - maxtobiasweber@gmail.com

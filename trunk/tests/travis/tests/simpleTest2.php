@@ -1,7 +1,7 @@
 <?php
 //require_once 'PHPUnit/Extensions/SeleniumTestCase.php';
 
-class admin_tests extends PHPUnit_Extensions_SeleniumTestCase
+class second_tests extends PHPUnit_Extensions_SeleniumTestCase
 {
     protected function setUp()
     {
@@ -9,7 +9,7 @@ class admin_tests extends PHPUnit_Extensions_SeleniumTestCase
         $this->setBrowserUrl('http://127.0.0.1/');
     }
 
-    public function testLoadPage()
+    public function testLoadPageAgain()
     {
         $this->open('http://127.0.0.1/trunk/tests/travis/simpleTest.html');
         $this->waitForPageToLoad ( "30000" );
