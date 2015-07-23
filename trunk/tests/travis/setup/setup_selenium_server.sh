@@ -12,10 +12,8 @@ php -r "readfile('https://getcomposer.org/installer');" | sudo php -d apc.enable
 echo "Updating Composer"
 sudo /usr/local/bin/composer self-update
 
-if [ ! -d vendor ] || [ ! -f vendor/autoload.php ]; then
-    echo "Installing dependencies"
-    composer install --dev
-fi
+echo "Installing dependencies"
+composer install --dev
 
 echo "Download Firefox"
 wget $firefoxUrl -O $firefoxFile
