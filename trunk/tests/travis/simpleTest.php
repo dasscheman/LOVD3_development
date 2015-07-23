@@ -11,7 +11,7 @@ class FleximgTest extends PHPUnit_Extensions_SeleniumTestCase
 
     public function testLoadPage()
     {
-        $this->open('http://127.0.0.1/tests/simpleTest.html');
+        $this->open('http://127.0.0.1/trunk/tests/travis/simpleTest.html');
         $this->waitForPageToLoad ( "30000" );
         $this->assertTitle('phpunit selenium test');
     }

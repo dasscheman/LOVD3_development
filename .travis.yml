@@ -8,7 +8,9 @@ before_script:
   - ./trunk/tests/travis/setup/setup_apache.sh
   - ./trunk/tests/travis/setup/setup_selenium_server.sh
 
-script: phpunit --verbose -c ./trunk/tests/travis/phpunit.xml
+script:
+  - phpunit --verbose --debug -c ./trunk/tests/travis/phpunit.xml
+  - phpunit --verbose --debug ./trunk/tests/travis/simpleTest.php
 ##notifications:
 ##  email:
 ##    - maxtobiasweber@gmail.com
