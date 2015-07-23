@@ -4,6 +4,19 @@ firefoxUrl=http://ftp.mozilla.org/pub/mozilla.org/firefox/releases/21.0/linux-x8
 firefoxFile=firefox.tar.bz2
 phpVersion=`php -v`
 
+sudo apt-get update
+
+echo "Installing Composer"
+php -r "readfile('https://getcomposer.org/installer');" | sudo php -d apc.enable_cli=0 -- --install-dir=/usr/local/bin --filename=composer
+
+echo "Updating Composer"
+sudo /usr/local/bin/composer self-update
+
+if [ ! -d vendor ] || [ ! -f vendor/autoload.php ]; then
+    echo "Installing dependencies"
+    composer install --dev
+fi
+
 echo "Download Firefox"
 wget $firefoxUrl -O $firefoxFile
 tar xvjf $firefoxFile
