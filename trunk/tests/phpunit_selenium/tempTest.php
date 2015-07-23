@@ -64,7 +64,7 @@ class temp_tests extends PHPUnit_Extensions_SeleniumTestCase
         //$this->click("css=input[type=\"submit\"]");
     }
 
-    public function testInstallLOVDzeven()
+  /*  public function testInstallLOVDzeven()
     {
         $this->open("http://127.0.0.1/");
         $this->waitForPageToLoad ( "30000" );
@@ -72,7 +72,7 @@ class temp_tests extends PHPUnit_Extensions_SeleniumTestCase
         $this->assertEquals('Introduction', $this->getText("//tr[2]/td"));
         //$this->open("/svn/LOVD3_development/trunk/src/install/");
        // $this->click("css=input[type=\"submit\"]");
-    }
+    }*/
 
     public function testInstallLOVD()
     {
