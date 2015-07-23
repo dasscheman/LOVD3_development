@@ -48,7 +48,7 @@ class temp_tests extends PHPUnit_Extensions_SeleniumTestCase
     {
         $this->open("http://127.0.0.1/trunk/src/install");
         $this->waitForPageToLoad ( "30000" );
-        $this->assertTitle('LOVD Setup - LOVD 3.0 shared installation');
+        $this->assertText('LOVD Setup - LOVD 3.0 shared installation');
        // $this->open("/svn/LOVD3_development/trunk/src/install/");
         //$this->click("css=input[type=\"submit\"]");
     }
@@ -57,7 +57,7 @@ class temp_tests extends PHPUnit_Extensions_SeleniumTestCase
     {
         $this->open("trunk/src/install");
         $this->waitForPageToLoad ( "30000" );
-        $this->assertTitle('LOVD Setup - LOVD 3.0 shared installation');
+        $this->assertText('LOVD Setup - LOVD 3.0 shared installation');
         //$this->open("/svn/LOVD3_development/trunk/src/install/");
         //$this->click("css=input[type=\"submit\"]");
     }
@@ -66,7 +66,7 @@ class temp_tests extends PHPUnit_Extensions_SeleniumTestCase
     {
         $this->open("http://127.0.0.1/");
         $this->waitForPageToLoad ( "30000" );
-        $this->assertTitle('LOVD Setup - LOVD 3.0 shared installation');
+        $this->assertText('LOVD Setup - LOVD 3.0 shared installation');
         //$this->open("/svn/LOVD3_development/trunk/src/install/");
        // $this->click("css=input[type=\"submit\"]");
     }
