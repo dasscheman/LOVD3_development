@@ -6,8 +6,8 @@ phpVersion=`php -v`
 
 sudo apt-get update
 
-echo "Updating Composer"
-sudo /home/travis/.phpenv/versions/5.3/bin/composer self-update
+##echo "Updating Composer"
+##sudo /home/travis/.phpenv/versions/5.3/bin/composer self-update
 
 echo "Installing dependencies"
 composer install
