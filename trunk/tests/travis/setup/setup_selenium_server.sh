@@ -29,10 +29,18 @@ if [ ! $? -eq 0 ]; then
     # If the selenium server is already running, then the selenium server is not started again.
     javaruns=`ps -ef | grep selenium-server | grep -v grep | wc -l`
     if [ $javaruns = 0 ]; then
+        echo "install gnome-terminal"
+        sudo apt-get install gnome-terminal
         echo "Start Selenium Server"
-        gnome-terminal -e "java -jar ${SELENIUMSERVER} -trustAllSSLCertificates" & sleep 2s
+        gnome-terminal -e "java -jar ${serverFile} -trustAllSSLCertificates" & sleep 2s
+        javaruns=`ps -ef | grep selenium-server | grep -v grep | wc -l`
+        if [ $javaruns = 0 ]; then
+            echo "Alternatief werkt ook niet"
+        else
+            echo "Alternatief heeft Selenium Server opgestart"
+        fi
     else
-        echo "Selenium Server is running"
+        echo "Selenium Server is toch wel running"
     fi
 else
     echo "Finished setup"
