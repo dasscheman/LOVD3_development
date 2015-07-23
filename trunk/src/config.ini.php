@@ -27,8 +27,6 @@ hostname = localhost
 #
 username = lovd
 password = lovd_pw
-#username = root
-#password =
 
 
 # Database name (required). When using SQLite, specify the filename here.
