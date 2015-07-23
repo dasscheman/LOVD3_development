@@ -106,6 +106,15 @@ class temp_tests extends PHPUnit_Extensions_SeleniumTestCase
        // $this->click("css=input[type=\"submit\"]");
     }
 
+    public function testInstallLOVDzeven()
+    {
+        $this->open("/");
+        $this->waitForPageToLoad ( "30000" );
+        $this->assertTitle('LOVD Setup - LOVD 3.0 shared installation');
+        //$this->open("/svn/LOVD3_development/trunk/src/install/");
+       // $this->click("css=input[type=\"submit\"]");
+    }
+
     /*public function testInstallLOVD()
     {
         $this->open("/svn/LOVD3_development/trunk/src/install/");
