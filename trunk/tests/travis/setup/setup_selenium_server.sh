@@ -19,7 +19,7 @@ tar xvjf $firefoxFile
 echo "Starting xvfb"
 echo "Starting Selenium"
 if [ ! -f $serverFile ]; then
-    wget http://selenium-release.storage.googleapis.com/2.44/$serverFile > selenium-server-standalone-2.44.0.jar
+    wget http://selenium-release.storage.googleapis.com/2.44/$serverFile
 fi
 
 sudo xvfb-run java -jar $serverFile > /tmp/selenium.log &
