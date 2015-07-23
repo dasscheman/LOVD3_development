@@ -49,7 +49,7 @@ class temp_tests extends PHPUnit_Extensions_SeleniumTestCase
         $this->open("http://127.0.0.1/trunk/src/install");
         $this->waitForPageToLoad ( "30000" );
         $this->assertEquals('Installation steps', $this->getText("css=th"));
-        $this->assertEquals('Error connecting to database: SQLSTATE[28000] [1045] Access denied for user *', $this->getText("//tr[2]/td"));
+        $this->assertEquals('Introduction', $this->getText("//tr[2]/td"));
        // $this->open("/svn/LOVD3_development/trunk/src/install/");
         //$this->click("css=input[type=\"submit\"]");
     }
@@ -59,7 +59,7 @@ class temp_tests extends PHPUnit_Extensions_SeleniumTestCase
         $this->open("trunk/src/install");
         $this->waitForPageToLoad ( "30000" );
         $this->assertEquals('Installation steps', $this->getText("css=th"));
-        $this->assertEquals('Error connecting to database: SQLSTATE[28000] [1045] Access denied for user *', $this->getText("//tr[2]/td"));
+        $this->assertEquals('Introduction', $this->getText("//tr[2]/td"));
         //$this->open("/svn/LOVD3_development/trunk/src/install/");
         //$this->click("css=input[type=\"submit\"]");
     }
@@ -69,7 +69,7 @@ class temp_tests extends PHPUnit_Extensions_SeleniumTestCase
         $this->open("http://127.0.0.1/");
         $this->waitForPageToLoad ( "30000" );
         $this->assertEquals('Error: Init', $this->getText("css=th"));
-        $this->assertEquals('Error connecting to database: SQLSTATE[28000] [1045] Access denied for user *', $this->getText("//tr[2]/td"));
+        $this->assertEquals('Introduction', $this->getText("//tr[2]/td"));
         //$this->open("/svn/LOVD3_development/trunk/src/install/");
        // $this->click("css=input[type=\"submit\"]");
     }
@@ -118,9 +118,9 @@ class temp_tests extends PHPUnit_Extensions_SeleniumTestCase
        // $this->waitForPageToLoad("30000");
        // $this->clickAndWait("css=input[type=\'submit\']");
        // $this->waitForPageToLoad("30000");
+        $this->click("css=button");
         $this->assertEquals('Done', $this->getText("css=b"));
         $this->assertTrue((bool)preg_match('/^[\s\S]*\/trunk\/src\/install\/[\s\S]step=4$/',$this->getLocation()));
-        $this->click("css=button");
         $this->waitForPageToLoad("30000");
         $this->assertTrue((bool)preg_match('/^[\s\S]*\/trunk\/src\/setup[\s\S]newly_installed$/',$this->getLocation()));
         $this->assertEquals('trunk/src/install', $this->getLocation());
