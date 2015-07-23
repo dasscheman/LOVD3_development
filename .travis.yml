@@ -5,7 +5,7 @@ php:
 sudo: required
 
 before_install:
-  - mysql -e "create database IF NOT EXISTS 'lovd3_testing';" -u root
+  - mysql -e "create database IF NOT EXISTS lovd3_testing;" -u root
   - mysql -e "CREATE USER 'lovd'@'localhost' IDENTIFIED BY 'lovdpw'";
   - mysql -e "GRANT ALL PRIVILEGES ON 'lovd3_testing' TO 'lovd'@'localhost'";
 
