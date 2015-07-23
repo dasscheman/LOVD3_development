@@ -1,24 +1,19 @@
 language: php
 php:
-##  - 5.3
-##  - 5.4
-  - 5.5
-##  - 5.6
-##  - hhvm
-
-##matrix:
-##    allow_failures:
-##        - php: hhvm
+  - 5.3
 
 ##sudo: required
 before_script:
-  - "export DISPLAY=:99.0"
-  - "sh -e /etc/init.d/xvfb start"
-  - "wget http://selenium-release.storage.googleapis.com/2.44/selenium-server-standalone-2.44.0.jar"
-  - "java -jar selenium-server-standalone-2.44.0.jar > /tmp/selenium.log 2> /tmp/selenium.error &"
-  - composer install
-  - php -S localhost:8000 -t public/ &
+  - ./trunk/tests/travis/setup/before_script.sh
+  - ./trunk/tests/travis/setup/setup_apache.sh
+  - ./trunk/tests/travis/setup/setup_selenium_server.sh
+
+script: phpunit --verbose -c tests/phpunit.xml
+##notifications:
+##  email:
+##    - maxtobiasweber@gmail.com
+
 ##  - ./trunk/tests/bash_scripts/setup_apache.sh
 ##  - ./trunk/tests/bash_scripts/setup_selenium_server.sh
 ##  - ./trunk/tests/bash_scripts/start_selenium_sever.sh
-script: "vendor/bin/phpunit --verbose --debug ./trunk/tests/phpunit_selenium/tempTest.php"
+##script: "vendor/bin/phpunit --verbose --debug ./trunk/tests/phpunit_selenium/tempTest.php"
