@@ -3,7 +3,7 @@
 <phpunit backupGlobals="false" colors="true">
   <testsuites>
     <testsuite name="simpleTest">
-      <file>trunk/tests/travis/simpleTest.php</file>
+      <file>./trunk/tests/travis/simpleTest.php</file>
     </testsuite>
   </testsuites>
 </phpunit>
