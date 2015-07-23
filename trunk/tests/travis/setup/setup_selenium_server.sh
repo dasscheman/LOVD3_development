@@ -6,9 +6,6 @@ phpVersion=`php -v`
 
 sudo apt-get update
 
-echo "Installing Composer"
-php -r "readfile('https://getcomposer.org/installer');" | sudo php -d apc.enable_cli=0 -- --install-dir=/usr/local/bin --filename=composer
-
 echo "Updating Composer"
 sudo /home/travis/.phpenv/versions/5.3/bin/composer self-update
 
@@ -24,9 +21,10 @@ echo "Starting Selenium"
 if [ ! -f $serverFile ]; then
     wget http://selenium-release.storage.googleapis.com/$serverFile
 fi
-sudo xvfb-run java -jar $serverFile > /tmp/selenium.log &
+xvfb --help
 
-wget --retry-connrefused --tries=60 --waitretry=1 --output-file=/dev/null $serverUrl/wd/hub/status -O /dev/null
+sudo xvfb-run java -jar $serverFile > /tmp/selenium.log &
+wget --retry-connrefused --tries=120 --waitretry=3 --output-file=/dev/null $serverUrl/wd/hub/status -O /dev/null
 if [ ! $? -eq 0 ]; then
     echo "Selenium Server not started"
 else
