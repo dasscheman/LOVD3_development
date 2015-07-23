@@ -13,8 +13,6 @@ if [ ! -d vendor ] || [ ! -f vendor/autoload.php ]; then
     composer install --dev
 fi
 
-
-
 echo "Install and setup apache"
 
 

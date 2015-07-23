@@ -14,7 +14,7 @@ sudo: required
 before_script:
   - ./trunk/tests/bash_scripts/setup_apache.sh
   - ./trunk/tests/bash_scripts/setup_selenium_server.sh
-  - ./trunk/tests/bash_scripts/start_selenium_server.sh
+  - ./trunk/tests/bash_scripts/start_selenium_sever.sh
 ##  - ./trunk/tests/travis/before_script.sh
 ##  - ./trunk/tests/bash_scripts/convert_selenium_to_phpunit.sh
 script: "vendor/bin/phpunit --verbose --debug ./trunk/tests/phpunit_selenium/tempTest.php"
