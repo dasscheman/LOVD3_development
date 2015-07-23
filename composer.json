@@ -1,10 +1,9 @@
 {
-    "require-dev": {
+    "require": {
         "phpunit/phpunit-selenium": "*",
         "phpunit/phpunit": "4.7.*",
         "phpunit/php-invoker": "*",
         "phpunit/dbunit": "*",
         "phpunit/phpunit-story": "*"
-
     }
 }

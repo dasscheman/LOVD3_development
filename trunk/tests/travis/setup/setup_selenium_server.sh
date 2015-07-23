@@ -10,7 +10,7 @@ echo "Updating Composer"
 sudo /home/travis/.phpenv/versions/5.3/bin/composer self-update
 
 echo "Installing dependencies"
-composer install --dev
+composer install
 
 echo "Download Firefox"
 wget $firefoxUrl -O $firefoxFile
