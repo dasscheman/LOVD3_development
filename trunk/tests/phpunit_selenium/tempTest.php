@@ -113,6 +113,18 @@ class temp_tests extends PHPUnit_Extensions_SeleniumTestCase
         $this->click("css=input[type=\"submit\"]");
         $this->waitForPageToLoad("30000");
         $this->assertTrue((bool)preg_match('/^[\s\S]*\/trunk\/src\/install\/[\s\S]step=3&sent=true$/',$this->getLocation()));
+        $this->assertEquals('', $this->getText("css=div.err"));
+        $this->click("css=input[type=\"submit\"]");
+        $this->waitForPageToLoad("30000");
+        $this->assertEquals('', $this->getText("css=div.err"));
+        $this->assertTrue((bool)preg_match('/^[\s\S]*\/trunk\/src\/install\/[\s\S]step=4$/',$this->getLocation()));
+        $this->click("css=button");
+        $this->waitForPageToLoad("30000");
+        $this->assertEquals('', $this->getText("css=div.err"));
+        $this->assertTrue((bool)preg_match('/^[\s\S]*\/trunk\/src\/setup[\s\S]newly_installed$/',$this->getLocation()));
+
+        /*
+        $this->assertTrue((bool)preg_match('/^[\s\S]*\/trunk\/src\/install\/[\s\S]step=3&sent=true$/',$this->getLocation()));
         $this->assertEquals('Configuring LOVD system settings', $this->getText("css=b"));
         $this->click("css=input[type=\'submit\']");
         $this->waitForPageToLoad("30000");
@@ -124,7 +136,7 @@ class temp_tests extends PHPUnit_Extensions_SeleniumTestCase
         $this->assertTrue((bool)preg_match('/^[\s\S]*\/trunk\/src\/install\/[\s\S]step=4$/',$this->getLocation()));
         $this->waitForPageToLoad("30000");
         $this->assertTrue((bool)preg_match('/^[\s\S]*\/trunk\/src\/setup[\s\S]newly_installed$/',$this->getLocation()));
-        $this->assertEquals('trunk/src/install', $this->getLocation());
+        $this->assertEquals('trunk/src/install', $this->getLocation());*/
     }/*
     public function testCreateGeneIVD()
     {
