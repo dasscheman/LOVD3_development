@@ -1,5 +1,5 @@
 serverUrl='http://127.0.0.1:4444'
-serverFile=2.44/selenium-server-standalone-2.44.0.jar
+serverFile=selenium-server-standalone-2.44.0.jar
 firefoxUrl=http://ftp.mozilla.org/pub/mozilla.org/firefox/releases/37.0.2/linux-x86_64/en-US/firefox-37.0.2.tar.bz2
 firefoxFile=firefox.tar.bz2
 phpVersion=`php -v`
@@ -19,14 +19,21 @@ tar xvjf $firefoxFile
 echo "Starting xvfb"
 echo "Starting Selenium"
 if [ ! -f $serverFile ]; then
-    wget http://selenium-release.storage.googleapis.com/$serverFile
+    wget http://selenium-release.storage.googleapis.com/2.44/$serverFile > selenium-server-standalone-2.44.0.jar
 fi
-xvfb --help
 
 sudo xvfb-run java -jar $serverFile > /tmp/selenium.log &
 wget --retry-connrefused --tries=120 --waitretry=3 --output-file=/dev/null $serverUrl/wd/hub/status -O /dev/null
 if [ ! $? -eq 0 ]; then
-    echo "Selenium Server not started"
+    echo "Selenium Server not started second attempt"
+    # If the selenium server is already running, then the selenium server is not started again.
+    javaruns=`ps -ef | grep selenium-server | grep -v grep | wc -l`
+    if [ $javaruns = 0 ]; then
+        echo "Start Selenium Server"
+        gnome-terminal -e "java -jar ${SELENIUMSERVER} -trustAllSSLCertificates" & sleep 2s
+    else
+        echo "Selenium Server is running"
+    fi
 else
     echo "Finished setup"
 fi
