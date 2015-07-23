@@ -11,6 +11,7 @@ before_script:
 script:
   - phpunit --verbose --debug -c ./trunk/tests/travis/phpunit.xml
   - phpunit --verbose --debug ./trunk/tests/travis/tests/
+  - phpunit --verbose --debug ./trunk/tests/phpunit_selenium/tempTest.php"
 ##notifications:
 ##  email:
 ##    - maxtobiasweber@gmail.com
@@ -18,4 +19,4 @@ script:
 ##  - ./trunk/tests/bash_scripts/setup_apache.sh
 ##  - ./trunk/tests/bash_scripts/setup_selenium_server.sh
 ##  - ./trunk/tests/bash_scripts/start_selenium_sever.sh
-##script: "vendor/bin/phpunit --verbose --debug ./trunk/tests/phpunit_selenium/tempTest.php"
+##script: "vendor/bin/
