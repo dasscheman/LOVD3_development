@@ -2,7 +2,7 @@ language: php
 php:
   - 5.3
 
-##sudo: required
+sudo: required
 before_script:
   - ./trunk/tests/travis/setup/before_script.sh
   - ./trunk/tests/travis/setup/setup_apache.sh
