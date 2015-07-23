@@ -5,10 +5,10 @@ php:
 sudo: required
 
 before_install:
-  - mysql -e "create database IF NOT EXISTS lovd3_testing;" -u root
-##  - mysql -e "CREATE USER 'lovd' IDENTIFIED BY 'lovdpw';" -u root
-##  - mysql -e "GRANT ALL PRIVILEGES ON * . * TO 'lovd';" -u root
-##  - mysql -e "FLUSH PRIVILEGES;"
+  - mysql -e "create database IF NOT EXISTS lovd3_development;" -u root
+  - mysql -e "CREATE USER 'lovd' IDENTIFIED BY 'lovdpw';" -u root
+  - mysql -e "GRANT ALL PRIVILEGES ON * . * TO 'lovd';" -u root
+  - mysql -e "FLUSH PRIVILEGES;"
 
 before_script:
   - ./trunk/tests/travis/setup/before_script.sh
