@@ -48,7 +48,7 @@ class temp_tests extends PHPUnit_Extensions_SeleniumTestCase
     {
         $this->open("http://127.0.0.1/trunk/src/install");
         $this->waitForPageToLoad ( "30000" );
-        $this->assertEquals('Error: Init', $this->getText("css=th"));
+        $this->assertEquals('Installation steps', $this->getText("css=th"));
         $this->assertEquals('Error connecting to database: SQLSTATE[28000] [1045] Access denied for user *', $this->getText("//tr[2]/td"));
        // $this->open("/svn/LOVD3_development/trunk/src/install/");
         //$this->click("css=input[type=\"submit\"]");
@@ -58,7 +58,7 @@ class temp_tests extends PHPUnit_Extensions_SeleniumTestCase
     {
         $this->open("trunk/src/install");
         $this->waitForPageToLoad ( "30000" );
-        $this->assertEquals('Error: Init', $this->getText("css=th"));
+        $this->assertEquals('Installation steps', $this->getText("css=th"));
         $this->assertEquals('Error connecting to database: SQLSTATE[28000] [1045] Access denied for user *', $this->getText("//tr[2]/td"));
         //$this->open("/svn/LOVD3_development/trunk/src/install/");
         //$this->click("css=input[type=\"submit\"]");
@@ -115,9 +115,9 @@ class temp_tests extends PHPUnit_Extensions_SeleniumTestCase
         $this->assertTrue((bool)preg_match('/^[\s\S]*\/trunk\/src\/install\/[\s\S]step=3&sent=true$/',$this->getLocation()));
         $this->assertEquals('Configuring LOVD system settings', $this->getText("css=b"));
         $this->click("css=input[type=\"submit\"]");
-        $this->wait("30000");
+        $this->waitForPageToLoad("30000");
         $this->click("css=input[type=\"submit\"]");
-        $this->wait("30000");
+        $this->waitForPageToLoad("30000");
         $this->assertEquals('Done', $this->getText("css=b"));
         $this->assertTrue((bool)preg_match('/^[\s\S]*\/trunk\/src\/install\/[\s\S]step=4$/',$this->getLocation()));
         $this->click("css=button");
