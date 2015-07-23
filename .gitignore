@@ -5,7 +5,6 @@ r400
 .svn
 
 trunk/.svnignore
-trunk/src/config.ini.php
 trunk/src/.idea
 trunk/src/refseq
 

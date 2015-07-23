@@ -44,41 +44,6 @@ class temp_tests extends PHPUnit_Extensions_SeleniumTestCase
         $this->shareSession(true);
     }
 
-    public function testInstallLOVDeen()
-    {
-        $this->open("http://127.0.0.1/home/travis/build/dasscheman/LOVD3_development/trunk/src/install");
-        $this->waitForPageToLoad ( "30000" );
-        $this->assertTitle('LOVD Setup - LOVD 3.0 shared installation');
-       // $this->open("/svn/LOVD3_development/trunk/src/install/");
-       // $this->click("css=input[type=\"submit\"]");
-    }
-
-    public function testInstallLOVDtwee()
-    {
-        $this->open("http://127.0.0.1/build/dasscheman/LOVD3_development/trunk/src/install");
-        $this->waitForPageToLoad ( "30000" );
-        $this->assertTitle('LOVD Setup - LOVD 3.0 shared installation');
-       // $this->open("/svn/LOVD3_development/trunk/src/install/");
-        //$this->click("css=input[type=\"submit\"]");
-    }
-    public function testInstallLOVDdrie()
-    {
-        $this->open("http://127.0.0.1/dasscheman/LOVD3_development/trunk/src/install");
-        $this->waitForPageToLoad ( "30000" );
-        $this->assertTitle('LOVD Setup - LOVD 3.0 shared installation');
-       // $this->open("/svn/LOVD3_development/trunk/src/install/");
-        //$this->click("css=input[type=\"submit\"]");
-    }
-    public function testInstallLOVDdrietwee()
-    {
-        $this->setBrowserUrl("http://127.0.0.1/LOVD3_development/trunk/src/install");
-
-        $this->waitForPageToLoad ( "30000" );
-        $this->assertTitle('LOVD Setup - LOVD 3.0 shared installation');
-       // $this->open("/svn/LOVD3_development/trunk/src/install/");
-       // $this->click("css=input[type=\"submit\"]");
-    }
-
     public function testInstallLOVDvier()
     {
         $this->open("http://127.0.0.1/trunk/src/install");
@@ -90,20 +55,11 @@ class temp_tests extends PHPUnit_Extensions_SeleniumTestCase
 
     public function testInstallLOVDvijf()
     {
-        $this->open("http://127.0.0.1/src/install");
+        $this->open("trunk/src/install");
         $this->waitForPageToLoad ( "30000" );
         $this->assertTitle('LOVD Setup - LOVD 3.0 shared installation');
         //$this->open("/svn/LOVD3_development/trunk/src/install/");
         //$this->click("css=input[type=\"submit\"]");
-    }
-
-    public function testInstallLOVDzes()
-    {
-        $this->open("http://127.0.0.1/install");
-        $this->waitForPageToLoad ( "30000" );
-        $this->assertTitle('LOVD Setup - LOVD 3.0 shared installation');
-        //$this->open("/svn/LOVD3_development/trunk/src/install/");
-       // $this->click("css=input[type=\"submit\"]");
     }
 
     public function testInstallLOVDzeven()
