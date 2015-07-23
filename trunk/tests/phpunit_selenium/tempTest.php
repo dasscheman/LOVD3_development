@@ -46,7 +46,7 @@ class temp_tests extends PHPUnit_Extensions_SeleniumTestCase
 
     public function testInstallLOVDeen()
     {
-        $this->open("/home/travis/build/dasscheman/LOVD3_development/trunk/src/install");
+        $this->open("http://127.0.0.1/home/travis/build/dasscheman/LOVD3_development/trunk/src/install");
         $this->waitForPageToLoad ( "30000" );
         $this->assertTitle('LOVD Setup - LOVD 3.0 shared installation');
        // $this->open("/svn/LOVD3_development/trunk/src/install/");
@@ -55,7 +55,7 @@ class temp_tests extends PHPUnit_Extensions_SeleniumTestCase
 
     public function testInstallLOVDtwee()
     {
-        $this->open("/build/dasscheman/LOVD3_development/trunk/src/install");
+        $this->open("http://127.0.0.1/build/dasscheman/LOVD3_development/trunk/src/install");
         $this->waitForPageToLoad ( "30000" );
         $this->assertTitle('LOVD Setup - LOVD 3.0 shared installation');
        // $this->open("/svn/LOVD3_development/trunk/src/install/");
@@ -63,7 +63,7 @@ class temp_tests extends PHPUnit_Extensions_SeleniumTestCase
     }
     public function testInstallLOVDdrie()
     {
-        $this->open("/dasscheman/LOVD3_development/trunk/src/install");
+        $this->open("http://127.0.0.1/dasscheman/LOVD3_development/trunk/src/install");
         $this->waitForPageToLoad ( "30000" );
         $this->assertTitle('LOVD Setup - LOVD 3.0 shared installation');
        // $this->open("/svn/LOVD3_development/trunk/src/install/");
@@ -71,7 +71,7 @@ class temp_tests extends PHPUnit_Extensions_SeleniumTestCase
     }
     public function testInstallLOVDdrietwee()
     {
-        $this->setBrowserUrl("/LOVD3_development/trunk/src/install");
+        $this->setBrowserUrl("http://127.0.0.1/LOVD3_development/trunk/src/install");
 
         $this->waitForPageToLoad ( "30000" );
         $this->assertTitle('LOVD Setup - LOVD 3.0 shared installation');
@@ -81,7 +81,7 @@ class temp_tests extends PHPUnit_Extensions_SeleniumTestCase
 
     public function testInstallLOVDvier()
     {
-        $this->open("/trunk/src/install");
+        $this->open("http://127.0.0.1/trunk/src/install");
         $this->waitForPageToLoad ( "30000" );
         $this->assertTitle('LOVD Setup - LOVD 3.0 shared installation');
        // $this->open("/svn/LOVD3_development/trunk/src/install/");
@@ -90,7 +90,7 @@ class temp_tests extends PHPUnit_Extensions_SeleniumTestCase
 
     public function testInstallLOVDvijf()
     {
-        $this->open("/src/install");
+        $this->open("http://127.0.0.1/src/install");
         $this->waitForPageToLoad ( "30000" );
         $this->assertTitle('LOVD Setup - LOVD 3.0 shared installation');
         //$this->open("/svn/LOVD3_development/trunk/src/install/");
@@ -99,7 +99,7 @@ class temp_tests extends PHPUnit_Extensions_SeleniumTestCase
 
     public function testInstallLOVDzes()
     {
-        $this->open("/install");
+        $this->open("http://127.0.0.1/install");
         $this->waitForPageToLoad ( "30000" );
         $this->assertTitle('LOVD Setup - LOVD 3.0 shared installation');
         //$this->open("/svn/LOVD3_development/trunk/src/install/");
@@ -108,7 +108,7 @@ class temp_tests extends PHPUnit_Extensions_SeleniumTestCase
 
     public function testInstallLOVDzeven()
     {
-        $this->open("/");
+        $this->open("http://127.0.0.1/");
         $this->waitForPageToLoad ( "30000" );
         $this->assertTitle('LOVD Setup - LOVD 3.0 shared installation');
         //$this->open("/svn/LOVD3_development/trunk/src/install/");
