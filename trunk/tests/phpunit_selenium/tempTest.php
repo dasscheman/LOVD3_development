@@ -48,52 +48,62 @@ class temp_tests extends PHPUnit_Extensions_SeleniumTestCase
     {
         $this->open("/home/travis/build/dasscheman/LOVD3_development/trunk/src/install");
         $this->waitForPageToLoad ( "30000" );
+        $this->assertTitle('LOVD Setup - LOVD 3.0 shared installation');
        // $this->open("/svn/LOVD3_development/trunk/src/install/");
-        $this->click("css=input[type=\"submit\"]");
+       // $this->click("css=input[type=\"submit\"]");
     }
 
     public function testInstallLOVDtwee()
     {
         $this->open("/build/dasscheman/LOVD3_development/trunk/src/install");
         $this->waitForPageToLoad ( "30000" );
+        $this->assertTitle('LOVD Setup - LOVD 3.0 shared installation');
        // $this->open("/svn/LOVD3_development/trunk/src/install/");
-        $this->click("css=input[type=\"submit\"]");
+        //$this->click("css=input[type=\"submit\"]");
     }
     public function testInstallLOVDdrie()
     {
         $this->open("/dasscheman/LOVD3_development/trunk/src/install");
+        $this->waitForPageToLoad ( "30000" );
+        $this->assertTitle('LOVD Setup - LOVD 3.0 shared installation');
        // $this->open("/svn/LOVD3_development/trunk/src/install/");
-        $this->click("css=input[type=\"submit\"]");
+        //$this->click("css=input[type=\"submit\"]");
     }
     public function testInstallLOVDdrietwee()
     {
         $this->setBrowserUrl("http://localhost/LOVD3_development/trunk/src/install");
+
         $this->waitForPageToLoad ( "30000" );
+        $this->assertTitle('LOVD Setup - LOVD 3.0 shared installation');
        // $this->open("/svn/LOVD3_development/trunk/src/install/");
-        $this->click("css=input[type=\"submit\"]");
+       // $this->click("css=input[type=\"submit\"]");
     }
 
     public function testInstallLOVDvier()
     {
         $this->open("/trunk/src/install");
+        $this->waitForPageToLoad ( "30000" );
+        $this->assertTitle('LOVD Setup - LOVD 3.0 shared installation');
        // $this->open("/svn/LOVD3_development/trunk/src/install/");
-        $this->click("css=input[type=\"submit\"]");
+        //$this->click("css=input[type=\"submit\"]");
     }
 
     public function testInstallLOVDvijf()
     {
         $this->open("/src/install");
         $this->waitForPageToLoad ( "30000" );
+        $this->assertTitle('LOVD Setup - LOVD 3.0 shared installation');
         //$this->open("/svn/LOVD3_development/trunk/src/install/");
-        $this->click("css=input[type=\"submit\"]");
+        //$this->click("css=input[type=\"submit\"]");
     }
 
     public function testInstallLOVDzes()
     {
         $this->open("/install");
         $this->waitForPageToLoad ( "30000" );
+        $this->assertTitle('LOVD Setup - LOVD 3.0 shared installation');
         //$this->open("/svn/LOVD3_development/trunk/src/install/");
-        $this->click("css=input[type=\"submit\"]");
+       // $this->click("css=input[type=\"submit\"]");
     }
 
     /*public function testInstallLOVD()
