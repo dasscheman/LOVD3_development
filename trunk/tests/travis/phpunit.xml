@@ -3,7 +3,15 @@
 <phpunit backupGlobals="false" colors="true">
   <testsuites>
     <testsuite name="simpleTest">
-      <file>./trunk/tests/travis/simpleTest.php</file>
+      <file>./trunk/tests/travis/tests/simpleTest.php</file>
+      <file>/trunk/tests/travis/tests/simpleTest.php</file>
+      <file>trunk/tests/travis/tests/simpleTest.php</file>
+      <file>./LOVD3_development/trunk/tests/travis/tests/simpleTest.php</file>
+      <file>/LOVD3_development/trunk/tests/travis/tests/simpleTest.php</file>
+      <file>LOVD3_development/trunk/tests/travis/tests/simpleTest.php</file>
+      <file>./dasscheman/LOVD3_development/trunk/tests/travis/tests/simpleTest.php</file>
+      <file>/dasscheman/LOVD3_development/trunk/tests/travis/tests/simpleTest.php</file>
+      <file>dasscheman/LOVD3_development/trunk/tests/travis/tests/simpleTest.php</file>
     </testsuite>
   </testsuites>
 </phpunit>

@@ -9,6 +9,7 @@ before_script:
   - ./trunk/tests/travis/setup/setup_selenium_server.sh
 
 script:
+  - phpunit --verbose --debug -c ./trunk/tests/travis/phpunit.xml
   - phpunit --verbose --debug ./trunk/tests/travis/tests/
 ##notifications:
 ##  email:
