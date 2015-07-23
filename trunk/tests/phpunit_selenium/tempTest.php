@@ -110,13 +110,13 @@ class temp_tests extends PHPUnit_Extensions_SeleniumTestCase
         $this->click("name=include_in_listing");
         $this->click("name=lock_uninstall");
         $this->click("css=input[type=\"submit\"]");
-        $this->waitForPageToLoad("30000");
+        $this->waitForPageToLoad("300000");
         $this->assertTrue((bool)preg_match('/^[\s\S]*\/trunk\/src\/install\/[\s\S]step=3&sent=true$/',$this->getLocation()));
         $this->click("css=input[type=\"submit\"]");
-        $this->waitForPageToLoad("30000");
+        $this->waitForPageToLoad("300000");
         $this->assertTrue((bool)preg_match('/^[\s\S]*\/trunk\/src\/install\/[\s\S]step=4$/',$this->getLocation()));
         $this->click("css=button");
-        $this->waitForPageToLoad("30000");
+        $this->waitForPageToLoad("300000");
         $this->assertTrue((bool)preg_match('/^[\s\S]*\/trunk\/src\/setup[\s\S]newly_installed$/',$this->getLocation()));
     }
     public function testCreateGeneIVD()
