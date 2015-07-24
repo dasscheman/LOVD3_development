@@ -122,26 +122,6 @@
 	<td>noreply@LOVD.nl</td>
 </tr>
 <tr>
-	<td>type</td>
-	<td>name=proxy_host</td>
-	<td>localhost</td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>name=proxy_port</td>
-	<td>3128</td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>name=proxy_username</td>
-	<td>test</td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>name=proxy_password</td>
-	<td>test</td>
-</tr>
-<tr>
 	<td>click</td>
 	<td>name=send_stats</td>
 	<td></td>
