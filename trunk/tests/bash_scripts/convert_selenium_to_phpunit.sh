@@ -50,8 +50,6 @@ TESTDATATPATH=$(dirname $SCRIPTPATH)/test_data_files/
 LOCALHOSTDIR=`echo ${SCRIPTPATH} | sed "s@.*$FIRSTLOCALHOSTFOLDER@/$FIRSTLOCALHOSTFOLDER@" | sed "s@/trunk.*@@"`
 TRUNKDIR=`echo ${SCRIPT} | sed "s@trunk.*@@"`
 
-echo $LOCALHOSTDIR
-exit
 # These are used to replace the locations in the setup script.
 NEWSETBROWSERURL="http://localhost"${LOCALHOSTDIR}
 NEWSCREENSHOTPATH=${TRUNKDIR}"trunk/tests/test_results/error_screenshots"

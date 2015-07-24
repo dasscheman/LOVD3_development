@@ -28,7 +28,7 @@
  *
  *************/
 
-class temp_twee_tests extends PHPUnit_Extensions_SeleniumTestCase
+class admin_tests extends PHPUnit_Extensions_SeleniumTestCase
 {
     protected $captureScreenshotOnFailure = TRUE;
     protected $screenshotPath = '/home/dasscheman/svn/LOVD3_development/trunk/tests/test_results/error_screenshots';
