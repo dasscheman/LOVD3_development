@@ -5,7 +5,7 @@ sudo a2enmod rewrite
 
 ## Setting the home directory for localhost.
 sudo mv /home/travis/build/dasscheman/LOVD3_development /home/travis/build/dasscheman/svn/LOVD3_development
-sudo sed -i -e "s,/var/www,/home/travis/build/dasscheman/svn/LOVD3_development,g" /etc/apache2/sites-available/default
+sudo sed -i -e "s,/var/www,/home/travis/build/dasscheman,g" /etc/apache2/sites-available/default
 ##sudo sed -i -e "s,/var/www,/home/travis/build/dasscheman/LOVD3_development,g" /etc/apache2/sites-available/default
 sudo sed -i -e "s,AllowOverride[ ]None,AllowOverride All,g" /etc/apache2/sites-available/default
 
