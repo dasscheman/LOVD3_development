@@ -4,7 +4,7 @@
  * LEIDEN OPEN VARIATION DATABASE (LOVD)
  *
  * Created     : 2014-12-19
- * Modified    : 2015-07-24:13:25:46
+ * Modified    : 2015-07-24:13:39:32
  * For LOVD    : 3.0-12
  *
  * Copyright   : 2014 Leiden University Medical Center; http://www.LUMC.nl/
@@ -32,7 +32,7 @@ class import_tests extends PHPUnit_Extensions_SeleniumTestCase
 {
     protected $captureScreenshotOnFailure = TRUE;
     protected $screenshotPath = '/home/dasscheman/svn/LOVD3_development/trunk/tests/test_results/error_screenshots';
-    protected $screenshotUrl = 'http://localhost/svn/LOVD3_developmenttrunk/tests/test_results/error_screenshots';
+    protected $screenshotUrl = 'http://localhost/svn/LOVD3_development/trunk/tests/test_results/error_screenshots';
   
     protected function setUp()
     {
@@ -44,7 +44,7 @@ class import_tests extends PHPUnit_Extensions_SeleniumTestCase
     }
     public function testInstallLOVD()
     {
-        $this->open("/svn/LOVD3_development/trunksrc/install/");
+        $this->open("/svn/LOVD3_development/trunk/src/install/");
         $this->click("css=input[type=\"submit\"]");
         $this->waitForPageToLoad("30000");
         $this->assertTrue((bool)preg_match('/^[\s\S]*\/trunk\/src\/install\/[\s\S]step=1$/',$this->getLocation()));
@@ -89,13 +89,13 @@ class import_tests extends PHPUnit_Extensions_SeleniumTestCase
     }
     public function testCreateGeneIVD()
     {
-        $this->open("/svn/LOVD3_development/trunksrc/logout");
-        $this->open("/svn/LOVD3_development/trunksrc/login");
+        $this->open("/svn/LOVD3_development/trunk/src/logout");
+        $this->open("/svn/LOVD3_development/trunk/src/login");
         $this->type("name=username", "admin");
         $this->type("name=password", "test1234");
         $this->click("css=input[type=\"submit\"]");
         $this->waitForPageToLoad("30000");
-        $this->open("/svn/LOVD3_development/trunksrc/genes?create");
+        $this->open("/svn/LOVD3_development/trunk/src/genes?create");
         $this->type("name=hgnc_id", "IVD");
         $this->click("css=input[type=\"submit\"]");
         $this->waitForPageToLoad("30000");
@@ -109,7 +109,7 @@ class import_tests extends PHPUnit_Extensions_SeleniumTestCase
     }
     public function testCreateGenderColumn()
     {
-        $this->open("/svn/LOVD3_development/trunksrc/columns/Individual/Gender");
+        $this->open("/svn/LOVD3_development/trunk/src/columns/Individual/Gender");
         $this->click("id=viewentryOptionsButton_Columns");
         $this->click("link=Enable column");
         $this->waitForPageToLoad("30000");
@@ -119,7 +119,7 @@ class import_tests extends PHPUnit_Extensions_SeleniumTestCase
     }
     public function testCreateDiseaseIVA()
     {
-        $this->open("/svn/LOVD3_development/trunksrc/diseases?create");
+        $this->open("/svn/LOVD3_development/trunk/src/diseases?create");
         $this->type("name=symbol", "IVA");
         $this->type("name=name", "isovaleric acidemia");
         $this->type("name=id_omim", "243500");
@@ -127,7 +127,7 @@ class import_tests extends PHPUnit_Extensions_SeleniumTestCase
         $this->click("css=input[type=\"submit\"]");
         $this->waitForPageToLoad("30000");
         $this->assertEquals("Successfully created the disease information entry!", $this->getText("css=table[class=info]"));
-        $this->open("/svn/LOVD3_development/trunksrc/diseases?create");
+        $this->open("/svn/LOVD3_development/trunk/src/diseases?create");
         $this->type("name=symbol", "IVA2");
         $this->type("name=name", "isovaleric acidemia TWEE");
         $this->type("name=id_omim", "243522");
@@ -138,7 +138,7 @@ class import_tests extends PHPUnit_Extensions_SeleniumTestCase
     }
     public function testInsertImport()
     {
-        $this->open("/svn/LOVD3_development/trunksrc/import");
+        $this->open("/svn/LOVD3_development/trunk/src/import");
         $this->type("name=import", "/home/dasscheman/svn/LOVD3_development/trunk/tests/test_data_files/InsertImport.txt");
         $this->click("css=input[type=\"submit\"]");
         $this->waitForPageToLoad("30000");
@@ -146,7 +146,7 @@ class import_tests extends PHPUnit_Extensions_SeleniumTestCase
     }
     public function testFalseInsertImport()
     {
-        $this->open("/svn/LOVD3_development/trunksrc/import");
+        $this->open("/svn/LOVD3_development/trunk/src/import");
         $this->type("name=import", "/home/dasscheman/svn/LOVD3_development/trunk/tests/test_data_files/FalseInsertImport.txt");
         $this->click("name=simulate");
         $this->click("css=input[type=\"submit\"]");
@@ -210,7 +210,7 @@ class import_tests extends PHPUnit_Extensions_SeleniumTestCase
     }
     public function testFalseUpdateImport()
     {
-        $this->open("/svn/LOVD3_development/trunksrc/import");
+        $this->open("/svn/LOVD3_development/trunk/src/import");
         $this->type("name=import", "/home/dasscheman/svn/LOVD3_development/trunk/tests/test_data_files/FalseUpdateImport.txt");
         $this->select("name=mode", "label=Update existing data");
         $this->click("name=simulate");
@@ -301,7 +301,7 @@ class import_tests extends PHPUnit_Extensions_SeleniumTestCase
     }
     public function testSecondInsertImport()
     {
-        $this->open("/svn/LOVD3_development/trunksrc/import");
+        $this->open("/svn/LOVD3_development/trunk/src/import");
         $this->type("name=import", "/home/dasscheman/svn/LOVD3_development/trunk/tests/test_data_files/SecondInsertImport.txt");
         $this->select("name=mode", "label=Add only, treat all data as new");
         $this->click("css=input[type=\"submit\"]");
@@ -310,7 +310,7 @@ class import_tests extends PHPUnit_Extensions_SeleniumTestCase
     }
     public function testUpdateImport()
     {
-        $this->open("/svn/LOVD3_development/trunksrc/import");
+        $this->open("/svn/LOVD3_development/trunk/src/import");
         $this->type("name=import", "/home/dasscheman/svn/LOVD3_development/trunk/tests/test_data_files/UpdateImport.txt");
         $this->select("name=mode", "label=Update existing data");
         $this->click("css=input[type=\"submit\"]");
@@ -323,13 +323,13 @@ class import_tests extends PHPUnit_Extensions_SeleniumTestCase
     }
     public function testUninstallLOVD()
     {
-        $this->open("/svn/LOVD3_development/trunksrc/logout");
-        $this->open("/svn/LOVD3_development/trunksrc/login");
+        $this->open("/svn/LOVD3_development/trunk/src/logout");
+        $this->open("/svn/LOVD3_development/trunk/src/login");
         $this->type("name=username", "admin");
         $this->type("name=password", "test1234");
         $this->click("css=input[type=\"submit\"]");
         $this->waitForPageToLoad("30000");
-        $this->open("/svn/LOVD3_development/trunksrc/uninstall");
+        $this->open("/svn/LOVD3_development/trunk/src/uninstall");
         $this->type("name=password", "test1234");
         $this->click("css=input[type=\"submit\"]");
         $this->waitForPageToLoad("30000");

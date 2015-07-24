@@ -35,7 +35,8 @@ before_script:
 
 script:
   - phpunit --verbose --debug --coverage-text ./trunk/tests/travis/tests/
-  - phpunit --verbose --debug --coverage-text /home/travis/build/dasscheman/LOVD3_development/trunk/tests/phpunit_selenium/tempTweeTest.php
+  - phpunit --verbose --debug --coverage-text ./trunk/tests/phpunit_selenium/authorizationTest.php
+##  /home/travis/build/dasscheman/LOVD3_development/trunk/tests/phpunit_selenium/tempTweeTest.php
 
 notifications:
   email:

@@ -53,7 +53,7 @@ TRUNKDIR=`echo ${SCRIPT} | sed "s@trunk.*@@"`
 # These are used to replace the locations in the setup script.
 NEWSETBROWSERURL="http://localhost"${LOCALHOSTDIR}
 NEWSCREENSHOTPATH=${TRUNKDIR}"trunk/tests/test_results/error_screenshots"
-NEWSCHREENSHOTURL=${NEWSETBROWSERURL}"trunk/tests/test_results/error_screenshots"
+NEWSCHREENSHOTURL=${NEWSETBROWSERURL}"/trunk/tests/test_results/error_screenshots"
 
 # Used to change de modify date.
 DATE=`date +%Y-%m-%d:%H:%M:%S`
@@ -250,7 +250,7 @@ for file in "${PHPUNITTESTTPATH}"/*
 do
     echo "Fix:" ${file}
     data=`grep -A 2000 "<?php" ${file} |
-        sed "s@this->open(\".*./trunk/@this->open(\"$LOCALHOSTDIR/trunk@" |
+        sed "s@this->open(\".*./trunk/@this->open(\"$LOCALHOSTDIR/trunk/@" |
         sed 's/0)$/0);/' |
         sed "s@name=variant_file.*./trunk/tests/test_data_files/@name=variant_file\"\, \"$TESTDATATPATH@" |
         sed "s@name=import.*./trunk/tests/test_data_files/@name=import\"\, \"$TESTDATATPATH@"`
