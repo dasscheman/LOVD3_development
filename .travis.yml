@@ -31,6 +31,7 @@ before_script:
   ## setup_apache.sh fix some assumptions where the files are stored!
   - ./trunk/tests/bash_scripts/convert_selenium_to_phpunit.sh --localhost=trunk --continueall
   - ./trunk/tests/travis/setup/setup_selenium_server.sh
+  - echo `locate tempTweeTest.php`
 
 script:
   - phpunit --verbose --debug --coverage-text ./trunk/tests/travis/tests/
