@@ -29,12 +29,12 @@ before_script:
   - ./trunk/tests/travis/setup/setup_apache.sh
   ## IMPORTANT! convert must be run AFTER the setup_apache.sh
   ## setup_apache.sh fix some assumptions where the files are stored!
-  - ./svn/LOVD3_development/trunk/tests/bash_scripts/convert_selenium_to_phpunit.sh
+  - ./trunk/tests/bash_scripts/convert_selenium_to_phpunit.sh
   - ./trunk/tests/travis/setup/setup_selenium_server.sh
 
 script:
-  - phpunit --verbose --debug --coverage-text ./svn/LOVD3_development/trunk/tests/travis/tests/
-  - phpunit --verbose --debug --coverage-text ./svn/LOVD3_development/trunk/tests/phpunit_selenium/tempTweeTest.php
+  - phpunit --verbose --debug --coverage-text ./trunk/tests/travis/tests/
+  - phpunit --verbose --debug --coverage-text ./trunk/tests/phpunit_selenium/tempTweeTest.php
 
 notifications:
   email:
