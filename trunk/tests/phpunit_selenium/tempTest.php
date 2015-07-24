@@ -30,23 +30,23 @@
 
 class temp_tests extends PHPUnit_Extensions_SeleniumTestCase
 {
-//    protected $captureScreenshotOnFailure = TRUE;
-//    protected $screenshotPath = '/home/travis/build/dasscheman/LOVD3_development/trunk/tests/test_results/error_screenshots';
-//    protected $screenshotUrl = 'trunk/tests/test_results/error_screenshots';
+    protected $captureScreenshotOnFailure = TRUE;
+    protected $screenshotPath = '/home/travis/build/dasscheman/LOVD3_development/trunk/tests/test_results/error_screenshots';
+    protected $screenshotUrl = 'trunk/tests/test_results/error_screenshots';
 
     protected function setUp()
     {
         //$this->setHost('localhost');
         $this->setPort(4444);
-        $this->setBrowser("*firefox");
+        $this->setBrowser("firefox");
         //$this->setBrowserUrl("http://localhost/svn/LOVD3_development/");
-        $this->setBrowserUrl('http://127.0.0.1/');
+        $this->setBrowserUrl('http://localhost/');
         $this->shareSession(true);
     }
 
     public function testInstallLOVDvier()
     {
-        $this->open("http://127.0.0.1/trunk/src/install");
+        $this->open("http://localhost/trunk/src/install");
         $this->waitForPageToLoad ( "30000" );
         $this->assertEquals('Installation steps', $this->getText("css=th"));
         $this->assertEquals('Introduction', $this->getText("//tr[2]/td"));

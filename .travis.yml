@@ -1,6 +1,6 @@
 language: php
 php:
-  - 5.3.0
+  - 5.3.3
   # aliased to 5.3.29
   - 5.3
   # aliased to a recent 5.4.x version
@@ -28,7 +28,7 @@ before_script:
   - ./trunk/tests/travis/setup/setup_selenium_server.sh
 
 script:
-  - phpunit --verbose --debug --coverage-text ./trunk/tests/travis/tests/
+  - phpunit --verbose --debug --coverage-xml ./trunk/tests/travis/tests/
   - phpunit --verbose --debug --coverage-text ./trunk/tests/phpunit_selenium/tempTest.php
 
 notifications:

@@ -32,6 +32,5 @@ if [ ! $? -eq 0 ]; then
     echo "Selenium Server not started --> EXIT!"
     exit
 else
-    echo $?
     echo "Finished setup and selenium is started"
 fi
