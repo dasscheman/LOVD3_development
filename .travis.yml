@@ -1,20 +1,20 @@
 language: php
 php:
   # aliased to 5.2.17
-#  - 5.2
-#  - 5.3.3
+  - 5.2
+  - 5.3.3
   # aliased to 5.3.29
-#  - 5.3
+  - 5.3
   # aliased to a recent 5.4.x version
-#  - 5.4
+  - 5.4
   # aliased to a recent 5.5.x version
   - 5.5
   # aliased to a recent 5.6.x version  
-#  - 5.6
+  - 5.6
   # aliased to a recent 7.x version
-#  - 7.0
-#  - hhvm
-#  - nightly
+  - 7.0
+  - hhvm
+  - nightly
 
 sudo: required
 
@@ -31,12 +31,10 @@ before_script:
   ## setup_apache.sh fix some assumptions where the files are stored!
   - ./trunk/tests/bash_scripts/convert_selenium_to_phpunit.sh --localhost=trunk --continueall
   - ./trunk/tests/travis/setup/setup_selenium_server.sh
-  - echo `locate tempTweeTest.php`
 
 script:
   - phpunit --verbose --debug --coverage-text ./trunk/tests/travis/tests/
-  - phpunit --verbose --debug --coverage-text ./trunk/tests/phpunit_selenium/authorizationTest.php
-##  /home/travis/build/dasscheman/LOVD3_development/trunk/tests/phpunit_selenium/tempTweeTest.php
+  - phpunit --verbose --debug --coverage-text ./trunk/tests/phpunit_selenium/
 
 notifications:
   email:
