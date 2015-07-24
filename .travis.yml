@@ -1,18 +1,18 @@
 language: php
 php:
-  - 5.3.3
+#  - 5.3.3
   # aliased to 5.3.29
-  - 5.3
+#  - 5.3
   # aliased to a recent 5.4.x version
-  - 5.4
+#  - 5.4
   # aliased to a recent 5.5.x version
   - 5.5
   # aliased to a recent 5.6.x version  
-  - 5.6
+#  - 5.6
   # aliased to a recent 7.x version
-  - 7.0
-  - hhvm
-  - nightly
+#  - 7.0
+#  - hhvm
+#  - nightly
 
 sudo: required
 
@@ -33,6 +33,7 @@ before_script:
 script:
   - phpunit --verbose --debug --coverage-text ./trunk/tests/travis/tests/
   - phpunit --debug --coverage-text ./trunk/tests/phpunit_selenium/adminTest.php
+  - phpunit --debug --coverage-text ./trunk/tests/phpunit_selenium/authorizationTest.php
 ## Run all tests
 ##- phpunit --debug --coverage-text ./trunk/tests/phpunit_selenium/
 
