@@ -33,7 +33,7 @@ class admin_tests extends PHPUnit_Extensions_SeleniumTestCase
     protected $captureScreenshotOnFailure = TRUE;
     protected $screenshotPath = '/home/dasscheman/svn/LOVD3_development/trunk/tests/test_results/error_screenshots';
     protected $screenshotUrl = 'http://localhost/svn/LOVD3_development/trunk/tests/test_results/error_screenshots';
-  
+
     protected function setUp()
     {
         $this->setHost('localhost');
@@ -300,7 +300,7 @@ class admin_tests extends PHPUnit_Extensions_SeleniumTestCase
                 } catch (Exception $e) {}
                 sleep(1);
         }
-        
+
         sleep(30);
         $this->assertEquals("138 variants were imported, 1 variant could not be imported.", $this->getText("id=lovd__progress_message"));
         $this->click("css=input[type=\"button\"]");
