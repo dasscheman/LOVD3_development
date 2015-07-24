@@ -7,8 +7,8 @@ sudo a2enmod rewrite
 # convert_selenium_to_phpunit.sh assumes that the files are in a folder with this pattern: */svn/*/trunk
 # * can be a folder or nothing.
 # This is done because of the local folder structure, which I don't want to change.
-mkdir home/travis/build/dasscheman/svn
-sudo mv /home/travis/build/dasscheman/LOVD3_development /home/travis/build/dasscheman/svn
+mkdir /home/travis/build/dasscheman/svn
+sudo mv /home/travis/build/dasscheman/LOVD3_development/trunk /home/travis/build/dasscheman/svn
 sudo sed -i -e "s,/var/www,/home/travis/build/dasscheman,g" /etc/apache2/sites-available/default
 ##sudo sed -i -e "s,/var/www,/home/travis/build/dasscheman/LOVD3_development,g" /etc/apache2/sites-available/default
 sudo sed -i -e "s,AllowOverride[ ]None,AllowOverride All,g" /etc/apache2/sites-available/default
