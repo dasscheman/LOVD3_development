@@ -22,6 +22,11 @@
 	<td></td>
 </tr>
 <tr>
+	<td>waitForPageToLoad</td>
+	<td>4000</td>
+	<td></td>
+</tr>
+<tr>
 	<td>assertLocation</td>
 	<td>*trunk/src/individuals/00000001</td>
 	<td></td>
