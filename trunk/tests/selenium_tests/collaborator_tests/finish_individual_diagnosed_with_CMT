@@ -22,11 +22,10 @@
 	<td></td>
 </tr>
 <tr>
-	<td>click</td>
+	<td>clickAndWait</td>
 	<td>//tr[3]/td[2]/b</td>
 	<td></td>
 </tr>
-
 <tr>
 	<td>waitForElementPresent</td>
 	<td>css=table[class=info]</td>
