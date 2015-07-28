@@ -27,13 +27,8 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertText</td>
-	<td>css=table[class=info]</td>
-	<td>Successfully processed your submission and sent an email notification to the relevant curator*</td>
-</tr>
-<tr>
 	<td>waitForPageToLoad</td>
-	<td>4000</td>
+	<td>10000</td>
 	<td></td>
 </tr>
 <tr>
