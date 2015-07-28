@@ -4,7 +4,7 @@
  * LEIDEN OPEN VARIATION DATABASE (LOVD)
  *
  * Created     : 2014-12-19
- * Modified    : 2015-07-28:10:38:20
+ * Modified    : 2015-07-28:10:56:05
  * For LOVD    : 3.0-12
  *
  * Copyright   : 2014 Leiden University Medical Center; http://www.LUMC.nl/
@@ -335,7 +335,7 @@ class admin_tests extends PHPUnit_Extensions_SeleniumTestCase
         $this->assertTrue((bool)preg_match('/^[\s\S]*\/trunk\/src\/submit\/screening\/0000000001$/',$this->getLocation()));
         $this->click("//tr[3]/td[2]/b");
         $this->waitForPageToLoad("30000");
-        $this->assertTrue((bool)preg_match('/^[\s\S]*\/trunk\/src\/individuals\/00000001$/',$this->getLocation()));
+        $this->assertTrue((bool)preg_match('/^[\s\S]*\/trunk\/src\/submit\/finish\/individual\/00000001$/',$this->getLocation()));
     }
     public function testCreateIndividualDiagnosedWithIVA()
     {
