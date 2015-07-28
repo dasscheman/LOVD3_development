@@ -17,8 +17,13 @@
 	<td></td>
 </tr>
 <tr>
-	<td>clickAndWait</td>
+	<td>click</td>
 	<td>//tr[3]/td[2]/b</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForPageToLoad</td>
+	<td>10000</td>
 	<td></td>
 </tr>
 <tr>
