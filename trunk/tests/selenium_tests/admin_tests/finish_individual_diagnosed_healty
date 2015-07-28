@@ -22,14 +22,14 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForPageToLoad</td>
-	<td>30000</td>
+	<td>waitForElementPresent</td>
+	<td>css=table[class=info]</td>
 	<td></td>
 </tr>
 <tr>
-	<td>assertLocation</td>
-	<td>*/trunk/src/submit/finish/individual/00000001</td>
-	<td></td>
+	<td>assertText</td>
+	<td>css=table[class=info]</td>
+	<td>Successfully processed your submission and sent an email notification to the relevant curator*</td>
 </tr>
 </tbody></table>
 </body>

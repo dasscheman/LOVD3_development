@@ -4,7 +4,7 @@
  * LEIDEN OPEN VARIATION DATABASE (LOVD)
  *
  * Created     : 2014-12-19
- * Modified    : 2015-07-28:12:03:14
+ * Modified    : 2015-07-28:12:47:23
  * For LOVD    : 3.0-12
  *
  * Copyright   : 2014 Leiden University Medical Center; http://www.LUMC.nl/
@@ -324,8 +324,17 @@ class collaborator_tests extends PHPUnit_Extensions_SeleniumTestCase
         $this->open("/svn/LOVD3_development/trunk/src/submit/screening/0000000002");
         $this->assertTrue((bool)preg_match('/^[\s\S]*\/trunk\/src\/submit\/screening\/0000000002$/',$this->getLocation()));
         $this->click("//tr[3]/td[2]/b");
-        $this->waitForPageToLoad("30000");
-        $this->assertTrue((bool)preg_match('/^[\s\S]*\/trunk\/src\/submit\/finish\/individual\/00000001$/',$this->getLocation()));
+        for ($second = 0; ; $second++) {
+                if ($second >= 60) $this->fail("timeout");
+                try {
+                        if ($this->isElementPresent("css=table[class=info]")) break;
+                } catch (Exception $e) {}
+                sleep(1);
+        }
+
+        $this->assertTrue((bool)preg_match('/^Successfully processed your submission and sent an email notification to the relevant curator[\s\S]*$/',$this->getText("css=table[class=info]")));
+        $this->waitForPageToLoad("4000");
+        $this->assertTrue((bool)preg_match('/^[\s\S]*\/trunk\/src\/individuals\/00000001$/',$this->getLocation()));
     }
     public function testAddSummaryVariantLocatedWithinGene()
     {
@@ -421,7 +430,14 @@ class collaborator_tests extends PHPUnit_Extensions_SeleniumTestCase
         $this->type("name=VariantOnGenome/Frequency", "11/10000");
         $this->select("name=effect_reported", "label=Effect unknown");
         $this->click("css=input[type=\"submit\"]");
-        $this->waitForPageToLoad("30000");
+        for ($second = 0; ; $second++) {
+                if ($second >= 60) $this->fail("timeout");
+                try {
+                        if ($this->isElementPresent("css=table[class=info]")) break;
+                } catch (Exception $e) {}
+                sleep(1);
+        }
+
         $this->assertTrue((bool)preg_match('/^Successfully processed your submission and sent an email notification to the relevant curator[\s\S]*$/',$this->getText("css=table[class=info]")));
         $this->waitForPageToLoad("4000");
     }
