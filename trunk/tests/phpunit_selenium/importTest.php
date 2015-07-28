@@ -4,7 +4,7 @@
  * LEIDEN OPEN VARIATION DATABASE (LOVD)
  *
  * Created     : 2014-12-19
- * Modified    : 2015-07-28:13:04:53
+ * Modified    : 2015-07-28:13:30:29
  * For LOVD    : 3.0-12
  *
  * Copyright   : 2014 Leiden University Medical Center; http://www.LUMC.nl/
@@ -136,6 +136,7 @@ class import_tests extends PHPUnit_Extensions_SeleniumTestCase
     {
         $this->open("/svn/LOVD3_development/trunk/src/import");
         $this->type("name=import", "/home/dasscheman/svn/LOVD3_development/trunk/tests/test_data_files/InsertImport.txt");
+        $this->select("name=mode", "label=Add only, treat all data as new");
         $this->click("css=input[type=\"submit\"]");
         $this->waitForPageToLoad("30000");
         $this->assertEquals("Done importing!", $this->getText("id=lovd_sql_progress_message_done"));
@@ -144,6 +145,7 @@ class import_tests extends PHPUnit_Extensions_SeleniumTestCase
     {
         $this->open("/svn/LOVD3_development/trunk/src/import");
         $this->type("name=import", "/home/dasscheman/svn/LOVD3_development/trunk/tests/test_data_files/FalseInsertImport.txt");
+        $this->select("name=mode", "label=Add only, treat all data as new");
         $this->click("name=simulate");
         $this->click("css=input[type=\"submit\"]");
         $this->waitForPageToLoad("30000");

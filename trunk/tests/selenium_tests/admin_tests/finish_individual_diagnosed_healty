@@ -22,14 +22,14 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
-	<td>css=table[class=info]</td>
+	<td>assertLocation</td>
+	<td>*trunk/src/individuals/00000001</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>css=table[class=info]</td>
-	<td>Successfully processed your submission and sent an email notification to the relevant curator*</td>
+	<td>//tr[8]/td</td>
+	<td>Public</td>
 </tr>
 </tbody></table>
 </body>

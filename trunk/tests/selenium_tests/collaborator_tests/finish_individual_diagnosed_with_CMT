@@ -27,8 +27,8 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
-	<td>css=table[class=info]</td>
+	<td>pause</td>
+	<td>1</td>
 	<td></td>
 </tr>
 <tr>
