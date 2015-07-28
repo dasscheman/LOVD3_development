@@ -4,7 +4,7 @@
  * LEIDEN OPEN VARIATION DATABASE (LOVD)
  *
  * Created     : 2014-12-19
- * Modified    : 2015-07-28:10:56:05
+ * Modified    : 2015-07-28:12:03:14
  * For LOVD    : 3.0-12
  *
  * Copyright   : 2014 Leiden University Medical Center; http://www.LUMC.nl/
@@ -512,7 +512,7 @@ class admin_tests extends PHPUnit_Extensions_SeleniumTestCase
         $this->assertEquals("138 variants were imported, 1 variant could not be imported.", $this->getText("id=lovd__progress_message"));
         $this->click("css=input[type=\"button\"]");
         $this->waitForPageToLoad("30000");
-        sleep(100);
+        sleep(200);
         $this->open("/svn/LOVD3_development/trunk/src/ajax/map_variants.php");
         $this->open("/svn/LOVD3_development/trunk/src/ajax/map_variants.php");
         $this->open("/svn/LOVD3_development/trunk/src/ajax/map_variants.php");

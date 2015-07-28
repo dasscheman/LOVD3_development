@@ -4,7 +4,7 @@
  * LEIDEN OPEN VARIATION DATABASE (LOVD)
  *
  * Created     : 2014-12-19
- * Modified    : 2015-07-28:10:56:05
+ * Modified    : 2015-07-28:12:03:14
  * For LOVD    : 3.0-12
  *
  * Copyright   : 2014 Leiden University Medical Center; http://www.LUMC.nl/
@@ -460,7 +460,7 @@ class collaborator_tests extends PHPUnit_Extensions_SeleniumTestCase
         $this->type("name=VariantOnGenome/Frequency", "0.09");
         $this->select("name=effect_reported", "label=Effect unknown");
         $this->click("css=input[type=\"submit\"]");
-        $this->waitForPageToLoad("30000");
+        //$this->waitForPageToLoad("30000");
         $this->assertTrue((bool)preg_match('/^Successfully processed your submission and sent an email notification to the relevant curator[\s\S]*$/',$this->getText("css=table[class=info]")));
         $this->waitForPageToLoad("4000");
     }
