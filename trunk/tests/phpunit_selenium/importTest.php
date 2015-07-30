@@ -4,7 +4,7 @@
  * LEIDEN OPEN VARIATION DATABASE (LOVD)
  *
  * Created     : 2014-12-19
- * Modified    : 2015-07-30:13:43:21
+ * Modified    : 2015-07-30:14:55:26
  * For LOVD    : 3.0-12
  *
  * Copyright   : 2014 Leiden University Medical Center; http://www.LUMC.nl/
@@ -210,7 +210,7 @@ class import_tests extends PHPUnit_Extensions_SeleniumTestCase
     {
         $this->open("/svn/LOVD3_development/trunk/src/import");
         $this->type("name=import", "/home/dasscheman/svn/LOVD3_development/trunk/tests/test_data_files/FalseUpdateImport.txt");
-        $this->select("name=mode", "label=Update existing data");
+        $this->select("name=mode", "label=Update existing data (in beta)");
         $this->click("name=simulate");
         $this->click("css=input[type=\"submit\"]");
         $this->waitForPageToLoad("30000");
@@ -310,7 +310,7 @@ class import_tests extends PHPUnit_Extensions_SeleniumTestCase
     {
         $this->open("/svn/LOVD3_development/trunk/src/import");
         $this->type("name=import", "/home/dasscheman/svn/LOVD3_development/trunk/tests/test_data_files/UpdateImport.txt");
-        $this->select("name=mode", "label=Update existing data");
+        $this->select("name=mode", "label=Update existing data (in beta)");
         $this->click("css=input[type=\"submit\"]");
         $this->waitForPageToLoad("30000");
         $this->assertTrue((bool)preg_match('/^[\s\S]*Warning: It is currently not possible to do an update on section Genes_To_Diseases via an import[\s\S]*$/',$this->getBodyText()));
