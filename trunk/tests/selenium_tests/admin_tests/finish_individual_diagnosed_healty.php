@@ -13,6 +13,7 @@ class Example extends PHPUnit_Extensions_SeleniumTestCase
     $this->click("//tr[3]/td[2]/b");
     $this->waitForPageToLoad("30000");
     sleep(4);
+    $this->assertContains("ASDFASDFASDF", $this->getBodyText());
     $this->assertTrue((bool)preg_match('/^[\s\S]*trunk\/src\/individuals\/00000001$/',$this->getLocation()));
     $this->assertEquals("Public", $this->getText("//tr[8]/td"));
   }

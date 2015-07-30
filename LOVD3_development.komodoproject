@@ -2,8 +2,10 @@
 <!-- Komodo Project File - DO NOT EDIT -->
 <project id="6c41b1d7-70d3-4bf9-a272-37c3647fd694" kpf_version="5" name="LOVD3_development.komodoproject">
 <preference-set idref="6c41b1d7-70d3-4bf9-a272-37c3647fd694" id="project" preftype="project">
-  <string id="import_dirname">/home/dasscheman/www/svn/LOVD3_development/trunk</string>
-  <string id="last_local_directory">/home/dasscheman/www/svn/LOVD3_development/trunk</string>
+  <string relative="path" id="import_dirname">trunk</string>
+  <string relative="path" id="last_local_directory">trunk</string>
   <string id="mappedPaths"></string>
+  <long id="tabWidth">4</long>
+  <boolean id="useTabs">1</boolean>
 </preference-set>
 </project>
