@@ -4,7 +4,7 @@ firefoxUrl=http://ftp.mozilla.org/pub/mozilla.org/firefox/releases/37.0.2/linux-
 firefoxFile=firefox.tar.bz2
 phpVersion=`php -v`
 
-sudo apt-get update
+sudo apt-get -qq update
 
 ##echo "Updating Composer"
 ##sudo /home/travis/.phpenv/versions/5.3/bin/composer self-update

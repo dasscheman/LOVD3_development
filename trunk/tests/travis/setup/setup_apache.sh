@@ -1,6 +1,6 @@
 echo "Install and setup apache"
-sudo apt-get update > /dev/null
-sudo apt-get install -y --force-yes apache2 libapache2-mod-php5 php5-curl php5-intl php5-gd php5-idn php-pear php5-imagick php5-imap php5-mcrypt php5-memcache php5-ming php5-ps php5-pspell php5-recode php5-snmp php5-sqlite php5-tidy php5-xmlrpc php5-xsl php5-mysql nmap
+sudo apt-get -qq update > /dev/null
+sudo apt-get -qq install -y --force-yes apache2 libapache2-mod-php5 php5-curl php5-intl php5-gd php5-idn php-pear php5-imagick php5-imap php5-mcrypt php5-memcache php5-ming php5-ps php5-pspell php5-recode php5-snmp php5-sqlite php5-tidy php5-xmlrpc php5-xsl php5-mysql nmap
 ## exim4
 ## smtp
 sudo a2enmod rewrite
@@ -17,36 +17,34 @@ sudo sed -i -e "s,AllowOverride[ ]None,AllowOverride All,g" /etc/apache2/sites-a
 
 sudo /etc/init.d/apache2 restart
 
-echo 'Provisioning Environment with Dovecot and Test Messages'
-
 # Install and Configure Dovecot
-
-#if which dovecot > /dev/null; then
-#    echo 'Dovecot is already installed'
-#else
-#    echo 'Installing Dovecot'
+echo 'Provisioning Environment with Dovecot and Test Messages'
+if which dovecot > /dev/null; then
+    echo 'Dovecot is already installed'
+else
+    echo 'Installing Dovecot'
 
     # Install Dovecot.
     # Pass the -y flag to suppress interactive requests.
-#     sudo apt-get -qq -y install dovecot-imapd dovecot-pop3d
+    sudo apt-get -qq -y install dovecot-imapd dovecot-pop3d
 
     # Prepare the local.conf for custom values
-#     sudo touch /etc/dovecot/local.conf
+    sudo touch /etc/dovecot/local.conf
 
     # Move Maildir to the users home directory.
     # This keeps things consistent across environments.
-  #   sudo echo 'mail_location = maildir:/home/%u/Maildir' >> /etc/dovecot/local.conf
+    sudo echo 'mail_location = maildir:/home/%u/Maildir' >> /etc/dovecot/local.conf
 
     # Enable plaintext for testing.
     # This is pretty awful for production environments.
- #    sudo echo 'disable_plaintext_auth = no' >> /etc/dovecot/local.conf
+    sudo echo 'disable_plaintext_auth = no' >> /etc/dovecot/local.conf
 
- #    # Running tests in isolation requires a lot of connections very quickly.
- #    sudo echo 'mail_max_userip_connections = 10000' >> /etc/dovecot/local.conf
+    # Running tests in isolation requires a lot of connections very quickly.
+    sudo echo 'mail_max_userip_connections = 10000' >> /etc/dovecot/local.conf
 
     # Restart Dovecot so it gets it's new settings.
- #    sudo restart dovecot
-# fi
+    sudo restart dovecot
+fi
 
 
 nmap localhost -p 25
