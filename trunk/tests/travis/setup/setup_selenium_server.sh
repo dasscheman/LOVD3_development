@@ -16,8 +16,7 @@ echo "Download Firefox"
 wget $firefoxUrl -O $firefoxFile
 tar xvjf $firefoxFile
 
-echo "Starting xvfb"
-echo "Starting Selenium"
+echo "Download Selenium"
 if [ ! -f $serverFile ]; then
     wget http://selenium-release.storage.googleapis.com/2.44/$serverFile
 fi
@@ -26,6 +25,8 @@ if [ ! -e ${serverFile} ]; then
     echo "Test is aborted"
     exit
 fi
+
+echo "Starting xvfb and Selenium"
 sudo xvfb-run java -jar $serverFile > /tmp/selenium.log &
 wget --retry-connrefused --tries=120 --waitretry=3 --output-file=/dev/null $serverUrl/wd/hub/status -O /dev/null
 if [ ! $? -eq 0 ]; then

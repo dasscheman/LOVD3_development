@@ -17,10 +17,7 @@ php:
 sudo: required
 
 before_install:
-  - mysql -e "create database IF NOT EXISTS lovd3_development;" -u root
-  - mysql -e "CREATE USER 'lovd'@'localhost' IDENTIFIED BY 'lovd_pw';" -u root
-  - mysql -e "GRANT ALL PRIVILEGES ON * . * TO 'lovd'@'localhost';" -u root
-  - mysql -e "FLUSH PRIVILEGES;"
+  - ./trunk/tests/travis/setup/setup_mysql.sh
 
 before_script:
   - ./trunk/tests/travis/setup/setup_apache.sh
@@ -32,7 +29,6 @@ before_script:
 script:
 ##  - phpunit --verbose --debug --coverage-text ./trunk/tests/travis/tests/
   - phpunit --debug --coverage-text ./trunk/tests/phpunit_selenium/adminTest.php
-  - phpunit --debug --coverage-text ./trunk/tests/phpunit_selenium/importTest.php
 ##  - phpunit --debug --coverage-text ./trunk/tests/phpunit_selenium/managerTest.php
   
 ## Run all tests
