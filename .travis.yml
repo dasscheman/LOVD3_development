@@ -30,10 +30,10 @@ before_script:
   - ./trunk/tests/travis/setup/setup_selenium_server.sh
 
 script:
-  - phpunit --verbose --debug --coverage-text ./trunk/tests/travis/tests/
-  - phpunit --debug --coverage-text ./trunk/tests/phpunit_selenium/adminTest.php
+##  - phpunit --verbose --debug --coverage-text ./trunk/tests/travis/tests/
+##  - phpunit --debug --coverage-text ./trunk/tests/phpunit_selenium/adminTest.php
   - phpunit --debug --coverage-text ./trunk/tests/phpunit_selenium/importTest.php
-  - phpunit --debug --coverage-text ./trunk/tests/phpunit_selenium/managerTest.php
+##  - phpunit --debug --coverage-text ./trunk/tests/phpunit_selenium/managerTest.php
   
 ## Run all tests
 ##- phpunit --debug --coverage-text ./trunk/tests/phpunit_selenium/

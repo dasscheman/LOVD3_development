@@ -43,7 +43,7 @@
 </tr>
 <tr>
 	<td>assertBodyText</td>
-	<td>*Error (Columns, line 8): Will not update column Individual/Age_of_death, too many fields are different from the database (col_order, width, hgvs, standard, head_column, description_form, description_legend_short, description_legend_full, mysql_type, form_type, select_options, preg_pattern). There is a maximum of 1 difference to prevent accidental updates.*</td>
+	<td>*Error (Columns, line 8): Will not update column Individual?Age_of_death, too many fields are different from the database (col_order, width, hgvs, standard, head_column, description_form, description_legend_short, description_legend_full, mysql_type, form_type, select_options, preg_pattern). There is a maximum of 1 difference to prevent accidental updates.*</td>
 	<td></td>
 </tr>
 <tr>
@@ -78,7 +78,7 @@
 </tr>
 <tr>
 	<td>assertBodyText</td>
-	<td>*Error (Columns, line 9): ID &quot;Individual/Age_of_death&quot; already defined at line 8.*</td>
+	<td>*Error (Columns, line 9): ID &quot;Individual?Age_of_death&quot; already defined at line 8.*</td>
 	<td></td>
 </tr>
 <tr>
