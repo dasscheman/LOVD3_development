@@ -27,11 +27,6 @@
 	<td></td>
 </tr>
 <tr>
-	<td>pause</td>
-	<td>4</td>
-	<td></td>
-</tr>
-<tr>
 	<td>assertText</td>
 	<td>css=table[class=info]</td>
 	<td>Successfully processed your submission and sent an email notification to the relevant curator*</td>
