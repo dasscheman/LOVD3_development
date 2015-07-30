@@ -4,7 +4,7 @@
  * LEIDEN OPEN VARIATION DATABASE (LOVD)
  *
  * Created     : 2014-12-19
- * Modified    : 2015-07-30:11:20:44
+ * Modified    : 2015-07-30:12:15:58
  * For LOVD    : 3.0-12
  *
  * Copyright   : 2014 Leiden University Medical Center; http://www.LUMC.nl/
@@ -33,7 +33,7 @@ class admin_tests extends PHPUnit_Extensions_SeleniumTestCase
     protected $captureScreenshotOnFailure = TRUE;
     protected $screenshotPath = '/home/dasscheman/svn/LOVD3_development/trunk/tests/test_results/error_screenshots';
     protected $screenshotUrl = 'http://localhost/svn/LOVD3_development/trunk/tests/test_results/error_screenshots';
-
+  
     protected function setUp()
     {
         $this->setHost('localhost');
@@ -52,7 +52,7 @@ class admin_tests extends PHPUnit_Extensions_SeleniumTestCase
         $this->type("name=institute", "Leiden University Medical Center");
         $this->type("name=department", "Human Genetics");
         $this->type("name=address", "Einthovenweg 20\n2333 ZC Leiden");
-        $this->type("name=email", "I.F.A.C.Fokkema@LUMC.nl");
+        $this->type("name=email", "test@lovd.nl");
         $this->type("name=telephone", "+31 (0)71 526 9438");
         $this->type("name=username", "admin");
         $this->type("name=password_1", "test1234");
@@ -335,9 +335,9 @@ class admin_tests extends PHPUnit_Extensions_SeleniumTestCase
         $this->assertTrue((bool)preg_match('/^[\s\S]*\/trunk\/src\/submit\/screening\/0000000001$/',$this->getLocation()));
         $this->click("//tr[3]/td[2]/b");
         $this->waitForPageToLoad("30000");
-        sleep(4);
-        $this->assertContains("ASDFASDFASDF", $this->getBodyText());
-        $this->assertTrue((bool)preg_match('/^[\s\S]*trunk\/src\/individuals\/00000001$/',$this->getLocation()));
+        $this->assertTrue((bool)preg_match('/^[\s\S]*\/trunk\/src\/submit\/finish\/individual\/00000001$/',$this->getLocation()));
+        $this->waitForPageToLoad("4000");
+        $this->open("/svn/LOVD3_development/trunk/src/individuals/00000001");
         $this->assertEquals("Public", $this->getText("//tr[8]/td"));
     }
     public function testCreateIndividualDiagnosedWithIVA()
