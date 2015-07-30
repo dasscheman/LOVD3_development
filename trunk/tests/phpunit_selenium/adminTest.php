@@ -4,7 +4,7 @@
  * LEIDEN OPEN VARIATION DATABASE (LOVD)
  *
  * Created     : 2014-12-19
- * Modified    : 2015-07-30:16:22:03
+ * Modified    : 2015-07-30:16:39:14
  * For LOVD    : 3.0-12
  *
  * Copyright   : 2014 Leiden University Medical Center; http://www.LUMC.nl/
@@ -250,7 +250,7 @@ class admin_tests extends PHPUnit_Extensions_SeleniumTestCase
         $this->type("name=00001_VariantOnTranscript/Exon", "2");
         $this->type("name=00001_VariantOnTranscript/DNA", "c.456T>G");
         $this->click("css=button.mapVariant");
-        sleep(3);
+        sleep(10);
         $RnaChange = $this->getEval("window.document.getElementById('variantForm').elements[4].value");
         $this->assertTrue((bool)preg_match('/^r\.\([\s\S]\)$/',$this->getExpression($RnaChange)));
         $ProteinChange = $this->getEval("window.document.getElementById('variantForm').elements[5].value");
