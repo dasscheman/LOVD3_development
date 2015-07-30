@@ -31,7 +31,7 @@ before_script:
 
 script:
 ##  - phpunit --verbose --debug --coverage-text ./trunk/tests/travis/tests/
-##  - phpunit --debug --coverage-text ./trunk/tests/phpunit_selenium/adminTest.php
+  - phpunit --debug --coverage-text ./trunk/tests/phpunit_selenium/adminTest.php
   - phpunit --debug --coverage-text ./trunk/tests/phpunit_selenium/importTest.php
 ##  - phpunit --debug --coverage-text ./trunk/tests/phpunit_selenium/managerTest.php
   

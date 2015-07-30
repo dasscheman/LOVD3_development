@@ -83,7 +83,7 @@ $aTypes =
 // Number of columns that may be updated during an update import. If changes in a column should be ignored, edit the
 // lovd_calculateFieldDifferences() function and set the ignore value for that column to true.
 // For now this value is set to 1; increasing this number will increase the chance that users accidentally update the wrong record.
-$nUpdateColumnsAllowed = 4;
+$nUpdateColumnsAllowed = 1;
 
 // An array with import file types which are recognized but not accepted for import, with the error message.
 $aExcludedTypes =
@@ -102,6 +102,7 @@ function lovd_calculateFieldDifferences ($zData, $aLine)
 {
     // Creates an array with changed columns, with values from the database and the values from the import file.
     // By default, the variable 'ignore' is set to false. Meaning that this field is allowed to be updated.
+
     $aDiffs = array();
     foreach ($zData as $sCol => $sValue) {
         // Empty fields in the import file is considered valid. So when a field is filled in the database

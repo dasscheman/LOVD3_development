@@ -189,7 +189,7 @@ function lovd_emailError ($sErrorCode, $sSubject, $sTo, $bHalt = false)
     // Format the error message.
     // FIXME; Kan makkelijker??? // Een str_replace() zou ook wel werken... Deze code staat op minimaal 3 plaatsen.
     $sError = preg_replace('/^' . preg_quote(rtrim(lovd_getInstallURL(false), '/'), '/') . '/', '', $_SERVER['REQUEST_URI']) . ' returned error in code block ' . $sErrorCode . '.' . "\n" .
-              'Error : Couldn\'t send a mail with subject "' . $sSubject . '" to ' . $sTo . $sErrorCode .  $_SERVER['REQUEST_URI'];
+              'Error : Couldn\'t send a mail with subject "' . $sSubject . '" to ' . $sTo;
 
     // If the system needs to be halted, send it through to lovd_displayError() who will print it on the screen,
     // write it to the system log, and halt the system. Otherwise, just log it to the database.

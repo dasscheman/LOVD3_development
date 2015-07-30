@@ -28,7 +28,6 @@ hostname = localhost
 username = lovd
 password = lovd_pw
 
-
 # Database name (required). When using SQLite, specify the filename here.
 #
 database = lovd3_development

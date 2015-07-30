@@ -112,7 +112,7 @@
 	<td>label=Public</td>
 </tr>
 <tr>
-	<td>clickAndWait</td>
+	<td>click</td>
 	<td>css=input[type=&quot;submit&quot;]</td>
 	<td></td>
 </tr>
