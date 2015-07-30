@@ -101,10 +101,10 @@
 	<td>css=input[type=&quot;submit&quot;]</td>
 	<td></td>
 </tr>
-<!--Importing seatlleseq can take some time, therefore the pause for 5 minutes.-->
+<!--Importing seatlleseq can take some time, therefore the pause for 120 seconds.-->
 <tr>
-	<td>setTimeout</td>
-	<td>300000</td>
+	<td>pause</td>
+	<td>120000</td>
 	<td></td>
 </tr>
 <tr>
