@@ -25,24 +25,7 @@ else
 
     # Install Dovecot.
     # Pass the -y flag to suppress interactive requests.
-    sudo apt-get -qq -y install dovecot-imapd dovecot-pop3d
-
-    # Prepare the local.conf for custom values
-    sudo touch /etc/dovecot/local.conf
-
-    # Move Maildir to the users home directory.
-    # This keeps things consistent across environments.
-    sudo echo 'mail_location = maildir:/home/%u/Maildir' >> /etc/dovecot/local.conf
-
-    # Enable plaintext for testing.
-    # This is pretty awful for production environments.
-    sudo echo 'disable_plaintext_auth = no' >> /etc/dovecot/local.conf
-
-    # Running tests in isolation requires a lot of connections very quickly.
-    sudo echo 'mail_max_userip_connections = 10000' >> /etc/dovecot/local.conf
-
-    # Restart Dovecot so it gets it's new settings.
-    sudo restart dovecot
+    sudo apt-get -qq -y install exim4 apcupsd
 fi
 
 sudo /etc/init.d/apache2 restart
