@@ -4,7 +4,7 @@
  * LEIDEN OPEN VARIATION DATABASE (LOVD)
  *
  * Created     : 2014-12-19
- * Modified    : 2015-07-30:14:55:26
+ * Modified    : 2015-07-30:15:08:16
  * For LOVD    : 3.0-12
  *
  * Copyright   : 2014 Leiden University Medical Center; http://www.LUMC.nl/
@@ -110,7 +110,7 @@ class admin_tests extends PHPUnit_Extensions_SeleniumTestCase
         $this->type("name=institute", "Leiden University Medical Center");
         $this->type("name=department", "Human Genetics");
         $this->type("name=address", "Einthovenweg 20\n2333 ZC Leiden");
-        $this->type("name=email", "I.F.A.C.Fokkema@LUMC.nl");
+        $this->type("name=email", "d.asscheman@lumc.nl");
         $this->type("name=username", "manager");
         $this->type("name=password_1", "test1234");
         $this->type("name=password_2", "test1234");
@@ -130,7 +130,7 @@ class admin_tests extends PHPUnit_Extensions_SeleniumTestCase
         $this->type("name=institute", "Leiden University Medical Center");
         $this->type("name=department", "Human Genetics");
         $this->type("name=address", "Einthovenweg 20\n2333 ZC Leiden");
-        $this->type("name=email", "I.F.A.C.Fokkema@LUMC.nl");
+        $this->type("name=email", "d.asscheman@lumc.nl");
         $this->type("name=username", "curator");
         $this->type("name=password_1", "test1234");
         $this->type("name=password_2", "test1234");
@@ -159,7 +159,7 @@ class admin_tests extends PHPUnit_Extensions_SeleniumTestCase
         $this->type("name=institute", "Leiden University Medical Center");
         $this->type("name=department", "Human Genetics");
         $this->type("name=address", "Einthovenweg 20\n2333 ZC Leiden");
-        $this->type("name=email", "I.F.A.C.Fokkema@LUMC.nl");
+        $this->type("name=email", "d.asscheman@lumc.nl");
         $this->type("name=username", "submitter");
         $this->type("name=password_1", "test1234");
         $this->type("name=password_2", "test1234");
