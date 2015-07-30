@@ -19,35 +19,34 @@ sudo /etc/init.d/apache2 restart
 
 echo 'Provisioning Environment with Dovecot and Test Messages'
 
-I’m a big fan of knowing what’s going on, so I start by having the script echo a message out.
 # Install and Configure Dovecot
 
-if which dovecot > /dev/null; then
-    echo 'Dovecot is already installed'
-else
-    echo 'Installing Dovecot'
+#if which dovecot > /dev/null; then
+#    echo 'Dovecot is already installed'
+#else
+#    echo 'Installing Dovecot'
 
     # Install Dovecot.
     # Pass the -y flag to suppress interactive requests.
-    sudo apt-get -qq -y install dovecot-imapd dovecot-pop3d
+#     sudo apt-get -qq -y install dovecot-imapd dovecot-pop3d
 
     # Prepare the local.conf for custom values
-    sudo touch /etc/dovecot/local.conf
+#     sudo touch /etc/dovecot/local.conf
 
     # Move Maildir to the users home directory.
     # This keeps things consistent across environments.
-    sudo echo 'mail_location = maildir:/home/%u/Maildir' >> /etc/dovecot/local.conf
+  #   sudo echo 'mail_location = maildir:/home/%u/Maildir' >> /etc/dovecot/local.conf
 
     # Enable plaintext for testing.
     # This is pretty awful for production environments.
-    sudo echo 'disable_plaintext_auth = no' >> /etc/dovecot/local.conf
+ #    sudo echo 'disable_plaintext_auth = no' >> /etc/dovecot/local.conf
 
-    # Running tests in isolation requires a lot of connections very quickly.
-    sudo echo 'mail_max_userip_connections = 10000' >> /etc/dovecot/local.conf
+ #    # Running tests in isolation requires a lot of connections very quickly.
+ #    sudo echo 'mail_max_userip_connections = 10000' >> /etc/dovecot/local.conf
 
     # Restart Dovecot so it gets it's new settings.
-    sudo restart dovecot
-fi
+ #    sudo restart dovecot
+# fi
 
 
 nmap localhost -p 25

@@ -22,24 +22,9 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertLocation</td>
-	<td>*/trunk/src/submit/finish/individual/00000001</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForPageToLoad</td>
-	<td>4000</td>
-	<td></td>
-</tr>
-<tr>
-	<td>open</td>
-	<td>svn/LOVD3/trunk/src/individuals/00000001</td>
-	<td></td>
-</tr>
-<tr>
 	<td>assertText</td>
-	<td>//tr[8]/td</td>
-	<td>Public</td>
+	<td>css=table[class=info]</td>
+	<td>Successfully processed your submission and sent an email notification to the relevant curator*</td>
 </tr>
 </tbody></table>
 </body>
