@@ -23,7 +23,6 @@ before_install:
   - mysql -e "FLUSH PRIVILEGES;"
 
 before_script:
-  - ./trunk/tests/travis/setup/before_script.sh
   - ./trunk/tests/travis/setup/setup_apache.sh
   ## IMPORTANT! convert must be run AFTER the setup_apache.sh
   ## setup_apache.sh fix some assumptions where the files are stored!

@@ -18,7 +18,6 @@ sudo sed -i -e "s,AllowOverride[ ]None,AllowOverride All,g" /etc/apache2/sites-a
 echo 'Mail agent must be installed.'
 # Pass the -y flag to suppress interactive requests.
 sudo apt-get -qq -y install exim4 apcupsd nmap
-fi
 
 sudo /etc/init.d/apache2 restart
 
