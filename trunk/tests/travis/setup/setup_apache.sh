@@ -15,7 +15,6 @@ sudo a2enmod rewrite
 sudo sed -i -e "s,/var/www,/home/travis/build/dasscheman/LOVD3_development,g" /etc/apache2/sites-available/default
 sudo sed -i -e "s,AllowOverride[ ]None,AllowOverride All,g" /etc/apache2/sites-available/default
 
-sudo /etc/init.d/apache2 restart
 
 # Install and Configure Dovecot
 echo 'Provisioning Environment with Dovecot and Test Messages'
@@ -46,5 +45,6 @@ else
     sudo restart dovecot
 fi
 
+sudo /etc/init.d/apache2 restart
 
 nmap localhost -p 25
