@@ -35,7 +35,7 @@ class Example extends PHPUnit_Extensions_SeleniumTestCase
     $this->select("name=statusid", "label=Public");
     $this->click("css=input[type=\"submit\"]");
     $this->waitForPageToLoad("30000");
-    $this->assertEquals("Successfully created the variant entry!", $this->getText("css=table[class=info]"));
+    $this->assertTrue((bool)preg_match('/^Successfully processed your submission and sent an email notification to the relevant curator[\s\S]*$/',$this->getText("css=table[class=info]")));
     $this->waitForPageToLoad("4000");
     $this->assertTrue((bool)preg_match('/^[\s\S]*\/trunk\/src\/variants\/0000000559$/',$this->getLocation()));
   }

@@ -20,8 +20,6 @@ class Example extends PHPUnit_Extensions_SeleniumTestCase
     }
 
     $this->assertTrue((bool)preg_match('/^Successfully processed your submission and sent an email notification to the relevant curator[\s\S]*$/',$this->getText("css=table[class=info]")));
-    $this->waitForPageToLoad("4000");
-    $this->assertTrue((bool)preg_match('/^[\s\S]*\/trunk\/src\/individuals\/00000002$/',$this->getLocation()));
   }
 }
 ?>
