@@ -10,7 +10,6 @@ class Example extends PHPUnit_Extensions_SeleniumTestCase
   public function testMyTestCase()
   {
     $this->open("/svn/LOVD3/trunk/src/import");
-    $this->assertContains("ASDFASDFASDF", $this->getBodyText());
     $this->type("name=import", "/www/svn/LOVD3/trunk/tests/test_data_files/InsertImport.txt");
     $this->select("name=mode", "label=Add only, treat all data as new");
     $this->click("css=input[type=\"submit\"]");
