@@ -758,12 +758,15 @@ if (POST) {
                     case 'Individuals_To_Diseases':
                     case 'Screenings_To_Genes':
                     case 'Screenings_To_Variants':
-                        reset($aLine);
-                        list($sCol1, $nID1) = each($aLine);
-                        list($sCol2, $nID2) = each($aLine);
-                        if (isset($nID1) && isset($nID2)) {
-                            $zData = $_DB->query('SELECT * FROM ' . $sTableName . ' WHERE ' . $sCol1 . ' = ? AND ' . $sCol2 . ' = ?', array($nID1, $nID2))->fetchAssoc();
-                        }
+if (isset(array_values($aLine)[0]) && isset(array_values($aLine)[1])) {
+$zData = $_DB->query('SELECT * FROM ' . $sTableName . ' WHERE ' . array_keys($aLine)[0] . ' = ? AND ' . array_keys($aLine)[1] . ' = ?', array(array_values($aLine)[0], array_values($aLine)[1]))->fetchAssoc();
+}
+//                        reset($aLine);
+//                        list($sCol1, $nID1) = each($aLine);
+//                        list($sCol2, $nID2) = each($aLine);
+//                        if (isset($nID1) && isset($nID2)) {
+//                            $zData = $_DB->query('SELECT * FROM ' . $sTableName . ' WHERE ' . $sCol1 . ' = ? AND ' . $sCol2 . ' = ?', array($nID1, $nID2))->fetchAssoc();
+//                        }
                         break;
                 }
 
