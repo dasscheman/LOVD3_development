@@ -119,7 +119,7 @@
 <tr>
 	<td>assertText</td>
 	<td>css=table[class=info]</td>
-	<td>Successfully processed your submission and sent an email notification to the relevant curator*</td>
+	<td>Successfully created the variant entry!</td>
 </tr>
 <tr>
 	<td>waitForPageToLoad</td>
