@@ -31,8 +31,8 @@ class Example extends PHPUnit_Extensions_SeleniumTestCase
     $this->select("name=statusid", "label=Public");
     $this->click("css=input[type=\"submit\"]");
     $this->waitForPageToLoad("30000");
-    // Importing seatlleseq can take some time, therefore the pause for 120 seconds.
-    sleep(120);
+    // Importing seatlleseq can take some time, therefore the pause for 200 seconds.
+    sleep(200);
     for ($second = 0; ; $second++) {
         if ($second >= 60) $this->fail("timeout");
         try {

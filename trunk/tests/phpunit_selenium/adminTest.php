@@ -4,7 +4,7 @@
  * LEIDEN OPEN VARIATION DATABASE (LOVD)
  *
  * Created     : 2014-12-19
- * Modified    : 2015-07-31:13:49:25
+ * Modified    : 2015-07-31:14:24:31
  * For LOVD    : 3.0-12
  *
  * Copyright   : 2014 Leiden University Medical Center; http://www.LUMC.nl/
@@ -656,8 +656,8 @@ class admin_tests extends PHPUnit_Extensions_SeleniumTestCase
         $this->select("name=statusid", "label=Public");
         $this->click("css=input[type=\"submit\"]");
         $this->waitForPageToLoad("30000");
-        // Importing seatlleseq can take some time, therefore the pause for 120 seconds.
-        sleep(120);
+        // Importing seatlleseq can take some time, therefore the pause for 200 seconds.
+        sleep(200);
         for ($second = 0; ; $second++) {
                 if ($second >= 60) $this->fail("timeout");
                 try {
