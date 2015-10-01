@@ -4,7 +4,7 @@
  * LEIDEN OPEN VARIATION DATABASE (LOVD)
  *
  * Created     : 2009-10-21
- * Modified    : 2015-07-08
+ * Modified    : 2015-09-21
  * For LOVD    : 3.0-14
  *
  * Copyright   : 2004-2015 Leiden University Medical Center; http://www.LUMC.nl/
@@ -1123,7 +1123,8 @@ class LOVD_Object {
                         while ($zData = $q->fetchAssoc()) {
                             $zData = $this->generateRowID($zData);
                             // We only need the row_id here for knowing which ones we need to check.
-                            $aSessionViewList['checked'][] = $zData['row_id'];
+                            // 2015-09-18; 3.0-14; We need to run rawurldecode() or else Columns are not selectable this way.
+                            $aSessionViewList['checked'][] = rawurldecode($zData['row_id']);
                         }
                     } elseif ($_GET['ids_changed'] == 'none') {
                         // If the unselect all button was clicked, reset the 'checked' array.
@@ -1374,7 +1375,7 @@ class LOVD_Object {
                     die('0'); // Silent error.
                 }
 
-                print('      </FORM>' . "\n\n");
+                print('      <DIV id="viewlistDiv_' . $sViewListID . '">' . "\n"); // These contents will be replaced by Ajax.
 
                 if (substr($this->sObject, -7) == 'Variant') {
                     $sUnit = 'variants' . (substr($this->sObject, 0, 10) == 'Transcript'? ' on transcripts' : '');
@@ -1399,6 +1400,8 @@ class LOVD_Object {
                     $sMessage .= $sWhere;
                 }
                 lovd_showInfoTable($sMessage . '!', 'stop');
+
+                print('      </DIV></FORM>' . "\n\n");
 
                 return 0;
             }

@@ -4,7 +4,7 @@
  * LEIDEN OPEN VARIATION DATABASE (LOVD)
  *
  * Created     : 2012-09-19
- * Modified    : 2015-07-23
+ * Modified    : 2015-09-24
  * For LOVD    : 3.0-14
  *
  * Copyright   : 2004-2015 Leiden University Medical Center; http://www.LUMC.nl/
@@ -100,7 +100,7 @@ $nMaxSize = min(
 
 function lovd_calculateFieldDifferences ($zData, $aLine)
 {
-	global $aSection;
+    global $aSection;
     // Creates an array with changed columns, with values from the database and the values from the import file.
     // By default, the variable 'ignore' is set to false. Meaning that this field is allowed to be updated.
 
@@ -110,19 +110,39 @@ function lovd_calculateFieldDifferences ($zData, $aLine)
         // but is empty in the import file, the field is emptied in the database.
         // When the columns do not exist in the import file, the columns are not taken into account.
         // We trust that $aLine has already been filled with all columns from $zData.
-        if ($aLine[$sCol] && $sValue != $aLine[$sCol]) {
-			if (in_array($sCol, array_keys($aSection['update_columns_not_allowed'])) &&
-				$aSection['update_columns_not_allowed'][$sCol]['error_type']) {
-                // Changes in these fields are ignored during an update import, because they are not allowed to modify.
+        if (in_array($sCol, array_keys($aLine)) && $sValue != $aLine[$sCol]) {
+            if (in_array($sCol, array_keys($aSection['update_columns_not_allowed'])) &&
+                $aSection['update_columns_not_allowed'][$sCol]['error_type']) {
+                // Changes in these fields are ignored during an update import, because they are not allowed to be modified.
                 // But because we might want to set a warning to inform the user, the fields must be included in the $aDiffs array.
                 // Whether changes in these columns are soft or hard errors or ignored silently, is defined in $aSection['update_columns_not_allowed'].
                 $aDiffs[$sCol] = array('DB' => $sValue, 'file' => $aLine[$sCol], 'ignore' => true);
-            }  else {
+            } else {
                 $aDiffs[$sCol] = array('DB' => $sValue, 'file' => $aLine[$sCol], 'ignore' => false);
             }
         }
     }
     return $aDiffs;
+}
+
+/**
+ * At several points in the code, default columns and default data are added to $aLine
+ * During an update import we do not want to update fields which are not present in the import file with the default values.
+ * Therefor we going to add all the missing columns of the database to $aLine and set error_type on false and ingnore on true.
+ * In this way, the fields will not be updated and no warning or error is set.
+ **/
+function lovd_appendDbDataToImportAndUpdateArray ($zData)
+{
+    global $aSection, $aDifferences, $aLine;
+
+    foreach ($zData as $sCol => $sValue) {
+        if (! in_array($sCol, array_keys($aLine))){
+            $aLine[$sCol] = $sValue;
+            $aSection['update_columns_not_allowed'][$sCol]['error_type'] = false;
+            $aDifferences[$sCol] = array('DB' => $sValue, 'file' => 'Does not exist in import file', 'ignore' => true);
+        }
+    }
+    return;
 }
 
 function lovd_endLine ()
@@ -168,8 +188,36 @@ function utf8_encode_array ($Data)
     }
 }
 
+/**
+ * lovd_setEmptyCheckboxFields checks for all fields in the import file if it is a checkbox type
+ * and if it has an valid value (0 or 1). When the field has no value ('') it is set to 0.
+ * When it has an invalid value an error is set.
+ **/
+function lovd_setEmptyCheckboxFields($aForm){
+    global $aLine;
 
-
+    foreach ($aForm as $aField) {
+        if (!is_array($aField)) {
+            // 'skip', 'hr', etc...
+            continue;
+        }
+        @list($sHeader, $sHelp, $sType, $sName) = $aField;
+        if ($sType == 'checkbox') {
+            /**
+             * If a checkbox field is left empty in the import file, it is filled with 0.
+             * If it does not exist in the import file it should not be added.
+             * Because during update we want to ingore fields that are not available and during insert it will generate an ERROR when mandatory.
+             */
+            if (isset($aLine[$sName]) && $aLine[$sName] === '') {
+                // All data in $aLine is handled as a string, therefor we set the checkbox variable as string.
+                $aLine[$sName] = '0';
+            }
+            if (isset($aLine[$sName]) && !in_array($aLine[$sName], array('0', '1'))) {
+                lovd_errorAdd($sName, 'The field \'' . $sHeader . '\' must contain either a \'0\' or a \'1\'.');
+            }
+        }
+    }
+}
 
 
 $nWarnings = 0;
@@ -247,10 +295,10 @@ if (POST) {
         // Later, per section 'update_columns_not_allowed' is filled with additional fields which are not allowed to be updated, together with the error message when they are changed and the error type (soft or hard warning).
         $aParsed = array_fill_keys(
             array('Columns', 'Genes', 'Transcripts', 'Diseases', 'Genes_To_Diseases', 'Individuals', 'Individuals_To_Diseases', 'Phenotypes', 'Screenings', 'Screenings_To_Genes', 'Variants_On_Genome', 'Variants_On_Transcripts', 'Screenings_To_Variants'),
-            array('allowed_columns' => array(), 'columns' => array(), 'update_columns_not_allowed' => array('edited_by' => array( 'message' => 'Edited by field is set by LOVD', 'error_type' => 'soft'),
+            array('allowed_columns' => array(), 'columns' => array(), 'update_columns_not_allowed' => array('edited_by' => array('message' => 'Edited by field is set by LOVD', 'error_type' => 'soft'),
                                                                                                             'edited_date' => array('message' => 'Edited date field is set by LOVD', 'error_type' => 'soft'),
-                                                                                                            'created_by' => array('message' => 'Created by field is set by LOVD', 'error_type' => 'hard'),
-                                                                                                            'created_date' => array('message' => 'Created date field is set by LOVD', 'error_type' => 'hard')), 'data' => array(), 'ids' => array(), 'nColumns' => 0, 'object' => null, 'required_columns' => array(), 'settings' => array()));
+                                                                                                            'created_by' => array('message' => 'Created by field is set by LOVD', 'error_type' => 'soft'),
+                                                                                                            'created_date' => array('message' => 'Created date field is set by LOVD', 'error_type' => 'soft')), 'data' => array(), 'ids' => array(), 'nColumns' => 0, 'object' => null, 'required_columns' => array(), 'settings' => array()));
         $aParsed['Genes_To_Diseases'] = $aParsed['Individuals_To_Diseases'] = $aParsed['Screenings_To_Genes'] = $aParsed['Screenings_To_Variants'] = array('allowed_columns' => array(), 'data' => array()); // Just the data, nothing else!
         $aUsers = $_DB->query('SELECT id FROM ' . TABLE_USERS)->fetchAllColumn();
         $aImportFlags = array('max_errors' => 50);
@@ -262,6 +310,7 @@ if (POST) {
         $sMode = $_POST['mode'];
         $sDate = date('Y-m-d H:i:s');
         $aDiseasesAlreadyWarnedFor = array(); // To prevent lots and lots of error messages for each phenotype entry created for the same disease that is not yet inserted into the database.
+        $aSectionsAlreadyWarnedFor = array(); // To prevent lots and lots of error messages for a section that cannot be updated in the database.
 
         foreach ($aData as $i => $sLine) {
             $sLine = trim($sLine);
@@ -320,7 +369,6 @@ if (POST) {
         require ROOT_PATH . 'class/progress_bar.php';
         $_BAR = array(new ProgressBar('parser', 'Parsing file...'));
         $_BAR[0]->setMessageVisibility('done', true);
-
 
 
         // Now, the actual parsing...
@@ -648,7 +696,6 @@ if (POST) {
                 continue; // Continue to the next line.
             }
             $aLine = array_map('lovd_trimField', $aLine);
-
             // Tag all fields with their respective column name. Then check data.
             $aLine = array_combine($aColumns, array_values($aLine));
 
@@ -668,12 +715,20 @@ if (POST) {
                 $aLine[$key] = str_replace(array('\r', '\n', '\t'), array("\r", "\n", "\t"), $sVal);
             }
 
-            // Create all the standard column's keys in $aLine, so we can safely reference to it.
-            foreach ($aSection['allowed_columns'] as $sCol) {
-                if (!isset($aLine[$sCol])) {
-                    $aLine[$sCol] = '';
+            // When we are updating we don't want to add all allowed columns to de import data ($aLine).
+            // Because when the column is not in the import file during an import,
+            // the user probably doesn't want to change that column. So by not adding these columns to $aLine,
+            // we can completly ignore these fields.
+            if ($sMode != 'update') {
+
+                // Create all the standard column's keys in $aLine, so we can safely reference to it.
+                foreach ($aSection['allowed_columns'] as $sCol) {
+                    if (!isset($aLine[$sCol])) {
+                        $aLine[$sCol] = '';
+                    }
                 }
             }
+
 
 
 
@@ -728,6 +783,30 @@ if (POST) {
                 $aSection['object'] =& $aSection['objects'][$sGene];
             }
 
+            // Exclude section Genes, because it is not allowed to import this section it is not necessary to run the getForm()
+            if (isset($aSection['object']) && is_object($aSection['object']) && $sCurrentSection != 'Genes') {
+                if ($sCurrentSection == 'Columns') {
+                    // For custom columns, we need to split the ID in category and colid.
+                    list($aLine['category'], $aLine['colid']) = explode('/', $aLine['id'], 2);
+
+                    // Calling getForm() complains that $_POST data does not exist.
+                    // These globals are needed in getForm() and checkFields()
+                    $_POST['category'] = $aLine['category'];
+                    $_POST['width'] = $aLine['width'];
+                    $_POST['workID'] = '';
+                }
+
+                if ($sCurrentSection == 'Phenotypes') {
+                    $aForm = $aSection['objects'][(int) $aLine['diseaseid']]->getForm();
+                } elseif ($sCurrentSection == 'Variants_On_Transcripts'){
+                    $aForm = $aSection['objects'][$sGene]->getForm();
+                } else {
+                    $aForm = $aSection['object']->getForm();
+                }
+
+                lovd_setEmptyCheckboxFields($aForm);
+            }
+
             // General checks: checkFields().
             $zData = false;
             // If we're updating, get the current info from the database.
@@ -764,12 +843,19 @@ if (POST) {
                         if (isset($nID1) && isset($nID2)) {
                             $zData = $_DB->query('SELECT * FROM ' . $sTableName . ' WHERE ' . $sCol1 . ' = ? AND ' . $sCol2 . ' = ?', array($nID1, $nID2))->fetchAssoc();
                         }
+                        if (!$zData && !in_array($sCurrentSection, $aSectionsAlreadyWarnedFor)) {
+                            $_BAR[0]->appendMessage('Warning: It is currently not possible to do an update on section ' . $sCurrentSection . ' via an import <BR>', 'done');
+                            $nWarnings ++;
+                            $aSectionsAlreadyWarnedFor[] = $sCurrentSection;
+                        }
                         break;
                 }
 
                 if ($zData) {
                     // Here we create an array with all columns that are different in the DB and in the file.
                     $aDifferences = lovd_calculateFieldDifferences($zData, $aLine);
+                    lovd_appendDbDataToImportAndUpdateArray($zData);
+                    var_dump($aDifferences);
                     // Calculate number of differences.
                     // Note: This also filters out any linking tables, because they can't have a difference between $zData and $aLine.
                     $nDifferences = 0;
@@ -785,7 +871,9 @@ if (POST) {
                         }
                     }
 
-                    if ($nDifferences) {
+                    // When ignore is true, we still want to display the errors or warnings.
+                    // Therefore use $aDifferences instead of $nDifferences to check if it is required to set warnings and/or errors.
+                    if (!empty($aDifferences)) {
                         if (!lovd_isAuthorized($sCurrentAuthorization, $aLine['id'], false)) {
                             // Not allowed to edit at all!
                             lovd_errorAdd('import', 'Error (' . $sCurrentSection . ', line ' . $nLine . '): Access denied for update of ' . $sCurrentAuthorization . ' entry ' . htmlspecialchars($aLine['id']) . '.');
@@ -822,11 +910,6 @@ if (POST) {
 
             if (isset($aSection['object']) && is_object($aSection['object'])) {
                 // Object has been created.
-                // For custom columns, we need to split the ID in category and colid.
-                if ($sCurrentSection == 'Columns') {
-                    list($aLine['category'], $aLine['colid']) = explode('/', $aLine['id'], 2);
-                }
-
                 // We'll need to split the functional consequence field to have checkFields() function normally.
                 if ($sCurrentSection == 'Variants_On_Genome' || $sCurrentSection == 'Variants_On_Transcripts') {
                     $aLine['effect_reported'] = substr($_SETT['var_effect_default'], 0, 1); // Default value.
@@ -845,6 +928,7 @@ if (POST) {
 
                 // Use the object's checkFields() to have the values checked.
                 $nErrors = count($_ERROR['messages']); // We'll need to mark the generated errors.
+                // During the update import we dont want to a mandatory fields, but we do want to run checkfields.
                 $aSection['object']->checkFields($aLine, $zData);
                 for ($i = $nErrors; isset($_ERROR['messages'][$i]); $i++) {
                     $_ERROR['fields'][$i] = ''; // It wants to highlight a field that's not here right now.
@@ -1040,13 +1124,13 @@ if (POST) {
                             $_ERROR['messages'] = array_values($_ERROR['messages']);
                         }
 
-						if (!$zData) {
-							// Do not set soft warnings when we do an update.
-							$_BAR[0]->appendMessage('Warning (' . $sCurrentSection . ', line ' . $nLine . '): There is already a disease with disease name ' . $aLine['name'] . (empty($aLine['id_omim'])? '' : ' and/or OMIM ID ' . $aLine['id_omim']) . '. This disease is not imported! <BR>', 'done');
-							$nWarnings ++;
-						}
+                        if (!$zData) {
+                            // Do not set soft warnings when we do an update.
+                            $_BAR[0]->appendMessage('Warning (' . $sCurrentSection . ', line ' . $nLine . '): There is already a disease with disease name ' . $aLine['name'] . (empty($aLine['id_omim'])? '' : ' and/or OMIM ID ' . $aLine['id_omim']) . '. This disease is not imported! <BR>', 'done');
+                            $nWarnings ++;
+                        }
 
-						$aLine['newID'] = $nDiseaseIdOmim[0];
+                        $aLine['newID'] = $nDiseaseIdOmim[0];
                         $aLine['todo'] = 'map';
                         break;
                     }
@@ -1531,6 +1615,7 @@ if (POST) {
         }
 
         // Clean up old section, if available.
+
         if ($sCurrentSection) {
             unset($aSection['columns']);
             unset($aSection['nColumns']);

@@ -17,22 +17,22 @@ php:
 sudo: required
 
 before_install:
-  - ./trunk/tests/travis/setup/setup_mysql.sh
+  - ./tests/travis/setup/setup_mysql.sh
 
 before_script:
-  - ./trunk/tests/travis/setup/setup_apache.sh
+  - ./tests/travis/setup/setup_apache.sh
   ## IMPORTANT! convert must be run AFTER the setup_apache.sh
   ## setup_apache.sh fix some assumptions where the files are stored!
-  - ./trunk/tests/bash_scripts/convert_selenium_to_phpunit.sh --localhost=trunk --continueall
-  - ./trunk/tests/travis/setup/setup_selenium_server.sh
+  - ./tests/bash_scripts/convert_selenium_to_phpunit.sh --localhost=trunk --continueall
+  - ./tests/travis/setup/setup_selenium_server.sh
 
 script:
 ##  - phpunit --verbose --debug --coverage-text ./trunk/tests/travis/tests/
-##  - phpunit --debug --coverage-text ./trunk/tests/phpunit_selenium/adminTest.php
-##  - phpunit --debug --coverage-text ./trunk/tests/phpunit_selenium/importTest.php
+##  - phpunit --debug --coverage-text ./tests/phpunit_selenium/adminTest.php
+##  - phpunit --debug --coverage-text ./tests/phpunit_selenium/importTest.php
   
 ## Run all tests
-  - phpunit --debug --coverage-text ./trunk/tests/phpunit_selenium/
+  - phpunit --debug --coverage-text ./tests/phpunit_selenium/
 
 notifications:
   email:

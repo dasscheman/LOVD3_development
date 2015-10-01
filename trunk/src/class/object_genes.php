@@ -4,7 +4,7 @@
  * LEIDEN OPEN VARIATION DATABASE (LOVD)
  *
  * Created     : 2010-12-15
- * Modified    : 2015-07-01
+ * Modified    : 2015-09-21
  * For LOVD    : 3.0-14
  *
  * Copyright   : 2004-2015 Leiden University Medical Center; http://www.LUMC.nl/
@@ -73,10 +73,10 @@ class LOVD_Gene extends LOVD_Object {
                                            'uc.name AS created_by_, ' .
                                            'ue.name AS edited_by_, ' .
                                            'uu.name AS updated_by_, ' .
-                                           '(SELECT COUNT(*) FROM lovd_v3_variants AS vog INNER JOIN lovd_v3_variants_on_transcripts AS vot USING (id) WHERE vot.transcriptid = t.id AND vog.statusid >= ' . STATUS_MARKED . ') AS variants, ' .
-                                           '(SELECT COUNT(DISTINCT vog.`VariantOnGenome/DBID`) FROM lovd_v3_variants AS vog INNER JOIN lovd_v3_variants_on_transcripts AS vot USING (id) WHERE vot.transcriptid = t.id AND vog.statusid >= ' . STATUS_MARKED . ') AS uniq_variants, ' .
+                                           '(SELECT COUNT(*) FROM ' . TABLE_VARIANTS . ' AS vog INNER JOIN ' . TABLE_VARIANTS_ON_TRANSCRIPTS . ' AS vot USING (id) WHERE vot.transcriptid = t.id AND vog.statusid >= ' . STATUS_MARKED . ') AS variants, ' .
+                                           '(SELECT COUNT(DISTINCT vog.`VariantOnGenome/DBID`) FROM ' . TABLE_VARIANTS . ' AS vog INNER JOIN ' . TABLE_VARIANTS_ON_TRANSCRIPTS . ' AS vot USING (id) WHERE vot.transcriptid = t.id AND vog.statusid >= ' . STATUS_MARKED . ') AS uniq_variants, ' .
                                            '"" AS count_individuals, ' . // Temporarely value, prepareData actually runs this query.
-                                           '(SELECT COUNT(*) FROM lovd_v3_variants AS hidden_vog INNER JOIN lovd_v3_variants_on_transcripts AS hidden_vot ON (hidden_vog.id = hidden_vot.id) WHERE hidden_vot.transcriptid = t.id AND hidden_vog.statusid < ' . STATUS_MARKED . ') AS hidden_variants';
+                                           '(SELECT COUNT(*) FROM ' . TABLE_VARIANTS . ' AS hidden_vog INNER JOIN ' . TABLE_VARIANTS_ON_TRANSCRIPTS . ' AS hidden_vot ON (hidden_vog.id = hidden_vot.id) WHERE hidden_vot.transcriptid = t.id AND hidden_vog.statusid < ' . STATUS_MARKED . ') AS hidden_variants';
         $this->aSQLViewEntry['FROM']     = TABLE_GENES . ' AS g ' .
                                            'LEFT OUTER JOIN ' . TABLE_GEN2DIS . ' AS g2d ON (g.id = g2d.geneid) ' .
                                            'LEFT OUTER JOIN ' . TABLE_DISEASES . ' AS d ON (g2d.diseaseid = d.id) ' .
@@ -582,13 +582,15 @@ class LOVD_Gene extends LOVD_Object {
                 $sURLBedFile = rawurlencode(str_replace('https://', 'http://', ($_CONF['location_url']? $_CONF['location_url'] : lovd_getInstallURL())) . 'api/rest/variants/' . $zData['id'] . '?format=text/bed');
                 $sURLUCSC = 'http://genome.ucsc.edu/cgi-bin/hgTracks?clade=mammal&amp;org=Human&amp;db=' . $_CONF['refseq_build'] . '&amp;position=chr' . $zData['chromosome'] . ':' . ($zData['position_g_mrna_start'] - 50) . '-' . ($zData['position_g_mrna_end'] + 50) . ($zData['sense']? '' : '&amp;complement_hg19=1') . '&amp;hgt.customText=' . $sURLBedFile;
                 $zData['ucsc'] = 'Show variants in the UCSC Genome Browser (<A href="' . $sURLUCSC . '" target="_blank">full view</A>, <A href="' . $sURLUCSC . rawurlencode('&visibility=4') . '" target="_blank">compact view</A>)';
-                // The weird addition in the end is to fake a proper name in Ensembl.
                 if ($_CONF['refseq_build'] == 'hg18') {
-                    $sURLEnsembl = 'http://may2009.archive.ensembl.org/Homo_sapiens/Location/View?r=' . $zData['chromosome'] . ':' . ($zData['position_g_mrna_start'] - 50) . '-' . ($zData['position_g_mrna_end'] + 50) . ';data_URL=' . $sURLBedFile . rawurlencode('&name=/' . $zData['id'] . ' variants');
-                //} elseif ($_CONF['refseq_build'] == 'hg19') {
+                    $sURLEnsembl = 'http://may2009.archive.ensembl.org/Homo_sapiens/Location/View?r=' . $zData['chromosome'] . ':' . ($zData['position_g_mrna_start'] - 50) . '-' . ($zData['position_g_mrna_end'] + 50) . ';data_URL=';
+                } elseif ($_CONF['refseq_build'] == 'hg19') {
+                    $sURLEnsembl = 'http://grch37.ensembl.org/Homo_sapiens/Location/View?r=' . $zData['chromosome'] . ':' . ($zData['position_g_mrna_start'] - 50) . '-' . ($zData['position_g_mrna_end'] + 50) . ';contigviewbottom=url:';
                 } else {
-                    $sURLEnsembl = 'http://www.ensembl.org/Homo_sapiens/Location/View?r=' . $zData['chromosome'] . ':' . ($zData['position_g_mrna_start'] - 50) . '-' . ($zData['position_g_mrna_end'] + 50) . ';contigviewbottom=url:' . $sURLBedFile . rawurlencode('&name=/' . $zData['id'] . ' variants');
+                    $sURLEnsembl = 'http://www.ensembl.org/Homo_sapiens/Location/View?r=' . $zData['chromosome'] . ':' . ($zData['position_g_mrna_start'] - 50) . '-' . ($zData['position_g_mrna_end'] + 50) . ';contigviewbottom=url:';
                 }
+                // The weird addition in the end is to fake a proper name in Ensembl.
+                $sURLEnsembl .= $sURLBedFile . rawurlencode('&name=/' . $zData['id'] . ' variants');
                 $zData['ensembl'] = 'Show variants in the Ensembl Genome Browser (<A href="' . $sURLEnsembl . '=labels" target="_blank">full view</A>, <A href="' . $sURLEnsembl . '=normal" target="_blank">compact view</A>)';
                 $zData['ncbi'] = 'Show distribution histogram of variants in the <A href="http://www.ncbi.nlm.nih.gov/projects/sviewer/?id=' . $_SETT['human_builds'][$_CONF['refseq_build']]['ncbi_sequences'][$zData['chromosome']] . '&amp;v=' . ($zData['position_g_mrna_start'] - 100) . ':' . ($zData['position_g_mrna_end'] + 100) . '&amp;content=7&amp;url=' . $sURLBedFile . '" target="_blank">NCBI Sequence Viewer</A>';
 

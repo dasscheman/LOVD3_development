@@ -55,6 +55,21 @@
    "Date last edited" fields.
  * Fixed bug; When gene symbols with wrong capitalization are used in URLs, some
    features and pages caused errors.
+ * Added hidden column on data ViewLists for searching on the data owner's
+   country.
+ * Importing data with status pending is now possible.
+ * Fixed typo in reset_password.php.
+ * Fixed bug; The "Select all" link didn't work for the custom column data
+   listing.
+ * Fixed bug; When removing a transcript from a variant, if the transcript was
+   the only one in the database, an interface error occured.
+ * Fixed bug; The position converter on the variant data entry form always used
+   hg19.
+ * Added support for hg38 for new LOVD3 installations. It is also the new
+   default for new LOVD3 installations.
+ * Updated links to Ensembl as they changed the default URL to point to hg38.
+ * Fixed bug; For each new gene, the UD (Mutalyzer reference sequence) retrieved
+   was hg38 instead of the active human build.
 
 
 /**************************
