@@ -33,7 +33,7 @@ class manager_tests extends PHPUnit_Extensions_SeleniumTestCase
     protected $captureScreenshotOnFailure = TRUE;
     protected $screenshotPath = '/home/dasscheman/svn/LOVD3_development/trunk/tests/test_results/error_screenshots';
     protected $screenshotUrl = 'http://localhost/svn/LOVD3_development/trunk/tests/test_results/error_screenshots';
-
+  
     protected function setUp()
     {
         $this->setHost('localhost');
@@ -817,7 +817,7 @@ class manager_tests extends PHPUnit_Extensions_SeleniumTestCase
         $this->assertEquals("Successfully deleted the gene information entry!", $this->getText("css=table[class=info]"));
         $this->waitForPageToLoad("4000");
         $this->assertTrue((bool)preg_match('/^[\s\S]*\/trunk\/src\/genes$/',$this->getLocation()));
-    }/*
+    }
     public function testUninstallLOVD()
     {
         $this->open("/svn/LOVD3_development/trunk/src/logout");
@@ -834,6 +834,6 @@ class manager_tests extends PHPUnit_Extensions_SeleniumTestCase
         $this->click("css=input[type=\"submit\"]");
         $this->waitForPageToLoad("30000");
         $this->assertEquals("LOVD successfully uninstalled!\nThank you for having used LOVD!", $this->getText("css=div[id=lovd__progress_message]"));
-    }*/
+    }
 }
 ?>

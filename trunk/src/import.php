@@ -201,7 +201,7 @@ function lovd_setEmptyCheckboxFields($aForm){
             // 'skip', 'hr', etc...
             continue;
         }
-        @list($sHeader, $sHelp, $sType, $sName) = $aField;
+        @list($sHeader, $sDummyHelp, $sType, $sName) = $aField;
         if ($sType == 'checkbox') {
             /**
              * If a checkbox field is left empty in the import file, it is filled with 0.
@@ -217,6 +217,22 @@ function lovd_setEmptyCheckboxFields($aForm){
             }
         }
     }
+}
+
+/**
+ * Returns the form from the object $aSection.
+ * $sCurrentSection is necessary to determine what to return.
+ **/
+function lovd_getFormForCurrentSection($sCurrentSection, $aSection, $aLine, $sGene){
+    if ($sCurrentSection == 'Phenotypes') {
+        return $aSection['objects'][(int) $aLine['diseaseid']]->getForm();
+    }
+
+    if ($sCurrentSection == 'Variants_On_Transcripts'){
+        return $aSection['objects'][$sGene]->getForm();
+    }
+
+    return $aSection['object']->getForm();
 }
 
 
@@ -796,14 +812,7 @@ if (POST) {
                     $_POST['workID'] = '';
                 }
 
-                if ($sCurrentSection == 'Phenotypes') {
-                    $aForm = $aSection['objects'][(int) $aLine['diseaseid']]->getForm();
-                } elseif ($sCurrentSection == 'Variants_On_Transcripts'){
-                    $aForm = $aSection['objects'][$sGene]->getForm();
-                } else {
-                    $aForm = $aSection['object']->getForm();
-                }
-
+                $aForm = lovd_getFormForCurrentSection($sCurrentSection, $aSection, $aLine, $sGene);
                 lovd_setEmptyCheckboxFields($aForm);
             }
 
@@ -855,7 +864,6 @@ if (POST) {
                     // Here we create an array with all columns that are different in the DB and in the file.
                     $aDifferences = lovd_calculateFieldDifferences($zData, $aLine);
                     lovd_appendDbDataToImportAndUpdateArray($zData);
-                    var_dump($aDifferences);
                     // Calculate number of differences.
                     // Note: This also filters out any linking tables, because they can't have a difference between $zData and $aLine.
                     $nDifferences = 0;
