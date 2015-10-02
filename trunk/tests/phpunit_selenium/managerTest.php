@@ -4,7 +4,7 @@
  * LEIDEN OPEN VARIATION DATABASE (LOVD)
  *
  * Created     : 2014-12-19
- * Modified    : 2015-07-31:14:40:39
+ * Modified    : 2015-10-02:10:58:30
  * For LOVD    : 3.0-12
  *
  * Copyright   : 2014 Leiden University Medical Center; http://www.LUMC.nl/
@@ -66,6 +66,7 @@ class manager_tests extends PHPUnit_Extensions_SeleniumTestCase
         $this->waitForPageToLoad("30000");
         $this->type("name=institute", "Leiden University Medical Center");
         $this->type("name=email_address", "noreply@LOVD.nl");
+        $this->select("name=refseq_build", "label=hg19 / GRCh37");
         $this->click("name=send_stats");
         $this->click("name=include_in_listing");
         $this->click("name=lock_uninstall");
@@ -413,7 +414,7 @@ class manager_tests extends PHPUnit_Extensions_SeleniumTestCase
         $this->click("css=input[type=\"button\"]");
         $this->waitForPageToLoad("30000");
         $this->assertTrue((bool)preg_match('/^[\s\S]*\/trunk\/src\/submit\/screening\/0000000002$/',$this->getLocation()));
-        sleep(90);
+        sleep(200);
         $this->open("/svn/LOVD3_development/trunk/src/ajax/map_variants.php");
         $this->open("/svn/LOVD3_development/trunk/src/ajax/map_variants.php");
         $this->open("/svn/LOVD3_development/trunk/src/ajax/map_variants.php");
@@ -489,8 +490,6 @@ class manager_tests extends PHPUnit_Extensions_SeleniumTestCase
         $this->assertTrue((bool)preg_match('/^[\s\S]*trunk\/src\/variants[\s\S]create&reference=Transcript&geneid=ARSD$/',$this->getLocation()));
         $this->uncheck("name=ignore_00002");
         $this->uncheck("name=ignore_00003");
-        $this->check("name=ignore_00004");
-        $this->check("name=ignore_00005");
         $this->type("name=00002_VariantOnTranscript/Exon", "3");
         $this->type("name=00002_VariantOnTranscript/DNA", "c.62T>A");
         $this->click("css=button.mapVariant");
