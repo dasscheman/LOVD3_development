@@ -4,7 +4,7 @@
  * LEIDEN OPEN VARIATION DATABASE (LOVD)
  *
  * Created     : 2014-12-19
- * Modified    : 2015-10-06:09:04:25
+ * Modified    : 2015-10-06:15:19:51
  * For LOVD    : 3.0-12
  *
  * Copyright   : 2014 Leiden University Medical Center; http://www.LUMC.nl/
@@ -513,7 +513,7 @@ class admin_tests extends PHPUnit_Extensions_SeleniumTestCase
         $this->assertEquals("138 variants were imported, 1 variant could not be imported.", $this->getText("id=lovd__progress_message"));
         $this->click("css=input[type=\"button\"]");
         $this->waitForPageToLoad("30000");
-        sleep(200);
+        sleep(400);
         $this->open("/svn/LOVD3_development/trunk/src/ajax/map_variants.php");
         $this->open("/svn/LOVD3_development/trunk/src/ajax/map_variants.php");
         $this->open("/svn/LOVD3_development/trunk/src/ajax/map_variants.php");
@@ -572,7 +572,7 @@ class admin_tests extends PHPUnit_Extensions_SeleniumTestCase
         $this->type("name=00003_VariantOnTranscript/Exon", "3");
         $this->type("name=00002_VariantOnTranscript/DNA", "c.62T>C");
         $this->click("css=button.mapVariant");
-        sleep(3);
+        sleep(6);
         $RnaChange = $this->getEval("window.document.getElementById('variantForm').elements[4].value");
         $this->assertTrue((bool)preg_match('/^r\.\([\s\S]\)$/',$this->getExpression($RnaChange)));
         $ProteinChange = $this->getEval("window.document.getElementById('variantForm').elements[5].value");
