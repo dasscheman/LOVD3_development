@@ -878,7 +878,7 @@ if (POST) {
                 if ($zData) {
                     // Here we create an array with all columns that are different in the DB and in the file.
                     $aDifferences = lovd_calculateFieldDifferences($zData, $aLine);
-                    lovd_appendDbDataToImportAndUpdateArray($zData);
+                    lovd_appendDbDataToLineAndDiffArray($zData);
                     // Calculate number of differences.
                     // Note: This also filters out any linking tables, because they can't have a difference between $zData and $aLine.
                     $nDifferences = 0;
