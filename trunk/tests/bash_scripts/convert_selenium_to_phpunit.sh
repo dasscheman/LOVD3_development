@@ -65,7 +65,7 @@ NEWSCHREENSHOTURL=${NEWSETBROWSERURL}"/tests/test_results/error_screenshots"
 echo Default browser URL: ${NEWSETBROWSERURL}
 echo Screenshot Path: ${NEWSCREENSHOTPATH}
 echo Screenshot URL: ${NEWSCHREENSHOTURL}
-exit
+
 
 # Used to change de modify date.
 DATE=`date +%Y-%m-%d:%H:%M:%S`
