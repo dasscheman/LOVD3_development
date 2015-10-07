@@ -20,10 +20,10 @@ before_install:
   - ./trunk/tests/travis/setup/setup_mysql.sh
 
 before_script:
-  - ./trunk/tests/travis/setup/setup_apache.sh
+  - ./trunk/tests/travis/setup/setup_apache.sh --githubaccount=dasscheman
   ## IMPORTANT! convert must be run AFTER the setup_apache.sh
   ## setup_apache.sh fix some assumptions where the files are stored!
-  - ./trunk/tests/bash_scripts/convert_selenium_to_phpunit.sh --localhost=trunk --continueall
+  - ./trunk/tests/bash_scripts/convert_selenium_to_phpunit.sh --localhost=LOVD3_development --continueall
   - ./trunk/tests/travis/setup/setup_selenium_server.sh
 
 script:

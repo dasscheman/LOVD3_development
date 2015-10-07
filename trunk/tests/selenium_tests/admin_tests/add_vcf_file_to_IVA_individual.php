@@ -55,6 +55,16 @@ class Example extends PHPUnit_Extensions_SeleniumTestCase
     $this->open("/svn/LOVD3/trunk/src/ajax/map_variants.php");
     $this->open("/svn/LOVD3/trunk/src/ajax/map_variants.php");
     $this->open("/svn/LOVD3/trunk/src/ajax/map_variants.php");
+    $this->open("/svn/LOVD3/trunk/src/ajax/map_variants.php");
+    $this->open("/svn/LOVD3/trunk/src/ajax/map_variants.php");
+    $this->open("/svn/LOVD3/trunk/src/ajax/map_variants.php");
+    $this->open("/svn/LOVD3/trunk/src/ajax/map_variants.php");
+    $this->open("/svn/LOVD3/trunk/src/ajax/map_variants.php");
+    $this->open("/svn/LOVD3/trunk/src/ajax/map_variants.php");
+    $this->open("/svn/LOVD3/trunk/src/ajax/map_variants.php");
+    $this->open("/svn/LOVD3/trunk/src/ajax/map_variants.php");
+    $this->open("/svn/LOVD3/trunk/src/ajax/map_variants.php");
+    $this->open("/svn/LOVD3/trunk/src/ajax/map_variants.php");
     $this->assertEquals("0 99 There are no variants to map in the database", $this->getText("css=body"));
   }
 }
