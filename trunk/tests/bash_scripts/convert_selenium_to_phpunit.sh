@@ -261,10 +261,10 @@ for file in "${PHPUNITTESTTPATH}"/*
 do
     echo "Fix:" ${file}
     data=`grep -A 2000 "<?php" ${file} |
-        sed "s@this->open(\".*./trunk/@this->open(\"$LOCALHOSTDIR/trunk/@" |
+        sed "s@this->open(\".*./src/@this->open(\"$LOCALHOSTDIR/src/@" |
         sed 's/0)$/0);/' |
-        sed "s@name=variant_file.*./trunk/tests/test_data_files/@name=variant_file\"\, \"$TESTDATATPATH@" |
-        sed "s@name=import.*./trunk/tests/test_data_files/@name=import\"\, \"$TESTDATATPATH@"`
+        sed "s@name=variant_file.*./tests/test_data_files/@name=variant_file\"\, \"$TESTDATATPATH@" |
+        sed "s@name=import.*./tests/test_data_files/@name=import\"\, \"$TESTDATATPATH@"`
     echo "${data}">${file}
     sleep 1
     echo "done"
