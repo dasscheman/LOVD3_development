@@ -30,7 +30,7 @@ done
 # * can be a folder or nothing.
 # This is done because of the local folder structure, which I don't want to change.
 echo 'Set localhost directory.'
-sudo sed -i -e "s,/var/www,/${LOCALHOSTFOLDER},g" /etc/apache2/sites-available/default
+sudo sed -i -e "s,/var/www,/home/travis/build/${LOCALHOSTFOLDER},g" /etc/apache2/sites-available/default
 sudo sed -i -e "s,AllowOverride[ ]None,AllowOverride All,g" /etc/apache2/sites-available/default
 
 echo 'Mail agent must be installed.'
