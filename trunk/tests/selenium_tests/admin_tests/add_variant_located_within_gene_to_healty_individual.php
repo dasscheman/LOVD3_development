@@ -23,8 +23,10 @@ class Example extends PHPUnit_Extensions_SeleniumTestCase
     $this->click("css=button.mapVariant");
     sleep(10);
     $RnaChange = $this->getEval("window.document.getElementById('variantForm').elements[4].value");
+$this->assertContains("submit", $this->getExpression($RnaChangeTwo));
     $this->assertTrue((bool)preg_match('/^r\.\([\s\S]\)$/',$this->getExpression($RnaChange)));
     $ProteinChange = $this->getEval("window.document.getElementById('variantForm').elements[5].value");
+$this->assertContains("p.(Leu21Pro)",  $this->getExpression($ProteinChangeTwo));
     $this->assertTrue((bool)preg_match('/^p\.\(Tyr152[\s\S]*\)$/',$this->getExpression($ProteinChange)));
     $GenomicDnaChange = $this->getEval("window.document.getElementById('variantForm').elements[10].value");
     $this->assertEquals("g.40702987T>G", $this->getExpression($GenomicDnaChange));
