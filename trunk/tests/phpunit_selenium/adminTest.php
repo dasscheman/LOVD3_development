@@ -4,7 +4,7 @@
  * LEIDEN OPEN VARIATION DATABASE (LOVD)
  *
  * Created     : 2014-12-19
- * Modified    : 2015-10-07:17:31:11
+ * Modified    : 2015-10-08:11:08:51
  * For LOVD    : 3.0-12
  *
  * Copyright   : 2014 Leiden University Medical Center; http://www.LUMC.nl/
@@ -251,7 +251,13 @@ class admin_tests extends PHPUnit_Extensions_SeleniumTestCase
         $this->type("name=00001_VariantOnTranscript/Exon", "2");
         $this->type("name=00001_VariantOnTranscript/DNA", "c.456T>G");
         $this->click("css=button.mapVariant");
-        sleep(10);
+        for ($second = 0; ; $second++) {
+                if ($second >= 60) $this->fail("timeout");
+                try {
+                        if ($this->isElementPresent("css=img[alt=\"Prediction OK!\"]")) break;
+                } catch (Exception $e) {}
+                sleep(1);
+        }
         $RnaChange = $this->getEval("window.document.getElementById('variantForm').elements[4].value");
         $this->assertTrue((bool)preg_match('/^r\.\([\s\S]\)$/',$this->getExpression($RnaChange)));
         $ProteinChange = $this->getEval("window.document.getElementById('variantForm').elements[5].value");
@@ -582,7 +588,13 @@ class admin_tests extends PHPUnit_Extensions_SeleniumTestCase
         $this->type("name=00003_VariantOnTranscript/Exon", "3");
         $this->type("name=00002_VariantOnTranscript/DNA", "c.62T>C");
         $this->click("css=button.mapVariant");
-        sleep(10);
+        for ($second = 0; ; $second++) {
+                if ($second >= 60) $this->fail("timeout");
+                try {
+                        if ($this->isElementPresent("css=img[alt=\"Prediction OK!\"]")) break;
+                } catch (Exception $e) {}
+                sleep(1);
+        }
         $RnaChange = $this->getEval("window.document.getElementById('variantForm').elements[4].value");
         $this->assertTrue((bool)preg_match('/^r\.\([\s\S]\)$/',$this->getExpression($RnaChange)));
         $ProteinChange = $this->getEval("window.document.getElementById('variantForm').elements[5].value");

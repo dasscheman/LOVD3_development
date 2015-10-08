@@ -10,8 +10,6 @@ class Example extends PHPUnit_Extensions_SeleniumTestCase
   public function testMyTestCase()
   {
     $this->open("/svn/LOVD3/trunk/src/install/");
-    $this->assertContains("/trunk/src/install/", $this->getLocation());
-    //$this->assertContains("submit", $this->getBodyText());
     $this->click("css=input[type=\"submit\"]");
     $this->waitForPageToLoad("30000");
     $this->assertTrue((bool)preg_match('/^[\s\S]*\/src\/install\/[\s\S]step=1$/',$this->getLocation()));
