@@ -4,7 +4,7 @@
  * LEIDEN OPEN VARIATION DATABASE (LOVD)
  *
  * Created     : 2014-12-19
- * Modified    : 2015-10-08:12:10:55
+ * Modified    : 2015-10-08:14:28:10
  * For LOVD    : 3.0-12
  *
  * Copyright   : 2014 Leiden University Medical Center; http://www.LUMC.nl/
@@ -44,7 +44,7 @@ class temp_tests extends PHPUnit_Extensions_SeleniumTestCase
     }
     public function testInstallLOVD()
     {
-        $this->open("/LOVD3_development/trunk/src//install/");
+        $this->open("/LOVD3_development/trunk/src/install/");
         $this->click("css=input[type=\"submit\"]");
         $this->waitForPageToLoad("30000");
         $this->assertTrue((bool)preg_match('/^[\s\S]*\/src\/install\/[\s\S]step=1$/',$this->getLocation()));
@@ -86,13 +86,13 @@ class temp_tests extends PHPUnit_Extensions_SeleniumTestCase
     }
     public function testCreateGeneIVD()
     {
-        $this->open("/LOVD3_development/trunk/src//logout");
-        $this->open("/LOVD3_development/trunk/src//login");
+        $this->open("/LOVD3_development/trunk/src/logout");
+        $this->open("/LOVD3_development/trunk/src/login");
         $this->type("name=username", "admin");
         $this->type("name=password", "test1234");
         $this->click("css=input[type=\"submit\"]");
         $this->waitForPageToLoad("30000");
-        $this->open("/LOVD3_development/trunk/src//genes?create");
+        $this->open("/LOVD3_development/trunk/src/genes?create");
         $this->type("name=hgnc_id", "IVD");
         $this->click("css=input[type=\"submit\"]");
         $this->waitForPageToLoad("30000");
@@ -106,7 +106,7 @@ class temp_tests extends PHPUnit_Extensions_SeleniumTestCase
     }
     public function testCreateDiseaseIVA()
     {
-        $this->open("/LOVD3_development/trunk/src//diseases?create");
+        $this->open("/LOVD3_development/trunk/src/diseases?create");
         $this->type("name=symbol", "IVA");
         $this->type("name=name", "isovaleric acidemia");
         $this->type("name=id_omim", "243500");
@@ -117,7 +117,7 @@ class temp_tests extends PHPUnit_Extensions_SeleniumTestCase
     }
     public function testCreateIndividualDiagnosedWithIVA()
     {
-        $this->open("/LOVD3_development/trunk/src//submit");
+        $this->open("/LOVD3_development/trunk/src/submit");
         $this->click("//div/table/tbody/tr/td/table/tbody/tr/td[2]/b");
         $this->waitForPageToLoad("30000");
         $this->assertTrue((bool)preg_match('/^[\s\S]*\/src\/individuals[\s\S]create$/',$this->getLocation()));
@@ -206,7 +206,7 @@ class temp_tests extends PHPUnit_Extensions_SeleniumTestCase
     }
     public function testConfirmVariantToIVAIndividual()
     {
-        $this->open("/LOVD3_development/trunk/src//submit/screening/0000000001");
+        $this->open("/LOVD3_development/trunk/src/submit/screening/0000000001");
         $this->chooseOkOnNextConfirmation();
         $this->waitForPageToLoad("30000");
         $this->click("//div/table/tbody/tr/td/table/tbody/tr[2]/td[2]/b");
@@ -244,13 +244,13 @@ class temp_tests extends PHPUnit_Extensions_SeleniumTestCase
     }
     public function testUninstallLOVD()
     {
-        $this->open("/LOVD3_development/trunk/src//logout");
-        $this->open("/LOVD3_development/trunk/src//login");
+        $this->open("/LOVD3_development/trunk/src/logout");
+        $this->open("/LOVD3_development/trunk/src/login");
         $this->type("name=username", "admin");
         $this->type("name=password", "test1234");
         $this->click("css=input[type=\"submit\"]");
         $this->waitForPageToLoad("30000");
-        $this->open("/LOVD3_development/trunk/src//uninstall");
+        $this->open("/LOVD3_development/trunk/src/uninstall");
         $this->type("name=password", "test1234");
         $this->click("css=input[type=\"submit\"]");
         $this->waitForPageToLoad("30000");

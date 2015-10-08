@@ -253,15 +253,17 @@ echo -----------------------end---------------------------
 
 # There are three bugs/issues with the selenium export file.
 # 1 The base url is not used. Therefore the directory in the open functions have to be modified.
-# 2 In some cases the ";" is not put at the end of a line.
-# 3 When files are imported the location must be modified, depending on the installation.
+# 2 The base url is not used. Therefore the directory in the open functions have to be modified.
+# 3 In some cases the ";" is not put at the end of a line.
 # 4 When files are imported the location must be modified, depending on the installation.
+# 5 When files are imported the location must be modified, depending on the installation.
 echo --------------Fix Selenium export bugs---------------
 for file in "${PHPUNITTESTTPATH}"/*
 do
     echo "Fix:" ${file}
     data=`grep -A 2000 "<?php" ${file} |
         sed "s@this->open(\".*./src@this->open(\"$LOCALHOSTDIR/src@" |
+        sed "s@this->open(\".*./tests@this->open(\"$LOCALHOSTDIR/tests@" |
         sed 's/0)$/0);/' |
         sed "s@name=variant_file.*./tests/test_data_files/@name=variant_file\"\, \"$TESTDATATPATH@" |
         sed "s@name=import.*./tests/test_data_files/@name=import\"\, \"$TESTDATATPATH@"`
