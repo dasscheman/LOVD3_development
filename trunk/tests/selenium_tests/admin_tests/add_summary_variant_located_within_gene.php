@@ -35,8 +35,10 @@ class Example extends PHPUnit_Extensions_SeleniumTestCase
     $this->select("name=00002_effect_reported", "label=Probably affects function");
     $this->select("name=00002_effect_concluded", "label=Probably does not affect function");
     $RnaChangeTwo = $this->getEval("window.document.getElementById('variantForm').elements[4].value");
+$this->assertContains("submit", $this->getExpression($RnaChangeTwo));
     $this->assertTrue((bool)preg_match('/^r\.\([\s\S]\)$/',$this->getExpression($RnaChangeTwo)));
     $ProteinChangeTwo = $this->getEval("window.document.getElementById('variantForm').elements[5].value");
+$this->assertContains("p.(Leu21Pro)",  $this->getExpression($ProteinChangeTwo));
     $this->assertEquals("p.(Leu21Pro)", $this->getExpression($ProteinChangeTwo));
     $this->select("name=00003_effect_reported", "label=Probably affects function");
     $this->select("name=00003_effect_concluded", "label=Probably does not affect function");

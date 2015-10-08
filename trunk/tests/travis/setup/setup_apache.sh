@@ -33,7 +33,7 @@ echo 'Set localhost directory.'
 sudo sed -i -e "s,/var/www,/home/travis/build/${LOCALHOSTFOLDER},g" /etc/apache2/sites-available/default
 sudo sed -i -e "s,AllowOverride[ ]None,AllowOverride All,g" /etc/apache2/sites-available/default
 
-echo 'Mail agent must be installed.'
+echo 'Intall mail agent.'
 # Pass the -y flag to suppress interactive requests.
 sudo apt-get -qq -y install exim4 apcupsd nmap
 
