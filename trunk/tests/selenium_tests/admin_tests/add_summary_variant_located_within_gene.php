@@ -27,6 +27,7 @@ class Example extends PHPUnit_Extensions_SeleniumTestCase
     $this->type("name=00003_VariantOnTranscript/Exon", "3");
     $this->type("name=00002_VariantOnTranscript/DNA", "c.62T>C");
     $this->click("css=button.mapVariant");
+    sleep(3);
     for ($second = 0; ; $second++) {
         if ($second >= 60) $this->fail("timeout");
         try {

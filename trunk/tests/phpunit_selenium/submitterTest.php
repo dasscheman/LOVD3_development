@@ -4,7 +4,7 @@
  * LEIDEN OPEN VARIATION DATABASE (LOVD)
  *
  * Created     : 2014-12-19
- * Modified    : 2015-10-08:11:08:51
+ * Modified    : 2015-10-08:12:10:55
  * For LOVD    : 3.0-12
  *
  * Copyright   : 2014 Leiden University Medical Center; http://www.LUMC.nl/
@@ -44,7 +44,7 @@ class submitter_tests extends PHPUnit_Extensions_SeleniumTestCase
     }
     public function testInstallLOVD()
     {
-        $this->open("/LOVD3_development/trunk/src/install/");
+        $this->open("/LOVD3_development/trunk/src//install/");
         $this->click("css=input[type=\"submit\"]");
         $this->waitForPageToLoad("30000");
         $this->type("name=name", "LOVD3 Admin");
@@ -100,7 +100,7 @@ class submitter_tests extends PHPUnit_Extensions_SeleniumTestCase
     }
     public function testCreateUserSubmitter()
     {
-        $this->open("/LOVD3_development/trunk/src/users?create&no_orcid");
+        $this->open("/LOVD3_development/trunk/src//users?create&no_orcid");
         $this->type("name=name", "Test Submitter");
         $this->type("name=institute", "Leiden University Medical Center");
         $this->type("name=department", "Human Genetics");
@@ -120,8 +120,8 @@ class submitter_tests extends PHPUnit_Extensions_SeleniumTestCase
     }
     public function testLoginAsSubmitter()
     {
-        $this->open("/LOVD3_development/trunk/src/logout");
-        $this->open("/LOVD3_development/trunk/src/login");
+        $this->open("/LOVD3_development/trunk/src//logout");
+        $this->open("/LOVD3_development/trunk/src//login");
         $this->assertTrue((bool)preg_match('/^[\s\S]*\/src\/login$/',$this->getLocation()));
         $this->type("name=username", "submitter");
         $this->type("name=password", "test1234");
@@ -130,15 +130,15 @@ class submitter_tests extends PHPUnit_Extensions_SeleniumTestCase
     }
     public function testCreateUserSubmitter2()
     {
-        $this->open("/LOVD3_development/trunk/src/users?create&no_orcid");
+        $this->open("/LOVD3_development/trunk/src//users?create&no_orcid");
         $this->assertEquals("To access this area, you need at least Manager clearance.", $this->getText("css=table[class=info]"));
     }
     public function testCreateDiseaseCMT()
     {
-        $this->open("/LOVD3_development/trunk/src/diseases?create");
+        $this->open("/LOVD3_development/trunk/src//diseases?create");
         $this->assertEquals("To access this area, you need at least Curator clearance.", $this->getText("css=table[class=info]"));
-        $this->open("/LOVD3_development/trunk/src/logout");
-        $this->open("/LOVD3_development/trunk/src/login");
+        $this->open("/LOVD3_development/trunk/src//logout");
+        $this->open("/LOVD3_development/trunk/src//login");
         $this->assertTrue((bool)preg_match('/^[\s\S]*\/src\/login$/',$this->getLocation()));
         $this->type("name=username", "admin");
         $this->type("name=password", "test1234");
@@ -156,8 +156,8 @@ class submitter_tests extends PHPUnit_Extensions_SeleniumTestCase
         $this->assertEquals("Successfully created the disease information entry!", $this->getText("css=table[class=info]"));
         $this->waitForPageToLoad("4000");
         $this->assertTrue((bool)preg_match('/^[\s\S]*\/src\/diseases\/00001$/',$this->getLocation()));
-        $this->open("/LOVD3_development/trunk/src/logout");
-        $this->open("/LOVD3_development/trunk/src/login");
+        $this->open("/LOVD3_development/trunk/src//logout");
+        $this->open("/LOVD3_development/trunk/src//login");
         $this->assertTrue((bool)preg_match('/^[\s\S]*\/src\/login$/',$this->getLocation()));
         $this->type("name=username", "submitter");
         $this->type("name=password", "test1234");
@@ -301,17 +301,17 @@ class submitter_tests extends PHPUnit_Extensions_SeleniumTestCase
     }
     public function testAddSeatlleseqFileToCMTIndividual()
     {
-        $this->open("/LOVD3_development/trunk/src/variants/upload?create&target=0000000002");
+        $this->open("/LOVD3_development/trunk/src//variants/upload?create&target=0000000002");
         $this->assertEquals("To access this area, you need at least Manager clearance.", $this->getText("css=table[class=info]"));
     }
     public function testAddVcfFileToCMTIndividual()
     {
-        $this->open("/LOVD3_development/trunk/src/variants/upload?create&target=0000000002");
+        $this->open("/LOVD3_development/trunk/src//variants/upload?create&target=0000000002");
         $this->assertEquals("To access this area, you need at least Manager clearance.", $this->getText("css=table[class=info]"));
     }
     public function testFinishIndividualDiagnosedWithCMT()
     {
-        $this->open("/LOVD3_development/trunk/src/submit/screening/0000000002");
+        $this->open("/LOVD3_development/trunk/src//submit/screening/0000000002");
         $this->assertTrue((bool)preg_match('/^[\s\S]*\/src\/submit\/screening\/0000000002$/',$this->getLocation()));
         $this->click("//tr[3]/td[2]/b");
         $this->waitForPageToLoad("30000");
@@ -321,28 +321,28 @@ class submitter_tests extends PHPUnit_Extensions_SeleniumTestCase
     }
     public function testAddSummaryVariantLocatedWithinGene()
     {
-        $this->open("/LOVD3_development/trunk/src/variants?create&reference=Transcript&geneid=GJB1");
+        $this->open("/LOVD3_development/trunk/src//variants?create&reference=Transcript&geneid=GJB1");
         $this->assertEquals("To access this area, you need at least Submitter (data owner) clearance.", $this->getText("css=table[class=info]"));
     }
     public function testAddSummaryVariantOnlyDescribedOnGenomicLevel()
     {
-        $this->open("/LOVD3_development/trunk/src/variants?create&reference=Genome");
+        $this->open("/LOVD3_development/trunk/src//variants?create&reference=Genome");
         $this->assertEquals("To access this area, you need at least Submitter (data owner) clearance.", $this->getText("css=table[class=info]"));
     }
     public function testAddSummaryVariantSeatlleseqFile()
     {
-        $this->open("/LOVD3_development/trunk/src/variants/upload?create&type=SeattleSeq");
+        $this->open("/LOVD3_development/trunk/src//variants/upload?create&type=SeattleSeq");
         $this->assertEquals("To access this area, you need at least Submitter (data owner) clearance.", $this->getText("css=table[class=info]"));
     }
     public function testAddSummaryVariantVcfFile()
     {
-        $this->open("/LOVD3_development/trunk/src/variants/upload?create&type=VCF");
+        $this->open("/LOVD3_development/trunk/src//variants/upload?create&type=VCF");
         $this->assertEquals("To access this area, you need at least Submitter (data owner) clearance.", $this->getText("css=table[class=info]"));
     }
     public function testLoginAsAdmin()
     {
-        $this->open("/LOVD3_development/trunk/src/logout");
-        $this->open("/LOVD3_development/trunk/src/login");
+        $this->open("/LOVD3_development/trunk/src//logout");
+        $this->open("/LOVD3_development/trunk/src//login");
         $this->assertTrue((bool)preg_match('/^[\s\S]*\/src\/login$/',$this->getLocation()));
         $this->type("name=username", "admin");
         $this->type("name=password", "test1234");
@@ -384,14 +384,14 @@ class submitter_tests extends PHPUnit_Extensions_SeleniumTestCase
     }
     public function testPostFinishAddVariantOnlyDescribedOnGenomicLevelToCMTIndividual()
     {
-        $this->open("/LOVD3_development/trunk/src/logout");
-        $this->open("/LOVD3_development/trunk/src/login");
+        $this->open("/LOVD3_development/trunk/src//logout");
+        $this->open("/LOVD3_development/trunk/src//login");
         $this->assertTrue((bool)preg_match('/^[\s\S]*\/src\/login$/',$this->getLocation()));
         $this->type("name=username", "submitter");
         $this->type("name=password", "test1234");
         $this->click("css=input[type=\"submit\"]");
         $this->waitForPageToLoad("30000");
-        $this->open("/LOVD3_development/trunk/src/");
+        $this->open("/LOVD3_development/trunk/src//");
         $this->click("id=tab_screenings");
         $this->waitForPageToLoad("30000");
         $this->assertTrue((bool)preg_match('/^[\s\S]*\/src\/screenings$/',$this->getLocation()));
@@ -504,18 +504,18 @@ class submitter_tests extends PHPUnit_Extensions_SeleniumTestCase
     }
     public function testDeleteGeneGJB()
     {
-        $this->open("/LOVD3_development/trunk/src/genes/GJB1?delete");
+        $this->open("/LOVD3_development/trunk/src//genes/GJB1?delete");
         $this->assertEquals("To access this area, you need at least Manager clearance.", $this->getText("css=table[class=info]"));
     }
     public function testUninstallLOVD()
     {
-        $this->open("/LOVD3_development/trunk/src/logout");
-        $this->open("/LOVD3_development/trunk/src/login");
+        $this->open("/LOVD3_development/trunk/src//logout");
+        $this->open("/LOVD3_development/trunk/src//login");
         $this->type("name=username", "admin");
         $this->type("name=password", "test1234");
         $this->click("css=input[type=\"submit\"]");
         $this->waitForPageToLoad("30000");
-        $this->open("/LOVD3_development/trunk/src/uninstall");
+        $this->open("/LOVD3_development/trunk/src//uninstall");
         $this->type("name=password", "test1234");
         $this->click("css=input[type=\"submit\"]");
         $this->waitForPageToLoad("30000");
