@@ -4,7 +4,7 @@
  * LEIDEN OPEN VARIATION DATABASE (LOVD)
  *
  * Created     : 2014-12-19
- * Modified    : 2015-10-08:14:28:10
+ * Modified    : 2015-10-09:08:45:13
  * For LOVD    : 3.0-12
  *
  * Copyright   : 2014 Leiden University Medical Center; http://www.LUMC.nl/
@@ -31,7 +31,7 @@
 class admin_tests extends PHPUnit_Extensions_SeleniumTestCase
 {
     protected $captureScreenshotOnFailure = TRUE;
-    protected $screenshotPath = '/home/dasscheman/svn/LOVD3_development/trunk/tests/test_results/error_screenshots';
+    protected $screenshotPath = '/home/daan/Website/LOVD3_development/trunk/tests/test_results/error_screenshots';
     protected $screenshotUrl = 'http://localhost/LOVD3_development/trunk/tests/test_results/error_screenshots';
   
     protected function setUp()
@@ -294,7 +294,7 @@ class admin_tests extends PHPUnit_Extensions_SeleniumTestCase
         $this->click("//div/table/tbody/tr/td/table/tbody/tr[2]/td[2]/b");
         $this->waitForPageToLoad("30000");
         $this->assertTrue((bool)preg_match('/^[\s\S]*\/src\/variants\/upload[\s\S]create&type=SeattleSeq&target=0000000001$/',$this->getLocation()));
-        $this->type("name=variant_file", "/home/dasscheman/svn/LOVD3_development/trunk/tests/test_data_files/ShortSeattleSeqAnnotation138v1.txt");
+        $this->type("name=variant_file", "/home/daan/Website/LOVD3_development/trunk/tests/test_data_files/ShortSeattleSeqAnnotation138v1.txt");
         $this->select("name=hg_build", "label=hg19");
         $this->select("name=dbSNP_column", "label=VariantOnGenome/Reference");
         $this->select("name=autocreate", "label=Create genes and transcripts");
@@ -509,7 +509,7 @@ class admin_tests extends PHPUnit_Extensions_SeleniumTestCase
         $this->click("//div/table/tbody/tr/td/table/tbody/tr/td[2]/b");
         $this->waitForPageToLoad("30000");
         $this->assertTrue((bool)preg_match('/^[\s\S]*\/src\/variants\/upload[\s\S]create&type=VCF&target=0000000003$/',$this->getLocation()));
-        $this->type("name=variant_file", "/home/dasscheman/svn/LOVD3_development/trunk/tests/test_data_files/ShortVCFfilev1.vcf");
+        $this->type("name=variant_file", "/home/daan/Website/LOVD3_development/trunk/tests/test_data_files/ShortVCFfilev1.vcf");
         $this->select("name=hg_build", "label=hg19");
         $this->select("name=dbSNP_column", "label=VariantOnGenome/Reference");
         $this->select("name=genotype_field", "label=Use Phred-scaled genotype likelihoods (PL)");
@@ -673,7 +673,7 @@ class admin_tests extends PHPUnit_Extensions_SeleniumTestCase
         $this->click("//div/table/tbody/tr/td/table/tbody/tr[2]/td[2]/b");
         $this->waitForPageToLoad("30000");
         $this->assertTrue((bool)preg_match('/^[\s\S]*\/src\/variants\/upload[\s\S]create&type=SeattleSeq$/',$this->getLocation()));
-        $this->type("name=variant_file", "/home/dasscheman/svn/LOVD3_development/trunk/tests/test_data_files/ShortSeattleSeqAnnotation138v1.txt");
+        $this->type("name=variant_file", "/home/daan/Website/LOVD3_development/trunk/tests/test_data_files/ShortSeattleSeqAnnotation138v1.txt");
         $this->select("name=hg_build", "label=hg19");
         $this->select("name=dbSNP_column", "label=VariantOnGenome/Reference");
         $this->select("name=autocreate", "label=Create genes and transcripts");
@@ -711,7 +711,7 @@ class admin_tests extends PHPUnit_Extensions_SeleniumTestCase
         $this->click("//div/table/tbody/tr/td/table/tbody/tr/td[2]/b");
         $this->waitForPageToLoad("30000");
         $this->open("/LOVD3_development/trunk/src/variants/upload?create&type=VCF");
-        $this->type("name=variant_file", "/home/dasscheman/svn/LOVD3_development/trunk/tests/test_data_files/ShortVCFfilev1.vcf");
+        $this->type("name=variant_file", "/home/daan/Website/LOVD3_development/trunk/tests/test_data_files/ShortVCFfilev1.vcf");
         $this->select("name=hg_build", "label=hg19");
         $this->select("name=dbSNP_column", "label=VariantOnGenome/Reference");
         $this->select("name=genotype_field", "label=Use Phred-scaled genotype likelihoods (PL)");
