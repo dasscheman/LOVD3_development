@@ -1,0 +1,18 @@
+{
+  "insertOutput": 0, 
+  "parseRegex": "", 
+  "doNotOpenOutputWindow": 0, 
+  "keyboard_shortcut": "", 
+  "name": "Convert Selenium to phpunit", 
+  "operateOnSelection": 0, 
+  "value": [
+    "./convert_selenium_to_phpunit.sh --localhost=LOVD3_development"
+  ], 
+  "cwd": "/home/daan/Website/LOVD3_development/trunk/tests/bash_scripts", 
+  "version": "1.0.12", 
+  "env": "", 
+  "showParsedOutputList": 0, 
+  "type": "command", 
+  "parseOutput": 0, 
+  "runIn": "command-output-window"
+}

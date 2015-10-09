@@ -163,6 +163,11 @@ function lovd_getUDForGene ($sBuild, $sGene)
     // Retrieves an UD for any given gene and genome build.
     // In principle, any build is supported, but we'll check against the available builds supported in LOVD.
     global $_CONF, $_SETT;
+	if (empty($_CONF['mutalyzer_soap_url'])) {
+		$mutalyzer_soap_url = "https://mutalyzer.nl/services";
+	} else {
+		$mutalyzer_soap_url = $_CONF['mutalyzer_soap_url'];
+	}
 
     if (!$sBuild || !is_string($sBuild) || !isset($_SETT['human_builds'][$sBuild])) {
         return false;
@@ -175,18 +180,17 @@ function lovd_getUDForGene ($sBuild, $sGene)
     $sUD = '';
 
     // Let's get the mapping information.
-    $sJSONResponse = @file_get_contents(str_replace('/services', '', $_CONF['mutalyzer_soap_url']) . '/json/getGeneLocation?build=' . $sBuild . '&gene=' . $sGene);
-    if ($sJSONResponse && $aResponse = json_decode($sJSONResponse, true)) {
+    $sJSONResponse = @file_get_contents(str_replace('/services', '', $mutalyzer_soap_url) . '/json/getGeneLocation?build=' . $sBuild . '&gene=' . $sGene);
+	if ($sJSONResponse && $aResponse = json_decode($sJSONResponse, true)) {
         $sChromosome = $_SETT['human_builds'][$sBuild]['ncbi_sequences'][substr($aResponse['chromosome_name'], 3)];
         $nStart = $aResponse['start'] - ($aResponse['orientation'] == 'forward'? 5000 : 2000);
         $nEnd = $aResponse['stop'] + ($aResponse['orientation'] == 'forward'? 2000 : 5000);
-        $sJSONResponse = @file_get_contents(str_replace('/services', '', $_CONF['mutalyzer_soap_url']) . '/json/sliceChromosome?chromAccNo=' . $sChromosome . '&start=' . $nStart . '&end=' . $nEnd . '&orientation=' . ($aResponse['orientation'] == 'forward'? 1 : 2));
+        $sJSONResponse = @file_get_contents(str_replace('/services', '', $mutalyzer_soap_url) . '/json/sliceChromosome?chromAccNo=' . $sChromosome . '&start=' . $nStart . '&end=' . $nEnd . '&orientation=' . ($aResponse['orientation'] == 'forward'? 1 : 2));
         if ($sJSONResponse && $aResponse = json_decode($sJSONResponse, true)) {
             $sResponse = (!is_array($aResponse)? $aResponse : implode('', $aResponse));
             $sUD = $sResponse;
         }
     }
-
     return $sUD;
 }
 
@@ -394,8 +398,6 @@ $nUDsRequested = 0;
 $nTimeSpentGettingTranscripts = 0;
 $nTranscriptsRequested = 0;
 
-
-
 // Loop through the data and write it to the file.
 print("\n");
 foreach ($aHGNCFile as $nLine => $sLine) {
@@ -421,7 +423,6 @@ foreach ($aHGNCFile as $nLine => $sLine) {
     foreach ($aHGNCColumns as $nKey => $sName) {
         $aLine[$sName] = $aLineTMP[$nKey];
     }
-
     // Ignore genes from the bad locus groups.
     if (in_array($aLine['gd_locus_group'], $aBadLocusGroups)) {
         continue;
@@ -447,6 +448,8 @@ foreach ($aHGNCFile as $nLine => $sLine) {
     } else {
         continue;
     }
+
+
     // Genomic refseq...
     if (isset($aLRGs[$aLine['gd_app_sym']])) {
         $sRefseqGenomic = $aLRGs[$aLine['gd_app_sym']];
@@ -455,9 +458,12 @@ foreach ($aHGNCFile as $nLine => $sLine) {
     } else {
         $sRefseqGenomic = $_SETT['human_builds']['hg19']['ncbi_sequences'][$sChromosome];
     }
+
+
     // UD... But we won't request it ofcourse, if we already have it!
     $sRefseqUD = (!isset($aParsed['Genes']['data'][$aLine['gd_app_sym']])? '' : $aParsed['Genes']['data'][$aLine['gd_app_sym']]['refseq_UD']);
-    if (!$sRefseqUD) {
+   if (!$sRefseqUD) {
+
         $t = microtime(true);
         $sRefseqUD = lovd_getUDForGene('hg19', $aLine['gd_app_sym']);
         $nTimeSpentGettingUDs += (microtime(true) - $t);
@@ -477,6 +483,8 @@ foreach ($aHGNCFile as $nLine => $sLine) {
     $sJSONResponse = @implode('', file('https://mutalyzer.nl/json/getTranscriptsAndInfo?genomicReference=' . $sRefseqUD . '&geneName=' . $aLine['gd_app_sym']));
     $nTimeSpentGettingTranscripts += (microtime(true) - $t);
     $nTranscriptsRequested ++;
+
+
     if ($sJSONResponse && $aResponse = json_decode($sJSONResponse, true)) {
         // We have to go three layers deep; through the response, then through the result, then read out TranscriptInfo.
         $aTranscriptsInUD = array();
@@ -504,55 +512,62 @@ foreach ($aHGNCFile as $nLine => $sLine) {
         }
 
         if (count($aTranscriptsInUD)) {
-            // Now we must make a choice based on the transcripts we found. During mapping, we actually verify our choice by performing
-            // multiple mappings and picking the first successful one, but we don't have that luxery right now (although we could
-            // do fake mapping if we want to).
-            // By limiting ourselves to transcripts found in the UD we automatically filter the transcripts; HGNC for instance,
-            // suggests NC, NG, NM, NP, NR, XM, XR, NT and YP refseqs.
-            // 1) We'll try the transcript(s) provided by the HGNC. If they provide more, we'll just pick the first one that can be found in the UD.
-            $aTranscriptsFromHGNC = preg_split('/\s?[,;]\s?/', $aLine['gd_pub_refseq_ids']); // Currently HGVS is splitting on ' ,', but this is more flexible.
-            // And the refseq provided by the HGNC that they got from somewhere else. Could also be NGs etc, but never more than one.
-            $aTranscriptsFromHGNC[] = $aLine['md_refseq_id'];
-            foreach ($aTranscriptsFromHGNC as $sTranscriptID) {
-                // HGNC doesn't often use versions in the transcripts they have stored, but sometimes they do.
-                // We're currently ignoring any version number given by HGNC.
-                $sIDWithoutVersion = preg_replace('/\.\d+$/', '', $sTranscriptID);
-                if (isset($aTranscriptsInUD[$sIDWithoutVersion])) {
-                    // We might have different versions here in this array. Pick the highest one.
-                    $nVersion = max(array_keys($aTranscriptsInUD[$sIDWithoutVersion]));
-                    $sRefseqTranscript = $sIDWithoutVersion . '.' . $nVersion;
-                    // Done, stop searching for transcripts.
-                    break;
-                }
-            }
-            // 2) Here we'll have some 9.500 genes left. Normally, we would now go find an LOVD and request that LOVD's API to see which transcript that one uses.
-            // But that will slow this script down a lot (~1hr at 4 requests a sec), and we want to be fast...!
-            // FIXME: Perhaps find a nice solution for this? Being able to get to the LOVD file itself already helps a lot!
-            /*
-            if (!$sRefseqTranscript) {
-                // The HGNC does not have a transcript accession for this gene. Get one from LOVD.
-                // FIXME; don't use file_get_contents() but instead lovd_php_file().
-                $sGeneLink = @substr($sGeneLink = @file_get_contents('http://www.lovd.nl/' . $sSymbol . '?getURL'), 0, @strpos($sGeneLink, "\n"));
-                $aGeneInfo = @explode("\n", @file_get_contents($sGeneLink . 'api/rest.php/genes/' . $sSymbol));
-                if (!empty($aGeneInfo) && is_array($aGeneInfo)) {
-                    foreach ($aGeneInfo as $sLine) {
-                        preg_match('/refseq_mrna[\s]*:[\s]*([\S]+\.[\S]+)/', $sLine, $aMatches);
-                        if (!empty($aMatches)) {
-                            $aRefseqsTranscript[] = array('id_ncbi' => $aMatches[1]);
-                            break;
-                        }
-                    }
-                }
-            }
-            */
-            // So OK, we'll just grab the first transcript found in the UD!
-            if (!$sRefseqTranscript) {
-                // We couldn't get any recommended transcripts from HGNC or the LOVD api, so we will just default to the first transcript that Mutalyzer returns.
-                $sIDWithoutVersion = key($aTranscriptsInUD);
-                // We might have different versions here in this array. Pick the highest one.
-                $nVersion = max(array_keys($aTranscriptsInUD[$sIDWithoutVersion]));
-                $sRefseqTranscript = $sIDWithoutVersion . '.' . $nVersion;
-            }
+			$aTranscriptList = lovd_php_file('./transcripts.txt');
+			foreach ($aTranscriptList as $key => $value) {
+				if (false !== stripos($value, $aLine['md_refseq_id'])) {
+					$sRefseqTranscript = $value;
+				}
+			}
+
+            //// Now we must make a choice based on the transcripts we found. During mapping, we actually verify our choice by performing
+            //// multiple mappings and picking the first successful one, but we don't have that luxery right now (although we could
+            //// do fake mapping if we want to).
+            //// By limiting ourselves to transcripts found in the UD we automatically filter the transcripts; HGNC for instance,
+            //// suggests NC, NG, NM, NP, NR, XM, XR, NT and YP refseqs.
+            //// 1) We'll try the transcript(s) provided by the HGNC. If they provide more, we'll just pick the first one that can be found in the UD.
+            //$aTranscriptsFromHGNC = preg_split('/\s?[,;]\s?/', $aLine['gd_pub_refseq_ids']); // Currently HGVS is splitting on ' ,', but this is more flexible.
+            //// And the refseq provided by the HGNC that they got from somewhere else. Could also be NGs etc, but never more than one.
+            //$aTranscriptsFromHGNC[] = $aLine['md_refseq_id'];
+            //foreach ($aTranscriptsFromHGNC as $sTranscriptID) {
+            //    // HGNC doesn't often use versions in the transcripts they have stored, but sometimes they do.
+            //    // We're currently ignoring any version number given by HGNC.
+            //    $sIDWithoutVersion = preg_replace('/\.\d+$/', '', $sTranscriptID);
+            //    if (isset($aTranscriptsInUD[$sIDWithoutVersion])) {
+            //        // We might have different versions here in this array. Pick the highest one.
+            //        $nVersion = max(array_keys($aTranscriptsInUD[$sIDWithoutVersion]));
+            //        $sRefseqTranscript = $sIDWithoutVersion . '.' . $nVersion;
+            //        // Done, stop searching for transcripts.
+            //        break;
+            //    }
+            //}
+            //// 2) Here we'll have some 9.500 genes left. Normally, we would now go find an LOVD and request that LOVD's API to see which transcript that one uses.
+            //// But that will slow this script down a lot (~1hr at 4 requests a sec), and we want to be fast...!
+            //// FIXME: Perhaps find a nice solution for this? Being able to get to the LOVD file itself already helps a lot!
+            ///*
+            //if (!$sRefseqTranscript) {
+            //    // The HGNC does not have a transcript accession for this gene. Get one from LOVD.
+            //    // FIXME; don't use file_get_contents() but instead lovd_php_file().
+            //    $sGeneLink = @substr($sGeneLink = @file_get_contents('http://www.lovd.nl/' . $sSymbol . '?getURL'), 0, @strpos($sGeneLink, "\n"));
+            //    $aGeneInfo = @explode("\n", @file_get_contents($sGeneLink . 'api/rest.php/genes/' . $sSymbol));
+            //    if (!empty($aGeneInfo) && is_array($aGeneInfo)) {
+            //        foreach ($aGeneInfo as $sLine) {
+            //            preg_match('/refseq_mrna[\s]*:[\s]*([\S]+\.[\S]+)/', $sLine, $aMatches);
+            //            if (!empty($aMatches)) {
+            //                $aRefseqsTranscript[] = array('id_ncbi' => $aMatches[1]);
+            //                break;
+            //            }
+            //        }
+            //    }
+            //}
+            //*/
+            //// So OK, we'll just grab the first transcript found in the UD!
+            //if (!$sRefseqTranscript) {
+            //    // We couldn't get any recommended transcripts from HGNC or the LOVD api, so we will just default to the first transcript that Mutalyzer returns.
+            //    $sIDWithoutVersion = key($aTranscriptsInUD);
+            //    // We might have different versions here in this array. Pick the highest one.
+            //    $nVersion = max(array_keys($aTranscriptsInUD[$sIDWithoutVersion]));
+            //    $sRefseqTranscript = $sIDWithoutVersion . '.' . $nVersion;
+            //}
         }
     }
     if (!$sRefseqTranscript) {
@@ -579,10 +594,6 @@ foreach ($aHGNCFile as $nLine => $sLine) {
             $aLine['md_mim_id'],
         )) . "\"\r\n");
 }
-
-
-
-
 
 // Now, start writing the transcript info.
 fwrite($f, "\r\n\r\n" .

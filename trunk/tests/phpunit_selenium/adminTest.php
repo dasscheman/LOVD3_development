@@ -4,7 +4,7 @@
  * LEIDEN OPEN VARIATION DATABASE (LOVD)
  *
  * Created     : 2014-12-19
- * Modified    : 2015-10-09:10:33:36
+ * Modified    : 2015-10-09:11:54:31
  * For LOVD    : 3.0-12
  *
  * Copyright   : 2014 Leiden University Medical Center; http://www.LUMC.nl/
@@ -414,7 +414,14 @@ class admin_tests extends PHPUnit_Extensions_SeleniumTestCase
         $this->type("name=00001_VariantOnTranscript/Exon", "2");
         $this->type("name=00001_VariantOnTranscript/DNA", "c.345G>T");
         $this->click("css=button.mapVariant");
-        sleep(10);
+        sleep(3);
+        for ($second = 0; ; $second++) {
+                if ($second >= 60) $this->fail("timeout");
+                try {
+                        if ($this->isElementPresent("css=img[alt=\"Prediction OK!\"]")) break;
+                } catch (Exception $e) {}
+                sleep(1);
+        }
         $RnaChange = $this->getEval("window.document.getElementById('variantForm').elements[4].value");
         $this->assertTrue((bool)preg_match('/^r\.\([\s\S]\)$/',$this->getExpression($RnaChange)));
         $ProteinChange = $this->getEval("window.document.getElementById('variantForm').elements[5].value");
@@ -934,7 +941,7 @@ class admin_tests extends PHPUnit_Extensions_SeleniumTestCase
         $this->waitForPageToLoad("4000");
         $this->assertTrue((bool)preg_match('/^[\s\S]*\/src\/genes$/',$this->getLocation()));
     }
-    public function testUninstallLOVD()
+ /*   public function testUninstallLOVD()
     {
         $this->open("/LOVD3_development/trunk/src/logout");
         $this->open("/LOVD3_development/trunk/src/login");
@@ -950,6 +957,6 @@ class admin_tests extends PHPUnit_Extensions_SeleniumTestCase
         $this->click("css=input[type=\"submit\"]");
         $this->waitForPageToLoad("30000");
         $this->assertEquals("LOVD successfully uninstalled!\nThank you for having used LOVD!", $this->getText("css=div[id=lovd__progress_message]"));
-    }
+    }*/
 }
 ?>

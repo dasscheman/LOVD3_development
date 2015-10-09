@@ -1,0 +1,190 @@
+HGNC ID	Approved Symbol	Approved Name	Locus Type	Locus Group	Chromosome	Entrez Gene ID	RefSeq IDs	OMIM ID(supplied by OMIM)	RefSeq(supplied by NCBI)
+HGNC:5	A1BG	alpha-1-B glycoprotein	gene with protein product	protein-coding gene	19q13.43	1	NM_130786	138670	NM_130786
+HGNC:5	A1BG	alpha-1-B glycoprotein	gene with protein product	protein-coding gene	19q13.43	1	NM_130786	138670	NM_130786
+HGNC:37133	A1BG-AS1	A1BG antisense RNA 1	RNA, long non-coding	non-coding RNA	19q13.43	503538	NR_015380		NR_015380
+HGNC:24086	A1CF	APOBEC1 complementation factor	gene with protein product	protein-coding gene	10q21.1	29974	NM_014576		NM_014576
+HGNC:24086	A1CF	APOBEC1 complementation factor	gene with protein product	protein-coding gene	10q21.1	29974	NM_014576		NM_014576
+HGNC:7	A2M	alpha-2-macroglobulin	gene with protein product	protein-coding gene	12p13.31	2	NM_000014	103950	NM_000014
+HGNC:7	A2M	alpha-2-macroglobulin	gene with protein product	protein-coding gene	12p13.31	2	NM_000014	103950	NM_000014
+HGNC:27057	A2M-AS1	A2M antisense RNA 1 (head to head)	RNA, long non-coding	non-coding RNA	12p13.31	144571	NR_026971		NR_026971
+HGNC:23336	A2ML1	alpha-2-macroglobulin-like 1	gene with protein product	protein-coding gene	12p13	144568	NM_144670	610627	XM_011520566
+HGNC:8	A2MP1	alpha-2-macroglobulin pseudogene 1	pseudogene	pseudogene	12p13.31	3	NG_001067		NR_040112
+HGNC:30005	A3GALT2	alpha 1,3-galactosyltransferase 2	gene with protein product	protein-coding gene	1p35.1	127550	NM_001080438		NM_001080438
+HGNC:13666	AAAS	achalasia, adrenocortical insufficiency, alacrimia	gene with protein product	protein-coding gene	12q13	8086		605378	NM_015665
+HGNC:21298	AACS	acetoacetyl-CoA synthetase	gene with protein product	protein-coding gene	12q24.31	65985	NM_023928	614364	NM_023928
+HGNC:21298	AACS	acetoacetyl-CoA synthetase	gene with protein product	protein-coding gene	12q24.31	65985	NM_023928	614364	NM_023928
+HGNC:18226	AACSP1	acetoacetyl-CoA synthetase pseudogene 1	pseudogene	pseudogene	5q35	729522	NR_024035		NR_024035
+HGNC:18226	AACSP1	acetoacetyl-CoA synthetase pseudogene 1	pseudogene	pseudogene	5q35	729522	NR_024035		NR_024035
+HGNC:17	AADAC	arylacetamide deacetylase	gene with protein product	protein-coding gene	3q25.1	13	NM_001086	600338	NM_001086
+HGNC:17	AADAC	arylacetamide deacetylase	gene with protein product	protein-coding gene	3q25.1	13	NM_001086	600338	NM_001086
+HGNC:24427	AADACL2	arylacetamide deacetylase-like 2	gene with protein product	protein-coding gene	3q25.1	344752	NM_207365		NM_207365
+HGNC:32038	AADACL4	arylacetamide deacetylase-like 4	gene with protein product	protein-coding gene	1p36.21	343066	NM_001013630		NM_001013630
+HGNC:50305	AADACP1	arylacetamide deacetylase pseudogene 1	pseudogene	pseudogene	3q25.1	201651			NR_026915
+HGNC:17929	AADAT	aminoadipate aminotransferase	gene with protein product	protein-coding gene	4q33	51166	NM_016228	611754	NM_182662
+HGNC:16881	AAED1	AhpC/TSA antioxidant enzyme domain containing 1	gene with protein product	protein-coding gene	9q22.32	195827	NM_153698		NM_153698
+HGNC:16881	AAED1	AhpC/TSA antioxidant enzyme domain containing 1	gene with protein product	protein-coding gene	9q22.32	195827	NM_153698		NM_153698
+HGNC:25662	AAGAB	alpha- and gamma-adaptin binding protein	gene with protein product	protein-coding gene	15q23	79719	NM_024666	614888	NM_024666
+HGNC:25662	AAGAB	alpha- and gamma-adaptin binding protein	gene with protein product	protein-coding gene	15q23	79719	NM_024666	614888	NM_024666
+HGNC:19679	AAK1	AP2 associated kinase 1	gene with protein product	protein-coding gene	2p13.3	22848	NM_014911	616405	NM_014911
+HGNC:30205	AAMDC	adipogenesis associated, Mth938 domain containing	gene with protein product	protein-coding gene	11q14.1	28971	NM_024684		NM_024684
+HGNC:18	AAMP	angio-associated, migratory cell protein	gene with protein product	protein-coding gene	2q	14	NM_001087	603488	NM_001302545
+HGNC:18	AAMP	angio-associated, migratory cell protein	gene with protein product	protein-coding gene	2q	14	NM_001087	603488	NM_001302545
+HGNC:19	AANAT	aralkylamine N-acetyltransferase	gene with protein product	protein-coding gene	17q25.1	15	NM_001088	600950	NM_001088
+HGNC:19	AANAT	aralkylamine N-acetyltransferase	gene with protein product	protein-coding gene	17q25.1	15	NM_001088	600950	NM_001088
+HGNC:15886	AAR2	AAR2 splicing factor homolog	gene with protein product	protein-coding gene	20q11.23	25980	NM_015511		NM_015511
+HGNC:20	AARS	alanyl-tRNA synthetase	gene with protein product	protein-coding gene	16q22.1	16	NM_001605	601065	NM_001605
+HGNC:21022	AARS2	alanyl-tRNA synthetase 2, mitochondrial	gene with protein product	protein-coding gene	6p21.1	57505	NM_020745	612035	NM_020745
+HGNC:28417	AARSD1	alanyl-tRNA synthetase domain containing 1	gene with protein product	protein-coding gene	17q21.31	80755	NM_001261434	613212	NM_001261434
+HGNC:49894	AARSP1	alanyl-tRNA synthetase pseudogene 1	pseudogene	pseudogene	4q28.3				NG_043271
+HGNC:14235	AASDHPPT	aminoadipate-semialdehyde dehydrogenase-phosphopantetheinyl transferase	gene with protein product	protein-coding gene	11q22	60496	NM_015423	607756	NM_015423
+HGNC:17366	AASS	aminoadipate-semialdehyde synthase	gene with protein product	protein-coding gene	7q31.3	10157	NM_005763	605113	NM_005763
+HGNC:17366	AASS	aminoadipate-semialdehyde synthase	gene with protein product	protein-coding gene	7q31.3	10157	NM_005763	605113	NM_005763
+HGNC:51526	AATBC	apoptosis associated transcript in bladder cancer	RNA, long non-coding	non-coding RNA	21q22.3	284837	NR_026961		NR_026961
+HGNC:19235	AATF	apoptosis antagonizing transcription factor	gene with protein product	protein-coding gene	17q12	26574	NM_012138	608463	NM_012138
+HGNC:21	AATK	apoptosis-associated tyrosine kinase	gene with protein product	protein-coding gene	17q25.3	9625	NM_004920	605276	NM_001080395
+HGNC:21	AATK	apoptosis-associated tyrosine kinase	gene with protein product	protein-coding gene	17q25.3	9625	NM_004920	605276	NM_001080395
+HGNC:40053	AATK-AS1	AATK antisense RNA 1	RNA, long non-coding	non-coding RNA	17q25.3	388428			NR_027255
+HGNC:22	AAVS1	adeno-associated virus integration site 1	virus integration site	other	19q13	17		102699	
+HGNC:23	ABAT	4-aminobutyrate aminotransferase	gene with protein product	protein-coding gene	16p13.2	18	NM_020686	137150	NM_020686
+HGNC:29	ABCA1	ATP-binding cassette, sub-family A (ABC1), member 1	gene with protein product	protein-coding gene	9q31	19	NM_005502	600046	NM_005502
+HGNC:31	ABCA11P	ATP-binding cassette, sub-family A (ABC1), member 11, pseudogene	pseudogene	pseudogene	4p16.3	79963	NR_002451.2		NR_002451
+HGNC:14637	ABCA12	ATP-binding cassette, sub-family A (ABC1), member 12	gene with protein product	protein-coding gene	2q34	26154	NM_173076	607800	NM_015657
+HGNC:14637	ABCA12	ATP-binding cassette, sub-family A (ABC1), member 12	gene with protein product	protein-coding gene	2q34	26154	NM_173076	607800	NM_015657
+HGNC:14638	ABCA13	ATP-binding cassette, sub-family A (ABC1), member 13	gene with protein product	protein-coding gene	7p12.3	154664	NM_152701	607807	NM_152701
+HGNC:32972	ABCA17P	ATP-binding cassette, sub-family A (ABC1), member 17, pseudogene	pseudogene	pseudogene	16p13.3	650655	NR_003574		NR_003574
+HGNC:40	ABCB1	ATP-binding cassette, sub-family B (MDR/TAP), member 1	gene with protein product	protein-coding gene	7q21.12	5243	NM_000927	171050	NM_000927
+HGNC:34	ABCA4	ATP-binding cassette, sub-family A (ABC1), member 4	gene with protein product	protein-coding gene	1p22	24	NM_000350	601691	NM_000350
+HGNC:35	ABCA5	ATP-binding cassette, sub-family A (ABC1), member 5	gene with protein product	protein-coding gene	17q24.3	23461	NM_018672	612503	NM_172232
+HGNC:35	ABCA5	ATP-binding cassette, sub-family A (ABC1), member 5	gene with protein product	protein-coding gene	17q24.3	23461	NM_018672	612503	NM_172232
+HGNC:36	ABCA6	ATP-binding cassette, sub-family A (ABC1), member 6	gene with protein product	protein-coding gene	17q21	23460	NM_080284	612504	NM_080284
+HGNC:37	ABCA7	ATP-binding cassette, sub-family A (ABC1), member 7	gene with protein product	protein-coding gene	19p13.3	10347	NM_019112	605414	NM_019112
+HGNC:38	ABCA8	ATP-binding cassette, sub-family A (ABC1), member 8	gene with protein product	protein-coding gene	17q24	10351	NM_007168	612505	XM_005256938
+HGNC:39	ABCA9	ATP-binding cassette, sub-family A (ABC1), member 9	gene with protein product	protein-coding gene	17q24	10350	NM_172386	612507	XM_005256934
+HGNC:41	ABCB10	ATP-binding cassette, sub-family B (MDR/TAP), member 10	gene with protein product	protein-coding gene	1q32	23456	NM_012089	605454	NM_012089
+HGNC:14114	ABCB10P1	ATP-binding cassette, sub-family B (MDR/TAP), member 10 pseudogene 1	pseudogene	pseudogene	15q11.2	56476			NG_005041
+HGNC:45	ABCB4	ATP-binding cassette, sub-family B (MDR/TAP), member 4	gene with protein product	protein-coding gene	7q21	5244	NM_000443	171060	NM_018850
+HGNC:46	ABCB5	ATP-binding cassette, sub-family B (MDR/TAP), member 5	gene with protein product	protein-coding gene	7p14	340273	NM_178559	611785	NM_001163942
+HGNC:46	ABCB5	ATP-binding cassette, sub-family B (MDR/TAP), member 5	gene with protein product	protein-coding gene	7p14	340273	NM_178559	611785	NM_001163942
+HGNC:47	ABCB6	ATP-binding cassette, sub-family B (MDR/TAP), member 6 (Langereis blood group)	gene with protein product	protein-coding gene	2q36	10058	NM_005689	605452	NM_005689
+HGNC:47	ABCB6	ATP-binding cassette, sub-family B (MDR/TAP), member 6 (Langereis blood group)	gene with protein product	protein-coding gene	2q36	10058	NM_005689	605452	NM_005689
+HGNC:48	ABCB7	ATP-binding cassette, sub-family B (MDR/TAP), member 7	gene with protein product	protein-coding gene	Xq13.3	22	NM_004299	300135	NM_004299
+HGNC:48	ABCB7	ATP-binding cassette, sub-family B (MDR/TAP), member 7	gene with protein product	protein-coding gene	Xq13.3	22	NM_004299	300135	NM_004299
+HGNC:49	ABCB8	ATP-binding cassette, sub-family B (MDR/TAP), member 8	gene with protein product	protein-coding gene	7q36.1	11194	NM_007188	605464	NM_001282291
+HGNC:50	ABCB9	ATP-binding cassette, sub-family B (MDR/TAP), member 9	gene with protein product	protein-coding gene	12q24	23457	NM_019624	605453	NM_019625
+HGNC:41	ABCB10	ATP-binding cassette, sub-family B (MDR/TAP), member 10	gene with protein product	protein-coding gene	1q32	23456	NM_012089	605454	NM_012089
+HGNC:52	ABCC10	ATP-binding cassette, sub-family C (CFTR/MRP), member 10	gene with protein product	protein-coding gene	6p12.3	89845	NM_033450	612509	NM_033450
+HGNC:14639	ABCC11	ATP-binding cassette, sub-family C (CFTR/MRP), member 11	gene with protein product	protein-coding gene	16q12	85320	NM_032583	607040	XM_011523396
+HGNC:14640	ABCC12	ATP-binding cassette, sub-family C (CFTR/MRP), member 12	gene with protein product	protein-coding gene	16q12.1	94160	NM_033226	607041	NM_033226
+HGNC:16022	ABCC13	ATP-binding cassette, sub-family C (CFTR/MRP), member 13, pseudogene	pseudogene	pseudogene	21q11.2	150000		608835	NR_003087
+HGNC:16022	ABCC13	ATP-binding cassette, sub-family C (CFTR/MRP), member 13, pseudogene	pseudogene	pseudogene	21q11.2	150000		608835	NR_003087
+HGNC:61	ABCD1	ATP-binding cassette, sub-family D (ALD), member 1	gene with protein product	protein-coding gene	Xq28	215	NM_000033	300371	NM_000033
+HGNC:55	ABCC4	ATP-binding cassette, sub-family C (CFTR/MRP), member 4	gene with protein product	protein-coding gene	13q31	10257	NM_005845	605250	XM_006719914
+HGNC:56	ABCC5	ATP-binding cassette, sub-family C (CFTR/MRP), member 5	gene with protein product	protein-coding gene	3q27	10057	NM_005688	605251	NM_005688
+HGNC:56	ABCC5	ATP-binding cassette, sub-family C (CFTR/MRP), member 5	gene with protein product	protein-coding gene	3q27	10057	NM_005688	605251	NM_005688
+HGNC:40055	ABCC5-AS1	ABCC5 antisense RNA 1	RNA, long non-coding	non-coding RNA	3q27.1				NR_046570
+HGNC:57	ABCC6	ATP-binding cassette, sub-family C (CFTR/MRP), member 6	gene with protein product	protein-coding gene	16p13.11	368		603234	NM_001079528
+HGNC:57	ABCC6	ATP-binding cassette, sub-family C (CFTR/MRP), member 6	gene with protein product	protein-coding gene	16p13.11	368		603234	NM_001079528
+HGNC:33352	ABCC6P1	ATP-binding cassette, sub-family C, member 6 pseudogene 1 (functional)	pseudogene	pseudogene	16p12.3	653190	NR_003569		NR_003569
+HGNC:33352	ABCC6P1	ATP-binding cassette, sub-family C, member 6 pseudogene 1 (functional)	pseudogene	pseudogene	16p12.3	653190	NR_003569		NR_003569
+HGNC:33353	ABCC6P2	ATP-binding cassette, sub-family C, member 6 pseudogene 2	pseudogene	pseudogene	16p13.11	730013	NR_023387		NR_023387
+HGNC:33353	ABCC6P2	ATP-binding cassette, sub-family C, member 6 pseudogene 2	pseudogene	pseudogene	16p13.11	730013	NR_023387		NR_023387
+HGNC:59	ABCC8	ATP-binding cassette, sub-family C (CFTR/MRP), member 8	gene with protein product	protein-coding gene	11p15.1	6833	NM_000352	600509	NM_000352
+HGNC:59	ABCC8	ATP-binding cassette, sub-family C (CFTR/MRP), member 8	gene with protein product	protein-coding gene	11p15.1	6833	NM_000352	600509	NM_000352
+HGNC:60	ABCC9	ATP-binding cassette, sub-family C (CFTR/MRP), member 9	gene with protein product	protein-coding gene	12p12.1	10060	NM_005691	601439	NM_020297
+HGNC:61	ABCD1	ATP-binding cassette, sub-family D (ALD), member 1	gene with protein product	protein-coding gene	Xq28	215	NM_000033	300371	NM_000033
+HGNC:62	ABCD1P1	ATP-binding cassette, sub-family D (ALD), member 1, pseudogene 1	pseudogene	pseudogene	2p11	23785			NG_001246
+HGNC:69	ABCE1	ATP-binding cassette, sub-family E (OABP), member 1	gene with protein product	protein-coding gene	4q31	6059	NM_002940	601213	NM_002940
+HGNC:70	ABCF1	ATP-binding cassette, sub-family F (GCN20), member 1	gene with protein product	protein-coding gene	6p21.33	23		603429	NM_001025091
+HGNC:70	ABCF1	ATP-binding cassette, sub-family F (GCN20), member 1	gene with protein product	protein-coding gene	6p21.33	23		603429	NM_001025091
+HGNC:71	ABCF2	ATP-binding cassette, sub-family F (GCN20), member 2	gene with protein product	protein-coding gene	7q36.1	10061	NM_005692	612510	NM_007189
+HGNC:71	ABCF2	ATP-binding cassette, sub-family F (GCN20), member 2	gene with protein product	protein-coding gene	7q36.1	10061	NM_005692	612510	NM_007189
+HGNC:48841	ABCF2P1	ATP-binding cassette, sub-family F (GCN20), member 2 pseudogene 1	pseudogene	pseudogene	3p11.1	344653			NG_022253
+HGNC:73	ABCG1	ATP-binding cassette, sub-family G (WHITE), member 1	gene with protein product	protein-coding gene	21q22.3	9619	NM_207174	603076	NM_016818
+HGNC:74	ABCG2	ATP-binding cassette, sub-family G (WHITE), member 2 (Junior blood group)	gene with protein product	protein-coding gene	4q22.1	9429	NM_004827	603756	NM_001257386
+HGNC:74	ABCG2	ATP-binding cassette, sub-family G (WHITE), member 2 (Junior blood group)	gene with protein product	protein-coding gene	4q22.1	9429	NM_004827	603756	NM_001257386
+HGNC:13884	ABCG4	ATP-binding cassette, sub-family G (WHITE), member 4	gene with protein product	protein-coding gene	11q23	64137	NM_022169	607784	NM_022169
+HGNC:13884	ABCG4	ATP-binding cassette, sub-family G (WHITE), member 4	gene with protein product	protein-coding gene	11q23	64137	NM_022169	607784	NM_022169
+HGNC:13886	ABCG5	ATP-binding cassette, sub-family G (WHITE), member 5	gene with protein product	protein-coding gene	2p21	64240	NM_022436	605459	NM_022436
+HGNC:13886	ABCG5	ATP-binding cassette, sub-family G (WHITE), member 5	gene with protein product	protein-coding gene	2p21	64240	NM_022436	605459	NM_022436
+HGNC:13887	ABCG8	ATP-binding cassette, sub-family G (WHITE), member 8	gene with protein product	protein-coding gene	2p21	64241	NM_022437	605460	NM_022437
+HGNC:13887	ABCG8	ATP-binding cassette, sub-family G (WHITE), member 8	gene with protein product	protein-coding gene	2p21	64241	NM_022437	605460	NM_022437
+HGNC:17553	ABHD1	abhydrolase domain containing 1	gene with protein product	protein-coding gene	2p23.3	84696	NM_032604	612195	NM_032604
+HGNC:17553	ABHD1	abhydrolase domain containing 1	gene with protein product	protein-coding gene	2p23.3	84696	NM_032604	612195	NM_032604
+HGNC:18717	ABHD2	abhydrolase domain containing 2	gene with protein product	protein-coding gene	15q26.1	11057		612196	NM_152924
+HGNC:16407	ABHD11	abhydrolase domain containing 11	gene with protein product	protein-coding gene	7q11.23	83451			NR_026910
+HGNC:18289	ABHD11-AS1	ABHD11 antisense RNA 1 (tail to tail)	RNA, long non-coding	non-coding RNA	7q11.23	171022	NR_026690	612545	NR_026690
+HGNC:15868	ABHD12	abhydrolase domain containing 12	gene with protein product	protein-coding gene	20p11.21	26090	NM_015600	613599	NM_015600
+HGNC:15868	ABHD12	abhydrolase domain containing 12	gene with protein product	protein-coding gene	20p11.21	26090	NM_015600	613599	NM_015600
+HGNC:19837	ABHD12B	abhydrolase domain containing 12B	gene with protein product	protein-coding gene	14q21.3	145447			NM_181814
+HGNC:19837	ABHD12B	abhydrolase domain containing 12B	gene with protein product	protein-coding gene	14q21.3	145447			NM_181814
+HGNC:20293	ABHD13	abhydrolase domain containing 13	gene with protein product	protein-coding gene	13q33.2	84945	NM_032859		NM_032859
+HGNC:24538	ABHD14A	abhydrolase domain containing 14A	gene with protein product	protein-coding gene	3p21.1	25864	NM_015407		NM_015407
+HGNC:38856	ABHD14A-ACY1	ABHD14A-ACY1 readthrough (NMD candidate)	readthrough	other	3p21.2	100526760			NR_037192
+HGNC:28235	ABHD14B	abhydrolase domain containing 14B	gene with protein product	protein-coding gene	3p21.2	84836	NM_032750		NM_032750
+HGNC:28235	ABHD14B	abhydrolase domain containing 14B	gene with protein product	protein-coding gene	3p21.2	84836	NM_032750		NM_032750
+HGNC:26971	ABHD15	abhydrolase domain containing 15	gene with protein product	protein-coding gene	17q11.2	116236	NM_198147		NM_198147
+HGNC:26971	ABHD15	abhydrolase domain containing 15	gene with protein product	protein-coding gene	17q11.2	116236	NM_198147		NM_198147
+HGNC:13921	ABHD16A	abhydrolase domain containing 16A	gene with protein product	protein-coding gene	6p21.3	7920		142620	NM_021160
+HGNC:16128	ABHD16B	abhydrolase domain containing 16B	gene with protein product	protein-coding gene	20q13.33	140701			NM_080622
+HGNC:16128	ABHD16B	abhydrolase domain containing 16B	gene with protein product	protein-coding gene	20q13.33	140701			NM_080622
+HGNC:28756	ABHD17A	abhydrolase domain containing 17A	gene with protein product	protein-coding gene	19p13.3	81926	NM_031213		NM_031213
+HGNC:18717	ABHD2	abhydrolase domain containing 2	gene with protein product	protein-coding gene	15q26.1	11057		612196	NM_152924
+HGNC:18718	ABHD3	abhydrolase domain containing 3	gene with protein product	protein-coding gene	18q11.1	171586		612197	NM_138340
+HGNC:18718	ABHD3	abhydrolase domain containing 3	gene with protein product	protein-coding gene	18q11.1	171586		612197	NM_138340
+HGNC:20154	ABHD4	abhydrolase domain containing 4	gene with protein product	protein-coding gene	14q11.1	63874			NM_022060
+HGNC:20154	ABHD4	abhydrolase domain containing 4	gene with protein product	protein-coding gene	14q11.1	63874			NM_022060
+HGNC:21396	ABHD5	abhydrolase domain containing 5	gene with protein product	protein-coding gene	3p21.33	51099	NM_016006	604780	NM_016006
+HGNC:21396	ABHD5	abhydrolase domain containing 5	gene with protein product	protein-coding gene	3p21.33	51099	NM_016006	604780	NM_016006
+HGNC:21398	ABHD6	abhydrolase domain containing 6	gene with protein product	protein-coding gene	3p21.2	57406	NM_020676		NM_020676
+HGNC:21398	ABHD6	abhydrolase domain containing 6	gene with protein product	protein-coding gene	3p21.2	57406	NM_020676		NM_020676
+HGNC:23759	ABHD8	abhydrolase domain containing 8	gene with protein product	protein-coding gene	19p13.12	79575	NM_024527		NM_024527
+HGNC:23759	ABHD8	abhydrolase domain containing 8	gene with protein product	protein-coding gene	19p13.12	79575	NM_024527		NM_024527
+HGNC:25656	ABHD10	abhydrolase domain containing 10	gene with protein product	protein-coding gene	3q13.2	55347	NM_018394		NM_018394
+HGNC:11320	ABI1	abl-interactor 1	gene with protein product	protein-coding gene	10p12.1	10006	NM_005470	603050	NM_005470
+HGNC:20035	ABI1P1	abl-interactor 1 pseudogene 1	pseudogene	pseudogene	14q22	326268			NG_002531
+HGNC:24011	ABI2	abl-interactor 2	gene with protein product	protein-coding gene	2q33	10152	NM_005759	606442	XM_005246217
+HGNC:29859	ABI3	ABI family, member 3	gene with protein product	protein-coding gene	17q21.3	51225	NM_016428	606363	NM_001135186
+HGNC:17265	ABI3BP	ABI family, member 3 (NESH) binding protein	gene with protein product	protein-coding gene	3q12.2	25890		606279	NM_015429
+HGNC:76	ABL1	ABL proto-oncogene 1, non-receptor tyrosine kinase	gene with protein product	protein-coding gene	9q34.1	25	NM_007313	189980	NM_007313
+HGNC:76	ABL1	ABL proto-oncogene 1, non-receptor tyrosine kinase	gene with protein product	protein-coding gene	9q34.1	25	NM_007313	189980	NM_007313
+HGNC:77	ABL2	ABL proto-oncogene 2, non-receptor tyrosine kinase	gene with protein product	protein-coding gene	1q25.2	27	NM_005158	164690	NM_001136001
+HGNC:77	ABL2	ABL proto-oncogene 2, non-receptor tyrosine kinase	gene with protein product	protein-coding gene	1q25.2	27	NM_005158	164690	NM_001136001
+HGNC:78	ABLIM1	actin binding LIM protein 1	gene with protein product	protein-coding gene	10q25	3983		602330	NM_002313
+HGNC:29132	ABLIM3	actin binding LIM protein family, member 3	gene with protein product	protein-coding gene	5q33.1	22885	NM_014945	611305	XM_005268392
+HGNC:79	ABO	ABO blood group (transferase A, alpha 1-3-N-acetylgalactosaminyltransferase; transferase B, alpha 1-3-galactosyltransferase)	gene with protein product	protein-coding gene	9q34.2	28	NM_020469	110300	NM_020469
+HGNC:79	ABO	ABO blood group (transferase A, alpha 1-3-N-acetylgalactosaminyltransferase; transferase B, alpha 1-3-galactosyltransferase)	gene with protein product	protein-coding gene	9q34.2	28	NM_020469	110300	NM_020469
+HGNC:81	ABR	active BCR-related	gene with protein product	protein-coding gene	17p13	29		600365	NM_001092
+
+HGNC:30655	ABRA	actin binding Rho activating protein	gene with protein product	protein-coding gene	8q23.1	137735	NM_139166	609747	NM_139166
+HGNC:21230	ABRACL	ABRA C-terminal like	gene with protein product	protein-coding gene	6q24.1	58527	NM_021243		NM_021243
+HGNC:17369	ABT1	activator of basal transcription 1	gene with protein product	protein-coding gene	6p21.31	29777			NM_013375
+HGNC:18275	ABTB1	ankyrin repeat and BTB (POZ) domain containing 1	gene with protein product	protein-coding gene	3q21	80325	NM_172027	608308	NM_172027
+HGNC:23842	ABTB2	ankyrin repeat and BTB (POZ) domain containing 2	gene with protein product	protein-coding gene	11p13	25841	NM_145804		NM_145804
+HGNC:82	ACAA1	acetyl-CoA acyltransferase 1	gene with protein product	protein-coding gene	3p22.2	30	NM_001607	604054	NM_001607
+HGNC:83	ACAA2	acetyl-CoA acyltransferase 2	gene with protein product	protein-coding gene	18q21	10449	NM_006111	604770	NM_006111
+HGNC:83	ACAA2	acetyl-CoA acyltransferase 2	gene with protein product	protein-coding gene	18q21	10449	NM_006111	604770	NM_006111
+HGNC:84	ACACA	acetyl-CoA carboxylase alpha	gene with protein product	protein-coding gene	17q12	31	NM_198836	200350	NM_198837
+HGNC:84	ACACA	acetyl-CoA carboxylase alpha	gene with protein product	protein-coding gene	17q12	31	NM_198836	200350	NM_198837
+HGNC:85	ACACB	acetyl-CoA carboxylase beta	gene with protein product	protein-coding gene	12q24.1	32	NM_001093	601557	NM_001093
+HGNC:85	ACACB	acetyl-CoA carboxylase beta	gene with protein product	protein-coding gene	12q24.1	32	NM_001093	601557	NM_001093
+HGNC:87	ACAD8	acyl-CoA dehydrogenase family, member 8	gene with protein product	protein-coding gene	11q25	27034	NM_014384	604773	NM_014384
+HGNC:21597	ACAD10	acyl-CoA dehydrogenase family, member 10	gene with protein product	protein-coding gene	12q24.12	80724	NM_025247	611181	NM_025247
+HGNC:30211	ACAD11	acyl-CoA dehydrogenase family, member 11	gene with protein product	protein-coding gene	3q22.1	84129	NM_032169	614288	NM_032169
+HGNC:30211	ACAD11	acyl-CoA dehydrogenase family, member 11	gene with protein product	protein-coding gene	3q22.1	84129	NM_032169	614288	NM_032169
+HGNC:88	ACADL	acyl-CoA dehydrogenase, long chain	gene with protein product	protein-coding gene	2q34	33	NM_001608	609576	NM_001608
+HGNC:87	ACAD8	acyl-CoA dehydrogenase family, member 8	gene with protein product	protein-coding gene	11q25	27034	NM_014384	604773	NM_014384
+HGNC:21497	ACAD9	acyl-CoA dehydrogenase family, member 9	gene with protein product	protein-coding gene	3q21.3	28976	NM_014049	611103	NM_014049
+HGNC:21497	ACAD9	acyl-CoA dehydrogenase family, member 9	gene with protein product	protein-coding gene	3q21.3	28976	NM_014049	611103	NM_014049
+HGNC:21597	ACAD10	acyl-CoA dehydrogenase family, member 10	gene with protein product	protein-coding gene	12q24.12	80724	NM_025247	611181	NM_025247
+HGNC:88	ACADL	acyl-CoA dehydrogenase, long chain	gene with protein product	protein-coding gene	2q34	33	NM_001608	609576	NM_001608
+HGNC:89	ACADM	acyl-CoA dehydrogenase, C-4 to C-12 straight chain	gene with protein product	protein-coding gene	1p31	34		607008	NM_000016
+HGNC:89	ACADM	acyl-CoA dehydrogenase, C-4 to C-12 straight chain	gene with protein product	protein-coding gene	1p31	34		607008	NM_000016
+HGNC:90	ACADS	acyl-CoA dehydrogenase, C-2 to C-3 short chain	gene with protein product	protein-coding gene	12q24.31	35	NM_000017	606885	NM_000017
+HGNC:90	ACADS	acyl-CoA dehydrogenase, C-2 to C-3 short chain	gene with protein product	protein-coding gene	12q24.31	35	NM_000017	606885	NM_000017
+HGNC:91	ACADSB	acyl-CoA dehydrogenase, short/branched chain	gene with protein product	protein-coding gene	10q26.13	36	NM_001609	600301	NM_001609
+HGNC:91	ACADSB	acyl-CoA dehydrogenase, short/branched chain	gene with protein product	protein-coding gene	10q26.13	36	NM_001609	600301	NM_001609
+HGNC:92	ACADVL	acyl-CoA dehydrogenase, very long chain	gene with protein product	protein-coding gene	17p13.1	37	NM_000018	609575	NM_000018
+HGNC:92	ACADVL	acyl-CoA dehydrogenase, very long chain	gene with protein product	protein-coding gene	17p13.1	37	NM_000018	609575	NM_000018
+HGNC:319	ACAN	aggrecan	gene with protein product	protein-coding gene	15q26.1	176	NM_001135	155760	NM_013227
+HGNC:16467	ACAP1	ArfGAP with coiled-coil, ankyrin repeat and PH domains 1	gene with protein product	protein-coding gene	17p13.1	9744	NM_014716	607763	NM_014716
+HGNC:16469	ACAP2	ArfGAP with coiled-coil, ankyrin repeat and PH domains 2	gene with protein product	protein-coding gene	3q29	23527	NM_012287	607766	NM_012287

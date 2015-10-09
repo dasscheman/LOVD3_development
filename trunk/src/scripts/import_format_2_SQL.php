@@ -38,7 +38,7 @@ header('Content-type: text/plain; charset=UTF-8');
 require '../inc-lib-init.php';
 set_time_limit(0);
 
-$sFileNameIn = 'LOVD_import_genes_and_transcripts.old.txt';
+$sFileNameIn = 'LOVD_import_genes_and_transcripts.txt';
 
 
 
@@ -57,6 +57,8 @@ $aParsed = array_fill_keys(
 // Prepare, find LOVD version and format type.
 $sFileVersion = $sFileType = $sCurrentSection = '';
 $bParseColumns = false;
+$sqlFile = "lovd_sql_import.sql";
+$openSqlFile = fopen($sqlFile, 'a') or die("can't open file");
 
 foreach ($aFileIn as $i => $sLine) {
     $sLine = trim($sLine);
@@ -136,7 +138,12 @@ foreach ($aFileIn as $i => $sLine) {
         $aLine['id'] = NULL;
     }
     print('INSERT IGNORE INTO lovd_' . strtolower($sCurrentSection) . ' (' . implode(', ', $aColumns) . ') VALUES ("' . implode('", "', $aLine) . '");' . "\n");
+	$stringData='INSERT IGNORE INTO lovd_' . strtolower($sCurrentSection) . ' (' . implode(', ', $aColumns) . ')
+	 VALUES ("' . implode('", "', $aLine) . '");' . "\n";
+
+	fwrite($openSqlFile, $stringData);
 }
+fclose($openSqlFile);
 
 // Clean up old section, if available.
 if ($sCurrentSection) {
