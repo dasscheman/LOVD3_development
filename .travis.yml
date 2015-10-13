@@ -32,7 +32,7 @@ script:
 ##  - phpunit --debug --coverage-text ./tests/phpunit_selenium/importTest.php
   
 ## Run all tests
-  - phpunit --debug --coverage-text ./trunk/tests/phpunit_selenium/
+  - phpunit ./trunk/tests/phpunit_selenium/
 
 notifications:
   email:
