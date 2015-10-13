@@ -28,11 +28,11 @@ before_script:
 
 script:
 ##  - phpunit --verbose --debug --coverage-text ./trunk/tests/travis/tests/
-  - phpunit ./tests/phpunit_selenium/adminTest.php
+##  - phpunit ./tests/phpunit_selenium/adminTest.php
 ##  - phpunit --debug --coverage-text ./tests/phpunit_selenium/importTest.php
   
 ## Run all tests
-#  - phpunit --debug --coverage-text ./tests/phpunit_selenium/
+ - phpunit ./tests/phpunit_selenium/
 
 notifications:
   email:
