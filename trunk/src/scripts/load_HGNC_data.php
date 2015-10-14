@@ -90,6 +90,7 @@ $aLOVDTranscriptColumns =
 
 $sFileNameOut = 'LOVD_import_genes.txt';
 $sFileNameOutTranscripts = 'LOVD_import_transcripts.txt';
+$sFileNameOutErrorLogs = 'LOVD_import_error_logs.txt';
 
 $_SETT = array(
     'system' =>
@@ -401,6 +402,7 @@ flush();
 // Open file to write to.
 $fGenes = @fopen('./' . $sFileNameOut, 'w');
 $fTranscripts = @fopen('./' . $sFileNameOutTranscripts, 'w');
+$fErrorLogs = @fopen('./' . $sFileNameOutErrorLogs, 'w');
 if (!$fGenes && !$fTranscripts) {
     die('Can not write to file!' . "\n");
 }
@@ -457,19 +459,23 @@ foreach ($aHGNCFile as $nLine => $sLine) {
 
     // Ignore genes from the bad locus groups.
     if (in_array($aLine['gd_locus_group'], $aBadLocusGroups)) {
+	fwrite($fErrorLogs, '"' . $aLine['gd_app_sym'] . "Ignore genes from the bad locus groups.\"\r\n");
         continue;
     }
     // Ignore genes from the bad locus types.
     if (in_array($aLine['gd_locus_type'], $aBadLocusTypes)) {
+	fwrite($fErrorLogs, '"' . $aLine['gd_app_sym'] . "Ignore genes from the bad locus types.\"\r\n");
         continue;
     }
     // Ignore genes in our ignore list.
     if (in_array($aLine['gd_app_sym'], $aGenesToIgnore)) {
+	fwrite($fErrorLogs, '"' . $aLine['gd_app_sym'] . "Ignore genes in our ignore list.\"\r\n");
         continue;
     }
     // Ignore genes not in list.
     if ($bUseGenseIncludeFile && ! in_array($aLine['gd_app_sym'], $aGenesToInclude)) {
-		continue;
+	fwrite($fErrorLogs, '"' . $aLine['gd_app_sym'] . "Ignore genes not in list.\"\r\n");
+	continue;
     }
 
     // Prepare fields.... HGNC ID.
@@ -482,6 +488,7 @@ foreach ($aHGNCFile as $nLine => $sLine) {
         $sChromosome = $aMatches[1];
         $sChromBand = $aMatches[2];
     } else {
+	fwrite($fErrorLogs, '"' . $aLine['gd_app_sym'] . "Skipped; Issue with Chromosome band.\"\r\n");
         continue;
     }
     // Genomic refseq...
@@ -500,6 +507,7 @@ foreach ($aHGNCFile as $nLine => $sLine) {
         $nTimeSpentGettingUDs += (microtime(true) - $t);
         $nUDsRequested ++;
         if (!$sRefseqUD) {
+	    fwrite($fErrorLogs, '"' . $aLine['gd_app_sym'] . "Skipped; no refseq UD found.\"\r\n");
             continue;
         }
     }
@@ -520,10 +528,11 @@ foreach ($aHGNCFile as $nLine => $sLine) {
         $aAvailableTranscripts = $aResponse;
 
         foreach($aAvailableTranscripts as $aAvailableTranscript) {
-			// Ignore transcripts not in list.
-			if ($bUseTranscriptIncludeFile && ! in_array($aAvailableTranscript['id'], $aTranscriptsToInclude)) {
-				continue;
-			}
+	    // Ignore transcripts not in list.
+	    if ($bUseTranscriptIncludeFile && ! in_array($aAvailableTranscript['id'], $aTranscriptsToInclude)) {
+		fwrite($fErrorLogs, '"' . $aLine['gd_app_sym'] . "Transcripts skipped.\"\r\n");
+                continue;
+	    }
 
             if ($aAvailableTranscript['id']) { // Is this check needed? Copied from genes.php.
                 list($sIDWithoutVersion, $nVersion) = explode('.', $aAvailableTranscript['id']);
@@ -598,6 +607,7 @@ foreach ($aHGNCFile as $nLine => $sLine) {
         }
     }
     if (!$sRefseqTranscript) {
+	fwrite($fErrorLogs, '"' . $aLine['gd_app_sym'] . "No transcripts found.\"\r\n");
         continue;
     }
     list($sIDWithoutVersion, $nVersion) = explode('.', $sRefseqTranscript);
@@ -621,15 +631,16 @@ foreach ($aHGNCFile as $nLine => $sLine) {
             $aLine['md_mim_id'],
         )) . "\"\r\n");
 
-	foreach ($aTranscriptsForLOVD as $aTranscript) {
-		$nTranscript ++;
-		fwrite($fTranscripts, '"' . str_pad($nTranscript, 5, '0', STR_PAD_LEFT) . '"' . "\t\"" . implode("\"\t\"", $aTranscript) . "\"\r\n");
-	}
+    foreach ($aTranscriptsForLOVD as $aTranscript) {
+	    $nTranscript ++;
+	    fwrite($fTranscripts, '"' . str_pad($nTranscript, 5, '0', STR_PAD_LEFT) . '"' . "\t\"" . implode("\"\t\"", $aTranscript) . "\"\r\n");
+    }
 }
 
 
 fclose($fGenes);
 fclose($fTranscripts);
+fclose($fErrorLogs);
 print("\n"  .
       'All done, in ' . round(microtime(true) - $tStart) . ' seconds.');
 ?>
