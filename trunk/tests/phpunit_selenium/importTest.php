@@ -4,7 +4,7 @@
  * LEIDEN OPEN VARIATION DATABASE (LOVD)
  *
  * Created     : 2014-12-19
- * Modified    : 2015-10-09:11:54:31
+ * Modified    : 2015-10-14:10:13:17
  * For LOVD    : 3.0-12
  *
  * Copyright   : 2014 Leiden University Medical Center; http://www.LUMC.nl/
@@ -31,7 +31,7 @@
 class import_tests extends PHPUnit_Extensions_SeleniumTestCase
 {
     protected $captureScreenshotOnFailure = TRUE;
-    protected $screenshotPath = '/home/daan/Website/LOVD3_development/trunk/tests/test_results/error_screenshots';
+    protected $screenshotPath = '/home/dasscheman/svn/LOVD3_development/trunk/tests/test_results/error_screenshots';
     protected $screenshotUrl = 'http://localhost/LOVD3_development/trunk/tests/test_results/error_screenshots';
   
     protected function setUp()
@@ -136,7 +136,7 @@ class import_tests extends PHPUnit_Extensions_SeleniumTestCase
     public function testInsertImport()
     {
         $this->open("/LOVD3_development/trunk/src/import");
-        $this->type("name=import", "/home/daan/Website/LOVD3_development/trunk/tests/test_data_files/InsertImport.txt");
+        $this->type("name=import", "/home/dasscheman/svn/LOVD3_development/trunk/tests/test_data_files/InsertImport.txt");
         $this->select("name=mode", "label=Add only, treat all data as new");
         $this->click("css=input[type=\"submit\"]");
         $this->waitForPageToLoad("30000");
@@ -145,7 +145,7 @@ class import_tests extends PHPUnit_Extensions_SeleniumTestCase
     public function testFalseInsertImport()
     {
         $this->open("/LOVD3_development/trunk/src/import");
-        $this->type("name=import", "/home/daan/Website/LOVD3_development/trunk/tests/test_data_files/FalseInsertImport.txt");
+        $this->type("name=import", "/home/dasscheman/svn/LOVD3_development/trunk/tests/test_data_files/FalseInsertImport.txt");
         $this->select("name=mode", "label=Add only, treat all data as new");
         $this->click("name=simulate");
         $this->click("css=input[type=\"submit\"]");
@@ -210,7 +210,7 @@ class import_tests extends PHPUnit_Extensions_SeleniumTestCase
     public function testFalseUpdateImport()
     {
         $this->open("/LOVD3_development/trunk/src/import");
-        $this->type("name=import", "/home/daan/Website/LOVD3_development/trunk/tests/test_data_files/FalseUpdateImport.txt");
+        $this->type("name=import", "/home/dasscheman/svn/LOVD3_development/trunk/tests/test_data_files/FalseUpdateImport.txt");
         $this->select("name=mode", "label=Update existing data (in beta)");
         $this->click("name=simulate");
         $this->click("css=input[type=\"submit\"]");
@@ -302,7 +302,7 @@ class import_tests extends PHPUnit_Extensions_SeleniumTestCase
     public function testSecondInsertImport()
     {
         $this->open("/LOVD3_development/trunk/src/import");
-        $this->type("name=import", "/home/daan/Website/LOVD3_development/trunk/tests/test_data_files/SecondInsertImport.txt");
+        $this->type("name=import", "/home/dasscheman/svn/LOVD3_development/trunk/tests/test_data_files/SecondInsertImport.txt");
         $this->select("name=mode", "label=Add only, treat all data as new");
         $this->click("css=input[type=\"submit\"]");
         $this->waitForPageToLoad("30000");
@@ -311,7 +311,7 @@ class import_tests extends PHPUnit_Extensions_SeleniumTestCase
     public function testUpdateImport()
     {
         $this->open("/LOVD3_development/trunk/src/import");
-        $this->type("name=import", "/home/daan/Website/LOVD3_development/trunk/tests/test_data_files/UpdateImport.txt");
+        $this->type("name=import", "/home/dasscheman/svn/LOVD3_development/trunk/tests/test_data_files/UpdateImport.txt");
         $this->select("name=mode", "label=Update existing data (in beta)");
         $this->click("css=input[type=\"submit\"]");
         $this->waitForPageToLoad("30000");

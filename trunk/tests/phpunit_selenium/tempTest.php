@@ -4,7 +4,7 @@
  * LEIDEN OPEN VARIATION DATABASE (LOVD)
  *
  * Created     : 2014-12-19
- * Modified    : 2015-10-09:11:54:31
+ * Modified    : 2015-10-14:10:13:17
  * For LOVD    : 3.0-12
  *
  * Copyright   : 2014 Leiden University Medical Center; http://www.LUMC.nl/
@@ -31,7 +31,7 @@
 class temp_tests extends PHPUnit_Extensions_SeleniumTestCase
 {
     protected $captureScreenshotOnFailure = TRUE;
-    protected $screenshotPath = '/home/daan/Website/LOVD3_development/trunk/tests/test_results/error_screenshots';
+    protected $screenshotPath = '/home/dasscheman/svn/LOVD3_development/trunk/tests/test_results/error_screenshots';
     protected $screenshotUrl = 'http://localhost/LOVD3_development/trunk/tests/test_results/error_screenshots';
   
     protected function setUp()

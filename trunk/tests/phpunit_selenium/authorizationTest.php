@@ -4,7 +4,7 @@
  * LEIDEN OPEN VARIATION DATABASE (LOVD)
  *
  * Created     : 2014-12-19
- * Modified    : 2015-10-09:11:54:31
+ * Modified    : 2015-10-14:10:13:17
  * For LOVD    : 3.0-12
  *
  * Copyright   : 2014 Leiden University Medical Center; http://www.LUMC.nl/
@@ -31,7 +31,7 @@
 class authorization_tests extends PHPUnit_Extensions_SeleniumTestCase
 {
     protected $captureScreenshotOnFailure = TRUE;
-    protected $screenshotPath = '/home/daan/Website/LOVD3_development/trunk/tests/test_results/error_screenshots';
+    protected $screenshotPath = '/home/dasscheman/svn/LOVD3_development/trunk/tests/test_results/error_screenshots';
     protected $screenshotUrl = 'http://localhost/LOVD3_development/trunk/tests/test_results/error_screenshots';
   
     protected function setUp()
@@ -189,7 +189,7 @@ class authorization_tests extends PHPUnit_Extensions_SeleniumTestCase
         $this->open("/LOVD3_development/trunk/src/genes?create");
         $this->type("name=hgnc_id", "IVD");
         $this->click("css=input[type=\"submit\"]");
-        $this->waitForPageToLoad("50000");
+        $this->waitForPageToLoad("120000");
         $this->addSelection("name=active_transcripts[]", "label=transcript variant 1 (NM_002225.3)");
         $this->click("name=show_hgmd");
         $this->click("name=show_genecards");
@@ -252,7 +252,14 @@ class authorization_tests extends PHPUnit_Extensions_SeleniumTestCase
         $this->type("name=00001_VariantOnTranscript/Exon", "2");
         $this->type("name=00001_VariantOnTranscript/DNA", "c.345G>T");
         $this->click("css=button.mapVariant");
-        sleep(20);
+        sleep(3);
+        for ($second = 0; ; $second++) {
+                if ($second >= 60) $this->fail("timeout");
+                try {
+                        if ($this->isElementPresent("css=img[alt=\"Prediction OK!\"]")) break;
+                } catch (Exception $e) {}
+                sleep(1);
+        }
         $RnaChange = $this->getEval("window.document.getElementById('variantForm').elements[4].value");
         $this->assertTrue((bool)preg_match('/^r\.\([\s\S]\)$/',$this->getExpression($RnaChange)));
         $ProteinChange = $this->getEval("window.document.getElementById('variantForm').elements[5].value");
