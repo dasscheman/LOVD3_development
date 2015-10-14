@@ -459,22 +459,22 @@ foreach ($aHGNCFile as $nLine => $sLine) {
 
     // Ignore genes from the bad locus groups.
     if (in_array($aLine['gd_locus_group'], $aBadLocusGroups)) {
-	fwrite($fErrorLogs, '"' . $aLine['gd_app_sym'] . "Ignore genes from the bad locus groups.\"\r\n");
+	fwrite($fErrorLogs, '"' . $aLine['gd_app_sym'] . ": Ignore genes from the bad locus groups.\"\r\n");
         continue;
     }
     // Ignore genes from the bad locus types.
     if (in_array($aLine['gd_locus_type'], $aBadLocusTypes)) {
-	fwrite($fErrorLogs, '"' . $aLine['gd_app_sym'] . "Ignore genes from the bad locus types.\"\r\n");
+	fwrite($fErrorLogs, '"' . $aLine['gd_app_sym'] . ": Ignore genes from the bad locus types.\"\r\n");
         continue;
     }
     // Ignore genes in our ignore list.
     if (in_array($aLine['gd_app_sym'], $aGenesToIgnore)) {
-	fwrite($fErrorLogs, '"' . $aLine['gd_app_sym'] . "Ignore genes in our ignore list.\"\r\n");
+	fwrite($fErrorLogs, '"' . $aLine['gd_app_sym'] . ": Gene in ignore list.\"\r\n");
         continue;
     }
     // Ignore genes not in list.
     if ($bUseGenseIncludeFile && ! in_array($aLine['gd_app_sym'], $aGenesToInclude)) {
-	fwrite($fErrorLogs, '"' . $aLine['gd_app_sym'] . "Ignore genes not in list.\"\r\n");
+	fwrite($fErrorLogs, '"' . $aLine['gd_app_sym'] . ": Gene not in include list.\"\r\n");
 	continue;
     }
 
@@ -488,7 +488,7 @@ foreach ($aHGNCFile as $nLine => $sLine) {
         $sChromosome = $aMatches[1];
         $sChromBand = $aMatches[2];
     } else {
-	fwrite($fErrorLogs, '"' . $aLine['gd_app_sym'] . "Skipped; Issue with Chromosome band.\"\r\n");
+	fwrite($fErrorLogs, '"' . $aLine['gd_app_sym'] . ": Skipped; Issue with Chromosome band.\"\r\n");
         continue;
     }
     // Genomic refseq...
@@ -507,7 +507,7 @@ foreach ($aHGNCFile as $nLine => $sLine) {
         $nTimeSpentGettingUDs += (microtime(true) - $t);
         $nUDsRequested ++;
         if (!$sRefseqUD) {
-	    fwrite($fErrorLogs, '"' . $aLine['gd_app_sym'] . "Skipped; no refseq UD found.\"\r\n");
+	    fwrite($fErrorLogs, '"' . $aLine['gd_app_sym'] . ": Skipped; no refseq UD found.\"\r\n");
             continue;
         }
     }
@@ -530,7 +530,7 @@ foreach ($aHGNCFile as $nLine => $sLine) {
         foreach($aAvailableTranscripts as $aAvailableTranscript) {
 	    // Ignore transcripts not in list.
 	    if ($bUseTranscriptIncludeFile && ! in_array($aAvailableTranscript['id'], $aTranscriptsToInclude)) {
-		fwrite($fErrorLogs, '"' . $aLine['gd_app_sym'] . "Transcripts skipped.\"\r\n");
+		fwrite($fErrorLogs, '"' . $aLine['gd_app_sym'] . ": Transcript " . $aAvailableTranscript['id'] . " skipped, not in the include list.\"\r\n");
                 continue;
 	    }
 
@@ -607,7 +607,7 @@ foreach ($aHGNCFile as $nLine => $sLine) {
         }
     }
     if (!$sRefseqTranscript) {
-	fwrite($fErrorLogs, '"' . $aLine['gd_app_sym'] . "No transcripts found.\"\r\n");
+	fwrite($fErrorLogs, '"' . $aLine['gd_app_sym'] . ": Transcript not found.\"\r\n");
         continue;
     }
     list($sIDWithoutVersion, $nVersion) = explode('.', $sRefseqTranscript);

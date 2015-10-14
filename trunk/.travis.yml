@@ -27,13 +27,13 @@ before_script:
   - ./tests/travis/setup/setup_selenium_server.sh
 
 script:
-  - phpunit --debug --coverage-text ./tests/phpunit_selenium/adminTest.php
-  - phpunit --debug --coverage-text ./tests/phpunit_selenium/authorizationTest.php
-  - phpunit --debug --coverage-text ./tests/phpunit_selenium/collaboratorTest.php
-  - phpunit --debug --coverage-text ./tests/phpunit_selenium/importTest.php
-  - phpunit --debug --coverage-text ./tests/phpunit_selenium/managerTest.php
-  - phpunit --debug --coverage-text ./tests/phpunit_selenium/submitterTest.php
-  - phpunit --debug --coverage-text ./tests/phpunit_selenium/tempTest.php
+  - phpunit ./tests/phpunit_selenium/adminTest.php
+  - phpunit ./tests/phpunit_selenium/authorizationTest.php
+  - phpunit ./tests/phpunit_selenium/collaboratorTest.php
+  - phpunit ./tests/phpunit_selenium/importTest.php
+  - phpunit ./tests/phpunit_selenium/managerTest.php
+  - phpunit ./tests/phpunit_selenium/submitterTest.php
+  - phpunit ./tests/phpunit_selenium/tempTest.php
   
 ## Run all tests
 ## - phpunit ./tests/phpunit_selenium/
