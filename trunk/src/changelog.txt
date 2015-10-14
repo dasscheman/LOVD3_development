@@ -5,8 +5,8 @@
  *************/
 
 /**************************
- * 3.0 Build 14 (r...)
- * 2015-0?-??
+ * 3.0 Build 14 (r657)
+ * 2015-10-09
  *********/
  * Added URLs to show data by reference (DOI or PubMed currently supported),
    e.g. /references/PMID:10677295.
@@ -70,8 +70,12 @@
  * Updated links to Ensembl as they changed the default URL to point to hg38.
  * Fixed bug; For each new gene, the UD (Mutalyzer reference sequence) retrieved
    was hg38 instead of the active human build.
- * Fixed bug; When a checkbox field was left empty in the import file, an sql
+ * Fixed bug; When a checkbox field was left empty in the import file, an SQL
    error occured during the import.
+ * Added the genome build to the genomic DNA field headers in variant listings
+   and detailed views.
+ * Increased maximum length of disease's abbreviation to 25.
+
 
 /**************************
  * 3.0 Build 13 (r546)
