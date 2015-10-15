@@ -31,7 +31,7 @@ class Example extends PHPUnit_Extensions_SeleniumTestCase
     $this->select("name=statusid", "label=Public");
     $this->click("css=input[type=\"submit\"]");
     // Importing seatlleseq can take some time, therefore the pause for 200 seconds.
-    sleep(200);
+    $this->setTimeout(200000)
     for ($second = 0; ; $second++) {
         if ($second >= 60) $this->fail("timeout");
         try {
@@ -39,10 +39,12 @@ class Example extends PHPUnit_Extensions_SeleniumTestCase
         } catch (Exception $e) {}
         sleep(1);
     }
+
     $this->assertEquals("138 variants were imported, 1 variant could not be imported.", $this->getText("id=lovd__progress_message"));
     $this->click("css=input[type=\"submit\"]");
     $this->waitForPageToLoad("30000");
     $this->assertTrue((bool)preg_match('/^Successfully processed your submission and sent an email notification to the relevant curator[\s\S]*$/',$this->getText("css=table[class=info]")));
+    $this->setTimeout(30000)
   }
 }
 ?>

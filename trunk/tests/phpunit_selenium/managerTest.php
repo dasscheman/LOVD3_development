@@ -4,7 +4,7 @@
  * LEIDEN OPEN VARIATION DATABASE (LOVD)
  *
  * Created     : 2014-12-19
- * Modified    : 2015-10-14:10:13:17
+ * Modified    : 2015-10-15:14:36:57
  * For LOVD    : 3.0-12
  *
  * Copyright   : 2014 Leiden University Medical Center; http://www.LUMC.nl/
@@ -417,7 +417,7 @@ class manager_tests extends PHPUnit_Extensions_SeleniumTestCase
         $this->select("name=statusid", "label=Public");
         $this->click("css=input[type=\"submit\"]");
         $this->waitForPageToLoad("30000");
-        $this->assertEquals("138 variants were imported, 1 variant could not be imported.", $this->getText("id=lovd__progress_message"));
+        $this->assertEquals("76 variants were imported, 1 variant could not be imported.", $this->getText("id=lovd__progress_message"));
         $this->click("css=input[type=\"button\"]");
         $this->waitForPageToLoad("30000");
         $this->assertTrue((bool)preg_match('/^[\s\S]*\/src\/submit\/screening\/0000000002$/',$this->getLocation()));
@@ -542,6 +542,7 @@ class manager_tests extends PHPUnit_Extensions_SeleniumTestCase
     }
     public function testAddSummaryVariantOnlyDescribedOnGenomicLevel()
     {
+        $this->assertContains((bool)preg_match('/^[\s\S]*\/src\/variants\/0000000281$/',$this->getLocation()));
         $this->assertTrue((bool)preg_match('/^[\s\S]*\/src\/variants\/0000000279$/',$this->getLocation()));
         $this->click("id=tab_submit");
         $this->waitForPageToLoad("30000");
@@ -632,7 +633,7 @@ class manager_tests extends PHPUnit_Extensions_SeleniumTestCase
         $this->select("name=statusid", "label=Public");
         $this->click("css=input[type=\"submit\"]");
         $this->waitForPageToLoad("30000");
-        $this->assertEquals("138 variants were imported, 1 variant could not be imported.", $this->getText("id=lovd__progress_message"));
+        $this->assertEquals("76 variants were imported, 1 variant could not be imported.", $this->getText("id=lovd__progress_message"));
         $this->click("css=input[type=\"submit\"]");
         $this->waitForPageToLoad("30000");
         $this->assertTrue((bool)preg_match('/^Successfully processed your submission and sent an email notification to the relevant curator[\s\S]*$/',$this->getText("css=table[class=info]")));

@@ -137,9 +137,12 @@ foreach ($aFileIn as $i => $sLine) {
     if ($sCurrentSection == 'Transcripts') {
         $aLine['id'] = NULL;
     }
-    print('INSERT IGNORE INTO lovd_' . strtolower($sCurrentSection) . ' (' . implode(', ', $aColumns) . ') VALUES ("' . implode('", "', $aLine) . '");' . "\n");
-	$stringData='INSERT IGNORE INTO lovd_' . strtolower($sCurrentSection) . ' (' . implode(', ', $aColumns) . ')
-	 VALUES ("' . implode('", "', $aLine) . '");' . "\n";
+    print("INSERT IGNORE INTO lovd_" . strtolower($sCurrentSection) . " (" . implode(', ', $aColumns) . ") VALUES ('" . implode("', '", $aLine) . "');" . "\n");
+	$stringData="INSERT IGNORE INTO lovd_" . strtolower($sCurrentSection) . " (" . implode(", ", $aColumns) . ")
+	 VALUES ('" . implode("', '", $aLine) . "');" . "\n";
+//    print('INSERT IGNORE INTO lovd_' . strtolower($sCurrentSection) . ' (' . implode(', ', $aColumns) . ') VALUES ("' . implode('", "', $aLine) . '");' . "\n");
+//	$stringData='INSERT IGNORE INTO lovd_' . strtolower($sCurrentSection) . ' (' . implode(', ', $aColumns) . ')
+//	 VALUES ("' . implode('", "', $aLine) . '");' . "\n";
 
 	fwrite($openSqlFile, $stringData);
 }

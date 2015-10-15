@@ -4,7 +4,7 @@
  * LEIDEN OPEN VARIATION DATABASE (LOVD)
  *
  * Created     : 2014-12-19
- * Modified    : 2015-10-14:10:13:17
+ * Modified    : 2015-10-15:14:36:57
  * For LOVD    : 3.0-12
  *
  * Copyright   : 2014 Leiden University Medical Center; http://www.LUMC.nl/
@@ -302,7 +302,7 @@ class admin_tests extends PHPUnit_Extensions_SeleniumTestCase
         $this->select("name=statusid", "label=Public");
         $this->click("css=input[type=\"submit\"]");
         // Importing seatlleseq can take some time, therefore the pause for 200 seconds.
-        sleep(200);
+        $this->setTimeout(200000);
         for ($second = 0; ; $second++) {
                 if ($second >= 60) $this->fail("timeout");
                 try {
@@ -315,6 +315,7 @@ class admin_tests extends PHPUnit_Extensions_SeleniumTestCase
         $this->click("css=input[type=\"button\"]");
         $this->waitForPageToLoad("30000");
         $this->waitForPageToLoad("4000");
+        $this->setTimeout(30000);
     }
     public function testAddVariantOnlyDescribedOnGenomicLevelToHealtyIndividual()
     {
@@ -526,7 +527,7 @@ class admin_tests extends PHPUnit_Extensions_SeleniumTestCase
         $this->select("name=statusid", "label=Public");
         $this->click("css=input[type=\"submit\"]");
         $this->waitForPageToLoad("30000");
-        $this->assertEquals("138 variants were imported, 1 variant could not be imported.", $this->getText("id=lovd__progress_message"));
+        $this->assertEquals("25 variants were imported, 1 variant could not be imported.", $this->getText("id=lovd__progress_message"));
         $this->click("css=input[type=\"button\"]");
         $this->waitForPageToLoad("30000");
         $this->setTimeout(60000);
@@ -634,11 +635,12 @@ class admin_tests extends PHPUnit_Extensions_SeleniumTestCase
         $this->waitForPageToLoad("30000");
         $this->assertTrue((bool)preg_match('/^Successfully processed your submission and sent an email notification to the relevant curator[\s\S]*$/',$this->getText("css=table[class=info]")));
         $this->waitForPageToLoad("4000");
+        $this->assertContains((bool)preg_match('/^[\s\S]*\/src\/variants\/0000000281$/',$this->getLocation()));
         $this->assertTrue((bool)preg_match('/^[\s\S]*\/src\/variants\/0000000281$/',$this->getLocation()));
     }
     public function testAddSummaryVariantOnlyDescribedOnGenomicLevel()
     {
-        $this->assertTrue((bool)preg_match('/^[\s\S]*\/src\/variants\/0000000281$/',$this->getLocation()));
+        $this->assertTrue((bool)preg_match('/^[\s\S]*\/src\/variants\/0000000168$/',$this->getLocation()));
         $this->click("link=Submit new data");
         $this->waitForPageToLoad("30000");
         $this->assertTrue((bool)preg_match('/^[\s\S]*\/src\/submit$/',$this->getLocation()));
@@ -664,7 +666,7 @@ class admin_tests extends PHPUnit_Extensions_SeleniumTestCase
         $this->waitForPageToLoad("30000");
         $this->assertTrue((bool)preg_match('/^Successfully processed your submission and sent an email notification to the relevant curator[\s\S]*$/',$this->getText("css=table[class=info]")));
         $this->waitForPageToLoad("4000");
-        $this->assertTrue((bool)preg_match('/^[\s\S]*\/src\/variants\/0000000282$/',$this->getLocation()));
+        $this->assertTrue((bool)preg_match('/^[\s\S]*\/src\/variants\/0000000168$/',$this->getLocation()));
     }
     public function testAddSummaryVariantSeatlleseqFile()
     {
@@ -690,7 +692,7 @@ class admin_tests extends PHPUnit_Extensions_SeleniumTestCase
         $this->select("name=statusid", "label=Public");
         $this->click("css=input[type=\"submit\"]");
         // Importing seatlleseq can take some time, therefore the pause for 200 seconds.
-        sleep(200);
+        $this->setTimeout(200000);
         for ($second = 0; ; $second++) {
                 if ($second >= 60) $this->fail("timeout");
                 try {
@@ -703,6 +705,7 @@ class admin_tests extends PHPUnit_Extensions_SeleniumTestCase
         $this->click("css=input[type=\"submit\"]");
         $this->waitForPageToLoad("30000");
         $this->assertTrue((bool)preg_match('/^Successfully processed your submission and sent an email notification to the relevant curator[\s\S]*$/',$this->getText("css=table[class=info]")));
+        $this->setTimeout(30000);
     }
     public function testAddSummaryVariantVcfFile()
     {
@@ -712,6 +715,7 @@ class admin_tests extends PHPUnit_Extensions_SeleniumTestCase
         $this->chooseOkOnNextConfirmation();
         $this->click("//div/table/tbody/tr/td/table/tbody/tr[2]/td[2]/b");
         $this->assertTrue((bool)preg_match('/^[\s\S]*Please reconsider to submit individual data as well, as it makes the data you submit much more valuable![\s\S]*$/',$this->getConfirmation()));
+        $this->setTimeout(60000);
         sleep(4);
         $this->assertTrue((bool)preg_match('/^[\s\S]*\/src\/variants[\s\S]create$/',$this->getLocation()));
         $this->click("//tr[3]/td[2]/b");
@@ -730,13 +734,22 @@ class admin_tests extends PHPUnit_Extensions_SeleniumTestCase
         $this->select("name=statusid", "label=Public");
         $this->click("css=input[type=\"submit\"]");
         $this->waitForPageToLoad("30000");
-        $this->assertEquals("138 variants were imported, 1 variant could not be imported.", $this->getText("id=lovd__progress_message"));
+        $this->assertEquals("25 variants were imported, 1 variant could not be imported.", $this->getText("id=lovd__progress_message"));
         $this->click("css=input[type=\"submit\"]");
         $this->waitForPageToLoad("30000");
         $this->assertTrue((bool)preg_match('/^Successfully processed your submission and sent an email notification to the relevant curator[\s\S]*$/',$this->getText("css=table[class=info]")));
         $this->waitForPageToLoad("4000");
-        $this->setTimeout(60000);
-        sleep(200);
+        sleep(400);
+        $this->open("/LOVD3_development/trunk/src/ajax/map_variants.php");
+        $this->open("/LOVD3_development/trunk/src/ajax/map_variants.php");
+        $this->open("/LOVD3_development/trunk/src/ajax/map_variants.php");
+        $this->open("/LOVD3_development/trunk/src/ajax/map_variants.php");
+        $this->open("/LOVD3_development/trunk/src/ajax/map_variants.php");
+        $this->open("/LOVD3_development/trunk/src/ajax/map_variants.php");
+        $this->open("/LOVD3_development/trunk/src/ajax/map_variants.php");
+        $this->open("/LOVD3_development/trunk/src/ajax/map_variants.php");
+        $this->open("/LOVD3_development/trunk/src/ajax/map_variants.php");
+        $this->open("/LOVD3_development/trunk/src/ajax/map_variants.php");
         $this->open("/LOVD3_development/trunk/src/ajax/map_variants.php");
         $this->open("/LOVD3_development/trunk/src/ajax/map_variants.php");
         $this->open("/LOVD3_development/trunk/src/ajax/map_variants.php");
@@ -829,7 +842,7 @@ class admin_tests extends PHPUnit_Extensions_SeleniumTestCase
         $this->waitForPageToLoad("30000");
         $this->assertTrue((bool)preg_match('/^Successfully processed your submission and sent an email notification to the relevant curator[\s\S]*$/',$this->getText("css=table[class=info]")));
         $this->waitForPageToLoad("4000");
-        $this->assertTrue((bool)preg_match('/^[\s\S]*\/src\/variants\/0000000559$/',$this->getLocation()));
+        $this->assertTrue((bool)preg_match('/^[\s\S]*\/src\/variants\/0000000333$/',$this->getLocation()));
     }
     public function testPostFinishAddVariantLocatedWithinGeneToIVAIndividual()
     {
@@ -859,6 +872,7 @@ class admin_tests extends PHPUnit_Extensions_SeleniumTestCase
                 } catch (Exception $e) {}
                 sleep(1);
         }
+
         $RnaChange = $this->getEval("window.document.getElementById('variantForm').elements[4].value");
         $this->assertTrue((bool)preg_match('/^r\.\([\s\S]\)$/',$this->getExpression($RnaChange)));
         $ProteinChange = $this->getEval("window.document.getElementById('variantForm').elements[5].value");
@@ -879,7 +893,7 @@ class admin_tests extends PHPUnit_Extensions_SeleniumTestCase
         $this->waitForPageToLoad("30000");
         $this->assertTrue((bool)preg_match('/^Successfully processed your submission and sent an email notification to the relevant curator[\s\S]*$/',$this->getText("css=table[class=info]")));
         $this->waitForPageToLoad("4000");
-        $this->assertTrue((bool)preg_match('/^[\s\S]*\/src\/variants\/0000000560$/',$this->getLocation()));
+        $this->assertTrue((bool)preg_match('/^[\s\S]*\/src\/variants\/0000000334$/',$this->getLocation()));
     }
     public function testPostFinishAddScreeningToIVAIndividual()
     {
