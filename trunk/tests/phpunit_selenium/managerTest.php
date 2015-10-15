@@ -33,7 +33,7 @@ class manager_tests extends PHPUnit_Extensions_SeleniumTestCase
     protected $captureScreenshotOnFailure = TRUE;
     protected $screenshotPath = '/home/dasscheman/svn/LOVD3_development/trunk/tests/test_results/error_screenshots';
     protected $screenshotUrl = 'http://localhost/LOVD3_development/trunk/tests/test_results/error_screenshots';
-  
+
     protected function setUp()
     {
         $this->setHost('localhost');
@@ -375,16 +375,13 @@ class manager_tests extends PHPUnit_Extensions_SeleniumTestCase
         $this->select("name=owned_by", "label=LOVD3 Admin");
         $this->select("name=statusid", "label=Public");
         $this->click("css=input[type=\"submit\"]");
-        // Importing seatlleseq can take some time, therefore the pause for 120 seconds.
-        sleep(120);
         for ($second = 0; ; $second++) {
-                if ($second >= 60) $this->fail("timeout");
+                if ($second >= 180) $this->fail("timeout");
                 try {
                         if ($this->isElementPresent("css=input[type=\"button\"]")) break;
                 } catch (Exception $e) {}
                 sleep(1);
         }
-
         $this->assertEquals("138 variants were imported, 1 variant could not be imported.", $this->getText("id=lovd__progress_message"));
         $this->click("css=input[type=\"button\"]");
         $this->waitForPageToLoad("30000");
@@ -593,10 +590,8 @@ class manager_tests extends PHPUnit_Extensions_SeleniumTestCase
         $this->select("name=owned_by", "label=LOVD3 Admin");
         $this->select("name=statusid", "label=Public");
         $this->click("css=input[type=\"submit\"]");
-        // Importing seatlleseq can take some time, therefore the pause for 200 seconds.
-        sleep(200);
         for ($second = 0; ; $second++) {
-                if ($second >= 60) $this->fail("timeout");
+                if ($second >= 300) $this->fail("timeout");
                 try {
                         if ($this->isElementPresent("css=input[type=\"submit\"]")) break;
                 } catch (Exception $e) {}

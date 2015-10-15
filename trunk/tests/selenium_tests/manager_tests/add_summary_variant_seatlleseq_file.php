@@ -30,10 +30,8 @@ class Example extends PHPUnit_Extensions_SeleniumTestCase
     $this->select("name=owned_by", "label=LOVD3 Admin");
     $this->select("name=statusid", "label=Public");
     $this->click("css=input[type=\"submit\"]");
-    // Importing seatlleseq can take some time, therefore the pause for 200 seconds.
-    sleep(200);
     for ($second = 0; ; $second++) {
-        if ($second >= 60) $this->fail("timeout");
+        if ($second >= 300) $this->fail("timeout");
         try {
             if ($this->isElementPresent("css=input[type=\"submit\"]")) break;
         } catch (Exception $e) {}
