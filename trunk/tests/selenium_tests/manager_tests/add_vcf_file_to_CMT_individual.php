@@ -35,61 +35,19 @@ class Example extends PHPUnit_Extensions_SeleniumTestCase
     $this->select("name=statusid", "label=Public");
     $this->click("css=input[type=\"submit\"]");
     $this->waitForPageToLoad("30000");
-    $this->assertEquals("76 variants were imported, 1 variant could not be imported.", $this->getText("id=lovd__progress_message"));
+    $this->assertEquals("25 variants were imported, 1 variant could not be imported.", $this->getText("id=lovd__progress_message"));
     $this->click("css=input[type=\"button\"]");
     $this->waitForPageToLoad("30000");
     $this->assertTrue((bool)preg_match('/^[\s\S]*\/src\/submit\/screening\/0000000002$/',$this->getLocation()));
     $this->setTimeout(60000)
-    sleep(400);
-    $this->open("/svn/LOVD3/trunk/src/ajax/map_variants.php");
-    $this->open("/svn/LOVD3/trunk/src/ajax/map_variants.php");
-    $this->open("/svn/LOVD3/trunk/src/ajax/map_variants.php");
-    $this->open("/svn/LOVD3/trunk/src/ajax/map_variants.php");
-    $this->open("/svn/LOVD3/trunk/src/ajax/map_variants.php");
-    $this->open("/svn/LOVD3/trunk/src/ajax/map_variants.php");
-    $this->open("/svn/LOVD3/trunk/src/ajax/map_variants.php");
-    $this->open("/svn/LOVD3/trunk/src/ajax/map_variants.php");
-    $this->open("/svn/LOVD3/trunk/src/ajax/map_variants.php");
-    $this->open("/svn/LOVD3/trunk/src/ajax/map_variants.php");
-    $this->open("/svn/LOVD3/trunk/src/ajax/map_variants.php");
-    $this->open("/svn/LOVD3/trunk/src/ajax/map_variants.php");
-    $this->open("/svn/LOVD3/trunk/src/ajax/map_variants.php");
-    $this->open("/svn/LOVD3/trunk/src/ajax/map_variants.php");
-    $this->open("/svn/LOVD3/trunk/src/ajax/map_variants.php");
-    $this->open("/svn/LOVD3/trunk/src/ajax/map_variants.php");
-    $this->open("/svn/LOVD3/trunk/src/ajax/map_variants.php");
-    $this->open("/svn/LOVD3/trunk/src/ajax/map_variants.php");
-    $this->open("/svn/LOVD3/trunk/src/ajax/map_variants.php");
-    $this->open("/svn/LOVD3/trunk/src/ajax/map_variants.php");
-    $this->open("/svn/LOVD3/trunk/src/ajax/map_variants.php");
-    $this->open("/svn/LOVD3/trunk/src/ajax/map_variants.php");
-    $this->open("/svn/LOVD3/trunk/src/ajax/map_variants.php");
-    $this->open("/svn/LOVD3/trunk/src/ajax/map_variants.php");
-    $this->open("/svn/LOVD3/trunk/src/ajax/map_variants.php");
-    $this->open("/svn/LOVD3/trunk/src/ajax/map_variants.php");
-    $this->open("/svn/LOVD3/trunk/src/ajax/map_variants.php");
-    $this->open("/svn/LOVD3/trunk/src/ajax/map_variants.php");
-    $this->open("/svn/LOVD3/trunk/src/ajax/map_variants.php");
-    $this->open("/svn/LOVD3/trunk/src/ajax/map_variants.php");
-    $this->open("/svn/LOVD3/trunk/src/ajax/map_variants.php");
-    $this->open("/svn/LOVD3/trunk/src/ajax/map_variants.php");
-    $this->open("/svn/LOVD3/trunk/src/ajax/map_variants.php");
-    $this->open("/svn/LOVD3/trunk/src/ajax/map_variants.php");
-    $this->open("/svn/LOVD3/trunk/src/ajax/map_variants.php");
-    $this->open("/svn/LOVD3/trunk/src/ajax/map_variants.php");
-    $this->open("/svn/LOVD3/trunk/src/ajax/map_variants.php");
-    $this->open("/svn/LOVD3/trunk/src/ajax/map_variants.php");
-    $this->open("/svn/LOVD3/trunk/src/ajax/map_variants.php");
-    $this->open("/svn/LOVD3/trunk/src/ajax/map_variants.php");
-    $this->open("/svn/LOVD3/trunk/src/ajax/map_variants.php");
-    $this->open("/svn/LOVD3/trunk/src/ajax/map_variants.php");
-    $this->open("/svn/LOVD3/trunk/src/ajax/map_variants.php");
-    $this->open("/svn/LOVD3/trunk/src/ajax/map_variants.php");
-    $this->open("/svn/LOVD3/trunk/src/ajax/map_variants.php");
-    $this->open("/svn/LOVD3/trunk/src/ajax/map_variants.php");
-    $this->open("/svn/LOVD3/trunk/src/ajax/map_variants.php");
-    $this->open("/svn/LOVD3/trunk/src/ajax/map_variants.php");
-    $this->assertEquals("0 99 There are no variants to map in the database", $this->getText("css=body"));
+    for ($second = 0; ; $second++) {
+        if ($second >= 300) $this->fail("timeout");
+        try {
+            $this->open("/svn/LOVD3/trunk/src/ajax/map_variants.php");
+            if ($this->assertEquals("0 99 There are no variants to map in the database", $this->getText("css=body"));) break;
+        } catch (Exception $e) {}
+        sleep(1);
+    }
     $this->setTimeout(30000)
   }
 }

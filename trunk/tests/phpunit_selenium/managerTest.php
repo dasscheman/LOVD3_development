@@ -539,7 +539,7 @@ class manager_tests extends PHPUnit_Extensions_SeleniumTestCase
     }
     public function testAddSummaryVariantOnlyDescribedOnGenomicLevel()
     {
-        $this->assertContains((bool)preg_match('/^[\s\S]*\/src\/variants\/0000000281$/',$this->getLocation()));
+        $this->assertContains("src/variants/0000000281" ,$this->getLocation());
         $this->assertTrue((bool)preg_match('/^[\s\S]*\/src\/variants\/0000000279$/',$this->getLocation()));
         $this->click("id=tab_submit");
         $this->waitForPageToLoad("30000");
