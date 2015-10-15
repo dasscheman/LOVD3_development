@@ -4,7 +4,7 @@
  * LEIDEN OPEN VARIATION DATABASE (LOVD)
  *
  * Created     : 2014-12-19
- * Modified    : 2015-10-15:14:36:57
+ * Modified    : 2015-10-15:15:56:03
  * For LOVD    : 3.0-12
  *
  * Copyright   : 2014 Leiden University Medical Center; http://www.LUMC.nl/
@@ -33,7 +33,7 @@ class manager_tests extends PHPUnit_Extensions_SeleniumTestCase
     protected $captureScreenshotOnFailure = TRUE;
     protected $screenshotPath = '/home/dasscheman/svn/LOVD3_development/trunk/tests/test_results/error_screenshots';
     protected $screenshotUrl = 'http://localhost/LOVD3_development/trunk/tests/test_results/error_screenshots';
-
+  
     protected function setUp()
     {
         $this->setHost('localhost');
@@ -382,6 +382,7 @@ class manager_tests extends PHPUnit_Extensions_SeleniumTestCase
                 } catch (Exception $e) {}
                 sleep(1);
         }
+
         $this->assertEquals("138 variants were imported, 1 variant could not be imported.", $this->getText("id=lovd__progress_message"));
         $this->click("css=input[type=\"button\"]");
         $this->waitForPageToLoad("30000");
@@ -414,61 +415,19 @@ class manager_tests extends PHPUnit_Extensions_SeleniumTestCase
         $this->select("name=statusid", "label=Public");
         $this->click("css=input[type=\"submit\"]");
         $this->waitForPageToLoad("30000");
-        $this->assertEquals("76 variants were imported, 1 variant could not be imported.", $this->getText("id=lovd__progress_message"));
+        $this->assertEquals("25 variants were imported, 1 variant could not be imported.", $this->getText("id=lovd__progress_message"));
         $this->click("css=input[type=\"button\"]");
         $this->waitForPageToLoad("30000");
         $this->assertTrue((bool)preg_match('/^[\s\S]*\/src\/submit\/screening\/0000000002$/',$this->getLocation()));
         $this->setTimeout(60000);
-        sleep(400);
-        $this->open("/LOVD3_development/trunk/src/ajax/map_variants.php");
-        $this->open("/LOVD3_development/trunk/src/ajax/map_variants.php");
-        $this->open("/LOVD3_development/trunk/src/ajax/map_variants.php");
-        $this->open("/LOVD3_development/trunk/src/ajax/map_variants.php");
-        $this->open("/LOVD3_development/trunk/src/ajax/map_variants.php");
-        $this->open("/LOVD3_development/trunk/src/ajax/map_variants.php");
-        $this->open("/LOVD3_development/trunk/src/ajax/map_variants.php");
-        $this->open("/LOVD3_development/trunk/src/ajax/map_variants.php");
-        $this->open("/LOVD3_development/trunk/src/ajax/map_variants.php");
-        $this->open("/LOVD3_development/trunk/src/ajax/map_variants.php");
-        $this->open("/LOVD3_development/trunk/src/ajax/map_variants.php");
-        $this->open("/LOVD3_development/trunk/src/ajax/map_variants.php");
-        $this->open("/LOVD3_development/trunk/src/ajax/map_variants.php");
-        $this->open("/LOVD3_development/trunk/src/ajax/map_variants.php");
-        $this->open("/LOVD3_development/trunk/src/ajax/map_variants.php");
-        $this->open("/LOVD3_development/trunk/src/ajax/map_variants.php");
-        $this->open("/LOVD3_development/trunk/src/ajax/map_variants.php");
-        $this->open("/LOVD3_development/trunk/src/ajax/map_variants.php");
-        $this->open("/LOVD3_development/trunk/src/ajax/map_variants.php");
-        $this->open("/LOVD3_development/trunk/src/ajax/map_variants.php");
-        $this->open("/LOVD3_development/trunk/src/ajax/map_variants.php");
-        $this->open("/LOVD3_development/trunk/src/ajax/map_variants.php");
-        $this->open("/LOVD3_development/trunk/src/ajax/map_variants.php");
-        $this->open("/LOVD3_development/trunk/src/ajax/map_variants.php");
-        $this->open("/LOVD3_development/trunk/src/ajax/map_variants.php");
-        $this->open("/LOVD3_development/trunk/src/ajax/map_variants.php");
-        $this->open("/LOVD3_development/trunk/src/ajax/map_variants.php");
-        $this->open("/LOVD3_development/trunk/src/ajax/map_variants.php");
-        $this->open("/LOVD3_development/trunk/src/ajax/map_variants.php");
-        $this->open("/LOVD3_development/trunk/src/ajax/map_variants.php");
-        $this->open("/LOVD3_development/trunk/src/ajax/map_variants.php");
-        $this->open("/LOVD3_development/trunk/src/ajax/map_variants.php");
-        $this->open("/LOVD3_development/trunk/src/ajax/map_variants.php");
-        $this->open("/LOVD3_development/trunk/src/ajax/map_variants.php");
-        $this->open("/LOVD3_development/trunk/src/ajax/map_variants.php");
-        $this->open("/LOVD3_development/trunk/src/ajax/map_variants.php");
-        $this->open("/LOVD3_development/trunk/src/ajax/map_variants.php");
-        $this->open("/LOVD3_development/trunk/src/ajax/map_variants.php");
-        $this->open("/LOVD3_development/trunk/src/ajax/map_variants.php");
-        $this->open("/LOVD3_development/trunk/src/ajax/map_variants.php");
-        $this->open("/LOVD3_development/trunk/src/ajax/map_variants.php");
-        $this->open("/LOVD3_development/trunk/src/ajax/map_variants.php");
-        $this->open("/LOVD3_development/trunk/src/ajax/map_variants.php");
-        $this->open("/LOVD3_development/trunk/src/ajax/map_variants.php");
-        $this->open("/LOVD3_development/trunk/src/ajax/map_variants.php");
-        $this->open("/LOVD3_development/trunk/src/ajax/map_variants.php");
-        $this->open("/LOVD3_development/trunk/src/ajax/map_variants.php");
-        $this->open("/LOVD3_development/trunk/src/ajax/map_variants.php");
-        $this->assertEquals("0 99 There are no variants to map in the database", $this->getText("css=body"));
+        for ($second = 0; ; $second++) {
+                if ($second >= 300) $this->fail("timeout");
+                try {
+                        $this->open("/LOVD3_development/trunk/src/ajax/map_variants.php");
+                        if ($this->assertEquals("0 99 There are no variants to map in the database", $this->getText("css=body"))) break;
+                } catch (Exception $e) {}
+                sleep(1);
+        }
         $this->setTimeout(30000);
     }
     public function testFinishIndividualDiagnosedWithCMT()
@@ -539,7 +498,7 @@ class manager_tests extends PHPUnit_Extensions_SeleniumTestCase
     }
     public function testAddSummaryVariantOnlyDescribedOnGenomicLevel()
     {
-        $this->assertContains("src/variants/0000000281" ,$this->getLocation());
+        $this->assertContains("/src/variants/0000000168" ,$this->getLocation());
         $this->assertTrue((bool)preg_match('/^[\s\S]*\/src\/variants\/0000000279$/',$this->getLocation()));
         $this->click("id=tab_submit");
         $this->waitForPageToLoad("30000");
@@ -628,68 +587,21 @@ class manager_tests extends PHPUnit_Extensions_SeleniumTestCase
         $this->select("name=statusid", "label=Public");
         $this->click("css=input[type=\"submit\"]");
         $this->waitForPageToLoad("30000");
-        $this->assertEquals("76 variants were imported, 1 variant could not be imported.", $this->getText("id=lovd__progress_message"));
+        $this->assertEquals("25 variants were imported, 1 variant could not be imported.", $this->getText("id=lovd__progress_message"));
         $this->click("css=input[type=\"submit\"]");
         $this->waitForPageToLoad("30000");
         $this->assertTrue((bool)preg_match('/^Successfully processed your submission and sent an email notification to the relevant curator[\s\S]*$/',$this->getText("css=table[class=info]")));
         $this->waitForPageToLoad("4000");
-        $this->setTimeout(30000);
-        sleep(60);
-        $this->open("/LOVD3_development/trunk/src/ajax/map_variants.php");
-        $this->open("/LOVD3_development/trunk/src/ajax/map_variants.php");
-        $this->open("/LOVD3_development/trunk/src/ajax/map_variants.php");
-        $this->open("/LOVD3_development/trunk/src/ajax/map_variants.php");
-        $this->open("/LOVD3_development/trunk/src/ajax/map_variants.php");
-        $this->open("/LOVD3_development/trunk/src/ajax/map_variants.php");
-        $this->open("/LOVD3_development/trunk/src/ajax/map_variants.php");
-        $this->open("/LOVD3_development/trunk/src/ajax/map_variants.php");
-        $this->open("/LOVD3_development/trunk/src/ajax/map_variants.php");
-        $this->open("/LOVD3_development/trunk/src/ajax/map_variants.php");
-        $this->open("/LOVD3_development/trunk/src/ajax/map_variants.php");
-        $this->open("/LOVD3_development/trunk/src/ajax/map_variants.php");
-        $this->open("/LOVD3_development/trunk/src/ajax/map_variants.php");
-        $this->open("/LOVD3_development/trunk/src/ajax/map_variants.php");
-        $this->open("/LOVD3_development/trunk/src/ajax/map_variants.php");
-        $this->open("/LOVD3_development/trunk/src/ajax/map_variants.php");
-        $this->open("/LOVD3_development/trunk/src/ajax/map_variants.php");
-        $this->open("/LOVD3_development/trunk/src/ajax/map_variants.php");
-        $this->open("/LOVD3_development/trunk/src/ajax/map_variants.php");
-        $this->open("/LOVD3_development/trunk/src/ajax/map_variants.php");
-        $this->open("/LOVD3_development/trunk/src/ajax/map_variants.php");
-        $this->open("/LOVD3_development/trunk/src/ajax/map_variants.php");
-        $this->open("/LOVD3_development/trunk/src/ajax/map_variants.php");
-        $this->open("/LOVD3_development/trunk/src/ajax/map_variants.php");
-        $this->open("/LOVD3_development/trunk/src/ajax/map_variants.php");
-        $this->open("/LOVD3_development/trunk/src/ajax/map_variants.php");
-        $this->open("/LOVD3_development/trunk/src/ajax/map_variants.php");
-        $this->open("/LOVD3_development/trunk/src/ajax/map_variants.php");
-        $this->open("/LOVD3_development/trunk/src/ajax/map_variants.php");
-        $this->open("/LOVD3_development/trunk/src/ajax/map_variants.php");
-        $this->open("/LOVD3_development/trunk/src/ajax/map_variants.php");
-        $this->open("/LOVD3_development/trunk/src/ajax/map_variants.php");
-        $this->open("/LOVD3_development/trunk/src/ajax/map_variants.php");
-        $this->open("/LOVD3_development/trunk/src/ajax/map_variants.php");
-        $this->open("/LOVD3_development/trunk/src/ajax/map_variants.php");
-        $this->open("/LOVD3_development/trunk/src/ajax/map_variants.php");
-        $this->open("/LOVD3_development/trunk/src/ajax/map_variants.php");
-        $this->open("/LOVD3_development/trunk/src/ajax/map_variants.php");
-        $this->open("/LOVD3_development/trunk/src/ajax/map_variants.php");
-        $this->open("/LOVD3_development/trunk/src/ajax/map_variants.php");
-        $this->open("/LOVD3_development/trunk/src/ajax/map_variants.php");
-        $this->open("/LOVD3_development/trunk/src/ajax/map_variants.php");
-        $this->open("/LOVD3_development/trunk/src/ajax/map_variants.php");
-        $this->open("/LOVD3_development/trunk/src/ajax/map_variants.php");
-        $this->open("/LOVD3_development/trunk/src/ajax/map_variants.php");
-        $this->open("/LOVD3_development/trunk/src/ajax/map_variants.php");
-        $this->open("/LOVD3_development/trunk/src/ajax/map_variants.php");
-        $this->open("/LOVD3_development/trunk/src/ajax/map_variants.php");
-        $this->open("/LOVD3_development/trunk/src/ajax/map_variants.php");
-        $this->open("/LOVD3_development/trunk/src/ajax/map_variants.php");
-        $this->open("/LOVD3_development/trunk/src/ajax/map_variants.php");
-        $this->open("/LOVD3_development/trunk/src/ajax/map_variants.php");
-        $this->open("/LOVD3_development/trunk/src/ajax/map_variants.php");
-        $this->open("/LOVD3_development/trunk/src/ajax/map_variants.php");
-        $this->assertEquals("0 99 There are no variants to map in the database", $this->getText("css=body"));
+        $this->setTimeout(60000);
+        for ($second = 0; ; $second++) {
+                if ($second >= 300) $this->fail("timeout");
+                try {
+                        $this->open("/LOVD3_development/trunk/src/ajax/map_variants.php");
+                        if ($this->assertEquals("0 99 There are no variants to map in the database", $this->getText("css=body")))
+                            break;
+                } catch (Exception $e) {}
+                sleep(1);
+        }
         $this->setTimeout(30000);
     }
     public function testPostFinishAddVariantOnlyDescribedOnGenomicLevelToCMTIndividual()
