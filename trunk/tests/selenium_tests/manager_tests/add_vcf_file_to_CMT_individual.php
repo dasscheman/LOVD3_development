@@ -39,16 +39,15 @@ class Example extends PHPUnit_Extensions_SeleniumTestCase
     $this->click("css=input[type=\"button\"]");
     $this->waitForPageToLoad("30000");
     $this->assertTrue((bool)preg_match('/^[\s\S]*\/src\/submit\/screening\/0000000002$/',$this->getLocation()));
-    $this->setTimeout(60000)
     for ($second = 0; ; $second++) {
-        if ($second >= 300) $this->fail("timeout");
-        try {
-            $this->open("/svn/LOVD3/trunk/src/ajax/map_variants.php");
-            if ($this->assertEquals("0 99 There are no variants to map in the database", $this->getText("css=body"))) break;
-        } catch (Exception $e) {}
+        if ($second >= 600) $this->fail("timeout");
+        $this->open("/svn/LOVD3/trunk/src/ajax/map_variants.php");
+        $this->waitForPageToLoad("60000");
+        if ($this->assertEquals("0 99 There are no variants to map in the database", $this->getText("css=body"))) {
+            break;
+        }
         sleep(1);
     }
-    $this->setTimeout(30000)
   }
 }
 ?>
