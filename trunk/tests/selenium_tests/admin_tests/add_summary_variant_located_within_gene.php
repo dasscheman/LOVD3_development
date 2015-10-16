@@ -21,6 +21,13 @@ class Example extends PHPUnit_Extensions_SeleniumTestCase
     $this->click("//tr[@id='ARSD']/td[2]");
     $this->waitForPageToLoad("30000");
     $this->assertTrue((bool)preg_match('/^[\s\S]*\/src\/variants[\s\S]create&reference=Transcript&geneid=ARSD$/',$this->getLocation()));
+    for ($second = 0; ; $second++) {
+        if ($second >= 60) $this->fail("timeout");
+        try {
+            if ($this->isElementPresent("name=ignore_00002")) break;
+        } catch (Exception $e) {}
+        sleep(1);
+    }
     $this->uncheck("name=ignore_00002");
     $this->uncheck("name=ignore_00003");
     $this->type("name=00002_VariantOnTranscript/Exon", "3");
