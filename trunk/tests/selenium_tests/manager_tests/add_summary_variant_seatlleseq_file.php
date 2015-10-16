@@ -30,7 +30,7 @@ class Example extends PHPUnit_Extensions_SeleniumTestCase
     $this->select("name=owned_by", "label=LOVD3 Admin");
     $this->select("name=statusid", "label=Public");
     $this->click("css=input[type=\"submit\"]");
-    $this->waitForPageToLoad("30000");
+    $this->waitForPageToLoad("60000");
     for ($second = 0; ; $second++) {
         if ($second >= 300) $this->fail("timeout");
         if ($this->isElementPresent("css=input[type=\"submit\"]")) {
