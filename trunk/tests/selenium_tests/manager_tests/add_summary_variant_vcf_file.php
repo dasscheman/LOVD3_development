@@ -40,9 +40,10 @@ class Example extends PHPUnit_Extensions_SeleniumTestCase
         if ($second >= 600) $this->fail("timeout");
         $this->open("/svn/LOVD3/trunk/src/ajax/map_variants.php");
         $this->waitForPageToLoad("60000");
-        if ($this->assertEquals("0 99 There are no variants to map in the database", $this->getText("css=body"))) {
+        if (strcmp("0 99 There are no variants to map in the database", $this->getBodyText())) {
             break;
         }
+        $this->assertNotContains("of 25 variants", $this->getBodyText());
         sleep(1);
     }
   }

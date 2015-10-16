@@ -62,7 +62,6 @@ class Example extends PHPUnit_Extensions_SeleniumTestCase
     $this->assertTrue((bool)preg_match('/^Successfully processed your submission and sent an email notification to the relevant curator[\s\S]*$/',$this->getText("css=table[class=info]")));
     $this->waitForPageToLoad("4000");
     $this->assertContains("src/variants/0000000168", $this->getLocation());
-    $this->assertTrue((bool)preg_match('/^[\s\S]*\/src\/variants\/0000000281$/',$this->getLocation()));
   }
 }
 ?>
