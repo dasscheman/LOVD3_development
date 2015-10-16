@@ -67,7 +67,7 @@ class Example extends PHPUnit_Extensions_SeleniumTestCase
     $this->click("css=input[type=\"submit\"]");
     for ($second = 0; ; $second++) {
         if ($second >= 60) $this->fail("timeout");
-        if ($this->isElementPresent("id=lovd__progress_message")) {
+        if ($this->isElementPresent("css=table[class=info]")) {
             $this->assertContains("Successfully processed your submission and sent an email notification to the relevant curator", $this->getText("css=table[class=info]"));
             break;
         }

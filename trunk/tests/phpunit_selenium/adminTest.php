@@ -4,7 +4,7 @@
  * LEIDEN OPEN VARIATION DATABASE (LOVD)
  *
  * Created     : 2014-12-19
- * Modified    : 2015-10-16:15:21:27
+ * Modified    : 2015-10-16:16:27:11
  * For LOVD    : 3.0-12
  *
  * Copyright   : 2014 Leiden University Medical Center; http://www.LUMC.nl/
@@ -565,6 +565,13 @@ class admin_tests extends PHPUnit_Extensions_SeleniumTestCase
         $this->click("//tr[@id='ARSD']/td[2]");
         $this->waitForPageToLoad("30000");
         $this->assertTrue((bool)preg_match('/^[\s\S]*\/src\/variants[\s\S]create&reference=Transcript&geneid=ARSD$/',$this->getLocation()));
+        for ($second = 0; ; $second++) {
+                if ($second >= 60) $this->fail("timeout");
+                try {
+                        if ($this->isElementPresent("name=ignore_00002")) break;
+                } catch (Exception $e) {}
+                sleep(1);
+        }
         $this->uncheck("name=ignore_00002");
         $this->uncheck("name=ignore_00003");
         $this->type("name=00002_VariantOnTranscript/Exon", "3");
@@ -602,8 +609,14 @@ class admin_tests extends PHPUnit_Extensions_SeleniumTestCase
         $this->select("name=owned_by", "label=LOVD3 Admin");
         $this->select("name=statusid", "label=Public");
         $this->click("css=input[type=\"submit\"]");
-        $this->waitForPageToLoad("30000");
-        $this->assertTrue((bool)preg_match('/^Successfully processed your submission and sent an email notification to the relevant curator[\s\S]*$/',$this->getText("css=table[class=info]")));
+        for ($second = 0; ; $second++) {
+                if ($second >= 60) $this->fail("timeout");
+                if ($this->isElementPresent("id=lovd__progress_message")) {
+                        $this->assertContains("Successfully processed your submission and sent an email notification to the relevant curator", $this->getText("css=table[class=info]"));
+                        break;
+                }
+                sleep(1);
+        }
         $this->waitForPageToLoad("4000");
         $this->assertContains("src/variants/0000000168", $this->getLocation());
     }
@@ -660,7 +673,7 @@ class admin_tests extends PHPUnit_Extensions_SeleniumTestCase
         $this->select("name=owned_by", "label=LOVD3 Admin");
         $this->select("name=statusid", "label=Public");
         $this->click("css=input[type=\"submit\"]");
-        $this->waitForPageToLoad("30000");
+        $this->waitForPageToLoad("60000");
         for ($second = 0; ; $second++) {
                 if ($second >= 300) $this->fail("timeout");
                 if ($this->isElementPresent("id=lovd__progress_message")) {

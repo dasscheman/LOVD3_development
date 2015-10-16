@@ -4,7 +4,7 @@
  * LEIDEN OPEN VARIATION DATABASE (LOVD)
  *
  * Created     : 2014-12-19
- * Modified    : 2015-10-16:15:21:27
+ * Modified    : 2015-10-16:16:27:11
  * For LOVD    : 3.0-12
  *
  * Copyright   : 2014 Leiden University Medical Center; http://www.LUMC.nl/
@@ -548,7 +548,7 @@ class manager_tests extends PHPUnit_Extensions_SeleniumTestCase
         $this->select("name=owned_by", "label=LOVD3 Admin");
         $this->select("name=statusid", "label=Public");
         $this->click("css=input[type=\"submit\"]");
-        $this->waitForPageToLoad("30000");
+        $this->waitForPageToLoad("60000");
         for ($second = 0; ; $second++) {
                 if ($second >= 300) $this->fail("timeout");
                 if ($this->isElementPresent("css=input[type=\"submit\"]")) {
