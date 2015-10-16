@@ -58,8 +58,14 @@ class Example extends PHPUnit_Extensions_SeleniumTestCase
     $this->select("name=owned_by", "label=LOVD3 Admin");
     $this->select("name=statusid", "label=Public");
     $this->click("css=input[type=\"submit\"]");
-    $this->waitForPageToLoad("30000");
-    $this->assertTrue((bool)preg_match('/^Successfully processed your submission and sent an email notification to the relevant curator[\s\S]*$/',$this->getText("css=table[class=info]")));
+    for ($second = 0; ; $second++) {
+        if ($second >= 60) $this->fail("timeout");
+        if ($this->isElementPresent("id=lovd__progress_message")) {
+            $this->assertContains("Successfully processed your submission and sent an email notification to the relevant curator", $this->getText("css=table[class=info]"));
+            break;
+        }
+        sleep(1);
+    }
     $this->waitForPageToLoad("4000");
     $this->assertContains("src/variants/0000000168", $this->getLocation());
   }
