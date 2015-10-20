@@ -6,6 +6,7 @@
   <string relative="path" id="last_local_directory">trunk</string>
   <string id="mappedPaths"></string>
   <long id="tabWidth">4</long>
+  <boolean id="useSmartTabs">0</boolean>
   <boolean id="useTabs">1</boolean>
 </preference-set>
 </project>
