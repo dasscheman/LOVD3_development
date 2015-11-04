@@ -5,6 +5,19 @@
  *************/
 
 /**************************
+ * 3.0 Build 15 (r...)
+ * 2016-03-..
+ *********/
+ * Fixed bug; During update import the file processing was not stopped after too
+   many errors. The message "Too many errors, stopping file processing." was
+   displayed more than once.
+ * Fixed bug; Custom columns with numbers in the names were not converted to
+   links in the log entries.
+ * After creating a user account for somebody else, you will now always be for-
+   warded to the account page of that new user.
+
+
+/**************************
  * 3.0 Build 14 (r657)
  * 2015-10-09
  *********/
@@ -12,7 +25,7 @@
    e.g. /references/PMID:10677295.
  * Fixed possible future problems with the longer new generic top level domains,
    which could be rejected as invalid URLs for LOVDs to reside.
- * Fixed bug; During import the panel IDs in the individual section where only
+ * Fixed bug; During import the panel IDs in the individual section were only
    checked in the database and not in the import file. Same for father ID and
    mother ID.
  * Curators can simulate the import of an LOVD tab-delimited file.
@@ -75,6 +88,10 @@
  * Added the genome build to the genomic DNA field headers in variant listings
    and detailed views.
  * Increased maximum length of disease's abbreviation to 25.
+ * Patch 01: 2015-10-19 (r666): Fixed bug; The diseases detailed view showed a
+   query error because table names were used directly (with a non-standard table
+   prefix) instead of using the table constants.
+   Closes #41: "Diseases Query error".
 
 
 /**************************

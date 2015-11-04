@@ -4,7 +4,7 @@
  * LEIDEN OPEN VARIATION DATABASE (LOVD)
  *
  * Created     : 2014-12-19
- * Modified    : 2015-10-20:10:28:05
+ * Modified    : 2015-10-21:08:25:39
  * For LOVD    : 3.0-12
  *
  * Copyright   : 2014 Leiden University Medical Center; http://www.LUMC.nl/
@@ -33,7 +33,7 @@ class manager_tests extends PHPUnit_Extensions_SeleniumTestCase
     protected $captureScreenshotOnFailure = TRUE;
     protected $screenshotPath = '/home/dasscheman/svn/LOVD3_development/trunk/tests/test_results/error_screenshots';
     protected $screenshotUrl = 'http://localhost/svn/LOVD3_development/trunk/tests/test_results/error_screenshots';
-  
+
     protected function setUp()
     {
         $this->setHost('localhost');
@@ -450,10 +450,9 @@ class manager_tests extends PHPUnit_Extensions_SeleniumTestCase
                 $this->assertTrue((bool)preg_match('/^[\s\S]*Please reconsider to submit individual data as well, as it makes the data you submit much more valuable![\s\S]*$/',$this->getConfirmation()));
                 sleep(4);
                 $this->click("//div/table/tbody/tr/td/table/tbody/tr/td[2]/b");
-                $this->click("//tr[@id='ARSD']/td[2]");
-                //$this->click("css=#ARSD > td.ordered");
+                $this->click("css=#ARSD > td.ordered");
                 $this->waitForPageToLoad("30000");
-                $this->assertTrue((bool)preg_match('/^[\s\S]*trunk\/src\/variants[\s\S]create&reference=Transcript&geneid=ARSD$/',$this->getLocation()));
+                $this->assertContains("src/variants?create&reference=Transcript&geneid=ARSD", $this->getLocation());
                 for ($second = 0; ; $second++) {
                         if ($second >= 60) $this->fail("timeout");
                         try {
@@ -763,7 +762,7 @@ class manager_tests extends PHPUnit_Extensions_SeleniumTestCase
         $this->waitForPageToLoad("4000");
         $this->assertTrue((bool)preg_match('/^[\s\S]*\/src\/genes$/',$this->getLocation()));
     }
-    public function testUninstallLOVD()
+ /*   public function testUninstallLOVD()
     {
         $this->open("/svn/LOVD3_development/trunk/src/logout");
         $this->open("/svn/LOVD3_development/trunk/src/login");
@@ -779,6 +778,6 @@ class manager_tests extends PHPUnit_Extensions_SeleniumTestCase
         $this->click("css=input[type=\"submit\"]");
         $this->waitForPageToLoad("30000");
         $this->assertEquals("LOVD successfully uninstalled!\nThank you for having used LOVD!", $this->getText("css=div[id=lovd__progress_message]"));
-    }
+    }*/
 }
 ?>

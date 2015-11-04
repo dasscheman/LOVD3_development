@@ -4,8 +4,8 @@
  * LEIDEN OPEN VARIATION DATABASE (LOVD)
  *
  * Created     : 2012-09-19
- * Modified    : 2015-10-07
- * For LOVD    : 3.0-14
+ * Modified    : 2015-10-23
+ * For LOVD    : 3.0-15
  *
  * Copyright   : 2004-2015 Leiden University Medical Center; http://www.LUMC.nl/
  * Programmers : Ing. Ivo F.A.C. Fokkema <I.F.A.C.Fokkema@LUMC.nl>
@@ -238,13 +238,13 @@ if (POST) {
 
     // If the file does not arrive (too big), it doesn't exist in $_FILES.
     if (empty($_FILES['import']) || ($_FILES['import']['error'] > 0 && $_FILES['import']['error'] < 4)) {
-        lovd_errorAdd('import', 'There was a problem with the file transfer. Please try again. The file cannot be larger than ' . round($nMaxSize/pow(1024, 2), 1) . ' MB' . ($nMaxSize == $nMaxSizeLOVD? '' : ', due to restrictions on this server.') . '.');
+        lovd_errorAdd('import', 'There was a problem with the file transfer. Please try again. The file cannot be larger than ' . round($nMaxSize/pow(1024, 2), 1) . ' MB' . ($nMaxSize == $nMaxSizeLOVD? '' : ', due to restrictions on this server') . '.');
 
-    } else if ($_FILES['import']['error'] == 4 || !$_FILES['import']['size']) {
+    } elseif ($_FILES['import']['error'] == 4 || !$_FILES['import']['size']) {
         lovd_errorAdd('import', 'Please select a file to upload.');
 
-    } else if ($_FILES['import']['size'] > $nMaxSize) {
-        lovd_errorAdd('import', 'The file cannot be larger than ' . round($nMaxSize/pow(1024, 2), 1) . ' MB' . ($nMaxSize == $nMaxSizeLOVD? '' : ', due to restrictions on this server.') . '.');
+    } elseif ($_FILES['import']['size'] > $nMaxSize) {
+        lovd_errorAdd('import', 'The file cannot be larger than ' . round($nMaxSize/pow(1024, 2), 1) . ' MB' . ($nMaxSize == $nMaxSizeLOVD? '' : ', due to restrictions on this server') . '.');
 
     } elseif ($_FILES['import']['error']) {
         // Various errors available from 4.3.0 or later.
@@ -326,7 +326,9 @@ if (POST) {
         foreach ($aData as $i => $sLine) {
             $sLine = trim($sLine);
             if (!$sLine) {
-                lovd_endLine();
+                if (!lovd_endLine()) {
+                    break;
+                }
                 continue;
             }
 
@@ -353,7 +355,9 @@ if (POST) {
                             }
                         }
                     }
-                    lovd_endLine();
+                    if (!lovd_endLine()) {
+                        break;
+                    }
                 }
                 break;
             }
@@ -387,7 +391,9 @@ if (POST) {
         foreach ($aData as $i => $sLine) {
             $sLine = trim($sLine);
             if (!$sLine) {
-                lovd_endLine();
+                if (!lovd_endLine()) {
+                    break;
+                }
                 continue;
             }
 
@@ -627,7 +633,9 @@ if (POST) {
                         }
                     }
                 } // Else, it's just comments we will ignore.
-                lovd_endLine();
+                if (!lovd_endLine()) {
+                    break;
+                }
                 continue;
             }
 
@@ -915,7 +923,9 @@ if (POST) {
                     }
                 } else {
                     lovd_errorAdd('import', 'Error (' . $sCurrentSection . ', line ' . $nLine . '): This line refers to a non-existing entry. When the import mode is set to update, no new inserts can be done.');
-                    lovd_endLine();
+                    if (!lovd_endLine()) {
+                        break;
+                    }
                     continue;
                 }
             }
@@ -960,7 +970,9 @@ if (POST) {
                 if (isset($aSection['data'][$ID])) {
                     // We saw this ID before in this file!
                     lovd_errorAdd('import', 'Error (' . $sCurrentSection . ', line ' . $nLine . '): ID "' . htmlspecialchars($aLine['id']) . '" already defined at line ' . $aSection['data'][$ID]['nLine'] . '.');
-                    lovd_endLine();
+                    if (!lovd_endLine()) {
+                        break;
+                    }
                     continue; // Skip to next line.
                 }
             }
