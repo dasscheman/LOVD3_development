@@ -250,68 +250,79 @@ if (ACTION == 'create') {
         flush();
 
         require ROOT_PATH . 'class/soap_client.php';
+        require ROOT_PATH . 'class/object_transcripts.php';
         $_Mutalyzer = new LOVD_SoapClient();
+        $_DATA = new LOVD_Transcript();
         $_BAR->setMessage('Collecting all available transcripts...');
         $_BAR->setProgress(0);
 
-        try {
-            // Can throw notice when TranscriptInfo is not present (when a gene recently has been renamed, for instance).
-            $aTranscriptInfo = @$_Mutalyzer->getTranscriptsAndInfo(array('genomicReference' => $zGene['refseq_UD'], 'geneName' => $zGene['id']))->getTranscriptsAndInfoResult->TranscriptInfo;
-        } catch (SoapFault $e) {
-            lovd_soapError($e);
-        }
-        if (empty($aTranscriptInfo)) {
-            // No transcripts found.
-            $aTranscriptInfo = array();
-        }
-
-        $_SESSION['work'][$sPathBase][$_POST['workID']]['values'] = array();
-        $aTranscripts = array();
-        $aTranscriptsName = array();
-        $aTranscriptsMutalyzer = array();
-        $aTranscriptsPositions = array();
-        $aTranscriptsProtein = array();
-        // Get list of transcripts already added to the database.
-        $aTranscriptsAdded = $_DB->query('SELECT id_ncbi FROM ' . TABLE_TRANSCRIPTS . ' WHERE geneid = ? ORDER BY id_ncbi', array($zGene['id']))->fetchAllColumn();
-        // Count transcripts that still can be added (needed for reliable progress reporting).
-        $nTranscripts = 0;
-        foreach ($aTranscriptInfo as $oTranscript) {
-            if (!in_array($oTranscript->id, $aTranscriptsAdded)) {
-                $nTranscripts += 1;
+        if (in_array($zGene['id'], array_keys($_SETT['mito_genes_aliases']))) {
+            // For mitochandrial genes an alias must be used to get the transcripts and info.
+            // List of aliasses are hard-coded in inc-init.php
+            $aTranscripts = $_DATA->getTranscriptPositions($zGene['refseq_UD'], $zGene['id'], $zGene['name'], $nProgress);
+        } else {
+            try {
+                // Can throw notice when TranscriptInfo is not present (when a gene recently has been renamed, for instance).
+                $aTranscriptInfo = @$_Mutalyzer->getTranscriptsAndInfo(array('genomicReference' => $zGene['refseq_UD'], 'geneName' => $zGene['id']))->getTranscriptsAndInfoResult->TranscriptInfo;
+            } catch (SoapFault $e) {
+                lovd_soapError($e);
             }
-        }
-        $nTranscripts = max($nTranscripts, 1); // To prevent division-by-zero errors...
-        $nProgress = 0.0;
-        foreach($aTranscriptInfo as $oTranscript) {
-            if (!in_array($oTranscript->id, $aTranscriptsAdded)) {
-                $nProgress += (100/$nTranscripts);
-                $_BAR->setMessage('Collecting ' . $oTranscript->id . ' info...');
-                if ($oTranscript->id) {
-                    $aTranscripts[] = $oTranscript->id;
-                    $aTranscriptsName[preg_replace('/\.\d+/', '', $oTranscript->id)] = str_replace($zGene['name'] . ', ', '', $oTranscript->product);
-                    $aTranscriptsMutalyzer[preg_replace('/\.\d+/', '', $oTranscript->id)] = str_replace($zGene['id'] . '_v', '', $oTranscript->name);
-                    // 2014-01-14; 3.0-10; When getting transcripts from an NG rather than an NC, we are missing some fields. Make sure they're set.
-                    $aTranscriptsPositions[$oTranscript->id] =
-                        array(
-                            'chromTransStart' => (isset($oTranscript->chromTransStart)? $oTranscript->chromTransStart : 0),
-                            'chromTransEnd' => (isset($oTranscript->chromTransEnd)? $oTranscript->chromTransEnd : 0),
-                            'cTransStart' => $oTranscript->cTransStart,
-                            'cTransEnd' => $oTranscript->sortableTransEnd,
-                            'cCDSStop' => $oTranscript->cCDSStop,
-                        );
-                    $aTranscriptsProtein[$oTranscript->id] = (!isset($oTranscript->proteinTranscript)? '' : $oTranscript->proteinTranscript->id);
+            if (empty($aTranscriptInfo)) {
+                // No transcripts found.
+                $aTranscriptInfo = array();
+            }
+
+            $_SESSION['work'][$sPathBase][$_POST['workID']]['values'] = array();
+            $aTranscripts['id'] = array();
+            $aTranscripts['name'] = array();
+            $aTranscripts['mutalyzer'] = array();
+            $aTranscripts['positions'] = array();
+            $aTranscripts['protein'] = array();
+            // Get list of transcripts already added to the database.
+            $aTranscripts['added'] = $_DB->query('SELECT id_ncbi FROM ' . TABLE_TRANSCRIPTS . ' WHERE geneid = ? ORDER BY id_ncbi', array($zGene['id']))->fetchAllColumn();
+            // Count transcripts that still can be added (needed for reliable progress reporting).
+            $nTranscripts = 0;
+            foreach ($aTranscriptInfo as $oTranscript) {
+                if (!in_array($oTranscript->id, $aTranscripts['added'])) {
+                    $nTranscripts += 1;
                 }
-                $_BAR->setProgress($nProgress);
+            }
+            $nTranscripts = max($nTranscripts, 1); // To prevent division-by-zero errors...
+            $nProgress = 0.0;
+            foreach($aTranscriptInfo as $oTranscript) {
+                if (!in_array($oTranscript->id, $aTranscripts['added'])) {
+                    $nProgress += (100/$nTranscripts);
+                    $_BAR->setMessage('Collecting ' . $oTranscript->id . ' info...');
+                    if ($oTranscript->id) {
+                        $aTranscripts['id'][] = $oTranscript->id;
+                        // TODO DAAN: Can not figure out why version is not included. Therefor for now we will do without.
+                        $aTranscripts['name'][$oTranscript->id] = str_replace($zGene['name'] . ', ', '', $oTranscript->product);
+                        $aTranscripts['mutalyzer'][$oTranscript->id] = str_replace($zGene['id'] . '_v', '', $oTranscript->name);
+                        //$aTranscripts['name'][preg_replace('/\.\d+/', '', $oTranscript->id)] = str_replace($zGene['name'] . ', ', '', $oTranscript->product);
+                        //$aTranscripts['mutalyzer'][preg_replace('/\.\d+/', '', $oTranscript->id)] = str_replace($zGene['id'] . '_v', '', $oTranscript->name);
+                        // 2014-01-14; 3.0-10; When getting transcripts from an NG rather than an NC, we are missing some fields. Make sure they're set.
+                        $aTranscripts['positions'][$oTranscript->id] =
+                            array(
+                                'chromTransStart' => (isset($oTranscript->chromTransStart)? $oTranscript->chromTransStart : 0),
+                                'chromTransEnd' => (isset($oTranscript->chromTransEnd)? $oTranscript->chromTransEnd : 0),
+                                'cTransStart' => $oTranscript->cTransStart,
+                                'cTransEnd' => $oTranscript->sortableTransEnd,
+                                'cCDSStop' => $oTranscript->cCDSStop,
+                            );
+                        $aTranscripts['protein'][$oTranscript->id] = (!isset($oTranscript->proteinTranscript)? '' : $oTranscript->proteinTranscript->id);
+                    }
+                    $_BAR->setProgress($nProgress);
+                }
             }
         }
         $_SESSION['work'][$sPathBase][$_POST['workID']]['values'] = array(
                                                                   'gene' => $zGene,
-                                                                  'transcripts' => $aTranscripts,
-                                                                  'transcriptMutalyzer' => $aTranscriptsMutalyzer,
-                                                                  'transcriptsProtein' => $aTranscriptsProtein,
-                                                                  'transcriptNames' => $aTranscriptsName,
-                                                                  'transcriptPositions' => $aTranscriptsPositions,
-                                                                  'transcriptsAdded' => $aTranscriptsAdded,
+                                                                  'transcripts' => $aTranscripts['id'],
+                                                                  'transcriptMutalyzer' => $aTranscripts['mutalyzer'],
+                                                                  'transcriptsProtein' => $aTranscripts['protein'],
+                                                                  'transcriptNames' => $aTranscripts['name'],
+                                                                  'transcriptPositions' => $aTranscripts['positions'],
+                                                                  'transcriptsAdded' => $aTranscripts['added'],
                                                                 );
 
         $_BAR->setProgress(100);
@@ -360,8 +371,12 @@ if (ACTION == 'create') {
                 foreach($_POST['active_transcripts'] as $sTranscript) {
                     // Add transcript to gene.
                     $sTranscriptProtein = (isset($zData['transcriptsProtein'][$sTranscript])? $zData['transcriptsProtein'][$sTranscript] : '');
-                    $nMutalyzerID = $zData['transcriptMutalyzer'][preg_replace('/\.\d+/', '', $sTranscript)];
-                    $sTranscriptName = $zData['transcriptNames'][preg_replace('/\.\d+/', '', $sTranscript)];
+                    // TODO DAAN: Can not figure out why version is not included. Therefor for now we will do without.
+                    $nMutalyzerID = $zData['transcriptMutalyzer'][$sTranscript];
+                    $sTranscriptName = $zData['transcriptNames'][$sTranscript];
+                    //$nMutalyzerID = $zData['transcriptMutalyzer'][preg_replace('/\.\d+/', '', $sTranscript)];
+                    //$sTranscriptName = $zData['transcriptNames'][preg_replace('/\.\d+/', '', $sTranscript)];
+
                     $aTranscriptPositions = $zData['transcriptPositions'][$sTranscript];
                     $q = $_DB->query('INSERT INTO ' . TABLE_TRANSCRIPTS . '(id, geneid, name, id_mutalyzer, id_ncbi, id_ensembl, id_protein_ncbi, id_protein_ensembl, id_protein_uniprot, position_c_mrna_start, position_c_mrna_end, position_c_cds_end, position_g_mrna_start, position_g_mrna_end, created_date, created_by) ' .
                                      'VALUES(NULL, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, NOW(), ?)',
@@ -425,8 +440,12 @@ if (ACTION == 'create') {
     $atranscriptNames = array();
     $aTranscriptsForm = array();
     foreach ($zData['transcripts'] as $sTranscript) {
-        if (!isset($aTranscriptNames[preg_replace('/\.\d+/', '', $sTranscript)])) {
-            $aTranscriptsForm[$sTranscript] = lovd_shortenString($zData['transcriptNames'][preg_replace('/\.\d+/', '', $sTranscript)], 50);
+        // TODO DAAN: Can not figure out why version is not included. Therefor for now we will do without.
+        if (!isset($aTranscriptNames[$sTranscript])) {
+        //if (!isset($aTranscriptNames[preg_replace('/\.\d+/', '', $sTranscript)])) {
+            // Here the version is placed back, but this was actively removed when creating a transcipt.
+            $aTranscriptsForm[$sTranscript] = lovd_shortenString($zData['transcriptNames'][$sTranscript], 50);
+            //$aTranscriptsForm[$sTranscript] = lovd_shortenString($zData['transcriptNames'][preg_replace('/\.\d+/', '', $sTranscript)], 50);
             $aTranscriptsForm[$sTranscript] .= str_repeat(')', substr_count($aTranscriptsForm[$sTranscript], '(')) . ' (' . $sTranscript . ')';
         }
     }

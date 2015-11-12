@@ -314,7 +314,9 @@ class LOVD_Gene extends LOVD_Object {
         if (!empty($zData['transcripts'])) {
             foreach ($zData['transcripts'] as $sTranscript) {
                 if (!isset($aTranscriptNames[preg_replace('/\.\d+$/', '', $sTranscript)])) {
-                    $aTranscriptsForm[$sTranscript] = lovd_shortenString($zData['transcriptNames'][preg_replace('/\.\d+$/', '', $sTranscript)], 50);
+                    // TODO DAAN: Can not figure out why version is not included. Therefor for now we will do without.
+                    $aTranscriptsForm[$sTranscript] = lovd_shortenString($zData['transcriptNames'][$sTranscript], 50);
+                    //$aTranscriptsForm[$sTranscript] = lovd_shortenString($zData['transcriptNames'][preg_replace('/\.\d+$/', '', $sTranscript)], 50);
                     $aTranscriptsForm[$sTranscript] .= str_repeat(')', substr_count($aTranscriptsForm[$sTranscript], '(')) . ' (' . $sTranscript . ')';
                 }
             }

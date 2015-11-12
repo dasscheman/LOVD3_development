@@ -7,3 +7,5 @@ r400
 trunk/.svnignore
 trunk/src/.idea
 trunk/src/refseq
+trunk/tests/phpunit_selenium/
+trunk/src/scripts/
