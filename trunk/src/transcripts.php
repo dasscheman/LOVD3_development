@@ -92,7 +92,6 @@ if (PATH_COUNT == 2 && ctype_digit($_PE[1]) && !ACTION) {
     require ROOT_PATH . 'class/object_transcripts.php';
     $_DATA = new LOVD_Transcript();
     $zData = $_DATA->viewEntry($nID);
-
     $aNavigation = array();
     if ($_AUTH && $_AUTH['level'] >= LEVEL_CURATOR) {
         $aNavigation[CURRENT_PATH . '?edit']      = array('menu_edit.png', 'Edit transcript information', 1);
@@ -369,33 +368,63 @@ if (ACTION == 'create') {
             if (!empty($_POST['active_transcripts']) && $_POST['active_transcripts'][0] != '') {
                 $aSuccessTranscripts = array();
                 foreach($_POST['active_transcripts'] as $sTranscript) {
-                    // Add transcript to gene.
-                    $sTranscriptProtein = (isset($zData['transcriptsProtein'][$sTranscript])? $zData['transcriptsProtein'][$sTranscript] : '');
-                    // TODO DAAN: Can not figure out why version is not included. Therefor for now we will do without.
-                    $nMutalyzerID = $zData['transcriptMutalyzer'][$sTranscript];
-                    $sTranscriptName = $zData['transcriptNames'][$sTranscript];
-                    //$nMutalyzerID = $zData['transcriptMutalyzer'][preg_replace('/\.\d+/', '', $sTranscript)];
-                    //$sTranscriptName = $zData['transcriptNames'][preg_replace('/\.\d+/', '', $sTranscript)];
+                    // TEMP!! If else statement is temporary. Now we only use the transcript object to save the transcripts for mitrchonrial genes.
+                    // Later all transcripts will be saved like this.
+                    if ($zData['chromosome'] == 'M') {
+                        $zDataTranscript = array(
+                            'geneid' => $_POST['id'],
+                            // TODO DAAN: Can not figure out why version is not included.
+                            'name' => $zData['transcriptNames'][preg_replace('/\.\d+/', '', $sTranscript)],
+                            'id_mutalyzer' => $zData['transcriptMutalyzer'][preg_replace('/\.\d+/', '', $sTranscript)],
+                            'id_ncbi' => $sTranscript,
+                            'id_ensembl' => '',
+                            'id_protein_ncbi' => $zData['transcriptsProtein'][$sTranscript],
+                            'id_protein_ensembl' => '',
+                            'id_protein_uniprot' => '',
+                            'position_c_mrna_start' => $zData['transcriptPositions'][$sTranscript]['cTransStart'],
+                            'position_c_mrna_end' => $zData['transcriptPositions'][$sTranscript]['cTransEnd'],
+                            'position_c_cds_end' => $zData['transcriptPositions'][$sTranscript]['cCDSStop'],
+                            'position_g_mrna_start' => $zData['transcriptPositions'][$sTranscript]['chromTransStart'],
+                            'position_g_mrna_end' => $zData['transcriptPositions'][$sTranscript]['chromTransEnd'],
+                            'created_date' => date('Y-m-d H:i:s'),
+                            'created_by' => $_POST['created_by']
+                        );
 
-                    $aTranscriptPositions = $zData['transcriptPositions'][$sTranscript];
-                    $q = $_DB->query('INSERT INTO ' . TABLE_TRANSCRIPTS . '(id, geneid, name, id_mutalyzer, id_ncbi, id_ensembl, id_protein_ncbi, id_protein_ensembl, id_protein_uniprot, position_c_mrna_start, position_c_mrna_end, position_c_cds_end, position_g_mrna_start, position_g_mrna_end, created_date, created_by) ' .
-                                     'VALUES(NULL, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, NOW(), ?)',
-                                     array($zData['gene']['id'], $sTranscriptName, $nMutalyzerID, $sTranscript, '', $sTranscriptProtein, '', '', $aTranscriptPositions['cTransStart'], $aTranscriptPositions['cTransEnd'], $aTranscriptPositions['cCDSStop'], $aTranscriptPositions['chromTransStart'], $aTranscriptPositions['chromTransEnd'], $_POST['created_by']));
-                    if (!$q) {
-                        // Silent error.
-                        lovd_writeLog('Error', LOG_EVENT, 'Transcript information entry ' . $sTranscript . ' - could not be added to gene ' . $zData['gene']['id']);
-                    } else {
+                        if (!$_DATA['Transcript']->insertEntry($zDataTranscript, array_keys($zDataTranscript))) {
+                            // Silent error.
+                            lovd_writeLog('Error', LOG_EVENT, 'Transcript information entry ' . $sTranscript . ' - ' . ' - could not be added to gene ' . $_POST['id']);
+                            continue;
+                        }
+
                         $aSuccessTranscripts[] = $sTranscript;
+                        $_DATA['Transcript']->turnOffMappingDone($_POST['chromosome'], $zData['transcriptPositions'][$sTranscript]);
+                    } else {
+                        // Add transcript to gene.
+                        $sTranscriptProtein = (isset($zData['transcriptsProtein'][$sTranscript])? $zData['transcriptsProtein'][$sTranscript] : '');
+                        // TODO DAAN: Can not figure out why version is not included.
+                        $nMutalyzerID = $zData['transcriptMutalyzer'][preg_replace('/\.\d+/', '', $sTranscript)];
+                        $sTranscriptName = $zData['transcriptNames'][preg_replace('/\.\d+/', '', $sTranscript)];
 
-                        // Turn off the MAPPING_DONE flags for variants within range of this transcript, so that automatic mapping will pick them up again.
-                        $q = $_DB->query('UPDATE ' . TABLE_VARIANTS . ' SET mapping_flags = mapping_flags & ~' . MAPPING_DONE . ' WHERE chromosome = ? AND ' .
-                                         '(position_g_start BETWEEN ? AND ?) OR ' .
-                                         '(position_g_end   BETWEEN ? AND ?) OR ' .
-                                         '(position_g_start < ? AND position_g_end > ?)',
-                                         array($zData['gene']['chromosome'], $aTranscriptPositions['chromTransStart'], $aTranscriptPositions['chromTransEnd'], $aTranscriptPositions['chromTransStart'], $aTranscriptPositions['chromTransEnd'], $aTranscriptPositions['chromTransStart'], $aTranscriptPositions['chromTransEnd']));
-                        if ($q->rowCount()) {
-                            // If we have changed variants, turn on mapping immediately.
-                            $_SESSION['mapping']['time_complete'] = 0;
+                        $aTranscriptPositions = $zData['transcriptPositions'][$sTranscript];
+                        $q = $_DB->query('INSERT INTO ' . TABLE_TRANSCRIPTS . '(id, geneid, name, id_mutalyzer, id_ncbi, id_ensembl, id_protein_ncbi, id_protein_ensembl, id_protein_uniprot, position_c_mrna_start, position_c_mrna_end, position_c_cds_end, position_g_mrna_start, position_g_mrna_end, created_date, created_by) ' .
+                                         'VALUES(NULL, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, NOW(), ?)',
+                                         array($zData['gene']['id'], $sTranscriptName, $nMutalyzerID, $sTranscript, '', $sTranscriptProtein, '', '', $aTranscriptPositions['cTransStart'], $aTranscriptPositions['cTransEnd'], $aTranscriptPositions['cCDSStop'], $aTranscriptPositions['chromTransStart'], $aTranscriptPositions['chromTransEnd'], $_POST['created_by']));
+                        if (!$q) {
+                            // Silent error.
+                            lovd_writeLog('Error', LOG_EVENT, 'Transcript information entry ' . $sTranscript . ' - could not be added to gene ' . $zData['gene']['id']);
+                        } else {
+                            $aSuccessTranscripts[] = $sTranscript;
+
+                            // Turn off the MAPPING_DONE flags for variants within range of this transcript, so that automatic mapping will pick them up again.
+                            $q = $_DB->query('UPDATE ' . TABLE_VARIANTS . ' SET mapping_flags = mapping_flags & ~' . MAPPING_DONE . ' WHERE chromosome = ? AND ' .
+                                             '(position_g_start BETWEEN ? AND ?) OR ' .
+                                             '(position_g_end   BETWEEN ? AND ?) OR ' .
+                                             '(position_g_start < ? AND position_g_end > ?)',
+                                             array($zData['gene']['chromosome'], $aTranscriptPositions['chromTransStart'], $aTranscriptPositions['chromTransEnd'], $aTranscriptPositions['chromTransStart'], $aTranscriptPositions['chromTransEnd'], $aTranscriptPositions['chromTransStart'], $aTranscriptPositions['chromTransEnd']));
+                            if ($q->rowCount()) {
+                                // If we have changed variants, turn on mapping immediately.
+                                $_SESSION['mapping']['time_complete'] = 0;
+                            }
                         }
                     }
                 }

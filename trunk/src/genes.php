@@ -493,7 +493,6 @@ if (PATH_COUNT == 1 && ACTION == 'create') {
                             //$sTranscriptName = $zData['transcriptNames'][preg_replace('/\.\d+$/', '', $sTranscript)];
                             $sTranscriptName = $zData['transcriptNames'][$sTranscript];
                             $aTranscriptPositions = $zData['transcriptPositions'][$sTranscript];
-
                             // Add transcript to gene.
                             $q = $_DB->query('INSERT INTO ' . TABLE_TRANSCRIPTS . '(id, geneid, name, id_mutalyzer, id_ncbi, id_ensembl, id_protein_ncbi, id_protein_ensembl, id_protein_uniprot, position_c_mrna_start, position_c_mrna_end, position_c_cds_end, position_g_mrna_start, position_g_mrna_end, created_date, created_by) ' .
                                              'VALUES(NULL, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, NOW(), ?)',

@@ -4,7 +4,7 @@
  * LEIDEN OPEN VARIATION DATABASE (LOVD)
  *
  * Created     : 2014-12-19
- * Modified    : 2015-10-21:08:25:39
+ * Modified    : 2015-11-13:14:28:24
  * For LOVD    : 3.0-12
  *
  * Copyright   : 2014 Leiden University Medical Center; http://www.LUMC.nl/
@@ -88,7 +88,8 @@ class collaborator_tests extends PHPUnit_Extensions_SeleniumTestCase
         $this->type("name=hgnc_id", "GJB1");
         $this->click("css=input[type=\"submit\"]");
         $this->waitForPageToLoad("30000");
-        $this->addSelection("name=active_transcripts[]", "label=transcript variant 1 (NM_001097642.2)");
+        //$this->addSelection("name=active_transcripts[]", "label=transcript variant 1 (NM_001097642.2)");
+        $this->addSelection("name=active_transcripts[]", "value=NM_001097642.2");
         $this->check("name=show_hgmd");
         $this->check("name=show_genecards");
         $this->check("name=show_genetests");
@@ -161,7 +162,8 @@ class collaborator_tests extends PHPUnit_Extensions_SeleniumTestCase
         $this->type("name=symbol", "CMT");
         $this->type("name=name", "Charcot Marie Tooth Disease");
         $this->type("name=id_omim", "302800");
-        $this->addSelection("name=genes[]", "label=GJB1 (gap junction protein, beta 1, 32kDa)");
+        //$this->addSelection("name=genes[]", "label=GJB1 (gap junction protein, beta 1, 32kDa)");
+        $this->addSelection("name=genes[]", "value=GJB1");
         $this->click("css=input[type=\"submit\"]");
         $this->waitForPageToLoad("30000");
         $this->assertEquals("Successfully created the disease information entry!", $this->getText("css=table[class=info]"));
@@ -214,7 +216,8 @@ class collaborator_tests extends PHPUnit_Extensions_SeleniumTestCase
         $this->addSelection("name=Screening/Technique[]", "label=array for Comparative Genomic Hybridisation");
         $this->addSelection("name=Screening/Technique[]", "label=array for resequencing");
         $this->addSelection("name=Screening/Technique[]", "label=array for SNP typing");
-        $this->addSelection("name=genes[]", "label=GJB1 (gap junction protein, beta 1, 32kDa)");
+        //$this->addSelection("name=genes[]", "label=GJB1 (gap junction protein, beta 1, 32kDa)");
+        $this->addSelection("name=genes[]", "value=GJB1");
         $this->check("name=variants_found");
         $this->click("css=input[type=\"submit\"]");
         $this->waitForPageToLoad("30000");
@@ -297,7 +300,8 @@ class collaborator_tests extends PHPUnit_Extensions_SeleniumTestCase
         $this->addSelection("name=Screening/Technique[]", "label=Single Base Extension");
         $this->addSelection("name=Screening/Technique[]", "label=Single-Strand DNA Conformation polymorphism Analysis (SSCP)");
         $this->addSelection("name=Screening/Technique[]", "label=SSCA, fluorescent (SSCP)");
-        $this->addSelection("name=genes[]", "label=GJB1 (gap junction protein, beta 1, 32kDa)");
+        //$this->addSelection("name=genes[]", "label=GJB1 (gap junction protein, beta 1, 32kDa)");
+        $this->addSelection("name=genes[]", "value=GJB1");
         $this->check("name=variants_found");
         $this->click("css=input[type=\"submit\"]");
         $this->waitForPageToLoad("30000");
@@ -506,7 +510,8 @@ class collaborator_tests extends PHPUnit_Extensions_SeleniumTestCase
         $this->addSelection("name=Screening/Technique[]", "label=array for Comparative Genomic Hybridisation");
         $this->addSelection("name=Screening/Technique[]", "label=array for resequencing");
         $this->addSelection("name=Screening/Technique[]", "label=array for SNP typing");
-        $this->addSelection("name=genes[]", "label=GJB1 (gap junction protein, beta 1, 32kDa)");
+        //$this->addSelection("name=genes[]", "label=GJB1 (gap junction protein, beta 1, 32kDa)");
+        $this->addSelection("name=genes[]", "value=GJB1");
         $this->check("name=variants_found");
         $this->click("css=input[type=\"submit\"]");
         $this->waitForPageToLoad("30000");
