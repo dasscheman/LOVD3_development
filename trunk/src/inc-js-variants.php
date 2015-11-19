@@ -211,7 +211,7 @@ function lovd_convertPosition (oElement)
                         aVariants = sData.split(';');
                         var nVariants = aVariants.length;
                         for (i = 0; i < nVariants; i++) {
-                            var aVariant = /^([A-Z]{2}_\d{6,9}\.\d{1,2}):([cn]\..+)$/.exec(aVariants[i]);
+                            var aVariant = /^([A-Z]{2}_\d{6,9}\.\d{1,2}(?:|\([A-Z]{1,6}\d{0,3}_v\d{3}\))):([cn]\..+)$/.exec(aVariants[i]);
                             if (aVariant != null) {
                                 var oInput = $('#variantForm input[id_ncbi="' + aVariant[1] + '"]');
                                 if (oInput[0] != undefined) {

@@ -145,6 +145,9 @@ if (ACTION == 'create') {
 
     define('LOG_EVENT', 'TranscriptCreate');
 
+    require ROOT_PATH . 'class/object_transcripts.php';
+    $_DATA = new LOVD_Transcript();
+
     // If no gene given, ask for it and forward user.
     if (!isset($_PE[1])) {
         define('PAGE_TITLE', 'Add transcript to a gene');
@@ -249,9 +252,7 @@ if (ACTION == 'create') {
         flush();
 
         require ROOT_PATH . 'class/soap_client.php';
-        require ROOT_PATH . 'class/object_transcripts.php';
         $_Mutalyzer = new LOVD_SoapClient();
-        $_DATA = new LOVD_Transcript();
         $_BAR->setMessage('Collecting all available transcripts...');
         $_BAR->setProgress(0);
 
@@ -270,7 +271,6 @@ if (ACTION == 'create') {
                 // No transcripts found.
                 $aTranscriptInfo = array();
             }
-
             $_SESSION['work'][$sPathBase][$_POST['workID']]['values'] = array();
             $aTranscripts['id'] = array();
             $aTranscripts['name'] = array();
@@ -294,11 +294,10 @@ if (ACTION == 'create') {
                     $_BAR->setMessage('Collecting ' . $oTranscript->id . ' info...');
                     if ($oTranscript->id) {
                         $aTranscripts['id'][] = $oTranscript->id;
-                        // TODO DAAN: Can not figure out why version is not included. Therefor for now we will do without.
+                        // Untill revison 678 the transcript version was not used in the index.
+                        // Can not figure out why version is not included. Therefor for now we will do without.
                         $aTranscripts['name'][$oTranscript->id] = str_replace($zGene['name'] . ', ', '', $oTranscript->product);
                         $aTranscripts['mutalyzer'][$oTranscript->id] = str_replace($zGene['id'] . '_v', '', $oTranscript->name);
-                        //$aTranscripts['name'][preg_replace('/\.\d+/', '', $oTranscript->id)] = str_replace($zGene['name'] . ', ', '', $oTranscript->product);
-                        //$aTranscripts['mutalyzer'][preg_replace('/\.\d+/', '', $oTranscript->id)] = str_replace($zGene['id'] . '_v', '', $oTranscript->name);
                         // 2014-01-14; 3.0-10; When getting transcripts from an NG rather than an NC, we are missing some fields. Make sure they're set.
                         $aTranscripts['positions'][$oTranscript->id] =
                             array(
@@ -363,19 +362,21 @@ if (ACTION == 'create') {
         if (!lovd_error()) {
             $_POST['created_by'] = $_AUTH['id'];
             $_POST['created_date'] = date('Y-m-d H:i:s');
-
             // FIXME; shouldn't this check be done before looping through active_transcripts above? This setup allows submission of the form when selecting "No transcripts available".
             if (!empty($_POST['active_transcripts']) && $_POST['active_transcripts'][0] != '') {
                 $aSuccessTranscripts = array();
                 foreach($_POST['active_transcripts'] as $sTranscript) {
+                    if (!$sTranscript) {
+                        continue;
+                    }
                     // TEMP!! If else statement is temporary. Now we only use the transcript object to save the transcripts for mitrchonrial genes.
                     // Later all transcripts will be saved like this.
-                    if ($zData['chromosome'] == 'M') {
+                    if (in_array($zData['gene']['id'], array_keys($_SETT['mito_genes_aliases']))) {
                         $zDataTranscript = array(
-                            'geneid' => $_POST['id'],
-                            // TODO DAAN: Can not figure out why version is not included.
-                            'name' => $zData['transcriptNames'][preg_replace('/\.\d+/', '', $sTranscript)],
-                            'id_mutalyzer' => $zData['transcriptMutalyzer'][preg_replace('/\.\d+/', '', $sTranscript)],
+                            'geneid' => $zData['gene']['id'],
+                            // Untill revison 678 the transcript version was not used in the index.
+                            // Can not figure out why version is not included. Therefor for now we will do without.'name' => $zData['transcriptNames'][preg_replace('/\.\d+/', '', $sTranscript)],
+                            'id_mutalyzer' => $zData['transcriptMutalyzer'][$sTranscript],
                             'id_ncbi' => $sTranscript,
                             'id_ensembl' => '',
                             'id_protein_ncbi' => $zData['transcriptsProtein'][$sTranscript],
@@ -390,20 +391,21 @@ if (ACTION == 'create') {
                             'created_by' => $_POST['created_by']
                         );
 
-                        if (!$_DATA['Transcript']->insertEntry($zDataTranscript, array_keys($zDataTranscript))) {
+                        if (!$_DATA->insertEntry($zDataTranscript, array_keys($zDataTranscript))) {
                             // Silent error.
                             lovd_writeLog('Error', LOG_EVENT, 'Transcript information entry ' . $sTranscript . ' - ' . ' - could not be added to gene ' . $_POST['id']);
                             continue;
                         }
 
                         $aSuccessTranscripts[] = $sTranscript;
-                        $_DATA['Transcript']->turnOffMappingDone($_POST['chromosome'], $zData['transcriptPositions'][$sTranscript]);
+                        $_DATA->turnOffMappingDone($zData['gene']['chromosome'], $zData['transcriptPositions'][$sTranscript]);
                     } else {
                         // Add transcript to gene.
                         $sTranscriptProtein = (isset($zData['transcriptsProtein'][$sTranscript])? $zData['transcriptsProtein'][$sTranscript] : '');
-                        // TODO DAAN: Can not figure out why version is not included.
-                        $nMutalyzerID = $zData['transcriptMutalyzer'][preg_replace('/\.\d+/', '', $sTranscript)];
-                        $sTranscriptName = $zData['transcriptNames'][preg_replace('/\.\d+/', '', $sTranscript)];
+                        // Untill revison 678 the transcript version was not used in the index.
+                        // Can not figure out why version is not included. Therefor for now we will do without.
+                        $nMutalyzerID = $zData['transcriptMutalyzer'][$sTranscript];
+                        $sTranscriptName = $zData['transcriptNames'][$sTranscript];
 
                         $aTranscriptPositions = $zData['transcriptPositions'][$sTranscript];
                         $q = $_DB->query('INSERT INTO ' . TABLE_TRANSCRIPTS . '(id, geneid, name, id_mutalyzer, id_ncbi, id_ensembl, id_protein_ncbi, id_protein_ensembl, id_protein_uniprot, position_c_mrna_start, position_c_mrna_end, position_c_cds_end, position_g_mrna_start, position_g_mrna_end, created_date, created_by) ' .
@@ -469,12 +471,10 @@ if (ACTION == 'create') {
     $atranscriptNames = array();
     $aTranscriptsForm = array();
     foreach ($zData['transcripts'] as $sTranscript) {
-        // TODO DAAN: Can not figure out why version is not included. Therefor for now we will do without.
+        // Untill revison 678 the transcript version was not used in the index.
+        // Can not figure out why version is not included. Therefor for now we will do without.
         if (!isset($aTranscriptNames[$sTranscript])) {
-        //if (!isset($aTranscriptNames[preg_replace('/\.\d+/', '', $sTranscript)])) {
-            // Here the version is placed back, but this was actively removed when creating a transcipt.
             $aTranscriptsForm[$sTranscript] = lovd_shortenString($zData['transcriptNames'][$sTranscript], 50);
-            //$aTranscriptsForm[$sTranscript] = lovd_shortenString($zData['transcriptNames'][preg_replace('/\.\d+/', '', $sTranscript)], 50);
             $aTranscriptsForm[$sTranscript] .= str_repeat(')', substr_count($aTranscriptsForm[$sTranscript], '(')) . ' (' . $sTranscript . ')';
         }
     }

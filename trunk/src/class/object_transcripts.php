@@ -180,6 +180,7 @@ class LOVD_Transcript extends LOVD_Object {
 
     function prepareData ($zData = '', $sView = 'list')
     {
+        global $_SETT;
         // Prepares the data by "enriching" the variable received with links, pictures, etc.
 
         if (!in_array($sView, array('list', 'entry'))) {
@@ -193,7 +194,13 @@ class LOVD_Transcript extends LOVD_Object {
             $zData['id_'] = '<A href="' . str_replace('{{ID}}', $zData['id'], $this->sRowLink) . '" class="hide">' . $zData['id'] . '</A>';
         } else {
             $zData['gene_name_'] = '<A href="genes/' . rawurlencode($zData['geneid']) . '">' . $zData['geneid'] . '</A> (' . $zData['gene_name'] . ')';
-            $zData['id_ncbi_'] = '<A href="http://www.ncbi.nlm.nih.gov/nuccore/' . $zData['id_ncbi'] . '" target="_blank">'  . $zData['id_ncbi'] . '</A>';
+
+            $sNCBILink = $zData['id_ncbi'] ;
+            // For mitochondrial genes we have to change the ncbi url.
+            if (isset($_SETT['mito_genes_aliases'][$zData['geneid']])) {
+                $sNCBILink = str_replace('(' . $_SETT['mito_genes_aliases'][$zData['geneid']] . '_v001)', '', $zData['id_ncbi']);
+            }
+            $zData['id_ncbi_'] = '<A href="http://www.ncbi.nlm.nih.gov/nuccore/' . $sNCBILink . '" target="_blank">' . $zData['id_ncbi'] . '</A>';
 
             // Exon/intron info table. Check if files exist, and build link. Otherwise, remove field.
             $sExonTable = '';
@@ -227,7 +234,7 @@ class LOVD_Transcript extends LOVD_Object {
      **/
     public function getTranscriptPositions($sRefseqUD, $sSymbol, $sGeneName, &$nProgress = 0.0)
     {
-        global $_BAR, $_SETT;
+        global $_BAR, $_SETT, $_DB;
 
         $_Mutalyzer = new LOVD_SoapClient();
         $aTranscripts['id'] = array();
@@ -239,6 +246,7 @@ class LOVD_Transcript extends LOVD_Object {
 
         $sGeneSymbol = $sSymbol;
 
+        $aTranscripts['added'] = $_DB->query('SELECT id_ncbi FROM ' . TABLE_TRANSCRIPTS . ' WHERE geneid = ? ORDER BY id_ncbi', array($sSymbol))->fetchAllColumn();
         if (in_array($sSymbol, array_keys($_SETT['mito_genes_aliases']))) {
             // For mitochandrial genes an alias must be used to get the transcripts and info.
             // List of aliasses are hard-coded in inc-init.php
@@ -257,42 +265,44 @@ class LOVD_Transcript extends LOVD_Object {
             return $aTranscripts;
         }
 
-        if (in_array($sSymbol, array_keys($_SETT['mito_genes_aliases']))) {
-            //For Mitochondrial genes, we won't be able to get any proper transcript information. Fake one.
-            $sRefseqNM = $sRefseqUD . '(' . $sSymbol . '_v001)';
-            $aTranscripts['id'] = array($sRefseqNM);
-            $aTranscripts['protein'] = array($sRefseqNM => '');
-            // preg_replace is done in the original code for mutalyzer and name, cannot trace back why.
-            // Not doing this will cause an error index not found transcripts.php.
-            // TODO DAAN: Can not figure out why version is not included. Therefor for now we will do without.
-            //$aTranscripts['mutalyzer'] = array(preg_replace('/\.\d+/', '', $sRefseqNM) => '001');
-            //$aTranscripts['name'] = array(preg_replace('/\.\d+/', '', $sRefseqNM) => 'transcript variant 1'); // FIXME: Perhaps indicate this transcript is a fake one, reconstructed from the CDS?
-            $aTranscripts['mutalyzer'] = array($sRefseqNM => '001');
-            $aTranscripts['name'] = array($sRefseqNM => 'transcript variant 1'); // FIXME: Perhaps indicate this transcript is a fake one, reconstructed from the CDS?
-            $aTranscripts['positions'] = array($sRefseqNM =>
-                array(
-                    // For mitochondrial genes we used the NC to get the transcriptInfo therefor we can use the gTransStart and gTransEnd.
-                    'chromTransStart' => (isset($aTranscripts['info'][0]->gTransStart)? $aTranscripts['info'][0]->gTransStart : 0),
-                    'chromTransEnd' => (isset($aTranscripts['info'][0]->gTransEnd)? $aTranscripts['info'][0]->gTransEnd : 0),
-                    'cTransStart' => (isset($aTranscripts['info'][0]->cTransStart)? $aTranscripts['info'][0]->cTransStart : 0),
-                    'cTransEnd' => (isset($aTranscripts['info'][0]->sortableTransEnd)? $aTranscripts['info'][0]->sortableTransEnd : 0),
-                    'cCDSStop' => (isset($aTranscripts['info'][0]->cCDSStop)? $aTranscripts['info'][0]->cCDSStop : 0),
-                )
-            );
-            return $aTranscripts;
-        }
 
         $nTranscripts = count($aTranscripts['info']);
         foreach($aTranscripts['info'] as $oTranscript) {
             $nProgress += ((100 - $nProgress)/$nTranscripts);
             $_BAR->setMessage('Collecting ' . $oTranscript->id . ' info...');
-            if ($oTranscript->id || in_array($sSymbol, array_keys($_SETT['mito_genes_aliases']))) {
+            if (in_array($sSymbol, array_keys($_SETT['mito_genes_aliases']))) {
+                //For Mitochondrial genes, we won't be able to get any proper transcript information. Fake one.
+                $sRefseqNM = $sRefseqUD . '(' . $_SETT['mito_genes_aliases'][$sSymbol] . '_v001)';
+                if (in_array($sRefseqNM, $aTranscripts['added'])) {
+                    // transcript allready exist; continue to the next transcript
+                    continue;
+                }
+                $aTranscripts['id'] = array($sRefseqNM);
+                $aTranscripts['protein'] = array($sRefseqNM => '');
+                // Untill revison 678 the transcript version was not used in the index.
+                // Can not figure out why version is not included. Therefor for now we will do without.
+                $aTranscripts['mutalyzer'] = array($sRefseqNM => '001');
+                $aTranscripts['name'] = array($sRefseqNM => 'transcript variant 1'); // FIXME: Perhaps indicate this transcript is a fake one, reconstructed from the CDS?
+                $aTranscripts['positions'] = array($sRefseqNM =>
+                    array(
+                        // For mitochondrial genes we used the NC to get the transcriptInfo therefor we can use the gTransStart and gTransEnd.
+                        'chromTransStart' => (isset($oTranscript->gTransStart)? $oTranscript->gTransStart : 0),
+                        'chromTransEnd' => (isset($oTranscript->gTransEnd)? $oTranscript->gTransEnd : 0),
+                        'cTransStart' => (isset($oTranscript->cTransStart)? $oTranscript->cTransStart : 0),
+                        'cTransEnd' => (isset($oTranscript->sortableTransEnd)? $oTranscript->sortableTransEnd : 0),
+                        'cCDSStop' => (isset($oTranscript->cCDSStop)? $oTranscript->cCDSStop : 0),
+                    )
+                );
+            } else {
+                if (in_array($oTranscript->id, $aTranscripts['added'])) {
+                    // transcript allready exist; continue to the next transcript
+                    continue;
+                }
                 $aTranscripts['id'][] = $oTranscript->id;
-                // TODO DAAN: Can not figure out why version is not included. Therefor for now we will do without.
+                // Untill revison 678 the transcript version was not used in the index.
+                // Can not figure out why version is not included. Therefor for now we will do without.
                 $aTranscripts['name'][$oTranscript->id] = str_replace($sGeneName . ', ', '', $oTranscript->product);
                 $aTranscripts['mutalyzer'][$oTranscript->id] = str_replace($sSymbol . '_v', '', $oTranscript->name);
-                //$aTranscripts['name'][preg_replace('/\.\d+/', '', $oTranscript->id)] = str_replace($sGeneName . ', ', '', $oTranscript->product);
-                //$aTranscripts['mutalyzer'][preg_replace('/\.\d+/', '', $oTranscript->id)] = str_replace($sSymbol . '_v', '', $oTranscript->name);
                 $aTranscripts['positions'][$oTranscript->id] =
                     array(
                         'chromTransStart' => (isset($oTranscript->chromTransStart)? $oTranscript->chromTransStart : 0),
@@ -305,7 +315,6 @@ class LOVD_Transcript extends LOVD_Object {
             }
             $_BAR->setProgress($nProgress);
         }
-
         return $aTranscripts;
     }
 

@@ -150,6 +150,7 @@ if (PATH_COUNT == 1 && ACTION == 'create') {
     require ROOT_PATH . 'class/object_transcripts.php';
     require ROOT_PATH . 'inc-lib-form.php';
     $_DATA['Genes'] = new LOVD_Gene();
+    $_DATA['Transcript'] = new LOVD_transcript();
 
     $sPath = CURRENT_PATH . '?' . ACTION;
     if (GET) {
@@ -267,8 +268,6 @@ if (PATH_COUNT == 1 && ACTION == 'create') {
                 }
 
                 // Get all transcripts and info.
-                $_DATA['Transcript'] = new LOVD_transcript();
-
                 // FIXME: When changing code here, check in transcripts?create if you need to make changes there, too.
                 $_BAR->setMessage('Collecting all available transcripts...');
                 $_BAR->setProgress($nProgress += 17);
@@ -302,11 +301,10 @@ if (PATH_COUNT == 1 && ACTION == 'create') {
                         $_BAR->setMessage('Collecting ' . $oTranscript->id . ' info...');
                         if ($oTranscript->id) {
                             $aTranscripts['id'][] = $oTranscript->id;
-                            // TODO DAAN: Can not figure out why version is not included. Therefor for now we will do without.
+                            // Untill revison 678 the transcript version was not used in the index.
+                            // Can not figure out why version is not included. Therefor for now we will do without.
                             $aTranscripts['name'][$oTranscript->id] = str_replace($sGeneName . ', ', '', $oTranscript->product);
                             $aTranscripts['mutalyzer'][$oTranscript->id] = str_replace($sSymbol . '_v', '', $oTranscript->name);
-                            //$aTranscripts['name'][preg_replace('/\.\d+/', '', $oTranscript->id)] = str_replace($sGeneName . ', ', '', $oTranscript->product);
-                            //$aTranscripts['mutalyzer'][preg_replace('/\.\d+/', '', $oTranscript->id)] = str_replace($sSymbol . '_v', '', $oTranscript->name);
                             $aTranscripts['positions'][$oTranscript->id] =
                                 array(
                                     'chromTransStart' => (isset($oTranscript->chromTransStart)? $oTranscript->chromTransStart : 0),
@@ -396,7 +394,6 @@ if (PATH_COUNT == 1 && ACTION == 'create') {
             lovd_errorClean();
 
             $_DATA['Genes']->checkFields($_POST, $zData);
-
             if (!lovd_error()) {
                 // Fields to be used.
                 $aFields = array(
@@ -475,7 +472,7 @@ if (PATH_COUNT == 1 && ACTION == 'create') {
                                 'created_date' => date('Y-m-d H:i:s'),
                                 'created_by' => $_POST['created_by']
                             );
-
+                            
                             if (!$_DATA['Transcript']->insertEntry($zDataTranscript, array_keys($zDataTranscript))) {
                                 // Silent error.
                                 lovd_writeLog('Error', LOG_EVENT, 'Transcript information entry ' . $sTranscript . ' - ' . ' - could not be added to gene ' . $_POST['id']);
@@ -486,11 +483,10 @@ if (PATH_COUNT == 1 && ACTION == 'create') {
                             $_DATA['Transcript']->turnOffMappingDone($_POST['chromosome'], $zData['transcriptPositions'][$sTranscript]);
                         } else {
                             // Gather transcript information from session.
-                            // TODO DAAN: Can not figure out why version is not included. Therefor for now we will do without.
-                            //$nMutalyzerID = $zData['transcriptMutalyzer'][preg_replace('/\.\d+$/', '', $sTranscript)];
+                            // Untill revison 678 the transcript version was not used in the index.
+                            // Can not figure out why version is not included. Therefor for now we will do without.
                             $nMutalyzerID = $zData['transcriptMutalyzer'][$sTranscript];
                             $sTranscriptProtein = $zData['transcriptsProtein'][$sTranscript];
-                            //$sTranscriptName = $zData['transcriptNames'][preg_replace('/\.\d+$/', '', $sTranscript)];
                             $sTranscriptName = $zData['transcriptNames'][$sTranscript];
                             $aTranscriptPositions = $zData['transcriptPositions'][$sTranscript];
                             // Add transcript to gene.

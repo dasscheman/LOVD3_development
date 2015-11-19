@@ -495,6 +495,23 @@ if (PATH_COUNT == 1 && ACTION == 'create') {
 
     define('LOG_EVENT', 'VariantCreate');
 
+//require ROOT_PATH . 'class/soap_client.php';
+//$_Mutalyzer = new LOVD_SoapClient();
+//
+//$TEMPvariant = 'NC_012920.1:c.2A>T';
+////$TEMPrefseq_build = 'NC_012920.1(MT-TD_v001)';
+////$TEMPvariant = 'NC_012920.1:c.2A>T';
+//$TEMPgene = 'MT-TD'; //TRND
+////var_dump($temp, $_CONF['refseq_build']);
+//$variant = 'chrM:m.578A>T';
+//$sGene ='TRNF'; //MT-TF'; //
+//$temp1 = @$_Mutalyzer->mappingInfo(array('LOVD_ver' => $_SETT['system']['version'], 'build' => $_CONF['refseq_build'], 'accNo' => 'NM_001100.3', 'variant' => $_POST['VariantOnGenome/DNA']))->mappingInfoResult;
+//$temp2 = @$_Mutalyzer->mappingInfo(array('LOVD_ver' => $_SETT['system']['version'], 'build' => $_CONF['refseq_build'], 'accNo' => 'NC_012920.1', 'variant' => 'm.578A>T'))->mappingInfoResult;
+//$oOutput = @$_Mutalyzer->numberConversion(array('build' => $_CONF['refseq_build'], 'variant' => $variant, 'gene' => $sGene))->numberConversionResult;
+//$temp = @$_Mutalyzer->numberConversion(array('build' => $_CONF['refseq_build'], 'variant' => $TEMPvariant, 'gene' => $TEMPgene))->numberConversionResult;
+////$sVariants = implode(';', $temp->string);
+//var_dump($oOutput, implode(';', $oOutput->string)); exit;
+
     if (!isset($_GET['reference'])) {
         // URL: /variants?create
         // Select whether you want to create a variant on the genome or on a transcript.
