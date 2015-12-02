@@ -4,8 +4,8 @@
  * LEIDEN OPEN VARIATION DATABASE (LOVD)
  *
  * Created     : 2009-10-19
- * Modified    : 2015-10-09
- * For LOVD    : 3.0-14
+ * Modified    : 2015-11-26
+ * For LOVD    : 3.0-15
  *
  * Copyright   : 2004-2015 Leiden University Medical Center; http://www.LUMC.nl/
  * Programmers : Ing. Ivo F.A.C. Fokkema <I.F.A.C.Fokkema@LUMC.nl>
@@ -204,7 +204,7 @@ $_SETT = array(
                           ),
                 'unique_view_max_string_length' => 100,
                 'human_builds' =>
-                    array(
+                     array(
                             '----' => array('ncbi_name' => 'non-Human'),
                             // This information has been taken from the release notes of the builds;
                             // http://www.ncbi.nlm.nih.gov/genome/guide/human/release_notes.html
@@ -306,8 +306,8 @@ $_SETT = array(
                                                           ),
                                           ),
                     ),
-		// Mitochondrial aliases. The key is the gene symbol used by HGNC the values are the gene symbol used by NCBI.
-                'mito_genes_aliases'=>
+                // Mitochondrial aliases. The key is the gene symbol used by HGNC, the value is the gene symbol used by NCBI.
+                'mito_genes_aliases' =>
                     array(
                             'MT-TF' => 'TRNF',
                             'MT-RNR1' => 'RNR1',
@@ -779,7 +779,7 @@ if (!defined('NOT_INSTALLED')) {
 
         // Switch gene.
         // Gene switch will occur automatically at certain pages. They can be accessed by following links in LOVD itself, or possibly from outer sources.
-        if (preg_match('/^(configuration|genes|transcripts|variants|view)\/([^\/]+)/', CURRENT_PATH, $aRegs)) {
+        if (preg_match('/^(configuration|genes|transcripts|variants|individuals|view)\/([^\/]+)/', CURRENT_PATH, $aRegs)) {
             // We'll check this value further down in this code.
             if (!in_array($aRegs[2], array('in_gene', 'upload')) && !ctype_digit($aRegs[2])) {
                 $_SESSION['currdb'] = $aRegs[2]; // Not checking capitalization here yet.
@@ -799,7 +799,6 @@ if (!defined('NOT_INSTALLED')) {
         $_SETT['email_headers'] = 'MIME-Version: 1.0' . PHP_EOL .
                                   'Content-Type: text/plain; charset=UTF-8' . PHP_EOL .
                                   'X-Priority: 3' . PHP_EOL .
-                                  'X-MSMail-Priority: Normal' . PHP_EOL .
                                   'X-Mailer: PHP/' . phpversion() . PHP_EOL .
                                   'From: ' . (ON_WINDOWS? '' : '"LOVD (' . lovd_shortenString($_CONF['system_title'], 50) . ')" ') . '<' . $_CONF['email_address'] . '>';
         $_SETT['email_mime_headers'] =

@@ -1151,11 +1151,10 @@ if (POST) {
                             // Do not set soft warnings when we do an update.
                             $_BAR[0]->appendMessage('Warning (' . $sCurrentSection . ', line ' . $nLine . '): There is already a disease with disease name ' . $aLine['name'] . (empty($aLine['id_omim'])? '' : ' and/or OMIM ID ' . $aLine['id_omim']) . '. This disease is not imported! <BR>', 'done');
                             $nWarnings ++;
+                            $aLine['todo'] = 'map';
+                            break;
                         }
-
                         $aLine['newID'] = $nDiseaseIdOmim[0];
-                        $aLine['todo'] = 'map';
-                        break;
                     }
 
                     if ($zData) {
