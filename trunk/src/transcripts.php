@@ -4,7 +4,7 @@
  * LEIDEN OPEN VARIATION DATABASE (LOVD)
  *
  * Created     : 2010-12-21
- * Modified    : 2015-10-28
+ * Modified    : 2015-12-01
  * For LOVD    : 3.0-15
  *
  * Copyright   : 2004-2015 Leiden University Medical Center; http://www.LUMC.nl/
@@ -42,7 +42,7 @@ if ($_AUTH) {
 
 
 
-if (!ACTION && (empty($_PE[1]) || preg_match('/^[a-z][a-z0-9#@-]+$/i', rawurldecode($_PE[1])))) {
+if (!ACTION && (empty($_PE[1]) || preg_match('/^[a-z][a-z0-9#@-]*$/i', rawurldecode($_PE[1])))) {
     // URL: /transcripts
     // URL: /transcripts/DMD
     // View all entries.
@@ -92,6 +92,7 @@ if (PATH_COUNT == 2 && ctype_digit($_PE[1]) && !ACTION) {
     require ROOT_PATH . 'class/object_transcripts.php';
     $_DATA = new LOVD_Transcript();
     $zData = $_DATA->viewEntry($nID);
+
     $aNavigation = array();
     if ($_AUTH && $_AUTH['level'] >= LEVEL_CURATOR) {
         $aNavigation[CURRENT_PATH . '?edit']      = array('menu_edit.png', 'Edit transcript information', 1);
@@ -256,11 +257,14 @@ if (ACTION == 'create') {
         $_BAR->setMessage('Collecting all available transcripts...');
         $_BAR->setProgress(0);
 
-        if (in_array($zGene['id'], array_keys($_SETT['mito_genes_aliases']))) {
-            // For mitochandrial genes an alias must be used to get the transcripts and info.
-            // List of aliasses are hard-coded in inc-init.php
+        if (isset($_SETT['mito_genes_aliases'][$zGene['id']])) {
+            // For mitochondrial genes, an alias must be used to get the transcripts and info.
+            // List of aliases are hard-coded in inc-init.php.
             $aTranscripts = $_DATA->getTranscriptPositions($zGene['refseq_UD'], $zGene['id'], $zGene['name'], $nProgress);
         } else {
+            // FIXME; Later this if-else statement should be removed. The function $_DATA['Transcript']->getTranscriptPositions
+            // should be called for all genes. For the sake of clarity this will be done in a separate commit.
+
             try {
                 // Can throw notice when TranscriptInfo is not present (when a gene recently has been renamed, for instance).
                 $aTranscriptInfo = @$_Mutalyzer->getTranscriptsAndInfo(array('genomicReference' => $zGene['refseq_UD'], 'geneName' => $zGene['id']))->getTranscriptsAndInfoResult->TranscriptInfo;
@@ -272,11 +276,13 @@ if (ACTION == 'create') {
                 $aTranscriptInfo = array();
             }
             $_SESSION['work'][$sPathBase][$_POST['workID']]['values'] = array();
-            $aTranscripts['id'] = array();
-            $aTranscripts['name'] = array();
-            $aTranscripts['mutalyzer'] = array();
-            $aTranscripts['positions'] = array();
-            $aTranscripts['protein'] = array();
+            $aTranscripts = array(
+                'id' => array(),
+                'name' => array(),
+                'mutalyzer' => array(),
+                'positions' => array(),
+                'protein' => array(),
+            );
             // Get list of transcripts already added to the database.
             $aTranscripts['added'] = $_DB->query('SELECT id_ncbi FROM ' . TABLE_TRANSCRIPTS . ' WHERE geneid = ? ORDER BY id_ncbi', array($zGene['id']))->fetchAllColumn();
             // Count transcripts that still can be added (needed for reliable progress reporting).
@@ -294,8 +300,8 @@ if (ACTION == 'create') {
                     $_BAR->setMessage('Collecting ' . $oTranscript->id . ' info...');
                     if ($oTranscript->id) {
                         $aTranscripts['id'][] = $oTranscript->id;
-                        // Untill revison 678 the transcript version was not used in the index.
-                        // Can not figure out why version is not included. Therefor for now we will do without.
+                        // Until revision 679 the transcript version was not used in the index. The version number was removed with preg_replace.
+                        // Can not figure out why version is not included. Therefore, for now we will do without preg_replace.
                         $aTranscripts['name'][$oTranscript->id] = str_replace($zGene['name'] . ', ', '', $oTranscript->product);
                         $aTranscripts['mutalyzer'][$oTranscript->id] = str_replace($zGene['id'] . '_v', '', $oTranscript->name);
                         // 2014-01-14; 3.0-10; When getting transcripts from an NG rather than an NC, we are missing some fields. Make sure they're set.
@@ -362,6 +368,7 @@ if (ACTION == 'create') {
         if (!lovd_error()) {
             $_POST['created_by'] = $_AUTH['id'];
             $_POST['created_date'] = date('Y-m-d H:i:s');
+
             // FIXME; shouldn't this check be done before looping through active_transcripts above? This setup allows submission of the form when selecting "No transcripts available".
             if (!empty($_POST['active_transcripts']) && $_POST['active_transcripts'][0] != '') {
                 $aSuccessTranscripts = array();
@@ -369,13 +376,14 @@ if (ACTION == 'create') {
                     if (!$sTranscript) {
                         continue;
                     }
-                    // TEMP!! If else statement is temporary. Now we only use the transcript object to save the transcripts for mitrchonrial genes.
-                    // Later all transcripts will be saved like this.
-                    if (in_array($zData['gene']['id'], array_keys($_SETT['mito_genes_aliases']))) {
+                    // FIXME; If else statement is temporary. Now, we only use the transcript object to save the transcripts for mitochondrial genes.
+                    // Later all transcripts will be saved like this. For the sake of clarity this will be done in a separate commit.
+                    if (isset($_SETT['mito_genes_aliases'][$zData['gene']['id']])) {
                         $zDataTranscript = array(
                             'geneid' => $zData['gene']['id'],
-                            // Untill revison 678 the transcript version was not used in the index.
-                            // Can not figure out why version is not included. Therefor for now we will do without.'name' => $zData['transcriptNames'][preg_replace('/\.\d+/', '', $sTranscript)],
+                            // Until revision 679 the transcript version was not used in the index.
+                            // Can not figure out why version is not included. Therefore, for now we will do without.
+                            'name' => $zData['transcriptNames'][$sTranscript],
                             'id_mutalyzer' => $zData['transcriptMutalyzer'][$sTranscript],
                             'id_ncbi' => $sTranscript,
                             'id_ensembl' => '',
@@ -402,8 +410,8 @@ if (ACTION == 'create') {
                     } else {
                         // Add transcript to gene.
                         $sTranscriptProtein = (isset($zData['transcriptsProtein'][$sTranscript])? $zData['transcriptsProtein'][$sTranscript] : '');
-                        // Untill revison 678 the transcript version was not used in the index.
-                        // Can not figure out why version is not included. Therefor for now we will do without.
+                        // Until revision 679 the transcript version was not used in the index.
+                        // Can not figure out why version is not included. Therefore, for now we will do without.
                         $nMutalyzerID = $zData['transcriptMutalyzer'][$sTranscript];
                         $sTranscriptName = $zData['transcriptNames'][$sTranscript];
 
@@ -418,10 +426,10 @@ if (ACTION == 'create') {
                             $aSuccessTranscripts[] = $sTranscript;
 
                             // Turn off the MAPPING_DONE flags for variants within range of this transcript, so that automatic mapping will pick them up again.
-                            $q = $_DB->query('UPDATE ' . TABLE_VARIANTS . ' SET mapping_flags = mapping_flags & ~' . MAPPING_DONE . ' WHERE chromosome = ? AND ' .
+                            $q = $_DB->query('UPDATE ' . TABLE_VARIANTS . ' SET mapping_flags = mapping_flags & ~' . MAPPING_DONE . ' WHERE chromosome = ? AND (' .
                                              '(position_g_start BETWEEN ? AND ?) OR ' .
                                              '(position_g_end   BETWEEN ? AND ?) OR ' .
-                                             '(position_g_start < ? AND position_g_end > ?)',
+                                             '(position_g_start < ? AND position_g_end > ?))',
                                              array($zData['gene']['chromosome'], $aTranscriptPositions['chromTransStart'], $aTranscriptPositions['chromTransEnd'], $aTranscriptPositions['chromTransStart'], $aTranscriptPositions['chromTransEnd'], $aTranscriptPositions['chromTransStart'], $aTranscriptPositions['chromTransEnd']));
                             if ($q->rowCount()) {
                                 // If we have changed variants, turn on mapping immediately.
@@ -471,8 +479,8 @@ if (ACTION == 'create') {
     $atranscriptNames = array();
     $aTranscriptsForm = array();
     foreach ($zData['transcripts'] as $sTranscript) {
-        // Untill revison 678 the transcript version was not used in the index.
-        // Can not figure out why version is not included. Therefor for now we will do without.
+        // Until revision 679 the transcript version was not used in the index. The version number was removed with preg_replace.
+        // Can not figure out why version is not included. Therefore, for now we will do without preg_replace.
         if (!isset($aTranscriptNames[$sTranscript])) {
             $aTranscriptsForm[$sTranscript] = lovd_shortenString($zData['transcriptNames'][$sTranscript], 50);
             $aTranscriptsForm[$sTranscript] .= str_repeat(')', substr_count($aTranscriptsForm[$sTranscript], '(')) . ' (' . $sTranscript . ')';

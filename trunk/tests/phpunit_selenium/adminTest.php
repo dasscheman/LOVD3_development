@@ -4,7 +4,7 @@
  * LEIDEN OPEN VARIATION DATABASE (LOVD)
  *
  * Created     : 2014-12-19
- * Modified    : 2015-11-17:10:36:52
+ * Modified    : 2015-12-03:13:12:44
  * For LOVD    : 3.0-12
  *
  * Copyright   : 2014 Leiden University Medical Center; http://www.LUMC.nl/
@@ -33,7 +33,7 @@ class admin_tests extends PHPUnit_Extensions_SeleniumTestCase
     protected $captureScreenshotOnFailure = TRUE;
     protected $screenshotPath = '/home/dasscheman/svn/LOVD3_development/trunk/tests/test_results/error_screenshots';
     protected $screenshotUrl = 'http://localhost/svn/LOVD3_development/trunk/tests/test_results/error_screenshots';
-
+  
     protected function setUp()
     {
         $this->setHost('localhost');
@@ -47,7 +47,8 @@ class admin_tests extends PHPUnit_Extensions_SeleniumTestCase
         $this->open("/svn/LOVD3_development/trunk/src/install/");
         $this->assertContains("/src/install/", $this->getLocation());
         $this->assertContains("install", $this->getBodyText());
-        $this->click("css=input[type=\"submit\"]");
+        $this->isElementPresent("//input[@value='Start >>']");
+        $this->click("//input[@value='Start >>']");
         $this->waitForPageToLoad("30000");
         $this->assertTrue((bool)preg_match('/^[\s\S]*\/src\/install\/[\s\S]step=1$/',$this->getLocation()));
         $this->type("name=name", "LOVD3 Admin");
@@ -61,13 +62,13 @@ class admin_tests extends PHPUnit_Extensions_SeleniumTestCase
         $this->type("name=password_2", "test1234");
         $this->select("name=countryid", "label=Netherlands");
         $this->type("name=city", "Leiden");
-        $this->click("css=input[type=\"submit\"]");
+        $this->click("//input[@value='Continue »']");
         $this->waitForPageToLoad("30000");
         $this->assertTrue((bool)preg_match('/^[\s\S]*\/src\/install\/[\s\S]step=1&sent=true$/',$this->getLocation()));
-        $this->click("css=input[type=\"submit\"]");
+        $this->click("//input[@value='Next >>']");
         $this->waitForPageToLoad("30000");
         $this->assertTrue((bool)preg_match('/^[\s\S]*\/src\/install\/[\s\S]step=2$/',$this->getLocation()));
-        $this->click("css=input[type=\"submit\"]");
+        $this->click("//input[@value='Next >>']");
         $this->waitForPageToLoad("30000");
         $this->assertTrue((bool)preg_match('/^[\s\S]*\/src\/install\/[\s\S]step=3$/',$this->getLocation()));
         $this->type("name=institute", "Leiden University Medical Center");
@@ -76,10 +77,10 @@ class admin_tests extends PHPUnit_Extensions_SeleniumTestCase
         $this->click("name=send_stats");
         $this->click("name=include_in_listing");
         $this->uncheck("name=lock_uninstall");
-        $this->click("css=input[type=\"submit\"]");
+        $this->click("//input[@value='Continue »']");
         $this->waitForPageToLoad("30000");
         $this->assertTrue((bool)preg_match('/^[\s\S]*\/src\/install\/[\s\S]step=3&sent=true$/',$this->getLocation()));
-        $this->click("css=input[type=\"submit\"]");
+        $this->click("//input[@value='Next >>']");
         $this->waitForPageToLoad("30000");
         $this->assertTrue((bool)preg_match('/^[\s\S]*\/src\/install\/[\s\S]step=4$/',$this->getLocation()));
         $this->click("css=button");
@@ -877,7 +878,7 @@ class admin_tests extends PHPUnit_Extensions_SeleniumTestCase
         $this->waitForPageToLoad("4000");
         $this->assertTrue((bool)preg_match('/^[\s\S]*\/src\/genes$/',$this->getLocation()));
     }
-    /*public function testUninstallLOVD()
+    public function testUninstallLOVD()
     {
         $this->open("/svn/LOVD3_development/trunk/src/logout");
         $this->open("/svn/LOVD3_development/trunk/src/login");
@@ -893,6 +894,6 @@ class admin_tests extends PHPUnit_Extensions_SeleniumTestCase
         $this->click("css=input[type=\"submit\"]");
         $this->waitForPageToLoad("30000");
         $this->assertEquals("LOVD successfully uninstalled!\nThank you for having used LOVD!", $this->getText("css=div[id=lovd__progress_message]"));
-    }*/
+    }
 }
 ?>

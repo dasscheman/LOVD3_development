@@ -4,7 +4,7 @@
  * LEIDEN OPEN VARIATION DATABASE (LOVD)
  *
  * Created     : 2014-12-19
- * Modified    : 2015-11-17:10:36:52
+ * Modified    : 2015-12-03:13:12:44
  * For LOVD    : 3.0-12
  *
  * Copyright   : 2014 Leiden University Medical Center; http://www.LUMC.nl/
@@ -45,7 +45,8 @@ class submitter_tests extends PHPUnit_Extensions_SeleniumTestCase
     public function testInstallLOVD()
     {
         $this->open("/svn/LOVD3_development/trunk/src/install/");
-        $this->click("css=input[type=\"submit\"]");
+        $this->click("//input[@value='Start >>']");
+        $this->isElementPresent("//input[@value='Start >>']");
         $this->waitForPageToLoad("30000");
         $this->type("name=name", "LOVD3 Admin");
         $this->type("name=institute", "Leiden University Medical Center");
@@ -58,22 +59,27 @@ class submitter_tests extends PHPUnit_Extensions_SeleniumTestCase
         $this->type("name=password_2", "test1234");
         $this->select("name=countryid", "label=Netherlands");
         $this->type("name=city", "Leiden");
-        $this->click("css=input[type=\"submit\"]");
+        $this->click("//input[@value='Continue »']");
         $this->waitForPageToLoad("30000");
-        $this->click("css=input[type=\"submit\"]");
+        $this->assertTrue((bool)preg_match('/^[\s\S]*\/src\/install\/[\s\S]step=1&sent=true$/',$this->getLocation()));
+        $this->click("//input[@value='Next >>']");
         $this->waitForPageToLoad("30000");
-        $this->click("css=input[type=\"submit\"]");
+        $this->assertTrue((bool)preg_match('/^[\s\S]*\/src\/install\/[\s\S]step=2$/',$this->getLocation()));
+        $this->click("//input[@value='Next >>']");
         $this->waitForPageToLoad("30000");
+        $this->assertTrue((bool)preg_match('/^[\s\S]*\/src\/install\/[\s\S]step=3$/',$this->getLocation()));
         $this->type("name=institute", "Leiden University Medical Center");
         $this->type("name=email_address", "noreply@LOVD.nl");
         $this->select("name=refseq_build", "label=hg19 / GRCh37");
         $this->click("name=send_stats");
         $this->click("name=include_in_listing");
-        $this->click("name=lock_uninstall");
-        $this->click("css=input[type=\"submit\"]");
+        $this->uncheck("name=lock_uninstall");
+        $this->click("//input[@value='Continue »']");
         $this->waitForPageToLoad("30000");
-        $this->click("css=input[type=\"submit\"]");
+        $this->assertTrue((bool)preg_match('/^[\s\S]*\/src\/install\/[\s\S]step=3&sent=true$/',$this->getLocation()));
+        $this->click("//input[@value='Next >>']");
         $this->waitForPageToLoad("30000");
+        $this->assertTrue((bool)preg_match('/^[\s\S]*\/src\/install\/[\s\S]step=4$/',$this->getLocation()));
         $this->click("css=button");
         $this->waitForPageToLoad("30000");
         $this->assertTrue((bool)preg_match('/^[\s\S]*\/src\/setup[\s\S]newly_installed$/',$this->getLocation()));
@@ -86,9 +92,8 @@ class submitter_tests extends PHPUnit_Extensions_SeleniumTestCase
         $this->waitForPageToLoad("30000");
         $this->assertTrue((bool)preg_match('/^[\s\S]*\/src\/genes[\s\S]create$/',$this->getLocation()));
         $this->type("name=hgnc_id", "GJB1");
-        $this->click("css=input[type=\"submit\"]");
+        $this->click("//input[@value='Continue »']");
         $this->waitForPageToLoad("30000");
-        //$this->addSelection("name=active_transcripts[]", "label=transcript variant 1 (NM_001097642.2)");
         $this->addSelection("name=active_transcripts[]", "value=NM_001097642.2");
         $this->check("name=show_hgmd");
         $this->check("name=show_genecards");
@@ -151,7 +156,6 @@ class submitter_tests extends PHPUnit_Extensions_SeleniumTestCase
         $this->type("name=symbol", "CMT");
         $this->type("name=name", "Charcot Marie Tooth Disease");
         $this->type("name=id_omim", "302800");
-        //$this->addSelection("name=genes[]", "label=GJB1 (gap junction protein, beta 1, 32kDa)");
         $this->addSelection("name=genes[]", "value=GJB1");
         $this->click("css=input[type=\"submit\"]");
         $this->waitForPageToLoad("30000");
@@ -205,7 +209,6 @@ class submitter_tests extends PHPUnit_Extensions_SeleniumTestCase
         $this->addSelection("name=Screening/Technique[]", "label=array for Comparative Genomic Hybridisation");
         $this->addSelection("name=Screening/Technique[]", "label=array for resequencing");
         $this->addSelection("name=Screening/Technique[]", "label=array for SNP typing");
-        //$this->addSelection("name=genes[]", "label=GJB1 (gap junction protein, beta 1, 32kDa)");
         $this->addSelection("name=genes[]", "value=GJB1");
         $this->check("name=variants_found");
         $this->click("css=input[type=\"submit\"]");
@@ -289,7 +292,6 @@ class submitter_tests extends PHPUnit_Extensions_SeleniumTestCase
         $this->addSelection("name=Screening/Technique[]", "label=Single Base Extension");
         $this->addSelection("name=Screening/Technique[]", "label=Single-Strand DNA Conformation polymorphism Analysis (SSCP)");
         $this->addSelection("name=Screening/Technique[]", "label=SSCA, fluorescent (SSCP)");
-        //$this->addSelection("name=genes[]", "label=GJB1 (gap junction protein, beta 1, 32kDa)");
         $this->addSelection("name=genes[]", "value=GJB1");
         $this->check("name=variants_found");
         $this->click("css=input[type=\"submit\"]");
@@ -485,7 +487,6 @@ class submitter_tests extends PHPUnit_Extensions_SeleniumTestCase
         $this->addSelection("name=Screening/Technique[]", "label=array for Comparative Genomic Hybridisation");
         $this->addSelection("name=Screening/Technique[]", "label=array for resequencing");
         $this->addSelection("name=Screening/Technique[]", "label=array for SNP typing");
-        //$this->addSelection("name=genes[]", "label=GJB1 (gap junction protein, beta 1, 32kDa)");
         $this->addSelection("name=genes[]", "value=GJB1");
         $this->check("name=variants_found");
         $this->click("css=input[type=\"submit\"]");

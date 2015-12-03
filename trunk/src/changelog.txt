@@ -15,6 +15,15 @@
    links in the log entries.
  * After creating a user account for somebody else, you will now always be for-
    warded to the account page of that new user.
+ * Mitochondrial genes are now supported.
+ * Fixed bug; When a new transcript was created, variants from other chromosomes
+   were selected to be remapped as well.
+ * Removed the X-MSMail-Priority header from emails sent by LOVD, to lower the
+   spam score.
+ * The view 'Individuals screened for gene X' has been replaced by the view
+   'Individuals with variants in gene X'.
+ * Fixed bug; Update import did not recognize changes in the disease section of 
+   the import file.
 
 
 /**************************

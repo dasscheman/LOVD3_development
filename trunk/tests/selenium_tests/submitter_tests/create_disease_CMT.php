@@ -24,7 +24,6 @@ class Example extends PHPUnit_Extensions_SeleniumTestCase
     $this->type("name=symbol", "CMT");
     $this->type("name=name", "Charcot Marie Tooth Disease");
     $this->type("name=id_omim", "302800");
-    //$this->addSelection("name=genes[]", "label=GJB1 (gap junction protein, beta 1, 32kDa)");
     $this->addSelection("name=genes[]", "value=GJB1");
     $this->click("css=input[type=\"submit\"]");
     $this->waitForPageToLoad("30000");

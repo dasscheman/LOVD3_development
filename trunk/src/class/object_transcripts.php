@@ -4,12 +4,13 @@
  * LEIDEN OPEN VARIATION DATABASE (LOVD)
  *
  * Created     : 2010-12-20
- * Modified    : 2013-09-11
- * For LOVD    : 3.0-08
+ * Modified    : 2015-11-27
+ * For LOVD    : 3.0-15
  *
  * Copyright   : 2004-2013 Leiden University Medical Center; http://www.LUMC.nl/
  * Programmers : Ing. Ivar C. Lugtenburg <I.C.Lugtenburg@LUMC.nl>
  *               Ing. Ivo F.A.C. Fokkema <I.F.A.C.Fokkema@LUMC.nl>
+ *               Msc. Daan Asscheman <D.Asscheman@LUMC.nl>
  *
  *
  * This file is part of LOVD.
@@ -190,13 +191,11 @@ class LOVD_Transcript extends LOVD_Object {
         // Makes sure it's an array and htmlspecialchars() all the values.
         $zData = parent::prepareData($zData, $sView);
 
-        if ($sView == 'list') {
-            $zData['id_'] = '<A href="' . str_replace('{{ID}}', $zData['id'], $this->sRowLink) . '" class="hide">' . $zData['id'] . '</A>';
-        } else {
+        if ($sView != 'list') {
             $zData['gene_name_'] = '<A href="genes/' . rawurlencode($zData['geneid']) . '">' . $zData['geneid'] . '</A> (' . $zData['gene_name'] . ')';
 
-            $sNCBILink = $zData['id_ncbi'] ;
-            // For mitochondrial genes we have to change the ncbi url.
+            $sNCBILink = $zData['id_ncbi'];
+            // For mitochondrial genes we have to change the NCBI URL.
             if (isset($_SETT['mito_genes_aliases'][$zData['geneid']])) {
                 $sNCBILink = str_replace('(' . $_SETT['mito_genes_aliases'][$zData['geneid']] . '_v001)', '', $zData['id_ncbi']);
             }
@@ -228,34 +227,40 @@ class LOVD_Transcript extends LOVD_Object {
 
     /**
      * This method returns transcripts and info from mutalyzer.
-     * @param string $sRefseqUD Search for variant which are on this cromosome.
-     * @param string $sSymbol Array with start and end positions of the transcripts.
-     * @return $aTranscriptInfo
+     * Note that transcripts that are already in the LOVD database are skipped.
+     * @param string $sRefseqUD Genomic reference.
+     * @param string $sSymbol HGNC gene symbol.
+     * @param string $sGeneName HGNC gene name.
+     * @param float $nProgress Variable is passed by reference and used to keep up the progress of the progress bar.
+     * If the progress bar is initialized before this method is called, you can keep track of the progress with this variable.
+     * The progress bar will start at zero when this variable is not set.
+     * @return array $aTranscriptInfo Transcript information from mutalyzer.
      **/
-    public function getTranscriptPositions($sRefseqUD, $sSymbol, $sGeneName, &$nProgress = 0.0)
+    public function getTranscriptPositions ($sRefseqUD, $sSymbol, $sGeneName, &$nProgress = 0.0)
     {
         global $_BAR, $_SETT, $_DB;
 
         $_Mutalyzer = new LOVD_SoapClient();
-        $aTranscripts['id'] = array();
-        $aTranscripts['name'] = array();
-        $aTranscripts['mutalyzer'] = array();
-        $aTranscripts['positions'] = array();
-        $aTranscripts['protein'] = array();
-        $aTranscripts['added'] = array();
+        $aTranscripts = array(
+            'id' => array(),
+            'name' => array(),
+            'mutalyzer' => array(),
+            'positions' => array(),
+            'protein' => array(),
+            'added' => array(),
+        );
 
-        $sGeneSymbol = $sSymbol;
-
+        $sAliasSymbol = $sSymbol;
         $aTranscripts['added'] = $_DB->query('SELECT id_ncbi FROM ' . TABLE_TRANSCRIPTS . ' WHERE geneid = ? ORDER BY id_ncbi', array($sSymbol))->fetchAllColumn();
-        if (in_array($sSymbol, array_keys($_SETT['mito_genes_aliases']))) {
-            // For mitochandrial genes an alias must be used to get the transcripts and info.
-            // List of aliasses are hard-coded in inc-init.php
-            $sGeneSymbol = $_SETT['mito_genes_aliases'][$sSymbol];
+        if (isset($_SETT['mito_genes_aliases'][$sSymbol])) {
+            // For mitochondrial genes, an alias must be used to get the transcripts and info.
+            // List of aliases are hard-coded in inc-init.php.
+            $sAliasSymbol = $_SETT['mito_genes_aliases'][$sSymbol];
         }
 
         try {
             // Can throw notice when TranscriptInfo is not present (when a gene recently has been renamed, for instance).
-            $aTranscripts['info'] = @$_Mutalyzer->getTranscriptsAndInfo(array('genomicReference' => $sRefseqUD, 'geneName' => $sGeneSymbol))->getTranscriptsAndInfoResult->TranscriptInfo;
+            $aTranscripts['info'] = @$_Mutalyzer->getTranscriptsAndInfo(array('genomicReference' => $sRefseqUD, 'geneName' => $sAliasSymbol))->getTranscriptsAndInfoResult->TranscriptInfo;
         } catch (SoapFault $e) {
             lovd_soapError($e);
         }
@@ -265,27 +270,29 @@ class LOVD_Transcript extends LOVD_Object {
             return $aTranscripts;
         }
 
-
         $nTranscripts = count($aTranscripts['info']);
         foreach($aTranscripts['info'] as $oTranscript) {
             $nProgress += ((100 - $nProgress)/$nTranscripts);
             $_BAR->setMessage('Collecting ' . $oTranscript->id . ' info...');
-            if (in_array($sSymbol, array_keys($_SETT['mito_genes_aliases']))) {
-                //For Mitochondrial genes, we won't be able to get any proper transcript information. Fake one.
-                $sRefseqNM = $sRefseqUD . '(' . $_SETT['mito_genes_aliases'][$sSymbol] . '_v001)';
+
+            if (isset($_SETT['mito_genes_aliases'][$sSymbol])) {
+                // For mitochondrial genes, we won't be able to get any proper transcript information. Fake one.
+                // FIXME: This code only works, if there is just one transcript. Can we assume there is only one?
+                //   Perhaps it's better to use the same array construction as for normal genes, which is shorter, faster, and more flexible.
+                $sRefseqNM = $sRefseqUD . '(' . $sAliasSymbol . '_v001)';
                 if (in_array($sRefseqNM, $aTranscripts['added'])) {
-                    // transcript allready exist; continue to the next transcript
+                    // Transcript already exists; continue to the next transcript.
                     continue;
                 }
                 $aTranscripts['id'] = array($sRefseqNM);
                 $aTranscripts['protein'] = array($sRefseqNM => '');
-                // Untill revison 678 the transcript version was not used in the index.
-                // Can not figure out why version is not included. Therefor for now we will do without.
+                // Until revision 679 the transcript version was not used in the index. The version number was removed with preg_replace.
+                // Can not figure out why version is not included. Therefore, for now we will do without preg_replace.
                 $aTranscripts['mutalyzer'] = array($sRefseqNM => '001');
                 $aTranscripts['name'] = array($sRefseqNM => 'transcript variant 1'); // FIXME: Perhaps indicate this transcript is a fake one, reconstructed from the CDS?
                 $aTranscripts['positions'] = array($sRefseqNM =>
                     array(
-                        // For mitochondrial genes we used the NC to get the transcriptInfo therefor we can use the gTransStart and gTransEnd.
+                        // For mitochondrial genes we used the NC to call getTranscriptAndInfo, therefore we can use the gTransStart and gTransEnd.
                         'chromTransStart' => (isset($oTranscript->gTransStart)? $oTranscript->gTransStart : 0),
                         'chromTransEnd' => (isset($oTranscript->gTransEnd)? $oTranscript->gTransEnd : 0),
                         'cTransStart' => (isset($oTranscript->cTransStart)? $oTranscript->cTransStart : 0),
@@ -295,12 +302,12 @@ class LOVD_Transcript extends LOVD_Object {
                 );
             } else {
                 if (in_array($oTranscript->id, $aTranscripts['added'])) {
-                    // transcript allready exist; continue to the next transcript
+                    // Transcript already exists; continue to the next transcript.
                     continue;
                 }
                 $aTranscripts['id'][] = $oTranscript->id;
-                // Untill revison 678 the transcript version was not used in the index.
-                // Can not figure out why version is not included. Therefor for now we will do without.
+                // Until revision 679 the transcript version was not used in the index. The version number was removed with preg_replace.
+                // Can not figure out why version is not included. Therefore, for now we will do without preg_replace.
                 $aTranscripts['name'][$oTranscript->id] = str_replace($sGeneName . ', ', '', $oTranscript->product);
                 $aTranscripts['mutalyzer'][$oTranscript->id] = str_replace($sSymbol . '_v', '', $oTranscript->name);
                 $aTranscripts['positions'][$oTranscript->id] =
@@ -325,20 +332,19 @@ class LOVD_Transcript extends LOVD_Object {
     /**
      * This method turns off the MAPPING_DONE flag for a variant within the range of a transcript.
      * Automatic mapping will pick them up again.
-     * @param string $sChromosome Search for variant which are on this cromosome.
-     * @param array $aTranscriptPositions Array with start and end positions of the transcripts.
-     * @return
+     * @param string $sChromosome Search for variants which are on this chromosome.
+     * @param array $aTranscriptPositions Array with start and end positions of the transcript.
      **/
-    public function turnOffMappingDone($sChromosome, $aTranscriptPositions)
+    public function turnOffMappingDone ($sChromosome, $aTranscriptPositions)
     {
         global $_DB;
 
         $q = $_DB->query('UPDATE ' . TABLE_VARIANTS . '
                          SET mapping_flags = mapping_flags & ~' . MAPPING_DONE . '
-                         WHERE chromosome = ?
-                         AND (position_g_start BETWEEN ? AND ?)
-                         OR (position_g_end   BETWEEN ? AND ?)
-                         OR (position_g_start < ? AND position_g_end > ?)',
+                         WHERE chromosome = ? AND (
+                           (position_g_start BETWEEN ? AND ?) OR
+                           (position_g_end BETWEEN ? AND ?) OR
+                           (position_g_start < ? AND position_g_end > ?))',
                          array($sChromosome,
                                $aTranscriptPositions['chromTransStart'],
                                $aTranscriptPositions['chromTransEnd'],

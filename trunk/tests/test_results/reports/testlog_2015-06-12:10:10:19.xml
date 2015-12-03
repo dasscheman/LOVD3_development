@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<testsuites>
-  <testsuite name="import_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/importTest.php" tests="1" assertions="1" failures="0" errors="0" time="9.316477">
-    <testcase name="testUninstallLOVD" class="import_tests" file="/home/dasscheman/svn/LOVD3_development/trunk/tests/phpunit_selenium/importTest.php" line="202" assertions="1" time="9.316477"/>
-  </testsuite>
-</testsuites>

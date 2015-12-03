@@ -4,8 +4,8 @@
  * LEIDEN OPEN VARIATION DATABASE (LOVD)
  *
  * Created     : 2010-12-15
- * Modified    : 2015-10-09
- * For LOVD    : 3.0-14
+ * Modified    : 2015-11-20
+ * For LOVD    : 3.0-15
  *
  * Copyright   : 2004-2015 Leiden University Medical Center; http://www.LUMC.nl/
  * Programmers : Ing. Ivar C. Lugtenburg <I.C.Lugtenburg@LUMC.nl>
@@ -313,8 +313,8 @@ class LOVD_Gene extends LOVD_Object {
         $aTranscriptsForm = array();
         if (!empty($zData['transcripts'])) {
             foreach ($zData['transcripts'] as $sTranscript) {
-                // Untill revison 678 the transcript version was not used in the index.
-                // Can not figure out why version is not included. Therefor for now we will do without.
+                // Until revision 679 the transcript version was not used in the index and removed with preg_replace.
+                // Can not figure out why version is not included. Therefore, for now we will do without preg_replace.
                 if (!isset($aTranscriptNames[$sTranscript])) {
                     $aTranscriptsForm[$sTranscript] = lovd_shortenString($zData['transcriptNames'][$sTranscript], 50);
                     $aTranscriptsForm[$sTranscript] .= str_repeat(')', substr_count($aTranscriptsForm[$sTranscript], '(')) . ' (' . $sTranscript . ')';

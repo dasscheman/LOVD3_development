@@ -4,7 +4,7 @@
  * LEIDEN OPEN VARIATION DATABASE (LOVD)
  *
  * Created     : 2014-12-19
- * Modified    : 2015-11-17:10:36:52
+ * Modified    : 2015-12-03:13:12:44
  * For LOVD    : 3.0-12
  *
  * Copyright   : 2014 Leiden University Medical Center; http://www.LUMC.nl/
@@ -45,7 +45,8 @@ class temp_tests extends PHPUnit_Extensions_SeleniumTestCase
     public function testInstallLOVD()
     {
         $this->open("/svn/LOVD3_development/trunk/src/install/");
-        $this->click("css=input[type=\"submit\"]");
+        $this->click("//input[@value='Start >>']");
+        $this->isElementPresent("//input[@value='Start >>']");
         $this->waitForPageToLoad("30000");
         $this->assertTrue((bool)preg_match('/^[\s\S]*\/src\/install\/[\s\S]step=1$/',$this->getLocation()));
         $this->type("name=name", "LOVD3 Admin");
@@ -59,13 +60,13 @@ class temp_tests extends PHPUnit_Extensions_SeleniumTestCase
         $this->type("name=password_2", "test1234");
         $this->select("name=countryid", "label=Netherlands");
         $this->type("name=city", "Leiden");
-        $this->click("css=input[type=\"submit\"]");
+        $this->click("//input[@value='Continue »']");
         $this->waitForPageToLoad("30000");
         $this->assertTrue((bool)preg_match('/^[\s\S]*\/src\/install\/[\s\S]step=1&sent=true$/',$this->getLocation()));
-        $this->click("css=input[type=\"submit\"]");
+        $this->click("//input[@value='Next >>']");
         $this->waitForPageToLoad("30000");
         $this->assertTrue((bool)preg_match('/^[\s\S]*\/src\/install\/[\s\S]step=2$/',$this->getLocation()));
-        $this->click("css=input[type=\"submit\"]");
+        $this->click("//input[@value='Next >>']");
         $this->waitForPageToLoad("30000");
         $this->assertTrue((bool)preg_match('/^[\s\S]*\/src\/install\/[\s\S]step=3$/',$this->getLocation()));
         $this->type("name=institute", "Leiden University Medical Center");
@@ -73,11 +74,11 @@ class temp_tests extends PHPUnit_Extensions_SeleniumTestCase
         $this->select("name=refseq_build", "label=hg19 / GRCh37");
         $this->click("name=send_stats");
         $this->click("name=include_in_listing");
-        $this->click("name=lock_uninstall");
-        $this->click("css=input[type=\"submit\"]");
+        $this->uncheck("name=lock_uninstall");
+        $this->click("//input[@value='Continue »']");
         $this->waitForPageToLoad("30000");
         $this->assertTrue((bool)preg_match('/^[\s\S]*\/src\/install\/[\s\S]step=3&sent=true$/',$this->getLocation()));
-        $this->click("css=input[type=\"submit\"]");
+        $this->click("//input[@value='Next >>']");
         $this->waitForPageToLoad("30000");
         $this->assertTrue((bool)preg_match('/^[\s\S]*\/src\/install\/[\s\S]step=4$/',$this->getLocation()));
         $this->click("css=button");
@@ -90,7 +91,7 @@ class temp_tests extends PHPUnit_Extensions_SeleniumTestCase
         $this->open("/svn/LOVD3_development/trunk/src/login");
         $this->type("name=username", "admin");
         $this->type("name=password", "test1234");
-        $this->click("css=input[type=\"submit\"]");
+        $this->click("//input[@value='Continue »']");
         $this->waitForPageToLoad("30000");
         $this->open("/svn/LOVD3_development/trunk/src/genes?create");
         $this->type("name=hgnc_id", "IVD");

@@ -4,7 +4,7 @@
  * LEIDEN OPEN VARIATION DATABASE (LOVD)
  *
  * Created     : 2014-12-19
- * Modified    : 2015-11-17:10:36:52
+ * Modified    : 2015-12-03:13:12:44
  * For LOVD    : 3.0-12
  *
  * Copyright   : 2014 Leiden University Medical Center; http://www.LUMC.nl/
@@ -45,7 +45,8 @@ class import_tests extends PHPUnit_Extensions_SeleniumTestCase
     public function testInstallLOVD()
     {
         $this->open("/svn/LOVD3_development/trunk/src/install/");
-        $this->click("css=input[type=\"submit\"]");
+        $this->click("//input[@value='Start >>']");
+        $this->isElementPresent("//input[@value='Start >>']");
         $this->waitForPageToLoad("30000");
         $this->assertTrue((bool)preg_match('/^[\s\S]*\/src\/install\/[\s\S]step=1$/',$this->getLocation()));
         $this->type("name=name", "LOVD3 Admin");
@@ -59,13 +60,13 @@ class import_tests extends PHPUnit_Extensions_SeleniumTestCase
         $this->type("name=password_2", "test1234");
         $this->select("name=countryid", "label=Netherlands");
         $this->type("name=city", "Leiden");
-        $this->click("css=input[type=\"submit\"]");
+        $this->click("//input[@value='Continue »']");
         $this->waitForPageToLoad("30000");
         $this->assertTrue((bool)preg_match('/^[\s\S]*\/src\/install\/[\s\S]step=1&sent=true$/',$this->getLocation()));
-        $this->click("css=input[type=\"submit\"]");
+        $this->click("//input[@value='Next >>']");
         $this->waitForPageToLoad("30000");
         $this->assertTrue((bool)preg_match('/^[\s\S]*\/src\/install\/[\s\S]step=2$/',$this->getLocation()));
-        $this->click("css=input[type=\"submit\"]");
+        $this->click("//input[@value='Next >>']");
         $this->waitForPageToLoad("30000");
         $this->assertTrue((bool)preg_match('/^[\s\S]*\/src\/install\/[\s\S]step=3$/',$this->getLocation()));
         $this->type("name=institute", "Leiden University Medical Center");
@@ -73,11 +74,11 @@ class import_tests extends PHPUnit_Extensions_SeleniumTestCase
         $this->select("name=refseq_build", "label=hg19 / GRCh37");
         $this->click("name=send_stats");
         $this->click("name=include_in_listing");
-        $this->click("name=lock_uninstall");
-        $this->click("css=input[type=\"submit\"]");
+        $this->uncheck("name=lock_uninstall");
+        $this->click("//input[@value='Continue »']");
         $this->waitForPageToLoad("30000");
         $this->assertTrue((bool)preg_match('/^[\s\S]*\/src\/install\/[\s\S]step=3&sent=true$/',$this->getLocation()));
-        $this->click("css=input[type=\"submit\"]");
+        $this->click("//input[@value='Next >>']");
         $this->waitForPageToLoad("30000");
         $this->assertTrue((bool)preg_match('/^[\s\S]*\/src\/install\/[\s\S]step=4$/',$this->getLocation()));
         $this->click("css=button");
@@ -94,7 +95,7 @@ class import_tests extends PHPUnit_Extensions_SeleniumTestCase
         $this->waitForPageToLoad("30000");
         $this->open("/svn/LOVD3_development/trunk/src/genes?create");
         $this->type("name=hgnc_id", "IVD");
-        $this->click("css=input[type=\"submit\"]");
+        $this->click("//input[@value='Continue »']");
         $this->waitForPageToLoad("30000");
         $this->addSelection("name=active_transcripts[]", "label=transcript variant 1 (NM_002225.3)");
         $this->click("name=show_hgmd");
@@ -231,11 +232,10 @@ class import_tests extends PHPUnit_Extensions_SeleniumTestCase
         $this->assertTrue((bool)preg_match('/^[\s\S]*Error \(Transcripts, line 20\): Transcript "00001" does not match the same gene and\/or the same NCBI ID as in the database\.[\s\S]*$/',$this->getBodyText()));
         $this->assertTrue((bool)preg_match('/^[\s\S]*Error \(Transcripts, line 21\): ID "00001" already defined at line 20\.[\s\S]*$/',$this->getBodyText()));
         $this->assertTrue((bool)preg_match('/^[\s\S]*Error \(Diseases, line 27\): Will not update disease 00000, too many fields are different from the database \(symbol, name, id_omim\)\. There is a maximum of 1 difference to prevent accidental updates\.[\s\S]*$/',$this->getBodyText()));
-        $this->assertTrue((bool)preg_match('/^[\s\S]*Error \(Diseases, line 27\): Another disease already exists with this OMIM ID at line 26\.[\s\S]*$/',$this->getBodyText()));
-        $this->assertTrue((bool)preg_match('/^[\s\S]*Error \(Diseases, line 27\): Another disease already exists with the same name at line 26\.[\s\S]*$/',$this->getBodyText()));
+        $this->assertTrue((bool)preg_match('/^[\s\S]*Error \(Diseases, line 27\): Another disease already exists with this OMIM ID[\s\S]*$/',$this->getBodyText()));
+        $this->assertTrue((bool)preg_match('/^[\s\S]*Error \(Diseases, line 27\): Another disease already exists with the same name![\s\S]*$/',$this->getBodyText()));
         $this->assertTrue((bool)preg_match('/^[\s\S]*Error \(Diseases, line 28\): Will not update disease 00002, too many fields are different from the database \(symbol, name, id_omim\)\. There is a maximum of 1 difference to prevent accidental updates\.[\s\S]*$/',$this->getBodyText()));
         $this->assertTrue((bool)preg_match('/^[\s\S]*Error \(Diseases, line 28\): Another disease already exists with the same name![\s\S]*$/',$this->getBodyText()));
-        $this->assertTrue((bool)preg_match('/^[\s\S]*Error \(Diseases, line 28\): Import file contains OMIM ID for disease Majeed syndrome, while OMIM ID is missing in database\.[\s\S]*$/',$this->getBodyText()));
         $this->assertTrue((bool)preg_match('/^[\s\S]*Error \(Genes_To_Diseases, line 34\): This line refers to a non-existing entry\. When the import mode is set to update, no new inserts can be done\.[\s\S]*$/',$this->getBodyText()));
         $this->assertTrue((bool)preg_match('/^[\s\S]*Error \(Individuals, line 39\): Individual "00000022" does not exist in the database and is not defined \(properly\) in this import file\.[\s\S]*$/',$this->getBodyText()));
         $this->assertTrue((bool)preg_match('/^[\s\S]*Error \(Individuals, line 40\): Will not update individual 00000002, too many fields are different from the database \(panelid, panel_size\)\. There is a maximum of 1 difference to prevent accidental updates\.[\s\S]*$/',$this->getBodyText()));
