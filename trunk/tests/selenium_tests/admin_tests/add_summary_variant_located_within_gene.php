@@ -64,7 +64,7 @@ class Example extends PHPUnit_Extensions_SeleniumTestCase
         $this->select("name=effect_concluded", "label=Affects function");
         $this->select("name=owned_by", "label=LOVD3 Admin");
         $this->select("name=statusid", "label=Public");
-        $this->click("css=input[type=\"submit\"]");
+		$this->click("//input[@value='Create variant entry']");
         for ($second = 0; ; $second++) {
             if ($second >= 60) $this->fail("timeout");
             if ($this->isElementPresent("css=table[class=info]")) {

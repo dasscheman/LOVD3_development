@@ -4,7 +4,7 @@
  * LEIDEN OPEN VARIATION DATABASE (LOVD)
  *
  * Created     : 2014-12-19
- * Modified    : 2015-12-03:13:12:44
+ * Modified    : 2015-12-04:09:47:21
  * For LOVD    : 3.0-12
  *
  * Copyright   : 2014 Leiden University Medical Center; http://www.LUMC.nl/
@@ -31,20 +31,20 @@
 class import_tests extends PHPUnit_Extensions_SeleniumTestCase
 {
     protected $captureScreenshotOnFailure = TRUE;
-    protected $screenshotPath = '/home/dasscheman/svn/LOVD3_development/trunk/tests/test_results/error_screenshots';
-    protected $screenshotUrl = 'http://localhost/svn/LOVD3_development/trunk/tests/test_results/error_screenshots';
+    protected $screenshotPath = '/home/daan/Website/LOVD3_development/trunk/tests/test_results/error_screenshots';
+    protected $screenshotUrl = 'http://localhost/home/daan/Website/LOVD3_development/trunk/tests/test_results/error_screenshots';
   
     protected function setUp()
     {
         $this->setHost('localhost');
         $this->setPort(4444);
         $this->setBrowser("firefox");
-        $this->setBrowserUrl("http://localhost/svn/LOVD3_development/trunk");
+        $this->setBrowserUrl("http://localhost/home/daan/Website/LOVD3_development/trunk");
         $this->shareSession(true);
     }
     public function testInstallLOVD()
     {
-        $this->open("/svn/LOVD3_development/trunk/src/install/");
+        $this->open("/home/daan/Website/LOVD3_development/trunk/src/install/");
         $this->click("//input[@value='Start >>']");
         $this->isElementPresent("//input[@value='Start >>']");
         $this->waitForPageToLoad("30000");
@@ -87,13 +87,13 @@ class import_tests extends PHPUnit_Extensions_SeleniumTestCase
     }
     public function testCreateGeneIVD()
     {
-        $this->open("/svn/LOVD3_development/trunk/src/logout");
-        $this->open("/svn/LOVD3_development/trunk/src/login");
+        $this->open("/home/daan/Website/LOVD3_development/trunk/src/logout");
+        $this->open("/home/daan/Website/LOVD3_development/trunk/src/login");
         $this->type("name=username", "admin");
         $this->type("name=password", "test1234");
         $this->click("css=input[type=\"submit\"]");
         $this->waitForPageToLoad("30000");
-        $this->open("/svn/LOVD3_development/trunk/src/genes?create");
+        $this->open("/home/daan/Website/LOVD3_development/trunk/src/genes?create");
         $this->type("name=hgnc_id", "IVD");
         $this->click("//input[@value='Continue »']");
         $this->waitForPageToLoad("30000");
@@ -107,7 +107,7 @@ class import_tests extends PHPUnit_Extensions_SeleniumTestCase
     }
     public function testCreateGenderColumn()
     {
-        $this->open("/svn/LOVD3_development/trunk/src/columns/Individual/Gender");
+        $this->open("/home/daan/Website/LOVD3_development/trunk/src/columns/Individual/Gender");
         $this->click("id=viewentryOptionsButton_Columns");
         $this->click("link=Enable column");
         $this->waitForPageToLoad("30000");
@@ -117,7 +117,7 @@ class import_tests extends PHPUnit_Extensions_SeleniumTestCase
     }
     public function testCreateDiseaseIVA()
     {
-        $this->open("/svn/LOVD3_development/trunk/src/diseases?create");
+        $this->open("/home/daan/Website/LOVD3_development/trunk/src/diseases?create");
         $this->type("name=symbol", "IVA");
         $this->type("name=name", "isovaleric acidemia");
         $this->type("name=id_omim", "243500");
@@ -125,7 +125,7 @@ class import_tests extends PHPUnit_Extensions_SeleniumTestCase
         $this->click("css=input[type=\"submit\"]");
         $this->waitForPageToLoad("30000");
         $this->assertEquals("Successfully created the disease information entry!", $this->getText("css=table[class=info]"));
-        $this->open("/svn/LOVD3_development/trunk/src/diseases?create");
+        $this->open("/home/daan/Website/LOVD3_development/trunk/src/diseases?create");
         $this->type("name=symbol", "IVA2");
         $this->type("name=name", "isovaleric acidemia TWEE");
         $this->type("name=id_omim", "243522");
@@ -136,8 +136,8 @@ class import_tests extends PHPUnit_Extensions_SeleniumTestCase
     }
     public function testInsertImport()
     {
-        $this->open("/svn/LOVD3_development/trunk/src/import");
-        $this->type("name=import", "/home/dasscheman/svn/LOVD3_development/trunk/tests/test_data_files/InsertImport.txt");
+        $this->open("/home/daan/Website/LOVD3_development/trunk/src/import");
+        $this->type("name=import", "/home/daan/Website/LOVD3_development/trunk/tests/test_data_files/InsertImport.txt");
         $this->select("name=mode", "label=Add only, treat all data as new");
         $this->click("css=input[type=\"submit\"]");
         $this->waitForPageToLoad("30000");
@@ -145,8 +145,8 @@ class import_tests extends PHPUnit_Extensions_SeleniumTestCase
     }
     public function testFalseInsertImport()
     {
-        $this->open("/svn/LOVD3_development/trunk/src/import");
-        $this->type("name=import", "/home/dasscheman/svn/LOVD3_development/trunk/tests/test_data_files/FalseInsertImport.txt");
+        $this->open("/home/daan/Website/LOVD3_development/trunk/src/import");
+        $this->type("name=import", "/home/daan/Website/LOVD3_development/trunk/tests/test_data_files/FalseInsertImport.txt");
         $this->select("name=mode", "label=Add only, treat all data as new");
         $this->click("name=simulate");
         $this->click("css=input[type=\"submit\"]");
@@ -210,8 +210,8 @@ class import_tests extends PHPUnit_Extensions_SeleniumTestCase
     }
     public function testFalseUpdateImport()
     {
-        $this->open("/svn/LOVD3_development/trunk/src/import");
-        $this->type("name=import", "/home/dasscheman/svn/LOVD3_development/trunk/tests/test_data_files/FalseUpdateImport.txt");
+        $this->open("/home/daan/Website/LOVD3_development/trunk/src/import");
+        $this->type("name=import", "/home/daan/Website/LOVD3_development/trunk/tests/test_data_files/FalseUpdateImport.txt");
         $this->select("name=mode", "label=Update existing data (in beta)");
         $this->click("name=simulate");
         $this->click("css=input[type=\"submit\"]");
@@ -301,8 +301,8 @@ class import_tests extends PHPUnit_Extensions_SeleniumTestCase
     }
     public function testSecondInsertImport()
     {
-        $this->open("/svn/LOVD3_development/trunk/src/import");
-        $this->type("name=import", "/home/dasscheman/svn/LOVD3_development/trunk/tests/test_data_files/SecondInsertImport.txt");
+        $this->open("/home/daan/Website/LOVD3_development/trunk/src/import");
+        $this->type("name=import", "/home/daan/Website/LOVD3_development/trunk/tests/test_data_files/SecondInsertImport.txt");
         $this->select("name=mode", "label=Add only, treat all data as new");
         $this->click("css=input[type=\"submit\"]");
         $this->waitForPageToLoad("30000");
@@ -310,8 +310,8 @@ class import_tests extends PHPUnit_Extensions_SeleniumTestCase
     }
     public function testUpdateImport()
     {
-        $this->open("/svn/LOVD3_development/trunk/src/import");
-        $this->type("name=import", "/home/dasscheman/svn/LOVD3_development/trunk/tests/test_data_files/UpdateImport.txt");
+        $this->open("/home/daan/Website/LOVD3_development/trunk/src/import");
+        $this->type("name=import", "/home/daan/Website/LOVD3_development/trunk/tests/test_data_files/UpdateImport.txt");
         $this->select("name=mode", "label=Update existing data (in beta)");
         $this->click("css=input[type=\"submit\"]");
         $this->waitForPageToLoad("30000");
@@ -319,13 +319,13 @@ class import_tests extends PHPUnit_Extensions_SeleniumTestCase
     }
     public function testUninstallLOVD()
     {
-        $this->open("/svn/LOVD3_development/trunk/src/logout");
-        $this->open("/svn/LOVD3_development/trunk/src/login");
+        $this->open("/home/daan/Website/LOVD3_development/trunk/src/logout");
+        $this->open("/home/daan/Website/LOVD3_development/trunk/src/login");
         $this->type("name=username", "admin");
         $this->type("name=password", "test1234");
         $this->click("css=input[type=\"submit\"]");
         $this->waitForPageToLoad("30000");
-        $this->open("/svn/LOVD3_development/trunk/src/uninstall");
+        $this->open("/home/daan/Website/LOVD3_development/trunk/src/uninstall");
         $this->type("name=password", "test1234");
         $this->click("css=input[type=\"submit\"]");
         $this->waitForPageToLoad("30000");

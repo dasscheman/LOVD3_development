@@ -41,7 +41,7 @@ class Example extends PHPUnit_Extensions_SeleniumTestCase
     $this->type("name=VariantOnGenome/Reference", "{PMID:[2011]:[2150333]}");
     $this->type("name=VariantOnGenome/Frequency", "0.003");
     $this->select("name=effect_reported", "label=Effect unknown");
-    $this->click("css=input[type=\"submit\"]");
+    $this->click("//input[@value='Create variant entry']");
     $this->waitForPageToLoad("30000");
     $this->assertEquals("Successfully created the variant entry!", $this->getText("css=table[class=info]"));
     $this->waitForPageToLoad("4000");

@@ -517,108 +517,64 @@ function lovd_mapVariants ()
 ?>
 
   <SCRIPT type="text/javascript">
-//    var availableGenes="";
-//    var maxDropDown = 10;
-//        
+    var availableGenes="";
+    var maxDropDown = 10;
+        
     $(function() {          
         $("#gene_name").show(); 
         $("#gene_switch").show(); 
         $("select_gene_switch").hide();
     });
-//
-//    function lovd_getAutocompleteList() {
-//        $( "#select_gene_autocomplete" ).autocomplete({
-//            source: availableGenes,
-//            minLength: 3
-//        });
-//    };
-//
-//    function lovd_getDropdownList(){          
-//        var items="";
-//        $.each(availableGenes,function(index,item) 
-//        {
-//            items+="<option value='"+item.id+"'>"+item.label+"</option>";
-//        });
-//        $("#select_gene_dropdown").html(items); 
-//    };
-//
-//
-//    function lovd_switchGene(){ 
-//        $.get('ajax/get_genes.php',function(sData, sStatus){
-//            availableGenes = sData;
-//            if (availableGenes === '<?php //echo AJAX_DATA_ERROR; ?>') {
-//                alert('Error when retrieving a list of genes'); 
-//                return;
-//            }
-//            $("#gene_name").hide(); 
-//            $("#gene_switch").hide(); 
-//            if (availableGenes.length < maxDropDown) {
-//                lovd_getDropdownList();
-//                $("#div_gene_dropdown").show();            
-//            } else {
-//                lovd_getAutocompleteList();  
-//                $("#div_gene_autocomplete").show();       
-//            }
-//            $("select_gene_switch").show();
-//        }, 'json'     
-//        ).fail(function (sData, sStatus) {
-//            alert('Error when retrieving a list of genes: ' + sStatus);                
-//        });
-//    }
+
+    function lovd_getAutocompleteList() {
+        $( "#select_gene_autocomplete" ).autocomplete({
+            source: availableGenes,
+            minLength: 3
+        });
+    };
+
+    function lovd_getDropdownList(){          
+        var items="";
+        $.each(availableGenes,function(index,item) 
+        {
+            items+="<option value='"+item.id+"'>"+item.label+"</option>";
+        });
+        $("#select_gene_dropdown").html(items); 
+    };
+
 
     function lovd_switchGene(){ 
-        var sGeneSwitchURL = '<?php echo (empty($sGeneSwitchURL)? 'null' : $sGeneSwitchURL) ?>';
-
-        $.get('ajax/get_gene_switcher.php', { sGeneSwitchURL: sGeneSwitchURL}, function(sData, sStatus){
-            if (sData === '<?php echo AJAX_DATA_ERROR; ?>') {
+        $.get('ajax/get_gene_switcher.php',function(sData, sStatus){
+            availableGenes = sData;
+            if (availableGenes === '<?php echo AJAX_DATA_ERROR; ?>') {
                 alert('Error when retrieving a list of genes'); 
                 return;
             }
-            document.getElementById('gene_name_header').innerHTML=sData;
-
-        }
+            $("#gene_name").hide(); 
+            $("#gene_switch").hide(); 
+            if (availableGenes.length < maxDropDown) {
+                lovd_getDropdownList();
+                $("#div_gene_dropdown").show();            
+            } else {
+                lovd_getAutocompleteList();  
+                $("#div_gene_autocomplete").show();       
+            }
+            $("select_gene_switch").show();
+        }, 'json'     
         ).fail(function (sData, sStatus) {
             alert('Error when retrieving a list of genes: ' + sStatus);                
         });
-    };
+    }
     
-//    function lovd_changeURL () {
-//        var sURL = "<?php //if (!empty($_SESSION['currdb'])) {echo $sGeneSwitchURL;} ?>";
-//        if (availableGenes.length < maxDropDown) {         
-//            document.location.href = (sURL.replace('{{GENE}}', document.getElementById('select_gene_dropdown').value));
-//        } else { 
-//            document.location.href = (sURL.replace('{{GENE}}', document.getElementById('select_gene_autocomplete').value));
-//        }
-//    }
-<?php
-//        if (!empty($_SESSION['currdb'])) {
-    
-//        
-//            // A quick way to switch genes, regardless of on which page you are.
-//            // FIXME; Currently we don't support "=GENE" matching (for instance, on the disease tab) because changing that value will not trigger a change in CURRDB... Yet.
-//            //$sGeneSwitchURL = preg_replace('/(\/|=)' . preg_quote($_SESSION['currdb'], '/') . '\b/', "$1{{GENE}}", $_SERVER['REQUEST_URI']);
-//            $sGeneSwitchURL = preg_replace('/(\/)' . preg_quote($_SESSION['currdb'], '/') . '\b/', "$1{{GENE}}", $_SERVER['REQUEST_URI']);
-//            print('    var sURL = "' . $sGeneSwitchURL . '";' . "\n" .
-//                  '    function lovd_switchGeneInline () {' . "\n" .
-//            // FIXME; It is very very difficult to keep the hash, it should be selective since otherwise you might be loading the EXACT SAME VL, BUT ON A DIFFERENT PAGE (viewing variants belonging to gene X, on a page that says you're looking at gene Y).
-////              '      var sForm = \'<FORM action="" id="SelectGeneDBInline" method="get" style="margin : 0px;" onsubmit="document.location.href=(sURL.replace(\\\'{{GENE}}\\\', $(this).children(\\\'select\\\').val()) + (!window.location.hash? \\\'\\\' : window.location.hash)); return false;">' .
-//                  '      var sForm = \'<FORM action="" id="SelectGeneDBInline" method="get" style="margin : 0px;" onsubmit="document.location.href=(sURL.replace(\\\'{{GENE}}\\\', $(this).children(\\\'select\\\').val())); return false;">' .
-//                                      '<SELECT name="select_db" onchange="$(this).parent().submit();">');
-//            $qGenes = $_DB->query('SELECT id, CONCAT(id, " (", name, ")") AS name FROM ' . TABLE_GENES . ' ORDER BY id');
-//            while ($zGene = $qGenes->fetchAssoc()) {
-//                // This will shorten the gene names nicely, to prevent long gene names from messing up the form.
-//                $zGene['name'] = lovd_shortenString($zGene['name'], 75);
-//                print('<OPTION value="' . $zGene['id'] . '"' . ($_SESSION['currdb'] == $zGene['id']? ' selected' : '') . '>' . addslashes($zGene['name']) . '</OPTION>');
-//            }
-//            print('</SELECT>' .
-//                  '<INPUT type="submit" value="Switch"></FORM>\';' . "\n" .
-//                  '      document.getElementById(\'gene_name\').innerHTML=sForm;' . "\n" .
-//                  '    }' . "\n");
-//        }
-//        }
-//        ?>
+    function lovd_changeURL () {
+        var sURL = "<?php if (!empty($_SESSION['currdb'])) {echo $sGeneSwitchURL;} ?>";
+        if (availableGenes.length < maxDropDown) {         
+            document.location.href = (sURL.replace('{{GENE}}', document.getElementById('select_gene_dropdown').value));
+        } else { 
+            document.location.href = (sURL.replace('{{GENE}}', document.getElementById('select_gene_autocomplete').value));
+        }
+    }
 
-    //-->
   </SCRIPT>
   <LINK rel="stylesheet" type="text/css" href="lib/jQuery/css/cupertino/jquery-ui.custom.css">
 </HEAD>
@@ -642,18 +598,16 @@ function lovd_mapVariants ()
               '      <IMG src="' . $_CONF['logo_uri'] . '" alt="LOVD - Leiden Open Variation Database" ' . $sSize . '>' . "\n" .
               '    </TD>' . "\n");
 
-/*        $sCurrSymbol = $sCurrGene = '';
-
         // FIXME; how will we handle this?
         // During submission, show the gene we're submitting to instead of the currently selected gene.
-        if (lovd_getProjectFile() == '/submit.php' && !empty($_POST['gene']) && $_POST['gene'] != $_SESSION['currdb']) {
-            // Fetch gene's info from db... we don't have it anywhere yet.
-            list($sCurrSymbol, $sCurrGene) = $_DB->query('SELECT id, gene FROM ' . TABLE_DBS . ' WHERE id = ?', array($_POST['gene']))->fetchRow();
-        } elseif (!empty($_SESSION['currdb'])) {
-            // Just use currently selected database.
-            $sCurrSymbol = $_SESSION['currdb'];
-            $sCurrGene = $_SETT['currdb']['name'];
-        }*/
+        //if (lovd_getProjectFile() == '/submit.php' && !empty($_POST['gene']) && $_POST['gene'] != $_SESSION['currdb']) {
+        //    // Fetch gene's info from db... we don't have it anywhere yet.
+        //    list($sCurrSymbol, $sCurrGene) = $_DB->query('SELECT id, gene FROM ' . TABLE_DBS . ' WHERE id = ?', array($_POST['gene']))->fetchRow();
+        //} elseif (!empty($_SESSION['currdb'])) {
+        //    // Just use currently selected database.
+        //    $sCurrSymbol = $_SESSION['currdb'];
+        //    $sCurrGene = $_SETT['currdb']['name'];
+        //}
 
         print('    <TD valign="top" style="padding-top : 2px;">' . "\n" .
               '      <H2 style="margin-bottom : 2px;">' . $_CONF['system_title'] . '</H2>');
@@ -669,17 +623,17 @@ function lovd_mapVariants ()
                       '      </H5>' . "\n");
             }
         }
-//        print('      <FORM action="" id="SelectGeneDBInline" method="get" style="margin : 0px;" onsubmit="lovd_changeURL(); return false;">' . "\n" .
-//              '        <!--By default both DIVs div_gene_dropdown and div_gene_autocomplete are hidden. Id is used to make the DIV visible with javascript function lovd_switchGene()-->' . "\n" .
-//              '        <DIV id="div_gene_dropdown" style="display:none">' . "\n" .
-//              '          <SELECT name="select_db" id="select_gene_dropdown" onchange="$(this).parent().submit();"></SELECT>' . "\n" .
-//              '          <INPUT type="submit" value="Switch" id="select_gene_switch">' . "\n" .
-//              '        </DIV>' . "\n" .
-//              '        <DIV id="div_gene_autocomplete" style="display:none">' . "\n" .
-//              '          <INPUT name="select_db" id="select_gene_autocomplete" onchange="$(this).parent().submit();">' . "\n" .
-//              '          <INPUT type="submit" value="Switch" id="select_gene_switch">' . "\n" .
-//              '        </DIV>' . "\n" .
-//              '      </FORM>');
+        print('      <FORM action="" id="SelectGeneDBInline" method="get" style="margin : 0px;" onsubmit="lovd_changeURL(); return false;">' . "\n" .
+              '        <!--By default both DIVs div_gene_dropdown and div_gene_autocomplete are hidden. Id is used to make the DIV visible with javascript function lovd_switchGene()-->' . "\n" .
+              '        <DIV id="div_gene_dropdown" style="display:none">' . "\n" .
+              '          <SELECT name="select_db" id="select_gene_dropdown" onchange="$(this).parent().submit();"></SELECT>' . "\n" .
+              '          <INPUT type="submit" value="Switch" id="select_gene_switch">' . "\n" .
+              '        </DIV>' . "\n" .
+              '        <DIV id="div_gene_autocomplete" style="display:none">' . "\n" .
+              '          <INPUT name="select_db" id="select_gene_autocomplete" onchange="$(this).parent().submit();">' . "\n" .
+              '          <INPUT type="submit" value="Switch" id="select_gene_switch">' . "\n" .
+              '        </DIV>' . "\n" .
+              '      </FORM>');
         
         print('    <H5 id="gene_name_header">' . "\n" .
               '    </H5>' . "\n" .
