@@ -25,7 +25,7 @@ class Example extends PHPUnit_Extensions_SeleniumTestCase
     $this->select("name=autocreate", "label=Create genes and transcripts");
     $this->select("name=owned_by", "label=LOVD3 Admin");
     $this->select("name=statusid", "label=Public");
-    $this->click("css=input[type=\"submit\"]");
+    $this->click("//input[@value='Upload SeattleSeq file']");
     for ($second = 0; ; $second++) {
         if ($second >= 300) $this->fail("timeout");
         try {
