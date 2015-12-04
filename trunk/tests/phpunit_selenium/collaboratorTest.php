@@ -4,7 +4,7 @@
  * LEIDEN OPEN VARIATION DATABASE (LOVD)
  *
  * Created     : 2014-12-19
- * Modified    : 2015-12-04:09:47:21
+ * Modified    : 2015-12-04:16:22:57
  * For LOVD    : 3.0-12
  *
  * Copyright   : 2014 Leiden University Medical Center; http://www.LUMC.nl/
@@ -44,9 +44,11 @@ class collaborator_tests extends PHPUnit_Extensions_SeleniumTestCase
     }
     public function testInstallLOVD()
     {
-        $this->open("/home/daan/Website/LOVD3_development/trunk/src/install/");
+	$this->open("/home/daan/Website/LOVD3_development/trunk/src/install/");
+	$this->assertContains("/src/install/", $this->getLocation());
+	$this->assertContains("install", $this->getBodyText());
+	$this->isElementPresent("//input[@value='Start >>']");
         $this->click("//input[@value='Start >>']");
-        $this->isElementPresent("//input[@value='Start >>']");
         $this->waitForPageToLoad("30000");
         $this->type("name=name", "LOVD3 Admin");
         $this->type("name=institute", "Leiden University Medical Center");
@@ -92,13 +94,13 @@ class collaborator_tests extends PHPUnit_Extensions_SeleniumTestCase
         $this->waitForPageToLoad("30000");
         $this->assertTrue((bool)preg_match('/^[\s\S]*\/src\/genes[\s\S]create$/',$this->getLocation()));
         $this->type("name=hgnc_id", "GJB1");
-        $this->click("css=input[type=\"submit\"]");
+        $this->click("//input[@value='Continue »']");
         $this->waitForPageToLoad("30000");
         $this->addSelection("name=active_transcripts[]", "value=NM_001097642.2");
         $this->check("name=show_hgmd");
         $this->check("name=show_genecards");
         $this->check("name=show_genetests");
-        $this->click("css=input[type=\"submit\"]");
+        $this->click("//input[@value='Create gene information entry']");
         $this->waitForPageToLoad("30000");
         $this->assertEquals("Successfully created the gene information entry!", $this->getText("css=table[class=info]"));
         $this->waitForPageToLoad("4000");
@@ -120,7 +122,7 @@ class collaborator_tests extends PHPUnit_Extensions_SeleniumTestCase
         $this->select("name=level", "Submitter");
         $this->click("name=send_email");
         $this->type("name=password", "test1234");
-        $this->click("css=input[type=\"submit\"]");
+        $this->click("//input[@value='Create user']");
         $this->waitForPageToLoad("30000");
         $this->assertEquals("Successfully created the user account!", $this->getText("css=table[class=info]"));
     }
@@ -131,7 +133,7 @@ class collaborator_tests extends PHPUnit_Extensions_SeleniumTestCase
         $this->click("link=Test Collaborator");
         $this->uncheck("xpath=(//input[@name='allow_edit[]'])[2]");
         $this->type("name=password", "test1234");
-        $this->click("css=input[type=\"submit\"]");
+        $this->click("//input[@value='Save curator list']");
         $this->waitForPageToLoad("30000");
         $this->assertEquals("Successfully updated the curator list!", $this->getText("css=table[class=info]"));
     }
@@ -142,7 +144,7 @@ class collaborator_tests extends PHPUnit_Extensions_SeleniumTestCase
         $this->assertTrue((bool)preg_match('/^[\s\S]*\/src\/login$/',$this->getLocation()));
         $this->type("name=username", "collaborator");
         $this->type("name=password", "test1234");
-        $this->click("css=input[type=\"submit\"]");
+        $this->click("//input[@value='Log in']");
         $this->waitForPageToLoad("30000");
     }
     public function testCreateUserSubmitter()
@@ -159,7 +161,7 @@ class collaborator_tests extends PHPUnit_Extensions_SeleniumTestCase
         $this->assertTrue((bool)preg_match('/^[\s\S]*\/src\/login$/',$this->getLocation()));
         $this->type("name=username", "admin");
         $this->type("name=password", "test1234");
-        $this->click("css=input[type=\"submit\"]");
+        $this->click("//input[@value='Log in']");
         $this->waitForPageToLoad("30000");
         $this->click("link=Create a new disease information entry");
         $this->waitForPageToLoad("30000");
@@ -168,7 +170,7 @@ class collaborator_tests extends PHPUnit_Extensions_SeleniumTestCase
         $this->type("name=name", "Charcot Marie Tooth Disease");
         $this->type("name=id_omim", "302800");
         $this->addSelection("name=genes[]", "value=GJB1");
-        $this->click("css=input[type=\"submit\"]");
+	$this->click("//input[@value='Create disease information entry']");
         $this->waitForPageToLoad("30000");
         $this->assertEquals("Successfully created the disease information entry!", $this->getText("css=table[class=info]"));
         $this->waitForPageToLoad("4000");
@@ -178,7 +180,7 @@ class collaborator_tests extends PHPUnit_Extensions_SeleniumTestCase
         $this->assertTrue((bool)preg_match('/^[\s\S]*\/src\/login$/',$this->getLocation()));
         $this->type("name=username", "collaborator");
         $this->type("name=password", "test1234");
-        $this->click("css=input[type=\"submit\"]");
+        $this->click("//input[@value='Log in']");
         $this->waitForPageToLoad("30000");
     }
     public function testCreateIndividualDiagnosedWithCMT()
@@ -191,7 +193,7 @@ class collaborator_tests extends PHPUnit_Extensions_SeleniumTestCase
         $this->type("name=Individual/Reference", "{PMID:[2011]:[21520333]}");
         $this->type("name=Individual/Remarks", "No Remarks");
         $this->addSelection("name=active_diseases[]", "label=CMT (Charcot Marie Tooth Disease)");
-        $this->click("css=input[type=\"submit\"]");
+        $this->click("//input[@value='Create individual information entry']");
         $this->waitForPageToLoad("30000");
         $this->assertEquals("Successfully created the individual information entry!", $this->getText("css=table[class=info]"));
         $this->waitForPageToLoad("4000");
@@ -204,7 +206,7 @@ class collaborator_tests extends PHPUnit_Extensions_SeleniumTestCase
         $this->assertTrue((bool)preg_match('/^[\s\S]*\/src\/phenotypes[\s\S]create&target=00000001$/',$this->getLocation()));
         $this->type("name=Phenotype/Additional", "Additional phenotype information");
         $this->select("name=Phenotype/Inheritance", "label=Familial");
-        $this->click("css=input[type=\"submit\"]");
+        $this->click("//input[@value='Create phenotype information entry']");
         $this->waitForPageToLoad("30000");
         $this->assertEquals("Successfully created the phenotype entry!", $this->getText("css=table[class=info]"));
         $this->waitForPageToLoad("4000");
@@ -222,7 +224,7 @@ class collaborator_tests extends PHPUnit_Extensions_SeleniumTestCase
         $this->addSelection("name=Screening/Technique[]", "label=array for SNP typing");
         $this->addSelection("name=genes[]", "value=GJB1");
         $this->check("name=variants_found");
-        $this->click("css=input[type=\"submit\"]");
+        $this->click("//input[@value='Create screening information entry']");
         $this->waitForPageToLoad("30000");
         $this->assertEquals("Successfully created the screening entry!", $this->getText("css=table[class=info]"));
         $this->waitForPageToLoad("4000");
@@ -261,7 +263,7 @@ class collaborator_tests extends PHPUnit_Extensions_SeleniumTestCase
         $this->type("name=VariantOnGenome/Reference", "{PMID:[2011]:[2150333]}");
         $this->type("name=VariantOnGenome/Frequency", "0.003");
         $this->select("name=effect_reported", "label=Effect unknown");
-        $this->click("css=input[type=\"submit\"]");
+        $this->click("//input[@value='Create variant entry']");
         $this->waitForPageToLoad("30000");
         $this->assertEquals("Successfully created the variant entry!", $this->getText("css=table[class=info]"));
         $this->waitForPageToLoad("4000");
@@ -282,7 +284,7 @@ class collaborator_tests extends PHPUnit_Extensions_SeleniumTestCase
         $this->type("name=VariantOnGenome/Reference", "{PMID:[2011]:[21520333]}");
         $this->type("name=VariantOnGenome/Frequency", "11/10000");
         $this->select("name=effect_reported", "label=Effect unknown");
-        $this->click("css=input[type=\"submit\"]");
+        $this->click("//input[@value='Create variant entry']");
         $this->waitForPageToLoad("30000");
         $this->assertEquals("Successfully created the variant entry!", $this->getText("css=table[class=info]"));
         $this->waitForPageToLoad("4000");
@@ -305,7 +307,7 @@ class collaborator_tests extends PHPUnit_Extensions_SeleniumTestCase
         $this->addSelection("name=Screening/Technique[]", "label=SSCA, fluorescent (SSCP)");
         $this->addSelection("name=genes[]", "value=GJB1");
         $this->check("name=variants_found");
-        $this->click("css=input[type=\"submit\"]");
+        $this->click("//input[@value='Create screening information entry']");
         $this->waitForPageToLoad("30000");
         $this->assertEquals("Successfully created the screening entry!", $this->getText("css=table[class=info]"));
         $this->waitForPageToLoad("4000");
@@ -318,7 +320,7 @@ class collaborator_tests extends PHPUnit_Extensions_SeleniumTestCase
         $this->assertTrue((bool)preg_match('/^[\s\S]*\/src\/screenings\/0000000002[\s\S]confirmVariants$/',$this->getLocation()));
         $this->click("id=check_0000000001");
         $this->type("name=password", "test1234");
-        $this->click("css=input[type=\"submit\"]");
+        $this->click("//input[@value='Save variant list']");
         $this->waitForPageToLoad("30000");
         $this->assertEquals("Successfully confirmed the variant entry!", $this->getText("css=table[class=info]"));
         $this->waitForPageToLoad("4000");
@@ -370,7 +372,7 @@ class collaborator_tests extends PHPUnit_Extensions_SeleniumTestCase
         $this->assertTrue((bool)preg_match('/^[\s\S]*\/src\/login$/',$this->getLocation()));
         $this->type("name=username", "admin");
         $this->type("name=password", "test1234");
-        $this->click("css=input[type=\"submit\"]");
+        $this->click("//input[@value='Log in']");
         $this->waitForPageToLoad("30000");
     }
     public function testCurateSubmittedData()
@@ -413,7 +415,7 @@ class collaborator_tests extends PHPUnit_Extensions_SeleniumTestCase
         $this->assertTrue((bool)preg_match('/^[\s\S]*\/src\/login$/',$this->getLocation()));
         $this->type("name=username", "collaborator");
         $this->type("name=password", "test1234");
-        $this->click("css=input[type=\"submit\"]");
+        $this->click("//input[@value='Log in']");
         $this->waitForPageToLoad("30000");
         $this->open("/home/daan/Website/LOVD3_development/trunk/src/");
         $this->click("id=tab_screenings");
@@ -436,7 +438,7 @@ class collaborator_tests extends PHPUnit_Extensions_SeleniumTestCase
         $this->type("name=VariantOnGenome/Reference", "{PMID:[2011]:[21520333]}");
         $this->type("name=VariantOnGenome/Frequency", "11/10000");
         $this->select("name=effect_reported", "label=Effect unknown");
-        $this->click("css=input[type=\"submit\"]");
+        $this->click("//input[@value='Create variant entry']");
         for ($second = 0; ; $second++) {
                 if ($second >= 60) $this->fail("timeout");
                 try {
@@ -489,7 +491,7 @@ class collaborator_tests extends PHPUnit_Extensions_SeleniumTestCase
         $this->type("name=VariantOnGenome/Reference", "{PMID:[2011]:[2150333]}");
         $this->type("name=VariantOnGenome/Frequency", "0.09");
         $this->select("name=effect_reported", "label=Effect unknown");
-        $this->click("css=input[type=\"submit\"]");
+        $this->click("//input[@value='Create variant entry']");
         $this->waitForPageToLoad("30000");
         $this->assertTrue((bool)preg_match('/^Successfully processed your submission and sent an email notification to the relevant curator[\s\S]*$/',$this->getText("css=table[class=info]")));
         $this->waitForPageToLoad("4000");
@@ -514,7 +516,7 @@ class collaborator_tests extends PHPUnit_Extensions_SeleniumTestCase
         $this->addSelection("name=Screening/Technique[]", "label=array for SNP typing");
         $this->addSelection("name=genes[]", "value=GJB1");
         $this->check("name=variants_found");
-        $this->click("css=input[type=\"submit\"]");
+        $this->click("//input[@value='Create screening information entry']");
         $this->waitForPageToLoad("30000");
         $this->assertEquals("Successfully created the screening entry!", $this->getText("css=table[class=info]"));
         $this->waitForPageToLoad("4000");
@@ -534,7 +536,7 @@ class collaborator_tests extends PHPUnit_Extensions_SeleniumTestCase
         $this->assertTrue((bool)preg_match('/^[\s\S]*\/src\/phenotypes[\s\S]create&target=00000001$/',$this->getLocation()));
         $this->type("name=Phenotype/Additional", "Additional phenotype information");
         $this->select("name=Phenotype/Inheritance", "label=Familial");
-        $this->click("css=input[type=\"submit\"]");
+        $this->click("//input[@value='Create phenotype information entry']");
         $this->waitForPageToLoad("30000");
         $this->assertTrue((bool)preg_match('/^Successfully processed your submission and sent an email notification to the relevant curator[\s\S]*$/',$this->getText("css=table[class=info]")));
         $this->waitForPageToLoad("4000");
@@ -551,14 +553,14 @@ class collaborator_tests extends PHPUnit_Extensions_SeleniumTestCase
         $this->open("/home/daan/Website/LOVD3_development/trunk/src/login");
         $this->type("name=username", "admin");
         $this->type("name=password", "test1234");
-        $this->click("css=input[type=\"submit\"]");
+        $this->click("//input[@value='Log in']");
         $this->waitForPageToLoad("30000");
         $this->open("/home/daan/Website/LOVD3_development/trunk/src/uninstall");
         $this->type("name=password", "test1234");
-        $this->click("css=input[type=\"submit\"]");
+        $this->click("//input[@value='Next >>']");
         $this->waitForPageToLoad("30000");
         $this->type("name=password", "test1234");
-        $this->click("css=input[type=\"submit\"]");
+        $this->click("//input[@value='Uninstall LOVD']");
         $this->waitForPageToLoad("30000");
         $this->assertEquals("LOVD successfully uninstalled!\nThank you for having used LOVD!", $this->getText("css=div[id=lovd__progress_message]"));
     }

@@ -4,7 +4,7 @@
  * LEIDEN OPEN VARIATION DATABASE (LOVD)
  *
  * Created     : 2014-12-19
- * Modified    : 2015-12-04:09:47:21
+ * Modified    : 2015-12-04:16:22:57
  * For LOVD    : 3.0-12
  *
  * Copyright   : 2014 Leiden University Medical Center; http://www.LUMC.nl/
@@ -44,9 +44,11 @@ class temp_tests extends PHPUnit_Extensions_SeleniumTestCase
     }
     public function testInstallLOVD()
     {
-        $this->open("/home/daan/Website/LOVD3_development/trunk/src/install/");
+	$this->open("/home/daan/Website/LOVD3_development/trunk/src/install/");
+	$this->assertContains("/src/install/", $this->getLocation());
+	$this->assertContains("install", $this->getBodyText());
+	$this->isElementPresent("//input[@value='Start >>']");
         $this->click("//input[@value='Start >>']");
-        $this->isElementPresent("//input[@value='Start >>']");
         $this->waitForPageToLoad("30000");
         $this->assertTrue((bool)preg_match('/^[\s\S]*\/src\/install\/[\s\S]step=1$/',$this->getLocation()));
         $this->type("name=name", "LOVD3 Admin");
@@ -91,17 +93,17 @@ class temp_tests extends PHPUnit_Extensions_SeleniumTestCase
         $this->open("/home/daan/Website/LOVD3_development/trunk/src/login");
         $this->type("name=username", "admin");
         $this->type("name=password", "test1234");
-        $this->click("//input[@value='Continue »']");
+        $this->click("//input[@value='Log in']");
         $this->waitForPageToLoad("30000");
         $this->open("/home/daan/Website/LOVD3_development/trunk/src/genes?create");
         $this->type("name=hgnc_id", "IVD");
-        $this->click("css=input[type=\"submit\"]");
+        $this->click("//input[@value='Continue »']");
         $this->waitForPageToLoad("30000");
         $this->addSelection("name=active_transcripts[]", "label=transcript variant 1 (NM_002225.3)");
         $this->click("name=show_hgmd");
         $this->click("name=show_genecards");
         $this->click("name=show_genetests");
-        $this->click("css=input[type=\"submit\"]");
+        $this->click("//input[@value='Create gene information entry']");
         $this->waitForPageToLoad("30000");
         $this->assertEquals("Successfully created the gene information entry!", $this->getText("css=table[class=info]"));
     }
@@ -112,7 +114,7 @@ class temp_tests extends PHPUnit_Extensions_SeleniumTestCase
         $this->type("name=name", "isovaleric acidemia");
         $this->type("name=id_omim", "243500");
         $this->addSelection("name=genes[]", "label=IVD (isovaleryl-CoA dehydrogenase)");
-        $this->click("css=input[type=\"submit\"]");
+	$this->click("//input[@value='Create disease information entry']");
         $this->waitForPageToLoad("30000");
         $this->assertEquals("Successfully created the disease information entry!", $this->getText("css=table[class=info]"));
     }
@@ -130,7 +132,7 @@ class temp_tests extends PHPUnit_Extensions_SeleniumTestCase
         $this->addSelection("name=active_diseases[]", "label=IVA (isovaleric acidemia)");
         $this->select("name=owned_by", "label=LOVD3 Admin");
         $this->select("name=statusid", "label=Public");
-        $this->click("css=input[type=\"submit\"]");
+        $this->click("//input[@value='Create individual information entry']");
         $this->waitForPageToLoad("30000");
         $this->assertEquals("Successfully created the individual information entry!", $this->getText("css=table[class=info]"));
         $this->waitForPageToLoad("4000");
@@ -145,7 +147,7 @@ class temp_tests extends PHPUnit_Extensions_SeleniumTestCase
         $this->select("name=Phenotype/Inheritance", "label=Familial");
         $this->select("name=owned_by", "label=LOVD3 Admin");
         $this->select("name=statusid", "label=Public");
-        $this->click("css=input[type=\"submit\"]");
+        $this->click("//input[@value='Create phenotype information entry']");
         $this->waitForPageToLoad("30000");
         $this->assertEquals("Successfully created the phenotype entry!", $this->getText("css=table[class=info]"));
         $this->waitForPageToLoad("4000");
@@ -164,7 +166,7 @@ class temp_tests extends PHPUnit_Extensions_SeleniumTestCase
         $this->addSelection("name=genes[]", "label=IVD (isovaleryl-CoA dehydrogenase)");
         $this->check("name=variants_found");
         $this->select("name=owned_by", "label=LOVD3 Admin");
-        $this->click("css=input[type=\"submit\"]");
+        $this->click("//input[@value='Create screening information entry']");
         $this->waitForPageToLoad("30000");
         $this->assertEquals("Successfully created the screening entry!", $this->getText("css=table[class=info]"));
         $this->waitForPageToLoad("4000");
@@ -207,7 +209,7 @@ class temp_tests extends PHPUnit_Extensions_SeleniumTestCase
         $this->select("name=effect_concluded", "label=Effect unknown");
         $this->select("name=owned_by", "label=LOVD3 Admin");
         $this->select("name=statusid", "label=Public");
-        $this->click("css=input[type=\"submit\"]");
+        $this->click("//input[@value='Create variant entry']");
         $this->waitForPageToLoad("30000");
         $this->assertEquals("Successfully created the variant entry!", $this->getText("css=table[class=info]"));
         $this->waitForPageToLoad("4000");
@@ -232,7 +234,7 @@ class temp_tests extends PHPUnit_Extensions_SeleniumTestCase
         $this->addSelection("name=genes[]", "label=IVD (isovaleryl-CoA dehydrogenase)");
         $this->check("name=variants_found");
         $this->select("name=owned_by", "label=LOVD3 Admin");
-        $this->click("css=input[type=\"submit\"]");
+        $this->click("//input[@value='Create screening information entry']");
         $this->waitForPageToLoad("30000");
         $this->assertEquals("Successfully created the screening entry!", $this->getText("css=table[class=info]"));
         $this->waitForPageToLoad("4000");
@@ -245,7 +247,7 @@ class temp_tests extends PHPUnit_Extensions_SeleniumTestCase
         $this->assertTrue((bool)preg_match('/^[\s\S]*\/src\/screenings\/0000000002[\s\S]confirmVariants$/',$this->getLocation()));
         $this->click("id=check_0000000001");
         $this->type("name=password", "test1234");
-        $this->click("css=input[type=\"submit\"]");
+        $this->click("//input[@value='Save variant list']");
         $this->waitForPageToLoad("30000");
         $this->assertEquals("Successfully confirmed the variant entry!", $this->getText("css=table[class=info]"));
         $this->waitForPageToLoad("4000");
@@ -256,14 +258,14 @@ class temp_tests extends PHPUnit_Extensions_SeleniumTestCase
         $this->open("/home/daan/Website/LOVD3_development/trunk/src/login");
         $this->type("name=username", "admin");
         $this->type("name=password", "test1234");
-        $this->click("css=input[type=\"submit\"]");
+        $this->click("//input[@value='Log in']");
         $this->waitForPageToLoad("30000");
         $this->open("/home/daan/Website/LOVD3_development/trunk/src/uninstall");
         $this->type("name=password", "test1234");
-        $this->click("css=input[type=\"submit\"]");
+        $this->click("//input[@value='Next >>']");
         $this->waitForPageToLoad("30000");
         $this->type("name=password", "test1234");
-        $this->click("css=input[type=\"submit\"]");
+        $this->click("//input[@value='Uninstall LOVD']");
         $this->waitForPageToLoad("30000");
         $this->assertEquals("LOVD successfully uninstalled!\nThank you for having used LOVD!", $this->getText("css=div[id=lovd__progress_message]"));
     }

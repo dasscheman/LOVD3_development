@@ -37,7 +37,7 @@ class Example extends PHPUnit_Extensions_SeleniumTestCase
     $this->type("name=VariantOnGenome/Reference", "{PMID:[2011]:[21520333]}");
     $this->type("name=VariantOnGenome/Frequency", "11/10000");
     $this->select("name=effect_reported", "label=Effect unknown");
-    $this->click("css=input[type=\"submit\"]");
+    $this->click("//input[@value='Create variant entry']");
     for ($second = 0; ; $second++) {
         if ($second >= 60) $this->fail("timeout");
         try {

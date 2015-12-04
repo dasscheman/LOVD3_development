@@ -29,13 +29,13 @@ class Example extends PHPUnit_Extensions_SeleniumTestCase
     for ($second = 0; ; $second++) {
         if ($second >= 180) $this->fail("timeout");
         try {
-            if ($this->isElementPresent("css=input[type=\"button\"]")) break;
+            if ($this->isElementPresent("//input[@value='Continue »']")) break;
         } catch (Exception $e) {}
         sleep(1);
     }
 
     $this->assertEquals("138 variants were imported, 1 variant could not be imported.", $this->getText("id=lovd__progress_message"));
-    $this->click("css=input[type=\"button\"]");
+    $this->click("//input[@value='Continue »']");
     $this->waitForPageToLoad("30000");
   }
 }

@@ -4,7 +4,7 @@
  * LEIDEN OPEN VARIATION DATABASE (LOVD)
  *
  * Created     : 2014-12-19
- * Modified    : 2015-12-04:09:47:21
+ * Modified    : 2015-12-04:16:22:57
  * For LOVD    : 3.0-12
  *
  * Copyright   : 2014 Leiden University Medical Center; http://www.LUMC.nl/
@@ -44,9 +44,11 @@ class import_tests extends PHPUnit_Extensions_SeleniumTestCase
     }
     public function testInstallLOVD()
     {
-        $this->open("/home/daan/Website/LOVD3_development/trunk/src/install/");
+	$this->open("/home/daan/Website/LOVD3_development/trunk/src/install/");
+	$this->assertContains("/src/install/", $this->getLocation());
+	$this->assertContains("install", $this->getBodyText());
+	$this->isElementPresent("//input[@value='Start >>']");
         $this->click("//input[@value='Start >>']");
-        $this->isElementPresent("//input[@value='Start >>']");
         $this->waitForPageToLoad("30000");
         $this->assertTrue((bool)preg_match('/^[\s\S]*\/src\/install\/[\s\S]step=1$/',$this->getLocation()));
         $this->type("name=name", "LOVD3 Admin");
@@ -91,7 +93,7 @@ class import_tests extends PHPUnit_Extensions_SeleniumTestCase
         $this->open("/home/daan/Website/LOVD3_development/trunk/src/login");
         $this->type("name=username", "admin");
         $this->type("name=password", "test1234");
-        $this->click("css=input[type=\"submit\"]");
+        $this->click("//input[@value='Log in']");
         $this->waitForPageToLoad("30000");
         $this->open("/home/daan/Website/LOVD3_development/trunk/src/genes?create");
         $this->type("name=hgnc_id", "IVD");
@@ -101,7 +103,7 @@ class import_tests extends PHPUnit_Extensions_SeleniumTestCase
         $this->click("name=show_hgmd");
         $this->click("name=show_genecards");
         $this->click("name=show_genetests");
-        $this->click("css=input[type=\"submit\"]");
+        $this->click("//input[@value='Create gene information entry']");
         $this->waitForPageToLoad("30000");
         $this->assertEquals("Successfully created the gene information entry!", $this->getText("css=table[class=info]"));
     }
@@ -122,7 +124,7 @@ class import_tests extends PHPUnit_Extensions_SeleniumTestCase
         $this->type("name=name", "isovaleric acidemia");
         $this->type("name=id_omim", "243500");
         $this->addSelection("name=genes[]", "label=IVD (isovaleryl-CoA dehydrogenase)");
-        $this->click("css=input[type=\"submit\"]");
+	$this->click("//input[@value='Create disease information entry']");
         $this->waitForPageToLoad("30000");
         $this->assertEquals("Successfully created the disease information entry!", $this->getText("css=table[class=info]"));
         $this->open("/home/daan/Website/LOVD3_development/trunk/src/diseases?create");
@@ -130,7 +132,7 @@ class import_tests extends PHPUnit_Extensions_SeleniumTestCase
         $this->type("name=name", "isovaleric acidemia TWEE");
         $this->type("name=id_omim", "243522");
         $this->addSelection("name=genes[]", "label=IVD (isovaleryl-CoA dehydrogenase)");
-        $this->click("css=input[type=\"submit\"]");
+	$this->click("//input[@value='Create disease information entry']");
         $this->waitForPageToLoad("30000");
         $this->assertEquals("Successfully created the disease information entry!", $this->getText("css=table[class=info]"));
     }
@@ -139,7 +141,7 @@ class import_tests extends PHPUnit_Extensions_SeleniumTestCase
         $this->open("/home/daan/Website/LOVD3_development/trunk/src/import");
         $this->type("name=import", "/home/daan/Website/LOVD3_development/trunk/tests/test_data_files/InsertImport.txt");
         $this->select("name=mode", "label=Add only, treat all data as new");
-        $this->click("css=input[type=\"submit\"]");
+        $this->click("//input[@value='Import file']");
         $this->waitForPageToLoad("30000");
         $this->assertEquals("Done importing!", $this->getText("id=lovd_sql_progress_message_done"));
     }
@@ -149,7 +151,7 @@ class import_tests extends PHPUnit_Extensions_SeleniumTestCase
         $this->type("name=import", "/home/daan/Website/LOVD3_development/trunk/tests/test_data_files/FalseInsertImport.txt");
         $this->select("name=mode", "label=Add only, treat all data as new");
         $this->click("name=simulate");
-        $this->click("css=input[type=\"submit\"]");
+        $this->click("//input[@value='Import file']");
         $this->waitForPageToLoad("30000");
         $this->click("link=Show 5 warnings");
         $this->assertTrue((bool)preg_match('/^[\s\S]*Error \(Columns, line 9\): Incorrect value for field [\s\S]col_order[\s\S], which needs to be numeric, between 0 and 255\.[\s\S]*$/',$this->getBodyText()));
@@ -214,7 +216,7 @@ class import_tests extends PHPUnit_Extensions_SeleniumTestCase
         $this->type("name=import", "/home/daan/Website/LOVD3_development/trunk/tests/test_data_files/FalseUpdateImport.txt");
         $this->select("name=mode", "label=Update existing data (in beta)");
         $this->click("name=simulate");
-        $this->click("css=input[type=\"submit\"]");
+        $this->click("//input[@value='Import file']");
         $this->waitForPageToLoad("30000");
         sleep(20);
         $this->click("link=Show 33 warnings");
@@ -304,7 +306,7 @@ class import_tests extends PHPUnit_Extensions_SeleniumTestCase
         $this->open("/home/daan/Website/LOVD3_development/trunk/src/import");
         $this->type("name=import", "/home/daan/Website/LOVD3_development/trunk/tests/test_data_files/SecondInsertImport.txt");
         $this->select("name=mode", "label=Add only, treat all data as new");
-        $this->click("css=input[type=\"submit\"]");
+        $this->click("//input[@value='Import file']");
         $this->waitForPageToLoad("30000");
         $this->assertEquals("Done importing!", $this->getText("id=lovd_sql_progress_message_done"));
     }
@@ -313,7 +315,7 @@ class import_tests extends PHPUnit_Extensions_SeleniumTestCase
         $this->open("/home/daan/Website/LOVD3_development/trunk/src/import");
         $this->type("name=import", "/home/daan/Website/LOVD3_development/trunk/tests/test_data_files/UpdateImport.txt");
         $this->select("name=mode", "label=Update existing data (in beta)");
-        $this->click("css=input[type=\"submit\"]");
+        $this->click("//input[@value='Import file']");
         $this->waitForPageToLoad("30000");
         $this->assertTrue((bool)preg_match('/^[\s\S]*The following sections are modified and updated in the database: Columns, Diseases, Individuals, Phenotypes, Screenings, Variants_On_Genome, Variants_On_Transcripts\.$/',$this->getText("id=lovd_sql_progress_message_done")));
     }
@@ -323,14 +325,14 @@ class import_tests extends PHPUnit_Extensions_SeleniumTestCase
         $this->open("/home/daan/Website/LOVD3_development/trunk/src/login");
         $this->type("name=username", "admin");
         $this->type("name=password", "test1234");
-        $this->click("css=input[type=\"submit\"]");
+        $this->click("//input[@value='Log in']");
         $this->waitForPageToLoad("30000");
         $this->open("/home/daan/Website/LOVD3_development/trunk/src/uninstall");
         $this->type("name=password", "test1234");
-        $this->click("css=input[type=\"submit\"]");
+        $this->click("//input[@value='Next >>']");
         $this->waitForPageToLoad("30000");
         $this->type("name=password", "test1234");
-        $this->click("css=input[type=\"submit\"]");
+        $this->click("//input[@value='Uninstall LOVD']");
         $this->waitForPageToLoad("30000");
         $this->assertEquals("LOVD successfully uninstalled!\nThank you for having used LOVD!", $this->getText("css=div[id=lovd__progress_message]"));
     }
