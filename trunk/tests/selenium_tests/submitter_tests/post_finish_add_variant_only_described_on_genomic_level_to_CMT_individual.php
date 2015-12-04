@@ -14,7 +14,7 @@ class Example extends PHPUnit_Extensions_SeleniumTestCase
     $this->assertTrue((bool)preg_match('/^[\s\S]*\/src\/login$/',$this->getLocation()));
     $this->type("name=username", "submitter");
     $this->type("name=password", "test1234");
-    $this->click("css=input[type=\"submit\"]");
+    $this->click("//input[@value='Log in']");
     $this->waitForPageToLoad("30000");
     $this->open("/svn/LOVD3/trunk/src/");
     $this->click("id=tab_screenings");
