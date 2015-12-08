@@ -8,7 +8,7 @@ php:
   # aliased to a recent 5.4.x version
 #  - 5.4
   # aliased to a recent 5.5.x version
-  - 5.5
+#  - 5.5
   # aliased to a recent 5.6.xversion  
   - 5.6
   # aliased to a recent 7.x version
@@ -19,8 +19,8 @@ php:
 sudo: required
 
 before_install:
-  - curl -s -o /home/.phpenv/versions/5.5/bin/phpunit https://phar.phpunit.de/phpunit-old.phar
-  - chmod +x /home/.phpenv/versions/5.5/bin/phpunit
+#  - curl -s -o /home/.phpenv/versions/5.5/bin/phpunit https://phar.phpunit.de/phpunit-old.phar
+#  - chmod +x /home/.phpenv/versions/5.5/bin/phpunit
   - ./trunk/tests/travis/setup/setup_mysql.sh
 
 before_script:
