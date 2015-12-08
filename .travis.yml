@@ -19,8 +19,9 @@ php:
 sudo: required
 
 before_install:
-#  - curl -s -o /home/.phpenv/versions/5.5/bin/phpunit https://phar.phpunit.de/phpunit-old.phar
-#  - chmod +x /home/.phpenv/versions/5.5/bin/phpunit
+# for php 5.5
+#  - curl -s -o $HOME/.phpenv/versions/5.5/bin/phpunit https://phar.phpunit.de/phpunit-old.phar
+#  - chmod +x $HOME/.phpenv/versions/5.5/bin/phpunit
   - ./trunk/tests/travis/setup/setup_mysql.sh
 
 before_script:
@@ -29,7 +30,7 @@ before_script:
   ## setup_apache.sh fix some assumptions where the files are stored!
   - ./trunk/tests/bash_scripts/convert_selenium_to_phpunit.sh --localhost=LOVD3_development --continueall
   - ./trunk/tests/travis/setup/setup_selenium_server.sh
-  ##- dpkg -l phpunit-selenium
+  - dpkg -l phpunit-selenium
 
 script:
   - phpunit ./trunk/tests/phpunit_selenium/adminTest.php
