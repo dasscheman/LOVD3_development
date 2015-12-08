@@ -17,8 +17,8 @@ php:
 sudo: required
 
 before_install:
-  - curl -s -o $HOME/.phpenv/versions/5.5/bin/phpunit https://phar.phpunit.de/phpunit-old.phar
-  - chmod +x $HOME/.phpenv/versions/5.5/bin/phpunit
+#  - curl -s -o $HOME/.phpenv/versions/5.5/bin/phpunit https://phar.phpunit.de/phpunit-old.phar
+#  - chmod +x $HOME/.phpenv/versions/5.5/bin/phpunit
   - ./trunk/tests/travis/setup/setup_mysql.sh
 
 before_script:
