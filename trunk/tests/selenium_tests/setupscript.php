@@ -28,6 +28,8 @@
  *
  *************/
 
+require_once 'PHPUnit/Extensions/SeleniumTestCase.php';
+
 class setupscript extends PHPUnit_Extensions_SeleniumTestCase
 {
     protected $captureScreenshotOnFailure = TRUE;
