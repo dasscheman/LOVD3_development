@@ -1,7 +1,7 @@
 {
     "require": {
         "phpunit/phpunit-selenium": ">=1.2",
-        "phpunit/phpunit": "4.4.*",
+        "phpunit/phpunit": "4.8.*",
         "phpunit/php-invoker": "*",
         "phpunit/dbunit": "*",
         "phpunit/phpunit-story": "*",
