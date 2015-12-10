@@ -28,7 +28,12 @@
  *
  *************/
 
-//require_once('phpunit-selenium/PHPUnit/Extensions/SeleniumTestCase.php');
+include 'vendor/phpunit/phpunit-selenium/PHPUnit/Extensions/SeleniumTestCase.php';
+use PHPUnit_Extensions_SeleniumTestCase;
+
+//namespace Stash\Test\Driver;
+//use Stash\Test\Stubs\PoolGetDriverStub;
+//use Stash\Item;
 
 class setupscript extends PHPUnit_Extensions_SeleniumTestCase
 {
