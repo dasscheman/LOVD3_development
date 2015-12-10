@@ -32,6 +32,7 @@ before_script:
   - ./trunk/tests/travis/setup/setup_selenium_server.sh
   #- dpkg -l phpunit-selenium
   - pwd
+  -  php -r 'var_dump($_SERVER);' 
 #  - cd /home/travis/build/dasscheman/LOVD3_development/vendor/phpunit
 #  - ls -l
 
