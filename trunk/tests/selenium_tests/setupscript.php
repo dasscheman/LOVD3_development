@@ -28,8 +28,6 @@
  *
  *************/
 
-include 'vendor/phpunit/phpunit-selenium/PHPUnit/Extensions/SeleniumTestCase.php';
-
 class setupscript extends PHPUnit_Extensions_SeleniumTestCase
 {
     protected $captureScreenshotOnFailure = TRUE;
