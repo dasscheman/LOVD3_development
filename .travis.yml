@@ -35,6 +35,8 @@ before_script:
   - ls -l
   - cd /home/travis/build/dasscheman
   - ls -l
+  - cd /home/travis/build/dasscheman/LOVD3_development
+  - ls -l
   - locate phpunit/phpunit-selenium
 
 script:
