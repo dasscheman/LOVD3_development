@@ -36,13 +36,14 @@ before_script:
 #  - ls -l
 
 script:
-  - phpunit ./trunk/tests/phpunit_selenium/adminTest.php
-  - phpunit ./trunk/tests/phpunit_selenium/authorizationTest.php
-  - phpunit ./trunk/tests/phpunit_selenium/collaboratorTest.php
-  - phpunit ./trunk/tests/phpunit_selenium/importTest.php
-  - phpunit ./trunk/tests/phpunit_selenium/managerTest.php
-  - phpunit ./trunk/tests/phpunit_selenium/submitterTest.php
-  - phpunit ./trunk/tests/phpunit_selenium/tempTest.php
+  - ./vendor/phpunit/phpunit ./trunk/tests/phpunit_selenium/adminTest.php 
+# - phpunit ./trunk/tests/phpunit_selenium/adminTest.php
+#  - phpunit ./trunk/tests/phpunit_selenium/authorizationTest.php
+#  - phpunit ./trunk/tests/phpunit_selenium/collaboratorTest.php
+#  - phpunit ./trunk/tests/phpunit_selenium/importTest.php
+#  - phpunit ./trunk/tests/phpunit_selenium/managerTest.php
+#  - phpunit ./trunk/tests/phpunit_selenium/submitterTest.php
+#  - phpunit ./trunk/tests/phpunit_selenium/tempTest.php
   
 ## Run all tests
 ##  - phpunit ./trunk/tests/phpunit_selenium/
