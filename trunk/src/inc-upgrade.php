@@ -1,12 +1,11 @@
 <?php
-// DMD_SPECIFIC: REMEMBER. If you add code that adds SQL for all genes, you MUST add the key first to the large array. Otherwise, the order in which upgrades are done is WRONG!!!
 /*******************************************************************************
  *
  * LEIDEN OPEN VARIATION DATABASE (LOVD)
  *
  * Created     : 2010-01-14
- * Modified    : 2015-10-09
- * For LOVD    : 3.0-14
+ * Modified    : 2015-12-08
+ * For LOVD    : 3.0-15
  *
  * Copyright   : 2004-2015 Leiden University Medical Center; http://www.LUMC.nl/
  * Programmers : Ing. Ivo F.A.C. Fokkema <I.F.A.C.Fokkema@LUMC.nl>
@@ -342,7 +341,7 @@ if ($sCalcVersionFiles != $sCalcVersionDB) {
                  ),
                  '3.0-05' =>
                  array(
-/////////////////// DMD_SPECIFIC: I would expect these to fail if I don't remove the FKs first. But they don't.
+                     // I would expect these to fail if I don't remove the FKs first. But they don't. Apparently, VARCHARs are different than INT columns (see 3.0-14b update).
                      'ALTER TABLE ' . TABLE_GENES . ' MODIFY COLUMN id VARCHAR(25) NOT NULL',
                      'ALTER TABLE ' . TABLE_CURATES . ' MODIFY COLUMN geneid VARCHAR(25) NOT NULL',
                      'ALTER TABLE ' . TABLE_TRANSCRIPTS . ' MODIFY COLUMN geneid VARCHAR(25) NOT NULL',
@@ -403,6 +402,18 @@ if ($sCalcVersionFiles != $sCalcVersionDB) {
                  '3.0-14' =>
                      array(
                          'ALTER TABLE ' . TABLE_DISEASES . ' MODIFY COLUMN symbol VARCHAR(25) NOT NULL',
+                     ),
+                 '3.0-14b' =>
+                     array(
+                         // In order to resize the transcript's ID column, we need to drop the foreign key contraint, otherwise it won't allow us to modify the column.
+                         'ALTER TABLE ' . TABLE_VARIANTS_ON_TRANSCRIPTS . ' DROP FOREIGN KEY ' . TABLE_VARIANTS_ON_TRANSCRIPTS . '_fk_transcriptid',
+                         'ALTER TABLE ' . TABLE_TRANSCRIPTS . ' MODIFY COLUMN id MEDIUMINT(8) UNSIGNED ZEROFILL NOT NULL AUTO_INCREMENT',
+                         'ALTER TABLE ' . TABLE_VARIANTS_ON_TRANSCRIPTS . ' MODIFY COLUMN transcriptid MEDIUMINT(8) UNSIGNED ZEROFILL NOT NULL',
+                         'ALTER TABLE ' . TABLE_VARIANTS_ON_TRANSCRIPTS . ' ADD CONSTRAINT ' . TABLE_VARIANTS_ON_TRANSCRIPTS . '_fk_transcriptid FOREIGN KEY (transcriptid) REFERENCES ' . TABLE_TRANSCRIPTS . ' (id) ON DELETE CASCADE ON UPDATE CASCADE',
+                     ),
+                 '3.0-14c' =>
+                     array(
+                         'ALTER TABLE ' . TABLE_TRANSCRIPTS . ' MODIFY COLUMN id MEDIUMINT(8) UNSIGNED ZEROFILL NOT NULL AUTO_INCREMENT',
                      ),
              );
 

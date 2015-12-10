@@ -3,8 +3,8 @@ LOVD v.3.0 INSTALLATION GUIDE
 
 REQUIREMENTS
 ============
-LOVD 3.0 requires a webserver (preferably Apache), PHP >= 5.1.0 and 
-MySQL >= 4.1.2.
+LOVD 3.0 requires a webserver (preferably Apache), PHP >= 5.3.0 with mbstring
+and SOAP support enabled and libxml and openssl installed, and MySQL >= 4.1.2.
 
 
 PREPARATIONS
@@ -70,10 +70,9 @@ LOVD DEVELOPMENT TEAM
 =====================
 The LOVD development team currently consists of:
 Ivo Fokkema
-Ivar Lugtenburg
+Daan Asscheman
 
 And is supported by:
 Johan den Dunnen
-Peter Taschner
 
 All from the Leiden University Medical Center, Leiden, Netherlands.

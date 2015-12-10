@@ -4,7 +4,7 @@
  * LEIDEN OPEN VARIATION DATABASE (LOVD)
  *
  * Created     : 2009-10-19
- * Modified    : 2015-11-26
+ * Modified    : 2015-12-08
  * For LOVD    : 3.0-15
  *
  * Copyright   : 2004-2015 Leiden University Medical Center; http://www.LUMC.nl/
@@ -133,7 +133,7 @@ $aRequired =
 $_SETT = array(
                 'system' =>
                      array(
-                            'version' => '3.0-14',
+                            'version' => '3.0-14c',
                           ),
                 'user_levels' =>
                      array(
@@ -203,6 +203,18 @@ $_SETT = array(
                             1  => 'right',
                           ),
                 'unique_view_max_string_length' => 100,
+                'objectid_length' =>
+                    array(
+                        'diseases' => 5,
+                        'individuals' => 8,
+                        'links' => 3,
+                        'phenotypes' => 10,
+                        'screenings' => 10,
+                        // Warning! Length of transcript IDs also configured in inc-js-variants.php.
+                        'transcripts' => 8,
+                        'users' => 5,
+                        'variants' => 10,
+                    ),
                 'human_builds' =>
                      array(
                             '----' => array('ncbi_name' => 'non-Human'),
@@ -726,18 +738,8 @@ if (!defined('NOT_INSTALLED')) {
             $_PE[$key] = '';
         }
     }
-    $aObjectPadding = array(
-                        'variants' => 10,
-                        'transcripts' => 5,
-                        'diseases' => 5,
-                        'individuals' => 8,
-                        'screenings' => 10,
-                        'links' => 3,
-                        'phenotypes' => 10,
-                        'users' => 5,
-                     );
-    if (isset($aObjectPadding[$_PE[0]]) && isset($_PE[1]) && ctype_digit($_PE[1])) {
-        $_PE[1] = sprintf('%0' . $aObjectPadding[$_PE[0]] . 'd', $_PE[1]);
+    if (isset($_SETT['objectid_length'][$_PE[0]]) && isset($_PE[1]) && ctype_digit($_PE[1])) {
+        $_PE[1] = sprintf('%0' . $_SETT['objectid_length'][$_PE[0]] . 'd', $_PE[1]);
     }
     define('CURRENT_PATH', implode('/', $_PE));
     define('PATH_COUNT', count($_PE)); // So you don't need !empty($_PE[1]) && ...
