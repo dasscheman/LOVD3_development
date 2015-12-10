@@ -36,7 +36,7 @@ before_script:
 #  - ls -l
 
 script:
-  - ./vendor/phpunit/phpunit ./trunk/tests/phpunit_selenium/adminTest.php 
+  - ./vendor/phpunit/phpunit/phpunit ./trunk/tests/phpunit_selenium/adminTest.php 
 # - phpunit ./trunk/tests/phpunit_selenium/adminTest.php
 #  - phpunit ./trunk/tests/phpunit_selenium/authorizationTest.php
 #  - phpunit ./trunk/tests/phpunit_selenium/collaboratorTest.php
