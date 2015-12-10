@@ -32,6 +32,7 @@ before_script:
   - ./trunk/tests/travis/setup/setup_selenium_server.sh
   #- dpkg -l phpunit-selenium
   - cd /home/travis
+  - locate phpunit/phpunit-selenium
   - ls -l
 
 script:
