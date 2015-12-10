@@ -31,7 +31,7 @@ before_script:
   - ./trunk/tests/bash_scripts/convert_selenium_to_phpunit.sh --localhost=LOVD3_development --continueall
   - ./trunk/tests/travis/setup/setup_selenium_server.sh
   #- dpkg -l phpunit-selenium
-  - cd /home/travis/bin/vendor
+  - cd /home/travis
   - ls -l
 
 script:
