@@ -31,13 +31,9 @@ before_script:
   - ./trunk/tests/bash_scripts/convert_selenium_to_phpunit.sh --localhost=LOVD3_development --continueall
   - ./trunk/tests/travis/setup/setup_selenium_server.sh
   #- dpkg -l phpunit-selenium
-  - cd /home/travis/build
+  - pwd
+  - cd /home/travis/build/dasscheman/LOVD3_development/vendor/phpunit
   - ls -l
-  - cd /home/travis/build/dasscheman
-  - ls -l
-  - cd /home/travis/build/dasscheman/LOVD3_development
-  - ls -l
-  - locate phpunit/phpunit-selenium
 
 script:
   - phpunit ./trunk/tests/phpunit_selenium/adminTest.php
