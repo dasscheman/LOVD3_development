@@ -4,7 +4,7 @@
  * LEIDEN OPEN VARIATION DATABASE (LOVD)
  *
  * Created     : 2014-12-19
- * Modified    : 2015-12-09:16:36:14
+ * Modified    : 2015-12-11:11:09:40
  * For LOVD    : 3.0-12
  *
  * Copyright   : 2014 Leiden University Medical Center; http://www.LUMC.nl/
@@ -239,9 +239,9 @@ class collaborator_tests extends PHPUnit_Extensions_SeleniumTestCase
         $this->click("link=GJB1");
         $this->waitForPageToLoad("30000");
         $this->assertTrue((bool)preg_match('/^[\s\S]*\/src\/variants[\s\S]create&reference=Transcript&geneid=GJB1&target=0000000001$/',$this->getLocation()));
-        $this->uncheck("name=ignore_00001");
-        $this->type("name=00001_VariantOnTranscript/Exon", "2");
-        $this->type("name=00001_VariantOnTranscript/DNA", "c.34G>T");
+        $this->uncheck("name=ignore_00000001");
+        $this->type("name=00000001_VariantOnTranscript/Exon", "2");
+        $this->type("name=00000001_VariantOnTranscript/DNA", "c.34G>T");
         $this->click("css=button.mapVariant");
         sleep(3);
         for ($second = 0; ; $second++) {
@@ -257,7 +257,7 @@ class collaborator_tests extends PHPUnit_Extensions_SeleniumTestCase
         $this->assertEquals("p.(Gly12Cys)", $this->getExpression($ProteinChange));
         $GenomicDnaChange = $this->getEval("window.document.getElementById('variantForm').elements[9].value");
         $this->assertEquals("g.70443591G>T", $this->getExpression($GenomicDnaChange));
-        $this->select("name=00001_effect_reported", "label=Effect unknown");
+        $this->select("name=00000001_effect_reported", "label=Effect unknown");
         $this->select("name=allele", "label=Maternal (confirmed)");
         $this->click("link=PubMed");
         $this->type("name=VariantOnGenome/Reference", "{PMID:[2011]:[2150333]}");
@@ -467,9 +467,9 @@ class collaborator_tests extends PHPUnit_Extensions_SeleniumTestCase
         $this->click("css=td.ordered");
         $this->waitForPageToLoad("30000");
         $this->assertTrue((bool)preg_match('/^[\s\S]*\/src\/variants[\s\S]create&reference=Transcript&geneid=GJB1&target=0000000002$/',$this->getLocation()));
-        $this->uncheck("name=ignore_00001");
-        $this->type("name=00001_VariantOnTranscript/Exon", "2");
-        $this->type("name=00001_VariantOnTranscript/DNA", "c.251T>A");
+        $this->uncheck("name=ignore_00000001");
+        $this->type("name=00000001_VariantOnTranscript/Exon", "2");
+        $this->type("name=00000001_VariantOnTranscript/DNA", "c.251T>A");
         $this->click("css=button.mapVariant");
         sleep(3);
         for ($second = 0; ; $second++) {
@@ -485,7 +485,7 @@ class collaborator_tests extends PHPUnit_Extensions_SeleniumTestCase
         $this->assertEquals("p.(Val84Asp)", $this->getExpression($ProteinChange));
         $GenomicDnaChange = $this->getEval("window.document.getElementById('variantForm').elements[9].value");
         $this->assertEquals("g.70443808T>A", $this->getExpression($GenomicDnaChange));
-        $this->select("name=00001_effect_reported", "label=Effect unknown");
+        $this->select("name=00000001_effect_reported", "label=Effect unknown");
         $this->select("name=allele", "label=Paternal (confirmed)");
         $this->click("link=PubMed");
         $this->type("name=VariantOnGenome/Reference", "{PMID:[2011]:[2150333]}");

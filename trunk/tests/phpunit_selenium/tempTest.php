@@ -4,7 +4,7 @@
  * LEIDEN OPEN VARIATION DATABASE (LOVD)
  *
  * Created     : 2014-12-19
- * Modified    : 2015-12-09:16:36:14
+ * Modified    : 2015-12-11:11:09:40
  * For LOVD    : 3.0-12
  *
  * Copyright   : 2014 Leiden University Medical Center; http://www.LUMC.nl/
@@ -181,9 +181,9 @@ class temp_tests extends PHPUnit_Extensions_SeleniumTestCase
         $this->click("css=td.ordered");
         $this->waitForPageToLoad("30000");
         $this->assertTrue((bool)preg_match('/^[\s\S]*\/src\/variants[\s\S]create&reference=Transcript&geneid=IVD&target=0000000001$/',$this->getLocation()));
-        $this->uncheck("name=ignore_00001");
-        $this->type("name=00001_VariantOnTranscript/Exon", "2");
-        $this->type("name=00001_VariantOnTranscript/DNA", "c.345G>T");
+        $this->uncheck("name=ignore_00000001");
+        $this->type("name=00000001_VariantOnTranscript/Exon", "2");
+        $this->type("name=00000001_VariantOnTranscript/DNA", "c.345G>T");
         $this->click("css=button.mapVariant");
         sleep(3);
         for ($second = 0; ; $second++) {
@@ -199,8 +199,8 @@ class temp_tests extends PHPUnit_Extensions_SeleniumTestCase
         $this->assertEquals("p.(Met115Ile)", $this->getExpression($ProteinChange));
         $GenomicDnaChange = $this->getEval("window.document.getElementById('variantForm').elements[10].value");
         $this->assertEquals("g.40702876G>T", $this->getExpression($GenomicDnaChange));
-        $this->select("name=00001_effect_reported", "label=Effect unknown");
-        $this->select("name=00001_effect_concluded", "label=Effect unknown");
+        $this->select("name=00000001_effect_reported", "label=Effect unknown");
+        $this->select("name=00000001_effect_concluded", "label=Effect unknown");
         $this->select("name=allele", "label=Paternal (confirmed)");
         $this->click("link=PubMed");
         $this->type("name=VariantOnGenome/Reference", "{PMID:[2011]:[2150333]}");

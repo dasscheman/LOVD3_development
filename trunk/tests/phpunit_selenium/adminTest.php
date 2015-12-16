@@ -4,7 +4,7 @@
  * LEIDEN OPEN VARIATION DATABASE (LOVD)
  *
  * Created     : 2014-12-19
- * Modified    : 2015-12-09:16:36:14
+ * Modified    : 2015-12-11:11:09:40
  * For LOVD    : 3.0-12
  *
  * Copyright   : 2014 Leiden University Medical Center; http://www.LUMC.nl/
@@ -250,9 +250,9 @@ class admin_tests extends PHPUnit_Extensions_SeleniumTestCase
         $this->click("//tr[@id='IVD']/td[2]");
         $this->waitForPageToLoad("30000");
         $this->assertTrue((bool)preg_match('/^[\s\S]*\/src\/variants[\s\S]create&reference=Transcript&geneid=IVD&target=0000000001$/',$this->getLocation()));
-        $this->uncheck("name=ignore_00001");
-        $this->type("name=00001_VariantOnTranscript/Exon", "2");
-        $this->type("name=00001_VariantOnTranscript/DNA", "c.456T>G");
+        $this->uncheck("name=ignore_00000001");
+        $this->type("name=00000001_VariantOnTranscript/Exon", "2");
+        $this->type("name=00000001_VariantOnTranscript/DNA", "c.456T>G");
         $this->click("css=button.mapVariant");
         sleep(3);
         for ($second = 0; ; $second++) {
@@ -268,8 +268,8 @@ class admin_tests extends PHPUnit_Extensions_SeleniumTestCase
         $this->assertTrue((bool)preg_match('/^p\.\(Tyr152[\s\S]*\)$/',$this->getExpression($ProteinChange)));
         $GenomicDnaChange = $this->getEval("window.document.getElementById('variantForm').elements[10].value");
         $this->assertEquals("g.40702987T>G", $this->getExpression($GenomicDnaChange));
-        $this->select("name=00001_effect_reported", "label=Effect unknown");
-        $this->select("name=00001_effect_concluded", "label=Effect unknown");
+        $this->select("name=00000001_effect_reported", "label=Effect unknown");
+        $this->select("name=00000001_effect_concluded", "label=Effect unknown");
         $this->select("name=allele", "label=Paternal (confirmed)");
         $this->click("link=PubMed");
         $this->type("name=VariantOnGenome/Reference", "{PMID:[2011]:[2150333]}");
@@ -408,9 +408,9 @@ class admin_tests extends PHPUnit_Extensions_SeleniumTestCase
         $this->click("css=td.ordered");
         $this->waitForPageToLoad("30000");
         $this->assertTrue((bool)preg_match('/^[\s\S]*\/src\/variants[\s\S]create&reference=Transcript&geneid=IVD&target=0000000002$/',$this->getLocation()));
-        $this->uncheck("name=ignore_00001");
-        $this->type("name=00001_VariantOnTranscript/Exon", "2");
-        $this->type("name=00001_VariantOnTranscript/DNA", "c.345G>T");
+        $this->uncheck("name=ignore_00000001");
+        $this->type("name=00000001_VariantOnTranscript/Exon", "2");
+        $this->type("name=00000001_VariantOnTranscript/DNA", "c.345G>T");
         $this->click("css=button.mapVariant");
         sleep(3);
         for ($second = 0; ; $second++) {
@@ -426,8 +426,8 @@ class admin_tests extends PHPUnit_Extensions_SeleniumTestCase
         $this->assertEquals("p.(Met115Ile)", $this->getExpression($ProteinChange));
         $GenomicDnaChange = $this->getEval("window.document.getElementById('variantForm').elements[10].value");
         $this->assertEquals("g.40702876G>T", $this->getExpression($GenomicDnaChange));
-        $this->select("name=00001_effect_reported", "label=Effect unknown");
-        $this->select("name=00001_effect_concluded", "label=Effect unknown");
+        $this->select("name=00000001_effect_reported", "label=Effect unknown");
+        $this->select("name=00000001_effect_concluded", "label=Effect unknown");
         $this->select("name=allele", "label=Paternal (confirmed)");
         $this->click("link=PubMed");
         $this->type("name=VariantOnGenome/Reference", "{PMID:[2011]:[2150333]}");
@@ -569,15 +569,15 @@ class admin_tests extends PHPUnit_Extensions_SeleniumTestCase
                 for ($second = 0; ; $second++) {
                         if ($second >= 60) $this->fail("timeout");
                         try {
-                                if ($this->isElementPresent("name=ignore_00002")) break;
+                                if ($this->isElementPresent("name=ignore_00000002")) break;
                         } catch (Exception $e) {}
                         sleep(1);
                 }
-                $this->uncheck("name=ignore_00002");
-                $this->uncheck("name=ignore_00003");
-                $this->type("name=00002_VariantOnTranscript/Exon", "3");
-                $this->type("name=00003_VariantOnTranscript/Exon", "3");
-                $this->type("name=00002_VariantOnTranscript/DNA", "c.62T>C");
+                $this->uncheck("name=ignore_00000002");
+                $this->uncheck("name=ignore_00000003");
+                $this->type("name=00000002_VariantOnTranscript/Exon", "3");
+                $this->type("name=00000003_VariantOnTranscript/Exon", "3");
+                $this->type("name=00000002_VariantOnTranscript/DNA", "c.62T>C");
                 $this->click("css=button.mapVariant");
                 sleep(3);
                 for ($second = 0; ; $second++) {
@@ -591,14 +591,14 @@ class admin_tests extends PHPUnit_Extensions_SeleniumTestCase
                 $this->assertTrue((bool)preg_match('/^r\.\([\s\S]\)$/',$this->getExpression($RnaChange)));
                 $ProteinChange = $this->getEval("window.document.getElementById('variantForm').elements[5].value");
                 $this->assertEquals("p.(Leu21Pro)", $this->getExpression($ProteinChange));
-                $this->select("name=00002_effect_reported", "label=Probably affects function");
-                $this->select("name=00002_effect_concluded", "label=Probably does not affect function");
+                $this->select("name=00000002_effect_reported", "label=Probably affects function");
+                $this->select("name=00000002_effect_concluded", "label=Probably does not affect function");
                 $RnaChangeTwo = $this->getEval("window.document.getElementById('variantForm').elements[4].value");
                 $this->assertTrue((bool)preg_match('/^r\.\([\s\S]\)$/',$this->getExpression($RnaChangeTwo)));
                 $ProteinChangeTwo = $this->getEval("window.document.getElementById('variantForm').elements[5].value");
                 $this->assertEquals("p.(Leu21Pro)", $this->getExpression($ProteinChangeTwo));
-                $this->select("name=00003_effect_reported", "label=Probably affects function");
-                $this->select("name=00003_effect_concluded", "label=Probably does not affect function");
+                $this->select("name=00000003_effect_reported", "label=Probably affects function");
+                $this->select("name=00000003_effect_concluded", "label=Probably does not affect function");
                 $this->select("name=allele", "label=Maternal (confirmed)");
                 $GenomicDnaChange = $this->getEval("window.document.getElementById('variantForm').elements[19].value");
                 $this->assertEquals("g.2843789A>G", $this->getExpression($GenomicDnaChange));
@@ -779,9 +779,9 @@ class admin_tests extends PHPUnit_Extensions_SeleniumTestCase
         $this->click("css=td.ordered");
         $this->waitForPageToLoad("30000");
         $this->assertTrue((bool)preg_match('/^[\s\S]*\/src\/variants[\s\S]create&reference=Transcript&geneid=IVD&target=0000000002$/',$this->getLocation()));
-        $this->uncheck("name=ignore_00001");
-        $this->type("name=00001_VariantOnTranscript/Exon", "2");
-        $this->type("name=00001_VariantOnTranscript/DNA", "c.345G>T");
+        $this->uncheck("name=ignore_00000001");
+        $this->type("name=00000001_VariantOnTranscript/Exon", "2");
+        $this->type("name=00000001_VariantOnTranscript/DNA", "c.345G>T");
         $this->click("css=button.mapVariant");
         sleep(3);
         for ($second = 0; ; $second++) {
@@ -798,8 +798,8 @@ class admin_tests extends PHPUnit_Extensions_SeleniumTestCase
         $this->assertEquals("p.(Met115Ile)", $this->getExpression($ProteinChange));
         $GenomicDnaChange = $this->getEval("window.document.getElementById('variantForm').elements[10].value");
         $this->assertEquals("g.40702876G>T", $this->getExpression($GenomicDnaChange));
-        $this->select("name=00001_effect_reported", "label=Effect unknown");
-        $this->select("name=00001_effect_concluded", "label=Effect unknown");
+        $this->select("name=00000001_effect_reported", "label=Effect unknown");
+        $this->select("name=00000001_effect_concluded", "label=Effect unknown");
         $this->select("name=allele", "label=Paternal (confirmed)");
         $this->click("link=PubMed");
         $this->type("name=VariantOnGenome/Reference", "{PMID:[2011]:[2150333]}");

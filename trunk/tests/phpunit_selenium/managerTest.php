@@ -4,7 +4,7 @@
  * LEIDEN OPEN VARIATION DATABASE (LOVD)
  *
  * Created     : 2014-12-19
- * Modified    : 2015-12-09:16:36:14
+ * Modified    : 2015-12-11:11:09:40
  * For LOVD    : 3.0-12
  *
  * Copyright   : 2014 Leiden University Medical Center; http://www.LUMC.nl/
@@ -270,9 +270,9 @@ class manager_tests extends PHPUnit_Extensions_SeleniumTestCase
         $this->click("link=GJB1");
         $this->waitForPageToLoad("30000");
         $this->assertTrue((bool)preg_match('/^[\s\S]*\/src\/variants[\s\S]create&reference=Transcript&geneid=GJB1&target=0000000001$/',$this->getLocation()));
-        $this->uncheck("name=ignore_00001");
-        $this->type("name=00001_VariantOnTranscript/Exon", "2");
-        $this->type("name=00001_VariantOnTranscript/DNA", "c.34G>T");
+        $this->uncheck("name=ignore_00000001");
+        $this->type("name=00000001_VariantOnTranscript/Exon", "2");
+        $this->type("name=00000001_VariantOnTranscript/DNA", "c.34G>T");
         $this->click("css=button.mapVariant");
         sleep(3);
         for ($second = 0; ; $second++) {
@@ -288,8 +288,8 @@ class manager_tests extends PHPUnit_Extensions_SeleniumTestCase
         $this->assertEquals("p.(Gly12Cys)", $this->getExpression($ProteinChange));
         $GenomicDnaChange = $this->getEval("window.document.getElementById('variantForm').elements[10].value");
         $this->assertEquals("g.70443591G>T", $this->getExpression($GenomicDnaChange));
-        $this->select("name=00001_effect_reported", "label=Effect unknown");
-        $this->select("name=00001_effect_concluded", "label=Effect unknown");
+        $this->select("name=00000001_effect_reported", "label=Effect unknown");
+        $this->select("name=00000001_effect_concluded", "label=Effect unknown");
         $this->select("name=allele", "label=Maternal (confirmed)");
         $this->click("link=PubMed");
         $this->type("name=VariantOnGenome/Reference", "{PMID:[2011]:[2150333]}");
@@ -464,13 +464,13 @@ class manager_tests extends PHPUnit_Extensions_SeleniumTestCase
                 for ($second = 0; ; $second++) {
                         if ($second >= 60) $this->fail("timeout");
                         try {
-                                if ($this->isElementPresent("name=ignore_00002")) break;
+                                if ($this->isElementPresent("name=ignore_00000002")) break;
                         } catch (Exception $e) {}
                         sleep(1);
                 }
-                $this->uncheck("name=ignore_00003");
-                $this->type("name=00002_VariantOnTranscript/Exon", "3");
-                $this->type("name=00002_VariantOnTranscript/DNA", "c.62T>A");
+                $this->uncheck("name=ignore_00000003");
+                $this->type("name=00000002_VariantOnTranscript/Exon", "3");
+                $this->type("name=00000002_VariantOnTranscript/DNA", "c.62T>A");
                 $this->click("css=button.mapVariant");
                 sleep(3);
                 for ($second = 0; ; $second++) {
@@ -484,17 +484,17 @@ class manager_tests extends PHPUnit_Extensions_SeleniumTestCase
                 $this->assertTrue((bool)preg_match('/^r\.\([\s\S]\)$/',$this->getExpression($RnaChange)));
                 $ProteinChange = $this->getEval("window.document.getElementById('variantForm').elements[5].value");
                 $this->assertEquals("p.(Leu21Gln)", $this->getExpression($ProteinChange));
-                $this->select("name=00002_effect_reported", "label=Probably affects function");
-                $this->select("name=00002_effect_concluded", "label=Probably does not affect function");
-                $this->type("name=00003_VariantOnTranscript/Exon", "3");
+                $this->select("name=00000002_effect_reported", "label=Probably affects function");
+                $this->select("name=00000002_effect_concluded", "label=Probably does not affect function");
+                $this->type("name=00000003_VariantOnTranscript/Exon", "3");
                 $DnaChange = $this->getEval("window.document.getElementById('variantForm').elements[11].value");
                 $this->assertEquals("c.62T>A", $this->getExpression($DnaChange));
                 $RnaChange2 = $this->getEval("window.document.getElementById('variantForm').elements[13].value");
                 $this->assertTrue((bool)preg_match('/^r\.\([\s\S]\)$/',$this->getExpression($RnaChange2)));
                 $ProteinChange2 = $this->getEval("window.document.getElementById('variantForm').elements[14].value");
                 $this->assertEquals("p.(Leu21Gln)", $this->getExpression($ProteinChange2));
-                $this->select("name=00003_effect_reported", "label=Probably affects function");
-                $this->select("name=00003_effect_concluded", "label=Probably does not affect function");
+                $this->select("name=00000003_effect_reported", "label=Probably affects function");
+                $this->select("name=00000003_effect_concluded", "label=Probably does not affect function");
                 $this->select("name=allele", "label=Maternal (confirmed)");
                 $GenomicDnaChange = $this->getEval("window.document.getElementById('variantForm').elements[19].value");
                 $this->assertEquals("g.2843789A>T", $this->getExpression($GenomicDnaChange));
@@ -649,7 +649,7 @@ class manager_tests extends PHPUnit_Extensions_SeleniumTestCase
         $this->select("name=effect_concluded", "label=Effect unknown");
         $this->select("name=owned_by", "label=LOVD3 Admin");
         $this->select("name=statusid", "label=Public");
-        $this->click("//input[@value='Upload SeattleSeq file']");
+        $this->click("//input[@value='Create variant entry']");
         $this->waitForPageToLoad("30000");
         $this->assertTrue((bool)preg_match('/^Successfully processed your submission and sent an email notification to the relevant curator[\s\S]*$/',$this->getText("css=table[class=info]")));
         $this->waitForPageToLoad("4000");
@@ -671,9 +671,9 @@ class manager_tests extends PHPUnit_Extensions_SeleniumTestCase
         $this->click("css=td.ordered");
         $this->waitForPageToLoad("30000");
         $this->assertTrue((bool)preg_match('/^[\s\S]*\/src\/variants[\s\S]create&reference=Transcript&geneid=GJB1&target=0000000002$/',$this->getLocation()));
-        $this->uncheck("name=ignore_00001");
-        $this->type("name=00001_VariantOnTranscript/Exon", "2");
-        $this->type("name=00001_VariantOnTranscript/DNA", "c.251T>A");
+        $this->uncheck("name=ignore_00000001");
+        $this->type("name=00000001_VariantOnTranscript/Exon", "2");
+        $this->type("name=00000001_VariantOnTranscript/DNA", "c.251T>A");
         $this->click("css=button.mapVariant");
         sleep(3);
         for ($second = 0; ; $second++) {
@@ -689,8 +689,8 @@ class manager_tests extends PHPUnit_Extensions_SeleniumTestCase
         $this->assertEquals("p.(Val84Asp)", $this->getExpression($ProteinChange));
         $GenomicDnaChange = $this->getEval("window.document.getElementById('variantForm').elements[10].value");
         $this->assertEquals("g.70443808T>A", $this->getExpression($GenomicDnaChange));
-        $this->select("name=00001_effect_reported", "label=Effect unknown");
-        $this->select("name=00001_effect_concluded", "label=Effect unknown");
+        $this->select("name=00000001_effect_reported", "label=Effect unknown");
+        $this->select("name=00000001_effect_concluded", "label=Effect unknown");
         $this->select("name=allele", "label=Paternal (confirmed)");
         $this->click("link=PubMed");
         $this->type("name=VariantOnGenome/Reference", "{PMID:[2011]:[2150333]}");

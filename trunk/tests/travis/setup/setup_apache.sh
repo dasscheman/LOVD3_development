@@ -37,5 +37,8 @@ echo 'Intall mail agent.'
 # Pass the -y flag to suppress interactive requests.
 sudo apt-get -qq -y install exim4 apcupsd nmap
 
+echo 'Install phpunit selenium'
+sudo apt-get install phpunit-selenium
+
 echo 'Restart apache2'
 sudo /etc/init.d/apache2 restart
