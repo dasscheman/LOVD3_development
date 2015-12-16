@@ -30,11 +30,6 @@ before_script:
   ## setup_apache.sh fix some assumptions where the files are stored!
   - ./trunk/tests/bash_scripts/convert_selenium_to_phpunit.sh --localhost=LOVD3_development --continueall
   - ./trunk/tests/travis/setup/setup_selenium_server.sh
-  #- dpkg -l phpunit-selenium
-  - pwd
-  -  php -r 'var_dump($_SERVER);' 
-#  - cd /home/travis/build/dasscheman/LOVD3_development/vendor/phpunit
-#  - ls -l
 
 script:
   - ./vendor/phpunit/phpunit/phpunit ./trunk/tests/phpunit_selenium/adminTest.php 
