@@ -4,7 +4,7 @@
  * LEIDEN OPEN VARIATION DATABASE (LOVD)
  *
  * Created     : 2010-12-15
- * Modified    : 2015-12-01
+ * Modified    : 2015-12-21
  * For LOVD    : 3.0-15
  *
  * Copyright   : 2004-2015 Leiden University Medical Center; http://www.LUMC.nl/
@@ -260,6 +260,12 @@ if (PATH_COUNT == 1 && ACTION == 'create') {
                     // Get UD from mutalyzer.
                     try {
                         $sRefseqUD = lovd_getUDForGene($_CONF['refseq_build'], $sSymbol);
+                        // Function may return an empty string. This is not a SOAP error, but still an error. For instance a type of gene we don't support.
+                        // To prevent further problems (getting transcripts, let's handle this nicely, shall we?
+                        $_BAR->setMessage('Failed to retreive gene reference sequence. This could be a temporary error, but it is likely that this gene is not supported by LOVD.', 'done');
+                        $_BAR->setMessageVisibility('done', true);
+                        die('</BODY>' . "\n" .
+                            '</HTML>' . "\n");
                     } catch (SoapFault $e) {
                         lovd_soapError($e);
                     }
@@ -269,54 +275,9 @@ if (PATH_COUNT == 1 && ACTION == 'create') {
                 // FIXME: When changing code here, check in transcripts?create if you need to make changes there, too.
                 $_BAR->setMessage('Collecting all available transcripts...');
                 $_BAR->setProgress($nProgress += 17);
-                if ($sChromosome == 'M') {
-                    // For mitochondrial genes, an alias must be used to get the transcripts and info.
-                    // List of aliases are hard-coded in inc-init.php.
-                    $aTranscripts = $_DATA['Transcript']->getTranscriptPositions($sRefseqUD, $sSymbol, $sGeneName, $nProgress);
-                } else {
-                    // FIXME; Later this if-else statement should be removed. The function $_DATA['Transcript']->getTranscriptPositions()
-                    // should be called for all genes. For the sake of clarity this will be done in a separate commit.
-                    try {
-                        // Can throw notice when TranscriptInfo is not present (when a gene recently has been renamed, for instance).
-                        $aTranscriptInfo = @$_Mutalyzer->getTranscriptsAndInfo(array('genomicReference' => $sRefseqUD, 'geneName' => $sSymbol))->getTranscriptsAndInfoResult->TranscriptInfo;
-                    } catch (SoapFault $e) {
-                        lovd_soapError($e);
-                    }
-                    if (empty($aTranscriptInfo)) {
-                        // No transcripts found.
-                        $aTranscriptInfo = array();
-                    }
-
-                    $aTranscripts = array(
-                        'id' => array(),
-                        'name' => array(),
-                        'mutalyzer' => array(),
-                        'positions' => array(),
-                        'protein' => array(),
-                    );
-                    $nTranscripts = count($aTranscriptInfo);
-                    foreach($aTranscriptInfo as $oTranscript) {
-                        $nProgress += ((100 - $nProgress) / $nTranscripts);
-                        $_BAR->setMessage('Collecting ' . $oTranscript->id . ' info...');
-                        if ($oTranscript->id) {
-                            $aTranscripts['id'][] = $oTranscript->id;
-                            // Until revision 679 the transcript version was not used in the index. The version number was removed with a preg_replace.
-                            // Can not figure out why version is not included. Therefore, for now we will do without preg_replace.
-                            $aTranscripts['name'][$oTranscript->id] = str_replace($sGeneName . ', ', '', $oTranscript->product);
-                            $aTranscripts['mutalyzer'][$oTranscript->id] = str_replace($sSymbol . '_v', '', $oTranscript->name);
-                            $aTranscripts['positions'][$oTranscript->id] =
-                                array(
-                                    'chromTransStart' => (isset($oTranscript->chromTransStart)? $oTranscript->chromTransStart : 0),
-                                    'chromTransEnd' => (isset($oTranscript->chromTransEnd)? $oTranscript->chromTransEnd : 0),
-                                    'cTransStart' => $oTranscript->cTransStart,
-                                    'cTransEnd' => $oTranscript->sortableTransEnd,
-                                    'cCDSStop' => $oTranscript->cCDSStop,
-                                );
-                            $aTranscripts['protein'][$oTranscript->id] = (!isset($oTranscript->proteinTranscript)? '' : $oTranscript->proteinTranscript->id);
-                        }
-                        $_BAR->setProgress($nProgress);
-                    }
-                }
+                
+                $aTranscripts = $_DATA['Transcript']->getTranscriptPositions($sRefseqUD, $sSymbol, $sGeneName, $nProgress);
+                
                 $_BAR->setProgress(100);
                 $_BAR->setMessage('Information collected, now building form...');
                 $_BAR->setMessageVisibility('done', true);

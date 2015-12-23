@@ -4,7 +4,7 @@
  * LEIDEN OPEN VARIATION DATABASE (LOVD)
  *
  * Created     : 2015-11-27
- * Modified    : 2015-11-27
+ * Modified    : 2015-12-21
  * For LOVD    : 3.0-15
  *
  * Copyright   : 2004-2015 Leiden University Medical Center; http://www.LUMC.nl/
@@ -31,19 +31,48 @@
 define('ROOT_PATH', '../');
 require ROOT_PATH . 'inc-init.php';
 session_write_close();
+$nMaxDropDown = 10;
 
 $qGenes = $_DB->query('SELECT id, id as value, CONCAT(id, " (", name, ")") AS label FROM ' . TABLE_GENES . ' ORDER BY id');
 //$qGenes = $_DB->query('SELECT id, id as value, CONCAT(id, " (", name, ")") AS label FROM ' . TABLE_GENES . ' WHERE id = ?', array('ARSE'));
-$zGenes = $qGenes->fetchAllAssoc(); 
+$zGenes = $qGenes->fetchAllAssoc();
 
 if (empty($zGenes)) {
-    die(AJAX_DATA_ERROR);
+    die(json_encode(AJAX_DATA_ERROR));
 }
 
-foreach($zGenes as $key=>$value) {
+foreach ($zGenes as $key => $value) {
     //This will shorten the gene names nicely, to prevent long gene names from messing up the form.
     $zGenes[$key]['label'] = lovd_shortenString($zGenes[$key]['label'], 75);
 }
 
-die(json_encode($zGenes));
+if (count($zGenes) < $nMaxDropDown) {
+    // Create the option elements.
+    $options = '';
+    foreach ($zGenes as $aGene) { 
+        $options .= '<OPTION value=' . $aGene['id'] . '>' . $aGene['label'] . ' </OPTION>' . "\n";
+    }
+    die(json_encode(array(
+        'switchType' => 'dropdown',
+        'html' => 
+            '<FORM action="" id="SelectGeneDBInline" method="get" style="margin : 0px;" onsubmit="lovd_changeURL(); return false;">' . "\n" .
+            '   <DIV id="div_gene_dropdown">' . "\n" .
+            '        <SELECT name="select_db" id="select_gene_dropdown" onchange="$(this).parent().submit();">' . "\n" .
+                        $options .
+            '       </SELECT>' . "\n" .
+            '       <INPUT type="submit" value="Switch" id="select_gene_switch">' . "\n" .
+            '    </DIV>' . "\n" .
+            '</FORM>')));
+} else {
+    die(json_encode(array(
+        'switchType' => 'autocomplete',
+        'html' => 
+            '<FORM action="" id="SelectGeneDBInline" method="get" style="margin : 0px;" onsubmit="lovd_changeURL(); return false;">' . "\n" .
+            '   <DIV id="div_gene_autocomplete">' . "\n" .
+            '       <INPUT name="select_db" id="select_gene_autocomplete" onchange="$(this).parent().submit();">' . "\n" .
+            '       <INPUT type="submit" value="Switch" id="select_gene_switch">' . "\n" .
+            '   </DIV>' . "\n" .
+            '</FORM>', 
+        'data' => $zGenes)));
+}
 ?>

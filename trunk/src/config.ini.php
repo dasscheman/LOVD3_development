@@ -30,8 +30,8 @@ password = lovd_pw
 
 # Database name (required). When using SQLite, specify the filename here.
 #
-#database = lovd3
-database = lovd3_development
+database = lovd3
+#database = lovd3_development
 
 # This is for the table prefixes; if you wish to install more than one LOVD
 # system per database, use different directories for these installations and

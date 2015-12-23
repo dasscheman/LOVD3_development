@@ -27,10 +27,20 @@
  * Fixed bug; The links from user profile pages to data owned by the user didn't
    work for users with some special characters in their names.
  * LOVD now allows more transcripts to be stored; up to 16 million.
- * Fixed bug; During update import it was not possible to change the capitals of
-   a disease name.
+ * Fixed bug; When updating using an import file, it was not possible to change
+   the capitalization of a disease name.
+ * Fixed bug; Variants counts on the gene homepage were counted using the gene's
+   first transcript in the database only.
+ * Fixed bug; Attempting to make changes to the "Healty/Control" disease using
+   an import file resulted in a fatal error.
+ * Fixed bug; Under certain circumstances, fatal errors would not be logged even
+   though LOVD reported they had been logged.
  * Fixed bug; During an insert import the progress bar was hanging when a 
    transcript ID is missing in the section variants on transcripts.
+ * The geneswitcher in the header is now an autocomplete field for large databases.
+ * Improved error message when LOVD could not retrieve a valid gene reference
+   sequence from Mutalyzer.
+
 
 /**************************
  * 3.0 Build 14 (r657)
