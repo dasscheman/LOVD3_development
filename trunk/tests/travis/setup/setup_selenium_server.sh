@@ -12,11 +12,6 @@ sudo apt-get -qq update
 echo "Installing dependencies"
 composer install
 
-composer global require 'phpunit/phpunit-selenium=*'
-composer global require 'phpunit/phpunit-story=*'
-composer global require 'phpunit/dbunit=*'
-composer global require 'phpunit/php-invoker=*'
-
 echo "Download Firefox"
 wget $firefoxUrl -O $firefoxFile
 tar xvjf $firefoxFile
