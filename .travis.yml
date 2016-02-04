@@ -16,9 +16,6 @@ addons:
 sudo: required
 
 before_install:
-# for php 5.5
-#  - curl -s -o $HOME/.phpenv/versions/5.5/bin/phpunit https://phar.phpunit.de/phpunit-old.phar
-#  - chmod +x $HOME/.phpenv/versions/5.5/bin/phpunit
   - ./trunk/tests/travis/setup/setup_mysql.sh
 
 before_script:
@@ -42,7 +39,7 @@ script:
 #  - phpunit ./trunk/tests/phpunit_selenium/tempTest.php
   
 ## Run all tests
-  - phpunit ./trunk/tests/phpunit_selenium/
+  - ./vendor/bin/phpunit ./trunk/tests/phpunit_selenium/
 
 #notifications:
 #  email:
