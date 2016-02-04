@@ -124,17 +124,21 @@ Please bear with us while we finish this manual.
 
 
 \chapter{View and search data}
+To navigate around in an LOVD installation you can use the tabs on the top of the page. 
+Which tabs you can see depends on if you are logged in or not and when you logged in on your user level.
+When you are not logged in or you are logged in as a submitter you can see the tabs Genes, Transcripts, Variants, Individuals, Diseases, Screening, Submit and Documentation.
+On top of that, curators, managers and admin can see the tab Configuration and only managers and admin can see the Users and Setup tab. 
 
 Each tab does have a dropdown menu and the tab itself does have an default page to which you will go when you click on the tab.
-The content of this dropdown menu depents on what your user level is.
+The content of this dropdown menu depends on what your user level is.
 
 
 
 \section{Search and sort}
-All list views have a input field which can be used to search data.
+All list views have search fields which can be used to search data.
 You can search for a complete word or you can search for a part of a search term.
 For example in the all genes view you can search for ``AAM''. 
-LOVD will not only find genes starting with ``AAM'', but also containing ``AAM'', linke ``DAAM1'' and ``DAAM2''.
+LOVD will not only find genes starting with ``AAM'', but also containing ``AAM'', like ``DAAM1'' and ``DAAM2''.
 \begin{figure}[ht]
   \begin{shaded}
   \frame{\includegraphics[width=\linewidth]{search_for_gene.png}}
@@ -152,9 +156,9 @@ You can use different operators to specify your search request:
   Operator & \textbf{Example} & \textbf{Description}\\ \hline \hline
   {space} & AM DA & This gives results where both AM and DA are occuring.\\ \hline
   | & AM|DA & This gives results where either AM or DA occures.\\ \hline
-  ="" & ="AM" & Exactly matches\\ \hline
-  != & !=AM & Does not contain\\ \hline
-  !="" & !="AM" & Does not exactly match\\ \hline
+  ="" & ="AM" & Returns results which exactly matches AM.\\ \hline
+  != & !=AM & Returns results which does not contain AM.\\ \hline
+  !="" & !="AM" & Returns results which does not exactly match AM.\\ \hline
   > & >23 & Filter for values higher than 23\\ \hline
   < & <23 & Filter for values lower than 23\\ \hline
 \end{tabular}
@@ -174,13 +178,16 @@ When no gene is selected in the header, the default page of the genes tab is the
 When a gene is selected in the header the default page of the gene tab is the gene homepage. 
 
 
-\textbf{View all genes}: Here you can see all the genes for this installation. 
+\textbf{View all genes}: 
+Here you can see all the genes for this installation. 
 You can click on a gene to go to the View gene homepage.
 
-\textbf{View gene homepage}: Here you can see the details of a gene. See for more information: \hyperlink{sec:gene_homepage}{\nameref{sec:gene_homepage}}.
+\textbf{View gene homepage}: 
+Here you can see the details of a gene. See for more information: \hyperlink{sec:gene_homepage}{\nameref{sec:gene_homepage}}.
 This menu item is not available when no gene is selected in the header.
 
-\textbf{View graphs for a gene}: This displays the statistics of the variants within a gene. 
+\textbf{View graphs for a gene}: 
+This displays the statistics of the variants within a gene. 
 This menu item is not available when no gene is selected in the header.
 
 
@@ -203,7 +210,8 @@ When a gene is selected in the header the default page of the transcript tab is 
 \textbf{View all transcripts} and \textbf{View all transcripts for a gene} are both views which list the transcripts. In both views you can click on a transcript to view the detail of this transcript on the View transcript page. 
 The view all transcripts for a gene menu item is not available when no gene is selected in the header.
 
-\textbf{View transcript}: To get to the view transcript page you have to select a transcript in  in the view all transcript page or the view all transcript for a gene page. 
+\textbf{View transcript page}: 
+To get to the view transcript page you have to select a transcript in the view all transcript page or the view all transcript for a gene page. 
 On this page you can find details about the transcript and below the transcript details are all variant found on the transcript. 
 You can click on the a variant in the variant list, this will bring you to the view genomic variant page.
 
@@ -215,10 +223,12 @@ You can click on the a variant in the variant list, this will bring you to the v
 When no gene is selected in the header, the default page of the variants tab is the view all genomic variants page.
 When a gene is selected in the header the default page of the variants tab is the view unique variants in a gene. 
 
-\textbf{View all genomic variants}: This view displays all genomic variants in this LOVD installation.
+\textbf{View all genomic variants}:
+This view displays all genomic variants in this LOVD installation.
 You can click on the a variant, this will bring you to the view genomic variant page.
 
-\textbf{View all variants affecting transcripts}: This view displays all variants in this LOVD installation found on a transcript. 
+\textbf{View all variants affecting transcripts}:
+This view displays all variants in this LOVD installation found on a transcript.
 You can click on the a variant, this will bring you to the view genomic variant page.
 
 \begin{wrapfigure}[18]{r}{8cm}
@@ -231,16 +241,22 @@ You can click on the a variant, this will bring you to the view genomic variant 
 	\end{shaded}
 \end{wrapfigure}
 
-\textbf{View unique variants in a gene}
+\textbf{View unique variants in a gene}:
+This view displays the unique variants for a gene. The number of times a variant is found is displayed in the field ``reported''.
+The information in other fields are summarised and not all information for the variants are displayed.
+Click on a row to see all reported items of a variant.
 This menu item is not available when no gene is selected in the header.
 
-\textbf{View all variants for a gene}
+\textbf{View all variants for a gene}:
+Overview of all variants for a gene. Same variants are not grouped.
 This menu item is not available when no gene is selected in the header.
 
-\textbf{Full data view for a gene}
+\textbf{Full data view for a gene}:
 This menu item is not available when no gene is selected in the header.
 
-\textbf{View genomic variant}
+\textbf{View genomic variant page}:
+To get to the view genomic variant page you have to select a variant in one of the vatiant list view. 
+In the detail view of a genomic variant you can see which variant on transcripts are found and which screening is used.
 
 
 
@@ -248,7 +264,10 @@ This menu item is not available when no gene is selected in the header.
 
 
 \section{Individuals}
-\begin{wrapfigure}[23]{r}{8cm} % Only wrap for 3 lines
+When no gene is selected in the header, the default page of the individuals tab is the view individuals page.
+When a gene is selected in the header the default page of the individuals tab is the view all individuals with variants in a gene. 
+
+\begin{wrapfigure}[14]{r}{8cm}
   \vspace{-25pt}
 	\begin{shaded}
   		\frame{\includegraphics[width=0.95\linewidth]{individual_menu.png}}\centering
@@ -258,19 +277,35 @@ This menu item is not available when no gene is selected in the header.
 	\end{shaded}
 \end{wrapfigure}
 
+\textbf{View all individuals}:
+All individuals in the database are displayed and can be searched. 
+When you click on a individual row you will go to the detail view of the selected individual.
 
-\textbf{View all individuals}
+\textbf{View all individuals with variants in a gene}:
+This view displays all individuals with variants for current selected gene. 
+When you click on a individual row you will go to the detail view of the selected individual.
+This menu item is not available when no gene is selected in the header.
 
-\textbf{View all individuals with variants in a gene}
+\textbf{View individual page}:
+This is the detail view of a individual.
+The top gives details about the individual. 
+below the details the phenotype of the individual, the screenings used and the variants found in this individual are displayed.
 
-\textbf{View individual}
 
 
 
 
 
 \section{Diseases}
-\begin{wrapfigure}[23]{r}{8cm} % Only wrap for 3 lines
+When a gene is selected in the header the default page of the tab is the view diseases with a filter for current gene. 
+When no gene is selected all diseases in the database are displayed.
+
+\textbf{View all diseases}:
+This page displays all the diseases in the database.
+Also the number of individuals reported with this disease is displayed and the number of phenotypes reported.
+When you click on a disease row you will go to the detail view of a disease.
+
+\begin{wrapfigure}[8]{r}{8cm}
   \vspace{-25pt}
 	\begin{shaded}
   		\frame{\includegraphics[width=0.95\linewidth]{disease_menu.png}}\centering
@@ -280,17 +315,18 @@ This menu item is not available when no gene is selected in the header.
 	\end{shaded}
 \end{wrapfigure}
 
-
-\textbf{View all diseases}
-
-\textbf{View disease}
-
+\textbf{View disease page}:
+This is the detail view of a disease.
+On top you can see some characteristics of the disease.
+Below you can see a list view of all individuals diagnosed with current disease.
 
 
 
 
 \section{Screening}
-\begin{wrapfigure}[23]{r}{8cm} % Only wrap for 3 lines
+When no gene is selected in the header, the default page of the screenings tab is the view screenings page.
+When a gene is selected in the header the default page of the screenings tab is the view screenings that screened for a gene.
+\begin{wrapfigure}[14]{r}{8cm}
   \vspace{-25pt}
 	\begin{shaded}
   		\frame{\includegraphics[width=0.95\linewidth]{screening_menu.png}}\centering
@@ -301,11 +337,19 @@ This menu item is not available when no gene is selected in the header.
 \end{wrapfigure}
 
 
-\textbf{View all screenings}
+\textbf{View all screenings}:
+All screenings in the database are displayed and can be searched.
+When you click on a screening row you will go to the detail view of the selected screening.
 
-\textbf{View all screenings for a gene}
+\textbf{View all screenings for a gene}:
+This view displays all screenings that screened current selected gene.
+When you click on a screening row you will go to the detail view of the selected screening.
+This menu item is not available when no gene is selected in the header.
 
-\textbf{View screening}
+\textbf{View screening page}:
+This is the detail view of a screening.
+The top gives details about the screening.
+Below a list view of all genes screened with current screening and a list view of all variants found with current screening.
 
 
 

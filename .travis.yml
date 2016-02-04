@@ -1,21 +1,20 @@
 ## This is for LOVD3_development
-
 language: php
 php:
-#  - 5.3.3
-  # aliased to 5.3.29
-#  - 5.3
   # aliased to a recent 5.4.x version
-#  - 5.4
+  - 5.4
   # aliased to a recent 5.5.x version
 #  - 5.5
   # aliased to a recent 5.6.xversion  
-  - 5.6
+#  - 5.6
   # aliased to a recent 7.x version
 #  - 7.0
 #  - hhvm
 #  - nightly
 
+addons:
+  firefox: "40.0"
+  
 sudo: required
 
 before_install:
@@ -25,12 +24,15 @@ before_install:
   - ./trunk/tests/travis/setup/setup_mysql.sh
 
 before_script:
+  - "export DISPLAY=:99.0"
+  - "sh -e /etc/init.d/xvfb start"
+  - sleep 3
   - ./trunk/tests/travis/setup/setup_apache.sh --githubaccount=dasscheman
   ## IMPORTANT! convert must be run AFTER the setup_apache.sh
   ## setup_apache.sh fix some assumptions where the files are stored!
   - ./trunk/tests/bash_scripts/convert_selenium_to_phpunit.sh --localhost=LOVD3_development --continueall
   - ./trunk/tests/travis/setup/setup_selenium_server.sh
-
+  
 script:
   - ./vendor/bin/phpunit --verbose ./trunk/tests/phpunit_selenium/adminTest.php 
 #  - phpunit ./trunk/tests/phpunit_selenium/adminTest.php
@@ -44,6 +46,6 @@ script:
 ## Run all tests
 ##  - phpunit ./trunk/tests/phpunit_selenium/
 
-notifications:
-  email:
-    - d.asscheman@lumc.nl
+#notifications:
+#  email:
+#    - d.asscheman@lumc.nl

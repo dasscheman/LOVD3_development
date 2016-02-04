@@ -262,10 +262,10 @@ if (PATH_COUNT == 1 && ACTION == 'create') {
                         $sRefseqUD = lovd_getUDForGene($_CONF['refseq_build'], $sSymbol);
                         // Function may return an empty string. This is not a SOAP error, but still an error. For instance a type of gene we don't support.
                         // To prevent further problems (getting transcripts, let's handle this nicely, shall we?
-                        $_BAR->setMessage('Failed to retreive gene reference sequence. This could be a temporary error, but it is likely that this gene is not supported by LOVD.', 'done');
-                        $_BAR->setMessageVisibility('done', true);
-                        die('</BODY>' . "\n" .
-                            '</HTML>' . "\n");
+//                        $_BAR->setMessage('Failed to retreive gene reference sequence. This could be a temporary error, but it is likely that this gene is not supported by LOVD.', 'done');
+//                        $_BAR->setMessageVisibility('done', true);
+//                        die('</BODY>' . "\n" .
+//                            '</HTML>' . "\n");
                     } catch (SoapFault $e) {
                         lovd_soapError($e);
                     }
