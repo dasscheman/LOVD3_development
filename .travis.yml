@@ -34,7 +34,7 @@ before_script:
   - ./trunk/tests/travis/setup/setup_selenium_server.sh
   
 script:
-  - ./vendor/bin/phpunit --verbose ./trunk/tests/phpunit_selenium/adminTest.php 
+#  - ./vendor/bin/phpunit --verbose ./trunk/tests/phpunit_selenium/adminTest.php 
 #  - phpunit ./trunk/tests/phpunit_selenium/adminTest.php
 #  - phpunit ./trunk/tests/phpunit_selenium/authorizationTest.php
 #  - phpunit ./trunk/tests/phpunit_selenium/collaboratorTest.php
@@ -44,7 +44,7 @@ script:
 #  - phpunit ./trunk/tests/phpunit_selenium/tempTest.php
   
 ## Run all tests
-##  - phpunit ./trunk/tests/phpunit_selenium/
+  - phpunit ./trunk/tests/phpunit_selenium/
 
 #notifications:
 #  email:
