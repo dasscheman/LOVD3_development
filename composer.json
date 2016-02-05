@@ -1,8 +1,10 @@
 {
-    "require-dev": {
-        "phpunit/phpunit-selenium": "1.4.*",
-        "phpunit/phpunit": "4.8.*",
-        "phpunit/php-invoker": "*",
+    "require": {
+        "phpunit/phpunit-selenium": "1.4.2",
+        "phpunit/phpunit": "4.4.5",
+        "phpunit/php-invoker": "1.1.4",
+        "phpunit/dbunit": "2.0.2",
+        "phpunit/phpunit-story": "1.0.2",
         "phpunit/dbunit": "*",
         "phpunit/phpunit-story": "*",
         "sebastian/comparator": "~1.0",
