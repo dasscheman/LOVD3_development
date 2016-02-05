@@ -1,0 +1,9 @@
+
+
+## Transcripts ## Do not remove or alter this header ##
+{{id}}	{{geneid}}	{{name}}	{{id_mutalyzer}}	{{id_ncbi}}	{{id_protein_ncbi}}	{{position_c_mrna_start}}	{{position_c_mrna_end}}	{{position_c_cds_end}}	{{position_g_mrna_start}}	{{position_g_mrna_end}}
+"00001"	"A1BG"	"alpha-1-B glycoprotein"	"001"	"NM_130786.3"	"NP_570602.2"	"-62"	"1704"	"1488"	"58864865"	"58858172"
+"00002"	"A1CF"	"transcript variant 1"	"002"	"NM_014576.3"	"NP_055391.2"	"-188"	"9081"	"1761"	"52645435"	"52559169"
+"00003"	"A2M"	"alpha-2-macroglobulin"	"001"	"NM_000014.4"	"NP_000005.2"	"-113"	"4540"	"4425"	"9268558"	"9220304"
+"00004"	"A2M-AS1"	"A2M antisense RNA 1"	"001"	"NR_026971.1"	""	"1"	"2187"	"2187"	"9217773"	"9220651"
+"00005"	"A2MP1"	"alpha-2-macroglobulin pseudogene 1"	"001"	"NR_040112.1"	""	"1"	"1201"	"1201"	"9386803"	"9381129"

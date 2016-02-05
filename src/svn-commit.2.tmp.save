@@ -1,0 +1,7 @@
+Changed the view 'Individuals screened for gene' to 'Individuals with variants for gene'. A new column is added to the individuals view: variants in genes. This field displays for which genes variants are found for an i
+--This line, and those below, will be ignored--
+
+M    changelog.txt
+M    class/object_individuals.php
+M    class/template.php
+M    individuals.php

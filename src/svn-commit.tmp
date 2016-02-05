@@ -1,0 +1,5 @@
+Added soft warning when an new record is found in the importfile for a linking table. 
+These tables cannot be updated during an import and the user must be warned for that. 
+--This line, and those below, will be ignored--
+
+M    import.php

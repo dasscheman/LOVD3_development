@@ -1,0 +1,10 @@
+### LOVD-version 3000-020 ### Full data download ### To import, do not remove or alter this header ###
+# charset = UTF-8
+
+## Genes ## Do not remove or alter this header ##
+{{id}}	{{name}}	{{chromosome}}	{{chrom_band}}	{{refseq_genomic}}	{{refseq_UD}}	{{id_hgnc}}	{{id_entrez}}	{{id_omim}}
+"A1BG"	"alpha-1-B glycoprotein"	"19"	"q13.43"	"NC_000019.9"	"UD_144439223094"	"5"	"1"	"138670"
+"A1CF"	"APOBEC1 complementation factor"	"10"	"q21.1"	"NG_029916.1"	"UD_144439223660"	"24086"	"29974"	""
+"A2M"	"alpha-2-macroglobulin"	"12"	"p13.31"	"NG_011717.1"	"UD_144439223925"	"7"	"2"	"103950"
+"A2M-AS1"	"A2M antisense RNA 1 (head to head)"	"12"	"p13.31"	"NC_000012.11"	"UD_144439224103"	"27057"	"144571"	""
+"A2MP1"	"alpha-2-macroglobulin pseudogene 1"	"12"	"p13.31"	"NC_000012.11"	"UD_144439224546"	"8"	"3"	""

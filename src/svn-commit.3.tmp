@@ -1,0 +1,6 @@
+This is an amendment to revision 680. The function getTranscriptPositions is now for all genes. 
+
+--This line, and those below, will be ignored--
+
+M    genes.php
+M    transcripts.php
