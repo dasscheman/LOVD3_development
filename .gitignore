@@ -1,6 +1,5 @@
 /nbproject/
 /tests/test_results/reports/
-/tests/phpunit_selenium/
 /vendor/
 /tests/test_results/error_screenshots/
 /doc/tex/manual.toc
@@ -21,3 +20,11 @@
 /doc/tex/Curate_a_gene_variant_database.out
 /doc/tex/manual.out
 /doc/tex/Curate_a_gene_variant_database.toc
+/tests/phpunit_selenium/curatorTest.php
+/tests/phpunit_selenium/collaboratorTest.php
+/tests/phpunit_selenium/adminTest.php
+/tests/phpunit_selenium/managerTest.php
+/tests/phpunit_selenium/tempTest.php
+/tests/phpunit_selenium/submitterTest.php
+/tests/phpunit_selenium/importTest.php
+/tests/phpunit_selenium/authorizationTest.php
