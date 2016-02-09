@@ -48,8 +48,7 @@ SCRIPTPATH=$(dirname $SCRIPT)
 SELENIUMTESTTPATH=$(dirname $SCRIPTPATH)/selenium_tests
 PHPUNITTESTTPATH=$(dirname $SCRIPTPATH)/phpunit_selenium
 TESTDATATPATH=$(dirname $SCRIPTPATH)/test_data_files/
-#DOCROOT=$(grep -h DocumentRoot /etc/apache2/sites-enabled/*default* | head -n 1 | awk '{print $2}' | sed 's\//\\\//g');
-#LOCALHOSTDIR=`echo $SCRIPTPATH | sed "s/.*${DOCROOT}//" | sed "s@/trunk.*@@"`
+
 echo ${SCRIPTPATH}
 LOCALHOSTDIR=`echo ${SCRIPTPATH} | sed "s@.*$FIRSTLOCALHOSTFOLDER@/$FIRSTLOCALHOSTFOLDER@" | sed "s@/test.*@@"`
 TRUNKDIR=`echo ${SCRIPT} | sed "s@test.*@@"`
@@ -190,7 +189,7 @@ do
     totalnumberoftests=$((totalnumberoftests+numberoftests))
     for file in $files
     do
-        # Test if source and target files exists. If not then the conversion is interupted.
+        # Test if source and target files exists. If not then the conversion is interrupted.
         if [ ! -f "../phpunit_selenium/${newfilename}.php" ]; then
             echo "ERROR (Line:" $LINENO"): target file '"../phpunit_selenium/${dir}.php"' does not exist."
             echo "WARNING (Line:" $LINENO"): Conversion is interupted!"
