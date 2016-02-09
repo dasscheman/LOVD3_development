@@ -276,7 +276,7 @@ echo ----------------------Fix done-----------------------
 
 ls -l
 
-cd ${TRUNKDIR}"tests/phpunit_selnium"
+cd ${TRUNKDIR}"tests/phpunit_selenium"
 
 ls -l
 
