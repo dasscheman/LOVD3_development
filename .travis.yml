@@ -40,7 +40,7 @@ script:
 
   - vendor/bin/phpunit -v tests/travis/tests/simpleTest.php 
   - vendor/bin/phpunit ./tests/phpunit_selenium/tempTest.php
-  - vendor/bin/phpunit LOVD3_development/tests/travis/tests/
+  - vendor/bin/phpunit ./tests/travis/tests/
   - vendor/bin/phpunit -v -c tests/travis/phpunit.xml 
  
   
