@@ -44,34 +44,13 @@ do
 done
 
 SCRIPT=$(readlink -f $0)
-
-echo $PROJECTFOLDER
-
-exit 1
-PROJECTPATH=${SCRIPT} | sed "s@$PROJECTFOLDER.*@$PROJECTFOLDER@"`
-
-
-#SCRIPTPATH=$(dirname $SCRIPT)
-#SCRIPTPATH=$(dirname $SCRIPT)
-#SELENIUMTESTTPATH=$(dirname $SCRIPTPATH)/selenium_tests
-#PHPUNITTESTTPATH=$(dirname $SCRIPTPATH)/phpunit_selenium
-#TESTDATATPATH=$(dirname $SCRIPTPATH)/test_data_files/
-
-##echo ${SCRIPTPATH}
-
-echo ${PROJECTPATH}
-exit 1
-
-LOCALHOSTDIR=`echo ${SCRIPTPATH} | sed "s@.*$PROJECTFOLDER@http://localhost/$PROJECTFOLDER@" | sed "s@/test.*@@"`
-##TRUNKDIR=`echo ${SCRIPT} | sed "s@test.*@@"`
-
+PROJECTPATH=`echo ${SCRIPT} | sed "s@$PROJECTFOLDER.*@$PROJECTFOLDER@"`
+LOCALHOSTDIR=`echo ${PROJECTPATH} | sed "s@.*$PROJECTFOLDER@http://localhost/$PROJECTFOLDER@" | sed "s@/test.*@@"`
 echo Localhost directory: ${LOCALHOSTDIR}
-echo ${PROJECTPATH}
-##echo ${TRUNKDIR}
 
 # These are used to replace the locations in the setup script.
 NEWSETBROWSERURL="http://localhost"
-NEWSCREENSHOTPATH=${PROJECTPATH}"tests/test_results/error_screenshots"
+NEWSCREENSHOTPATH=${PROJECTPATH}"/tests/test_results/error_screenshots"
 NEWSCHREENSHOTURL=${LOCALHOSTDIR}"/tests/test_results/error_screenshots"
 
 echo Default browser URL: ${NEWSETBROWSERURL}
@@ -90,10 +69,8 @@ numberoftests=0
 totalnumberoftests=0
 
 #cd ${SELENIUMTESTTPATH}
-cd ${PROJECTPATH/tests/selenium_tests}
-ls -l 
+cd ${PROJECTPATH}/tests/selenium_tests
 
-exit 1
 # This is a temporary file used to merge all tests to one file.
 # This file is deleted at the end of a conversion.
 testsuite='TEMP_selenium_suite_test_all'
@@ -273,36 +250,19 @@ echo -----------------------end---------------------------
 # 4 When files are imported the location must be modified, depending on the installation.
 # 5 When files are imported the location must be modified, depending on the installation.
 echo --------------Fix Selenium export bugs---------------
-##for file in "${PHPUNITTESTTPATH}"/*
-for file in "${$PROJECTPATH)/tests/phpunit_selenium}"/*
+for file in "${PROJECTPATH}/tests/phpunit_selenium"/*
 do
     echo "Fix:" ${file}
     data=`grep -A 2000 "<?php" ${file} |
-        sed "s@this->open(\".*./src@this->open(\"$PROJECTPATH/src@" |
-        sed "s@this->open(\".*./tests@this->open(\"$PROJECTPATH/tests@" |
+        sed "s@this->open(\".*./src@this->open(\"$LOCALHOSTDIR/src@" |
+        sed "s@this->open(\".*./tests@this->open(\"$LOCALHOSTDIR/tests@" |
         sed 's/0)$/0);/' |
         sed "s@name=variant_file.*./tests/test_data_files/@name=variant_file\"\, \"$PROJECTPATH/tests/test_data_files@" |
         sed "s@name=import.*./tests/test_data_files/@name=import\"\, \"$PROJECTPATH/tests/test_data_files@"`
-#        sed "s@this->open(\".*./src@this->open(\"$LOCALHOSTDIR/src@" |
-#        sed "s@this->open(\".*./tests@this->open(\"$LOCALHOSTDIR/tests@" |
-#        sed 's/0)$/0);/' |
-#        sed "s@name=variant_file.*./tests/test_data_files/@name=variant_file\"\, \"$TESTDATATPATH@" |
-#        sed "s@name=import.*./tests/test_data_files/@name=import\"\, \"$TESTDATATPATH@"`
     echo "${data}">${file}
     sleep 1
     echo "done"
 done
 echo ----------------------Fix done-----------------------
-#
-#
-#
-#ls -l
-#
-#cd ${TRUNKDIR}"tests/phpunit_selenium"
-#
-#ls -l
-#
-#grep -i 'open' tempTest.php 
-#grep -i 'setBrowserUrl' tempTest.php 
 
 exit 
