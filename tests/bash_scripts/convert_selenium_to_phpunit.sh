@@ -35,7 +35,7 @@ do
         *)
             echo Unknown input
             echo Usage:
-            column -t -s "/" <<<'    -l=<folder> /|/ --localhost=<folder> / Give the first localhost folder when it is not "svn". This is used in the Travis CI test.
+            column -t -s "/" <<<'    -p=<folder> /|/ --projectfolder=<folder> / Give the first localhost folder when it is not "svn". This is used in the Travis CI test.
         -c /|/ --continueall / If set, it will not ask for actions during convert, but always continues with convert. This might create corrupt phpunit test files.'
             echo "Specify no file when you want te test all testfiles in the phpunit_selenium folder."
             exit
@@ -44,6 +44,10 @@ do
 done
 
 SCRIPT=$(readlink -f $0)
+
+echo $PROJECTFOLDER
+
+exit 1
 PROJECTPATH=${SCRIPT} | sed "s@$PROJECTFOLDER.*@$PROJECTFOLDER@"`
 
 
