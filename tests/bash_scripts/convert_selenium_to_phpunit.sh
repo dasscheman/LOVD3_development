@@ -271,16 +271,16 @@ do
     echo "done"
 done
 echo ----------------------Fix done-----------------------
+#
+#
+#
+#ls -l
+#
+#cd ${TRUNKDIR}"tests/phpunit_selenium"
+#
+#ls -l
+#
+#grep -i 'open' tempTest.php 
+#grep -i 'setBrowserUrl' tempTest.php 
 
-
-
-ls -l
-
-cd ${TRUNKDIR}"tests/phpunit_selenium"
-
-ls -l
-
-grep -i 'open' tempTest.php 
-grep -i 'setBrowserUrl' tempTest.php 
-
-exit 1
+exit 
