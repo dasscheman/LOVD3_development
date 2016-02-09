@@ -55,6 +55,9 @@ PROJECTPATH=${SCRIPT} | sed "s@$PROJECTFOLDER.*@$PROJECTFOLDER@"`
 
 ##echo ${SCRIPTPATH}
 
+echo ${PROJECTPATH}
+exit 1
+
 LOCALHOSTDIR=`echo ${SCRIPTPATH} | sed "s@.*$PROJECTFOLDER@http://localhost/$PROJECTFOLDER@" | sed "s@/test.*@@"`
 ##TRUNKDIR=`echo ${SCRIPT} | sed "s@test.*@@"`
 
@@ -84,7 +87,9 @@ totalnumberoftests=0
 
 #cd ${SELENIUMTESTTPATH}
 cd ${PROJECTPATH/tests/selenium_tests}
+ls -l 
 
+exit 1
 # This is a temporary file used to merge all tests to one file.
 # This file is deleted at the end of a conversion.
 testsuite='TEMP_selenium_suite_test_all'
