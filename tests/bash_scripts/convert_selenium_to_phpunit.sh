@@ -280,6 +280,6 @@ cd ${TRUNKDIR}"tests/phpunit_selenium"
 
 ls -l
 
-nano tempTest.php
+ grep -i 'open' tempTest.php 
 
 exit 1
