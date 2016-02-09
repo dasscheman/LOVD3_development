@@ -280,6 +280,7 @@ cd ${TRUNKDIR}"tests/phpunit_selenium"
 
 ls -l
 
- grep -i 'open' tempTest.php 
+grep -i 'open' tempTest.php 
+grep -i 'setBrowserUrl' tempTest.php 
 
 exit 1
