@@ -15,15 +15,15 @@ testsuitelist[7]='import_suite'
 # There for the user is asked what to do. Default is always ask what to do.
 alwaysask=true
 
-# As default it is assumed that 'svn' the first localhost folder is. ie http://localhost/svn
+# As default it is assumed that 'svn' the first localhost folder is. ie http://localhost/LOVD3
 # When the first folder is different, it must be given as input.
-FIRSTLOCALHOSTFOLDER='svn'
+PROJECTFOLDER='LOVD3'
 
 for i in "$@"
 do
     case $i in
-        -l=*|--localhost=*)
-            FIRSTLOCALHOSTFOLDER="${i#*=}"
+        -p=*|--projectfolder=*)
+            PROJECTFOLDER="${i#*=}"
 			#The input is refering to the github project.
 			#For local development: /LOVD3_development
 			#For LUMC development : /LOVD3
@@ -50,7 +50,7 @@ PHPUNITTESTTPATH=$(dirname $SCRIPTPATH)/phpunit_selenium
 TESTDATATPATH=$(dirname $SCRIPTPATH)/test_data_files/
 
 echo ${SCRIPTPATH}
-LOCALHOSTDIR=`echo ${SCRIPTPATH} | sed "s@.*$FIRSTLOCALHOSTFOLDER@/$FIRSTLOCALHOSTFOLDER@" | sed "s@/test.*@@"`
+LOCALHOSTDIR=`echo ${SCRIPTPATH} | sed "s@.*$PROJECTFOLDER@http://localhost/$PROJECTFOLDER@" | sed "s@/test.*@@"`
 TRUNKDIR=`echo ${SCRIPT} | sed "s@test.*@@"`
 
 echo Localhost directory: ${LOCALHOSTDIR}
