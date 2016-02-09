@@ -57,7 +57,7 @@ echo Localhost directory: ${LOCALHOSTDIR}
 echo ${TRUNKDIR}
 
 # These are used to replace the locations in the setup script.
-NEWSETBROWSERURL="http://localhost"${LOCALHOSTDIR}
+NEWSETBROWSERURL="http://localhost"${LOCALHOSTDIR}"/"
 NEWSCREENSHOTPATH=${TRUNKDIR}"tests/test_results/error_screenshots"
 NEWSCHREENSHOTURL=${NEWSETBROWSERURL}"/tests/test_results/error_screenshots"
 
