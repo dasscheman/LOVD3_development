@@ -68,7 +68,6 @@ totalmethod=0
 numberoftests=0
 totalnumberoftests=0
 
-#cd ${SELENIUMTESTTPATH}
 cd ${PROJECTPATH}/tests/selenium_tests
 
 # This is a temporary file used to merge all tests to one file.

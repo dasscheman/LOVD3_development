@@ -6,6 +6,9 @@ phpVersion=`php -v`
 echo "Installing dependencies"
 composer install
 
+echo "check firefox version"
+firefox --version
+
 echo "Download Selenium"
 if [ ! -f $serverFile ]; then
     wget http://selenium-release.storage.googleapis.com/2.50/$serverFile
@@ -31,7 +34,6 @@ sudo xvfb-run java -jar $serverFile > /tmp/selenium.log &
 #sudo java -jar $serverFile -port 4444 > /tmp/selenium.log &
 
 sleep 3
-
 
 wget --retry-connrefused --tries=120 --waitretry=3 --output-file=/dev/null $serverUrl/wd/hub/status -O /dev/null
 if [ ! $? -eq 0 ]; then

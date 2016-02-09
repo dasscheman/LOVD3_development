@@ -12,7 +12,7 @@ class second_tests extends PHPUnit_Extensions_SeleniumTestCase
 
     public function testLoadPageAgain()
     {
-        $this->open('http://localhost/tests/travis/simpleTest.html');
+        $this->open('http://localhost/LOVD3_development/tests/travis/simpleTest.html');
         $this->waitForPageToLoad ( "30000" );
         $this->assertTitle('phpunit selenium test');
     }
