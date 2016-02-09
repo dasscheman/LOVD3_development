@@ -273,7 +273,7 @@ done
 echo ----------------------Fix done-----------------------
 
 
-nano 
+
 ls -l
 
 cd ${TRUNKDIR}"tests/phpunit_selnium"
