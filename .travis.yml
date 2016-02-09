@@ -45,7 +45,7 @@ script:
  
   
 ## Run all tests
-#  - vendor/bin/phpunit -v ./tests/phpunit_selenium/
+  - vendor/bin/phpunit -v ./tests/phpunit_selenium/
 
 notifications: 
   email:

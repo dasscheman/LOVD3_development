@@ -3,8 +3,8 @@
 <phpunit backupGlobals="false" colors="true">
   <testsuites>
     <testsuite name="simpleTest">
-      <file> tests/travis/tests/simpleTest.php</file>
-      <file> /tests/travis/tests/simpleSecondTest.php</file>
+      <file> home/travis/build/dasscheman/LOVD3_development/tests/travis/tests/simpleTest.php</file>
+      <file> home/travis/build/dasscheman/LOVD3_development/tests/travis/tests/simpleSecondTest.php</file>
     </testsuite>
   </testsuites>
 </phpunit>
