@@ -22,6 +22,9 @@ before_script:
   ## IMPORTANT! convert must be run AFTER the setup_apache.sh
   ## setup_apache.sh fix some assumptions where the files are stored!
   - ./tests/bash_scripts/convert_selenium_to_phpunit.sh --localhost=LOVD3_development --continueall
+  
+  
+  
   - ./tests/travis/setup/setup_selenium_server.sh
 
 script:
@@ -39,8 +42,9 @@ script:
 #  - vendor/bin/phpunit ./tests/phpunit_selenium/tempTest.php
 
   - vendor/bin/phpunit -v tests/travis/tests/simpleTest.php 
+  - vendor/bin/phpunit ./tests/phpunit_selenium/tempTest.php
   - vendor/bin/phpunit LOVD3_development/tests/travis/tests/
-  - vendor/bin/phpunit -v -c tests/travis/tests/phpunit.xml 
+  - vendor/bin/phpunit -v -c tests/travis/phpunit.xml 
  
   
 ## Run all tests

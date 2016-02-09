@@ -50,14 +50,14 @@ PHPUNITTESTTPATH=$(dirname $SCRIPTPATH)/phpunit_selenium
 TESTDATATPATH=$(dirname $SCRIPTPATH)/test_data_files/
 
 echo ${SCRIPTPATH}
-LOCALHOSTDIR=`echo ${SCRIPTPATH} | sed "s@.*$FIRSTLOCALHOSTFOLDER@/$FIRSTLOCALHOSTFOLDER@" | sed "s@/test.*@/@"`
+LOCALHOSTDIR=`echo ${SCRIPTPATH} | sed "s@.*$FIRSTLOCALHOSTFOLDER@/$FIRSTLOCALHOSTFOLDER@" | sed "s@/test.*@@"`
 TRUNKDIR=`echo ${SCRIPT} | sed "s@test.*@@"`
 
 echo Localhost directory: ${LOCALHOSTDIR}
 echo ${TRUNKDIR}
 
 # These are used to replace the locations in the setup script.
-NEWSETBROWSERURL="http://localhost"${LOCALHOSTDIR}
+NEWSETBROWSERURL="http://localhost"
 NEWSCREENSHOTPATH=${TRUNKDIR}"tests/test_results/error_screenshots"
 NEWSCHREENSHOTURL=${NEWSETBROWSERURL}"/tests/test_results/error_screenshots"
 
@@ -271,4 +271,15 @@ do
     echo "done"
 done
 echo ----------------------Fix done-----------------------
-exit
+
+
+nano 
+ls -l
+
+cd ${TRUNKDIR}"tests/phpunit_selnium"
+
+ls -l
+
+nano tempTest.php
+
+exit 1
