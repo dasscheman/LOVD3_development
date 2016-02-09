@@ -36,7 +36,12 @@ script:
 #  - vendor/bin/phpunit ./tests/phpunit_selenium/importTest.php
 #  - vendor/bin/phpunit ./tests/phpunit_selenium/managerTest.php
 #  - vendor/bin/phpunit ./tests/phpunit_selenium/submitterTest.php
-  - vendor/bin/phpunit ./tests/phpunit_selenium/tempTest.php
+#  - vendor/bin/phpunit ./tests/phpunit_selenium/tempTest.php
+
+  - vendor/bin/phpunit -v tests/travis/tests/simpleTest.php 
+  - vendor/bin/phpunit LOVD3_development/tests/travis/tests/
+  - vendor/bin/phpunit -v -c tests/travis/tests/phpunit.xml 
+ 
   
 ## Run all tests
 #  - vendor/bin/phpunit -v ./tests/phpunit_selenium/
